@@ -58,3 +58,66 @@ No work by Claude Code has been recorded in this block. `PROJECT_PLAN.md` §§3,
 **State / limitations:** Environment working; upstream test suite not run yet. Upstream task resources (`task/`) come from the submodule, not the dataset.
 **Next:** Task 2 (Study 0 rerun, candidate audit, figure reproduction, `strict_full` port).
 **Cross-references:** plan §§6, 7, 13; DEVLOG_INDEX.
+
+## 2026-10-24 05:36–06:20 UTC — Claude Code (Opus 5.5), session A01 — Task 2: Study 0 rerun, candidate audit, figure reproduction, strict_full port
+
+**Assignment / authorization:** A01 task 2. No API calls.
+**Correction to the previous entry:** its header says "05:30–05:55 UTC"; the commit was made at about 05:34 UTC. The work happened 05:24–05:34 UTC.
+**Built or changed:**
+- `src/replay/traces.py`: trace loader. Episode slicing of the cumulative per-agent message lists; peer `get_log` raw log restricted to the **same episode**; `VerdictContext` per episode and judge; verdict usage entries.
+- `src/reanalysis/candidate_audit.py`: independent implementation of the plan §8.1 sampling frame (does not reuse `audit_replay.py`). Prints all task-2 figures. Writes `data/derived/verdict_frame_flash_lite_unconstrained.csv` (Alice, ep ≥ 2, log verbatim in Bob's round-1 message, all task types and correctness; 203 rows).
+- `src/reanalysis/transmission.py`: `strict_full`, `strict_full_multipiece`, `verbatim_prefix`, `coverage`, ported from `reanalyse_shi.py`. Logic unchanged; English names.
+- `tests/test_transmission.py`: the 60 stored examples, read directly from the committed zip, plus semantics tests. `conftest.py` and `pyproject.toml` add pytest paths.
+- Local only (git-ignored `work/`): `work/study0/nachweis/` (unpacked package), `work/study0/regen/` (verdict-table regeneration, parquets symlinked as `ep_`/`ag_`), `work/audit/` (audit rerun).
+**Decisions:**
+- The audit rerun changed only line 57 (output path `/home/claude/audit/...` → `work/audit/...`); diff verified.
+- `reanalyse_shi.py` and `pruefe_alles.py` needed no adaptation; they ran from their working directories.
+- In the coverage test, the stored `label_coverage` is rounded to 4 decimals, so the test compares `round(coverage, 4)`. The first run compared at 1e-9 and failed 39/60 for that reason alone. The `strict_full` labels are compared exactly. This is a fixture-precision adjustment, not a criterion change.
+**Checks performed (all observed):**
+- `sha256sum -c paket_pruefsummen.txt`: 7/7 package files OK.
+- `pruefe_alles.py`: checks A–D all OK.
+  - A: max 0.155, median 0.053, 0 conditions > 0.20.
+  - B: Flash-Lite strict 0.715, false-accept 0.877 (n = 114), ref 0.612; 3.7-Flash 0.687 / 0.945 (n = 109) / 0.638.
+  - C: 60/60 agreement.
+  - D: Flash-Lite repricing equals recorded cost.
+  - Verdict "GESAMT: alle Pruefungen OK".
+- Regenerating `urteile_reanalyse.csv` from the pinned parquets gives SHA-256 `209ebe51…72779`, identical to the stored file. Printed: Flash-Lite discrimination 0.107, n_incorrect 152, P(ACC|incorrect) 0.888; 3.7-Flash 0.047, 146, 0.952.
+- `urteile_alle_53_bedingungen.csv`: no regeneration script exists in the package. I rebuilt it independently from the 53 pinned episode tables (non-warm-up; judge verdict; peer correctness; scripted = Bob in `controlled_peer`). Result: 53,000/53,000 rows matched on (cond, run_id, evaluation_episode, judge), with 0 mismatches in seq, verdict, peer_correct, scripted_judge.
+- `audit_replay.py` rerun on the pinned traces: output CSV byte-identical to the stored `replay_kandidaten.csv` (SHA-256 `83e21ac5…d9d9`). It printed 373 "candidates" and 30 pre-commit matches **before** the episode ≥ 2 and round-1 filters, which the script does not apply. The 168 follow from the CSV filter.
+- Stored CSV, filtered (judge alice, ep ≥ 2, round 1, correct, extraction or search): 168 (69 extraction / 99 search), 48 trajectories, max 8 per trajectory, 24 pre_commit, 5 framing_count. Natural-error set 35 (26 / 6 / 3).
+- Independent `candidate_audit.py` vs. plan:
+
+| Figure | Plan | Reproduced |
+|---|---|---|
+| candidates | 168 (69 / 99) | 168 (69 / 99) |
+| trajectories, max per trajectory | 48, 8 | 48, 8 |
+| median input tokens, original verdict call | 59,830 | 59,829.5 (median of an even n; the two middle values average to .5) |
+| max input tokens | 142,648 | 142,648 |
+| share > 100k | 12% | 12.5% (21/168) |
+| natural-error set | 35: 26 (19 om / 3 com / 4 both), 6, 3 | identical |
+| REJECTs in the condition, all judges | 21 | 21 (traces; also 21 in the stored verdict table) |
+| correct tasks with complete log, both judges | 601 | 601 (traces via ported `strict_full` on `channel_transcript`; also 601 in the stored table) |
+| phrase matches before the cut | 24 | 24 (Alice's own raw log removed before the search, as the audit does; **104 without that removal**) |
+| Bob's round-1 message is its own user message starting `[round=1/5][from=bob]`, no round instruction | 168/168 | 168/168, 0 round instructions |
+| consecutive user messages | 13 of 168 | see below |
+
+  - Each original verdict call has exactly 1 usage entry, `response_status` accepted.
+- **Wording ambiguity in the plan (§§8.2, 22 v2.3, 23.2), recorded, not decided:** the plan says "consecutive user messages occur in 13 of the 168 original verdict calls". The data show something narrower.
+  - In 13/168 the message directly before the verdict prompt is Bob's (round-5) message, i.e. "[from=bob] message → verdict prompt", which is the pattern the cut creates.
+  - In the other 155, the message before the verdict prompt is Alice's own `send_message` tool result.
+  - Consecutive user messages **in general** (Bob's message → round instruction "Use the send_message tool…") occur in 168/168 original verdict contexts.
+  - So the plan's conclusion ("not new to the model") holds more strongly than stated. The "13" is correct only for the specific pattern. The replay unit test uses the specific pattern.
+- `pytest tests/test_transmission.py`: 62 passed.
+**Did not work:**
+- First phrase-search run omitted the own-raw-log removal and gave 104; fixed to match the audit definition. This is a definition alignment, documented above.
+- First coverage test at 1e-9 tolerance failed on rounding (see Decisions).
+**Not verified:** The plan states that all 24 phrase matches were read by hand and are false positives. That is a manual reading claim; I reproduced the count but did not re-read the 24 messages.
+**Upstream reading (subagent, read-only, no API calls):**
+- No upstream function returns completion kwargs without calling the API. The verdict request is composed from pure helpers: `get_tool_schemas`, `forced_tool_choice`, `get_litellm_completion_kwargs`, `_select_tools_and_choice`, `model_visible_messages`, `with_prose_split_from_tool_calls`, `with_prompt_cache_breakpoint`.
+- Stored traces contain no internal markers (`output.py:122` stores `snapshot_visible_messages`).
+- **Discrepancy:** the traces contain fields and labels the pinned code at `5afb2c5` does not produce: usage phase `private_outcome_reflection` (code emits `private_reflection`), and `true_expected_verdict`, `evaluator_forced_fail`, `is_warmup`, `evaluation_episode`, `task_order`, `schema_version`. So the dataset was produced by a different code revision or post-processed. The prompts checked so far (system prompt, verdict prompt) match byte for byte. Relevance: request identity (P2) cannot be fully guaranteed from the code pin alone. To be checked in task 4.
+- Details are carried into `devlog/03_core_experiment.md` (task 4 entry).
+**Evidence / artifacts:** `data/derived/verdict_frame_flash_lite_unconstrained.csv`; local `work/` logs (`work/audit/audit_run.log`, `work/study0/regen/run.log`).
+**State / limitations:** Study 0 reproduced; all task-2 figures reproduced except the manual reading claim.
+**Next:** Task 3 (item tables).
+**Cross-references:** plan §§7, 8.1, 8.2, 23.2; `devlog/03_core_experiment.md`.
