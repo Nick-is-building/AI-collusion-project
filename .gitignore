@@ -16,3 +16,8 @@ blind_check/key.local.json
 work/
 # local scratch files (inside the repository, never committed)
 scratch/
+
+# Study 2: uncompressed run records stay local; the gzipped copies (run.json.gz) are committed (A05)
+results/study2/**/run.json
+results/study2/**/run.json.tmp
+results/study2/STOP

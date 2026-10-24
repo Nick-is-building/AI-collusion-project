@@ -1,10 +1,15 @@
 """SHA-256 table of the files PREREGISTRATION_STUDY2.md freezes (printed as Markdown rows).
 
+Hashes are taken from the committed blobs at a revision (default HEAD), not from the working tree:
+another session may hold uncommitted edits to shared files (e.g. configs/caps.yaml).
+
     PYTHONPATH=. .venv/bin/python -m scripts.study2.prereg_hashes
 """
 from __future__ import annotations
 
 import hashlib
+import subprocess
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -29,13 +34,14 @@ FROZEN = (
 )
 
 
-def rows():
+def rows(rev: str = "HEAD"):
     for f in FROZEN:
-        p = ROOT / f
-        yield f, hashlib.sha256(p.read_bytes()).hexdigest() if p.exists() else "MISSING"
+        r = subprocess.run(["git", "-C", str(ROOT), "show", f"{rev}:{f}"], capture_output=True)
+        yield f, hashlib.sha256(r.stdout).hexdigest() if r.returncode == 0 else "NOT COMMITTED"
 
 
 if __name__ == "__main__":
-    print("| File | SHA-256 |\n|---|---|")
-    for f, h in rows():
+    rev = sys.argv[1] if len(sys.argv) > 1 else "HEAD"
+    print(f"| File (at {rev}) | SHA-256 |\n|---|---|")
+    for f, h in rows(rev):
         print(f"| `{f}` | `{h}` |")

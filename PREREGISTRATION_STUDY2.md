@@ -63,7 +63,15 @@
 
 ## 5. Sample size (D21)
 
-FILLED_AFTER_P8
+- **Rule (D21):** after P8, take the measured cost per sequence (including the observed cache share) plus a 15% reserve, and fit the largest n of 50, 40, 30 into the remaining Study 2 cap. Applied by `scripts/study2/fix_n.py`, output `results/summaries/study2_n.json`. It also checks the remaining project hard cap. No outcome was read.
+- **Inputs:**
+  - measured P8 cost per sequence, all five arms: 2.9755 USD; with the 15% reserve: 3.4218 USD;
+  - Study 2 spent (P8): 2.9755 USD; remaining Study 2 cap: 247.0245 USD;
+  - other project spend: 18.7551 USD; remaining hard cap: 308.2694 USD.
+- **Projected cost with the reserve:** n = 50: 171.09 USD; n = 40: 136.87 USD; n = 30: 102.65 USD.
+- **n = 50 pairs.** Sequences: rep001–rep050, in order: rep001, rep002, rep003, rep004, rep005, rep006, rep007, rep008, rep009, rep010, rep011, rep012, rep013, rep014, rep015, rep016, rep017, rep018, rep019, rep020, rep021, rep022, rep023, rep024, rep025, rep026, rep027, rep028, rep029, rep030, rep031, rep032, rep033, rep034, rep035, rep036, rep037, rep038, rep039, rep040, rep041, rep042, rep043, rep044, rep045, rep046, rep047, rep048, rep049, rep050.
+- P8's single sequence (rep001, pilot) is extra and its cost was subtracted (Nick's clarification, §8). In the main launch, rep001 runs fresh.
+- Power (plan §9.2, extended): 50 pairs lie between the plan's 40-pair column (10 pp: 0.43–0.48; 15 pp: 0.76–0.81) and 60-pair column (10 pp: about 0.66; 15 pp: about 0.95). No new power claim is made.
 
 ## 6. Budget, stops, errors (D20, D23, plan §§12, 13, 23)
 
@@ -101,7 +109,16 @@ Implementation:
 - `scripts/study2/fix_n.py` subtracts P8's spend from the remaining Study 2 cap before fitting n.
 - The P8 status-line check uses `scripts/study2/analyze.py --status-line-only`, which prints only PASS/FAIL and failure reasons, no outcome. `scripts/study2/monitor.py` reads only usage journals and run metadata.
 
-FILLED_AFTER_P8_PILOT
+**P8 result (operational only; `results/study2/p8/`, `results/summaries/study2_p8_monitor.json`):**
+- **Launch:** 12:49:46 UTC; finished 13:13:48 UTC. All five arms of rep001 complete: prefix 5 episodes; A′, B, C′, PC 10 each. Resume from the prefix worked for A′, B and PC.
+- **Calls and errors:** 702 calls. Response statuses {'accepted': 699, 'empty_no_content': 3}; the empty responses were retried by upstream. 0 API errors, 0 rate-limit errors (429). `response_model` constant: {'gemini-3.1-flash-lite': 699}.
+- **Cost:** 2.9755 USD (cap 5). By arm: {'Aprime': 0.5029, 'B': 0.6309, 'Cprime': 1.1237, 'PC': 0.2936, 'prefix': 0.4245}.
+- **Cache:** cached share of input tokens 0.8197 (30,771,818 of 37,541,490).
+- **Wall time per arm:** prefix 8.8 min, A′ 6.8, B 7.4, C′ 13.4, PC 3.5. Critical path prefix → B → PC ≈ 19.7 min.
+- **Interruption:** about 3.7 minutes between the prefix and the branches (12:58:49–13:02:31). Branch launches were refused by the provenance check (another session's uncommitted edit to `configs/caps.yaml`), and the scheduler relaunched them in a loop. No API call was made in that window. The fix and the operator's `attempts_reset` event are in `results/study2/p8/scheduler.jsonl` and DEVLOG 04.
+- **Status-line grep check (plan §23.3):** PASS, 90 rows, 0 failures; the line appears from episode 6 in every arm and nowhere before.
+- **Not looked at:** strict_full, verdicts, messages, or any other outcome in the P8 traces (Nick's clarification above).
+- **Projected main-run wall time** from P8 (about 40 worker-minutes per sequence): about 4.2 h at 8 workers, 2.1 h at 16, 1.1 h at 32, plus a critical-path tail of about 20 min.
 
 ## 9. Frozen files
 

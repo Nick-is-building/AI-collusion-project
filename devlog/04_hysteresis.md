@@ -129,3 +129,21 @@ No Study 2 work or result is recorded here. Its inclusion in the plan does not a
 - `tests/test_study2_build.py`: `test_failed_launches_count_as_attempts`, in live mode refused under pytest: exactly 3 launches per arm, and no journal.
 **Checks performed:** `pytest tests/test_study2_build.py -k "failed_launches or scheduler or counted or live_refused"`: 4 passed.
 **Next:** commit, then restart the P8 scheduler with `--reset-attempts` (operator event `attempts_reset` with the reason, added to the append-only `scheduler.jsonl`; launch counts restart after it, so the refused launches of the fixed bug do not exhaust B/A′). It continues: the prefix is complete, C′ runs as an orphan (detected), and B and A′ launch.
+
+## 2026-10-24 12:49–13:20 UTC — Claude Code (Opus 5.5), session A05 — Task 3: P8 live (rep001, all arms); Task 4 (part): D21 → n = 50
+
+**Assignment / authorization:** A05 task 3 (P8 live on one sequence through all arms, cap 5 USD, after the main run finished: the Study 1 main run ended at 12:05 UTC and A04 closed out at `08e2a7e`). Nick's clarification: P8 is pilot data, not reused, no outcome looked at, its cost counts in D21.
+**Launch (exact):** `set -a && . ./.env && set +a && PYTHONPATH=. nohup .venv/bin/python -m scripts.study2.launch --group p8 --seqs 1 --workers 5 --backend live --approved-stage study2 > logs/study2_p8.log 2>&1 &` at 12:49:46 UTC, commit `417f2a8`. Restart after the provenance fix at 13:02:31 UTC (commit `a17b809`) with the same command plus `--reset-attempts "<reason>"` (appended to the log).
+**Observed (operational only):**
+- 5/5 arms complete at 13:13:48 UTC; 702 calls; 699 accepted plus 3 `empty_no_content` (retried by upstream); 0 API errors; 0 rate-limit errors; `response_model` gemini-3.1-flash-lite on all 699 accepted.
+- Cost 2.9755 USD: prefix 0.42, A′ 0.50, B 0.63, C′ 1.12, PC 0.29. Cached share of input 0.820 (30.8 M of 37.5 M tokens), higher than the 44% of the A02 pilot and Shi et al.'s ~71%.
+- Wall time: prefix 8.8 min, A′ 6.8, B 7.4, C′ 13.4, PC 3.5. Critical path ≈ 19.7 min, plus the 3.7-minute interruption gap.
+- Study 2 code paths were clean for every run (`study2_code_dirty` = []). The prefix and C′ ran at `417f2a8`, the branches at `a17b809` (changes in between: provenance scope and launch counting only, no request content), PC under HEAD `8e138ca` (an A06 commit).
+**Status-line grep check:** `scripts.study2.analyze --runs results/study2/p8/runs.csv --status-line-only`: PASS, 90 rows, 0 failures, 0 mentions beyond the opening.
+**Not looked at:** strict_full, verdicts, messages, rewards, or any outcome in the P8 traces. The PC run completing implies upstream's load-time validation accepted the D22 messages and the rebuilt slot (`partner_control` raises otherwise). That is a code check, not a reading.
+**D21 (`scripts.study2.fix_n`, `results/summaries/study2_n.json`):** 2.9755 × 1.15 = 3.4218 USD per sequence. Remaining Study 2 cap 247.02 USD; remaining hard cap 308.27 USD (other project spend 18.76 USD). 50 × 3.42 = 171.09 ≤ 247.02, so **n = 50**, rep001–rep050. Caveat: this is a single-sequence cost estimate. At Shi's p90/median ratio (~1.3), 50 sequences would cost about 194 USD, still within the cap, and the guard fails closed regardless.
+**Evidence committed:** `results/study2/p8/` (journals, `study2_meta.json`, `scheduler.jsonl`, `runs.csv`, Bob cache, `run.json.gz`, `run_json_sha256.txt` of the uncompressed records); `results/summaries/study2_p8_monitor.json`; `results/summaries/study2_n.json`. Uncompressed `run.json` stays local (`.gitignore`). One sequence is about 67 MB uncompressed and 20 MB gzipped.
+**Changed:** `scripts/study2/prereg_hashes.py` hashes committed blobs at a revision, because A06 holds uncommitted edits to shared files.
+**Did not work:** the provenance refusal and relaunch loop (previous entries).
+**Open for Nick:** storage of the main run (about 1 GB gzipped for 50 sequences) in git.
+**Next:** commit, write the hashes into `PREREGISTRATION_STUDY2.md`, commit, tag `prereg-study2`, push, launch the main run at 8 workers.

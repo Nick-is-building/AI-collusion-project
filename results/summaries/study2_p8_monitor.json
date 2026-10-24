@@ -1,0 +1,39 @@
+{
+ "calls": 702,
+ "calls_by_arm": {
+  "Aprime": 129,
+  "B": 115,
+  "Cprime": 240,
+  "PC": 57,
+  "prefix": 161
+ },
+ "response_status": {
+  "accepted": 699,
+  "empty_no_content": 3
+ },
+ "error_categories": {},
+ "rate_limit_errors": 0,
+ "response_models": {
+  "gemini-3.1-flash-lite": 699
+ },
+ "cost_usd": 2.9755,
+ "cost_by_arm": {
+  "Aprime": 0.5029,
+  "B": 0.6309,
+  "Cprime": 1.1237,
+  "PC": 0.2936,
+  "prefix": 0.4245
+ },
+ "input_tokens": 37541490,
+ "cached_input_tokens": 30771818,
+ "cached_share": 0.8197,
+ "first_call": "2026-10-24T12:50:01.384825+00:00",
+ "last_call": "2026-10-24T13:13:43.221444+00:00",
+ "wall_minutes": 23.7,
+ "calls_per_min_last5": 18.8,
+ "arms_complete": 5,
+ "arms_total": 5,
+ "arms_running": 0,
+ "arms_failed_attempts": 0,
+ "projected_cost_usd": 2.68
+}
