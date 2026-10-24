@@ -168,3 +168,58 @@ No Study 2 work or result is recorded here. Its inclusion in the plan does not a
 - `.gitignore`: main-run journals, Bob caches and any `run.json.gz` stay local.
 **State:** the main run continues at 8 workers. The export runs after the run completes (and can be rerun at any time).
 **Next:** hand-read sequence 1, then ramp up.
+
+## 2026-10-24 20:55–21:20 UTC — Claude Code (Opus 5.5), diagnosis session — Study 2 main run: cause of the 32 failed C′ arms (diagnosis only, no call, no outcome)
+
+**Assignment / authorization:** Nick (session prompt, about 21:00 UTC): diagnose only. No reruns, no API calls, and no computing or viewing of any Study 2 outcome (strict_full, verdicts). Find the exact cause of the 32 failures, check whether successful arms are affected, report spend, give options (a) and (b) with cost and wall time, log, commit, push, stop. Context from Nick: the supervising Claude Code session lost its credit at about 15:28 UTC and could not act.
+**Built or changed:**
+- `scripts/study2/diagnose_failures.py`: reads only `scheduler.jsonl`, `study2_meta.json`, usage journals, the error lines of the per-run logs, and the project ledger. It reads no message, verdict or strict_full.
+- `results/summaries/study2_main_failure_diagnosis.json`: its output.
+**Checks performed:** `PYTHONPATH=. .venv/bin/python -m scripts.study2.diagnose_failures --group main --json results/summaries/study2_main_failure_diagnosis.json`, plus ad-hoc greps of `logs/study2/main/*.log` for error lines, and per-arm cost and duration taken from the journals and metadata. No process was running (`ps`). The scheduler ended at 20:53:56 UTC: done 218/250, failed = C′ of rep014–rep045, `stopped: false`.
+**Observed — cause:**
+- Every one of the 96 failed C′ attempts (32 arms × 3 launches) ends in `LLMRetryLimitExceededError` after 21 API attempts. The error is a Gemini HTTP 429 `RESOURCE_EXHAUSTED`: "Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend …".
+- This is Google AI Studio's project spend cap, not our guard: no `Study2Stop`, no STOP file, our caps far from reached.
+- No call was accepted project-wide from **15:49:30 to 19:53:47 UTC** (the only gap > 5 min in the journals). The cap was evidently raised or lifted at about 19:53 UTC. That is inferred from the journals; who changed it is not visible here.
+- Spend at the moment the cap was hit, by our ledger: Study 2 main 73.51 + P8 2.98 + other stages 26.63 ≈ 103 USD. The cap value itself is not visible from the repository.
+**Observed — mechanism (why only C′ 14–45):**
+- Upstream classifies the 429 as `transient_rate_limit` and retries 20 times with backoff, so each attempt took about 18 min before failing. The scheduler then relaunched; after 3 launches the arm was final-failed (MAX_ATTEMPTS = 3).
+- At 15:49 all prefixes, B and PC were done (last PC exit 15:34:35). C′ arms 1–13 had finished at 15:27–15:49:16. Under the frozen priority (B, PC, prefix, C′, A′), the 8 worker slots were filled with C′ 14–45 in successive batches. Each batch burned its 3 × ~18 min during the cap window: 14–21 at 15:42–16:45, 22–29 to 17:41, 30–37 to 18:36, 38–45 to 19:32.
+- C′ 46–50 attempt 1 (19:29–19:49) and A′ 1–3 attempt 1 (19:32–19:50) also failed on the cap. Their attempt 2 started at about 19:48–19:50 and succeeded once the cap was lifted.
+- Partial progress before the cap: C′ rep014 4 episodes, rep015 3, rep016 2, rep017 1 (attempt 1; attempts 2–3 resumed and added nothing); rep018–rep045 0 episodes. Cost of all failed C′ attempts 0.876 USD.
+- Which arms failed was set by queue position, not by any arm or sequence content. The 15:28 credit loss of the supervising session left nobody to stop the scheduler after the first spend-cap error (plan §23.3: "a rising error rate means stop and look").
+**Observed — are successful arms affected:**
+- All 218 complete arms: `response_model` gemini-3.1-flash-lite on all 27,057 accepted calls; Study 2 code paths clean in every counted run (`study2_code_dirty` empty).
+  - Between `prereg-study2` (`c6ab3de`) and HEAD `86c47aa`, the only changes in the provenance paths are two new, non-executed scripts: `scripts/study2/export.py` and `watch.py`.
+  - `configs/caps.yaml` changed three times (A07/A08 stage caps), but `hard_cap_usd` 330 and `stages.study2` 250 are identical in all versions.
+- 28 transient 429 "You exceeded your current quota" errors (a rate quota; the metric name is truncated in upstream's log line). Bursts at 15:27:46–15:28:03, 15:41:53–15:44:02 and 15:49:25, in C′ 2–13 and in B rep049/rep050 and PC rep048. All were retried successfully by upstream. A retry resends the same request, so content is unaffected (preregistered error handling, PREREGISTRATION_STUDY2 §6). They do mean the D23 condition for ramping above 8 workers ("429s stay at zero") is not met.
+- 8 counted runs started before the lift (A′ 1–3, C′ 46–50 attempt 2) and absorbed up to 6 spend-cap retries on their first call before proceeding. Same request, no content effect.
+  - A′ 1–3 attempt 2 resumed from the **prefix**: attempt 1 had only the 5 prefix episodes, and the resume floor is 5.
+  - C′ 46–50 attempt 2 ran **fresh**: attempt 1 had 0 episodes.
+  - So no counted run is stitched from a pre-cap and a post-cap process.
+- A′ rep004: attempt 1 (launched 19:59:59, after the lift) failed differently. It got 21 `content_filter` responses on one call (20:01–20:19). Attempt 2 restarted from the prefix and completed. This is a technical resample of a secondary arm under the preregistered retry rule; no outcome was involved.
+- Timing (operational, not an outcome): C′ ran 1.5–2 h after B for rep001–013 (frozen priority) and about 4.5 h after B for rep046–050 (cap window). B and C′ of a sequence were therefore never simultaneous, even in complete sequences.
+**Spend (our ledger, `JournalLedger` / `Ledger`, list prices incl. cache):**
+- Study 2 main 105.24 USD (incl. 0.88 in failed attempts) + P8 2.98 = **108.21 USD of the 250 cap** (141.79 left).
+- Other stages (`results/raw`) 26.63 USD.
+- **Project total 134.84 USD of the 330 hard cap** (195.16 left).
+- Google's own billing figure is not visible here.
+**Options (estimates from the 218 complete arms; 8 workers, because quota 429s occurred, D23):**
+- **(a) Rerun only C′ 14–45 (32 arms):**
+  - cost 32 × 1.075 = 34.4 USD (upper, at the max arm 1.44: 46.1);
+  - wall time: C′ mean 15.7 min, max 22.7 → 4 batches ≈ 65–90 min.
+  - Needs `--reset-attempts`. The frozen scheduler would **resume** rep014–017 from their partial pre-cap episodes. A fresh C′ for those four would need a decision, plus a flag or code change.
+- **(b) Rerun all arms of rep014–rep045 (plan §9.2; PREREGISTRATION_STUDY2 §6):**
+  - cost 32 × 2.771 = 88.7 USD per complete sequence (upper, at the max 3.45: 110.3);
+  - wall time: 41 worker-min per sequence → ≈ 2.7 h at 8 workers, plus a ~20 min critical-path tail ≈ 3 h.
+  - The existing complete prefix/A′/B/PC of those 32 sequences would be superseded. They need a new run group or directory so they are kept as evidence and never analysed (not looked at).
+- Either option fits both caps. Either needs AI Studio spend-cap headroom of at least the upper figure first, or it fails the same way.
+**Assessment (inferred):** (b) preserves the preregistered design better.
+- It is the procedure the plan (§9.2: "all arms of that sequence are rerun to keep the pairing") and the preregistration (§6) name for exactly this case.
+- Plan §9.1 uses fresh prefixes "so that B and C′ come from the same model deployment". Under (a), the 32 C′ arms would run ≥ 6 h after their B, and two thirds of the sample (32/50 pairs) would carry a systematic B-early / C′-late split.
+- Under (b), each sequence's arms run together in one window, with the same within-sequence lag as rep001–013.
+- (a) is cheaper by about 54 USD and 1.5–2 h. The failure is outcome-independent (provider billing), so (a) introduces no selection bias, only a time confound in the pairing. If chosen, it is a deviation to record.
+**Did not work / not determined:** the AI Studio cap value and who lifted it; the full quota-metric name of the transient 429s (truncated by upstream logging).
+**Not looked at:** strict_full, verdicts, messages, rewards, or any outcome. `episodes` counts come from `study2_meta.json`.
+**State / limitations:** `results/study2/main/` is still untracked. The D27 export (`scripts/study2/export.py`) has not been run, since the run is incomplete. The guard does not treat a spend-cap 429 as fail-closed. A possible fix (not made): STOP on "spending cap" in the 429 text.
+**Next (proposal, not authorized):** Nick chooses (a) or (b), checks the AI Studio cap, and decides on fresh vs. resumed C′ for rep014–017 if (a).
+**Cross-references:** plan §§9.1, 9.2, 23.3; `PREREGISTRATION_STUDY2.md` §6; `docs/deviations.md` D20, D23, D27.

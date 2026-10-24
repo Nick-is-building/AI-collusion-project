@@ -1,0 +1,1659 @@
+{
+ "scheduler_end": {
+  "at": "2026-10-24T20:53:56.600871+00:00",
+  "event": "scheduler_end",
+  "done": 218,
+  "total": 250,
+  "running": 0,
+  "stopped": false,
+  "failed": [
+   [
+    14,
+    "Cprime"
+   ],
+   [
+    15,
+    "Cprime"
+   ],
+   [
+    16,
+    "Cprime"
+   ],
+   [
+    17,
+    "Cprime"
+   ],
+   [
+    18,
+    "Cprime"
+   ],
+   [
+    19,
+    "Cprime"
+   ],
+   [
+    20,
+    "Cprime"
+   ],
+   [
+    21,
+    "Cprime"
+   ],
+   [
+    22,
+    "Cprime"
+   ],
+   [
+    23,
+    "Cprime"
+   ],
+   [
+    24,
+    "Cprime"
+   ],
+   [
+    25,
+    "Cprime"
+   ],
+   [
+    26,
+    "Cprime"
+   ],
+   [
+    27,
+    "Cprime"
+   ],
+   [
+    28,
+    "Cprime"
+   ],
+   [
+    29,
+    "Cprime"
+   ],
+   [
+    30,
+    "Cprime"
+   ],
+   [
+    31,
+    "Cprime"
+   ],
+   [
+    32,
+    "Cprime"
+   ],
+   [
+    33,
+    "Cprime"
+   ],
+   [
+    34,
+    "Cprime"
+   ],
+   [
+    35,
+    "Cprime"
+   ],
+   [
+    36,
+    "Cprime"
+   ],
+   [
+    37,
+    "Cprime"
+   ],
+   [
+    38,
+    "Cprime"
+   ],
+   [
+    39,
+    "Cprime"
+   ],
+   [
+    40,
+    "Cprime"
+   ],
+   [
+    41,
+    "Cprime"
+   ],
+   [
+    42,
+    "Cprime"
+   ],
+   [
+    43,
+    "Cprime"
+   ],
+   [
+    44,
+    "Cprime"
+   ],
+   [
+    45,
+    "Cprime"
+   ]
+  ]
+ },
+ "exits_by_arm_rc": {
+  "Aprime:0": 50,
+  "Aprime:1": 4,
+  "B:0": 50,
+  "Cprime:0": 18,
+  "Cprime:1": 101,
+  "PC:0": 50,
+  "prefix:0": 50
+ },
+ "runs_total": 323,
+ "arms_complete": 218,
+ "arms_incomplete": [
+  "14:Cprime",
+  "15:Cprime",
+  "16:Cprime",
+  "17:Cprime",
+  "18:Cprime",
+  "19:Cprime",
+  "20:Cprime",
+  "21:Cprime",
+  "22:Cprime",
+  "23:Cprime",
+  "24:Cprime",
+  "25:Cprime",
+  "26:Cprime",
+  "27:Cprime",
+  "28:Cprime",
+  "29:Cprime",
+  "30:Cprime",
+  "31:Cprime",
+  "32:Cprime",
+  "33:Cprime",
+  "34:Cprime",
+  "35:Cprime",
+  "36:Cprime",
+  "37:Cprime",
+  "38:Cprime",
+  "39:Cprime",
+  "40:Cprime",
+  "41:Cprime",
+  "42:Cprime",
+  "43:Cprime",
+  "44:Cprime",
+  "45:Cprime"
+ ],
+ "accepted_call_gaps_gt_5min": [
+  [
+   "2026-10-24T15:49:30.990375+00:00",
+   "2026-10-24T19:53:47.919355+00:00"
+  ]
+ ],
+ "arms_with_more_than_one_run": {
+  "1:Aprime": [
+   [
+    "e2e372",
+    5,
+    "failed: LLMRetryLimitExceededE",
+    "c0a925"
+   ],
+   [
+    "b43dfa",
+    10,
+    "complete",
+    "c0a925"
+   ]
+  ],
+  "2:Aprime": [
+   [
+    "b8129b",
+    5,
+    "failed: LLMRetryLimitExceededE",
+    "2417ef"
+   ],
+   [
+    "f5e3af",
+    10,
+    "complete",
+    "2417ef"
+   ]
+  ],
+  "3:Aprime": [
+   [
+    "8231c9",
+    5,
+    "failed: LLMRetryLimitExceededE",
+    "655f10"
+   ],
+   [
+    "c591ea",
+    10,
+    "complete",
+    "655f10"
+   ]
+  ],
+  "4:Aprime": [
+   [
+    "8dd0da",
+    5,
+    "failed: LLMRetryLimitExceededE",
+    "5b2877"
+   ],
+   [
+    "3519da",
+    10,
+    "complete",
+    "5b2877"
+   ]
+  ],
+  "14:Cprime": [
+   [
+    "dccf67",
+    4,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "9f3b8e",
+    4,
+    "failed: LLMRetryLimitExceededE",
+    "dccf67"
+   ],
+   [
+    "d116ce",
+    4,
+    "failed: LLMRetryLimitExceededE",
+    "9f3b8e"
+   ]
+  ],
+  "15:Cprime": [
+   [
+    "d6778c",
+    3,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "6ac31b",
+    3,
+    "failed: LLMRetryLimitExceededE",
+    "d6778c"
+   ],
+   [
+    "362728",
+    3,
+    "failed: LLMRetryLimitExceededE",
+    "6ac31b"
+   ]
+  ],
+  "16:Cprime": [
+   [
+    "b1a00b",
+    2,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "b59136",
+    2,
+    "failed: LLMRetryLimitExceededE",
+    "b1a00b"
+   ],
+   [
+    "86b28a",
+    2,
+    "failed: LLMRetryLimitExceededE",
+    "b59136"
+   ]
+  ],
+  "17:Cprime": [
+   [
+    "e4e331",
+    1,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "74d572",
+    1,
+    "failed: LLMRetryLimitExceededE",
+    "e4e331"
+   ],
+   [
+    "aeb736",
+    1,
+    "failed: LLMRetryLimitExceededE",
+    "74d572"
+   ]
+  ],
+  "18:Cprime": [
+   [
+    "d0feca",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "492f1f",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "d16a0c",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ]
+  ],
+  "19:Cprime": [
+   [
+    "aec477",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "909236",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "a9f9be",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ]
+  ],
+  "20:Cprime": [
+   [
+    "bbe27e",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "bcdc00",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "a65599",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ]
+  ],
+  "21:Cprime": [
+   [
+    "9f704c",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "109cf2",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "318332",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ]
+  ],
+  "22:Cprime": [
+   [
+    "79036f",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "0bdc86",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "dad4e7",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ]
+  ],
+  "23:Cprime": [
+   [
+    "307df8",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "6a716e",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "db1219",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ]
+  ],
+  "24:Cprime": [
+   [
+    "4d128c",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "a473e8",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "5a02f1",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ]
+  ],
+  "25:Cprime": [
+   [
+    "3cdc76",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "6869b9",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "281a9b",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ]
+  ],
+  "26:Cprime": [
+   [
+    "21205a",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "7c15a2",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "c1c793",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ]
+  ],
+  "27:Cprime": [
+   [
+    "3ddb43",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "0cd3ee",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "8c0625",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ]
+  ],
+  "28:Cprime": [
+   [
+    "1f18fc",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "6f317f",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "ebe809",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ]
+  ],
+  "29:Cprime": [
+   [
+    "5f80f7",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "d53883",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "8505be",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ]
+  ],
+  "30:Cprime": [
+   [
+    "9fd970",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "dd3065",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "22c55e",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ]
+  ],
+  "31:Cprime": [
+   [
+    "c0d639",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "9d7b8f",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "f57ac9",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ]
+  ],
+  "32:Cprime": [
+   [
+    "10e47e",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "9bf5c5",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "9db27c",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ]
+  ],
+  "33:Cprime": [
+   [
+    "ab271f",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "c5c242",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "8bc669",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ]
+  ],
+  "34:Cprime": [
+   [
+    "588403",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "a97aea",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "9e3d4e",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ]
+  ],
+  "35:Cprime": [
+   [
+    "cda4ad",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "d3f2d2",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "9a36c0",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ]
+  ],
+  "36:Cprime": [
+   [
+    "3f4c43",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "a0094e",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "a16354",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ]
+  ],
+  "37:Cprime": [
+   [
+    "427928",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "02f66d",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "1d7f25",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ]
+  ],
+  "38:Cprime": [
+   [
+    "210275",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "a7fb31",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "ad8798",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ]
+  ],
+  "39:Cprime": [
+   [
+    "0a9219",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "299ea6",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "1096a3",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ]
+  ],
+  "40:Cprime": [
+   [
+    "2f5b88",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "b21e02",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "c176c7",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ]
+  ],
+  "41:Cprime": [
+   [
+    "207019",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "38630a",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "ec7821",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ]
+  ],
+  "42:Cprime": [
+   [
+    "d9f179",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "d173af",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "38715e",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ]
+  ],
+  "43:Cprime": [
+   [
+    "75e276",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "ea5cb9",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "a13f96",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ]
+  ],
+  "44:Cprime": [
+   [
+    "8434ee",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "f08456",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "776e76",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ]
+  ],
+  "45:Cprime": [
+   [
+    "ed4549",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "c93319",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "948a99",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ]
+  ],
+  "46:Cprime": [
+   [
+    "acc248",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "7c8312",
+    10,
+    "complete",
+    ""
+   ]
+  ],
+  "47:Cprime": [
+   [
+    "ac997b",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "4ff4dd",
+    10,
+    "complete",
+    ""
+   ]
+  ],
+  "48:Cprime": [
+   [
+    "bf39b1",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "2c007f",
+    10,
+    "complete",
+    ""
+   ]
+  ],
+  "49:Cprime": [
+   [
+    "6cf697",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "104aee",
+    10,
+    "complete",
+    ""
+   ]
+  ],
+  "50:Cprime": [
+   [
+    "10bbc4",
+    0,
+    "failed: LLMRetryLimitExceededE",
+    ""
+   ],
+   [
+    "830952",
+    10,
+    "complete",
+    ""
+   ]
+  ]
+ },
+ "launch_error_classes": {
+  "1:Aprime:1": {
+   "spend_cap": 20
+  },
+  "1:Aprime:2": {
+   "spend_cap": 6
+  },
+  "2:Aprime:1": {
+   "spend_cap": 20
+  },
+  "2:Aprime:2": {
+   "spend_cap": 6
+  },
+  "2:Cprime:1": {
+   "quota_429": 2
+  },
+  "3:Aprime:1": {
+   "spend_cap": 20
+  },
+  "3:Aprime:2": {
+   "spend_cap": 6
+  },
+  "3:Cprime:1": {
+   "quota_429": 1
+  },
+  "4:Aprime:1": {
+   "content_filter": 20
+  },
+  "4:Cprime:1": {
+   "quota_429": 1
+  },
+  "5:Aprime:1": {
+   "quota_429": 1
+  },
+  "5:Cprime:1": {
+   "quota_429": 1
+  },
+  "6:Cprime:1": {
+   "quota_429": 1
+  },
+  "7:Cprime:1": {
+   "quota_429": 2
+  },
+  "9:Cprime:1": {
+   "quota_429": 2
+  },
+  "10:Cprime:1": {
+   "quota_429": 3
+  },
+  "11:Cprime:1": {
+   "quota_429": 2
+  },
+  "12:Cprime:1": {
+   "quota_429": 3
+  },
+  "13:Cprime:1": {
+   "quota_429": 2
+  },
+  "14:Cprime:1": {
+   "spend_cap": 20
+  },
+  "14:Cprime:2": {
+   "spend_cap": 20
+  },
+  "14:Cprime:3": {
+   "spend_cap": 20
+  },
+  "15:Cprime:1": {
+   "quota_429": 1,
+   "spend_cap": 20
+  },
+  "15:Cprime:2": {
+   "spend_cap": 20
+  },
+  "15:Cprime:3": {
+   "spend_cap": 20
+  },
+  "16:Cprime:1": {
+   "spend_cap": 20
+  },
+  "16:Cprime:2": {
+   "spend_cap": 20
+  },
+  "16:Cprime:3": {
+   "spend_cap": 20
+  },
+  "17:Cprime:1": {
+   "spend_cap": 20
+  },
+  "17:Cprime:2": {
+   "spend_cap": 20
+  },
+  "17:Cprime:3": {
+   "spend_cap": 20
+  },
+  "18:Cprime:1": {
+   "spend_cap": 20
+  },
+  "18:Cprime:2": {
+   "spend_cap": 20
+  },
+  "18:Cprime:3": {
+   "spend_cap": 20
+  },
+  "19:Cprime:1": {
+   "spend_cap": 20
+  },
+  "19:Cprime:2": {
+   "spend_cap": 20
+  },
+  "19:Cprime:3": {
+   "spend_cap": 20
+  },
+  "20:Cprime:1": {
+   "spend_cap": 20
+  },
+  "20:Cprime:2": {
+   "spend_cap": 20
+  },
+  "20:Cprime:3": {
+   "spend_cap": 20
+  },
+  "21:Cprime:1": {
+   "spend_cap": 20
+  },
+  "21:Cprime:2": {
+   "spend_cap": 20
+  },
+  "21:Cprime:3": {
+   "spend_cap": 20
+  },
+  "22:Cprime:1": {
+   "spend_cap": 20
+  },
+  "22:Cprime:2": {
+   "spend_cap": 20
+  },
+  "22:Cprime:3": {
+   "spend_cap": 20
+  },
+  "23:Cprime:1": {
+   "spend_cap": 20
+  },
+  "23:Cprime:2": {
+   "spend_cap": 20
+  },
+  "23:Cprime:3": {
+   "spend_cap": 20
+  },
+  "24:Cprime:1": {
+   "spend_cap": 20
+  },
+  "24:Cprime:2": {
+   "spend_cap": 20
+  },
+  "24:Cprime:3": {
+   "spend_cap": 20
+  },
+  "25:Cprime:1": {
+   "spend_cap": 20
+  },
+  "25:Cprime:2": {
+   "spend_cap": 20
+  },
+  "25:Cprime:3": {
+   "spend_cap": 20
+  },
+  "26:Cprime:1": {
+   "spend_cap": 20
+  },
+  "26:Cprime:2": {
+   "spend_cap": 20
+  },
+  "26:Cprime:3": {
+   "spend_cap": 20
+  },
+  "27:Cprime:1": {
+   "spend_cap": 20
+  },
+  "27:Cprime:2": {
+   "spend_cap": 20
+  },
+  "27:Cprime:3": {
+   "spend_cap": 20
+  },
+  "28:Cprime:1": {
+   "spend_cap": 20
+  },
+  "28:Cprime:2": {
+   "spend_cap": 20
+  },
+  "28:Cprime:3": {
+   "spend_cap": 20
+  },
+  "29:Cprime:1": {
+   "spend_cap": 20
+  },
+  "29:Cprime:2": {
+   "spend_cap": 20
+  },
+  "29:Cprime:3": {
+   "spend_cap": 20
+  },
+  "30:Cprime:1": {
+   "spend_cap": 20
+  },
+  "30:Cprime:2": {
+   "spend_cap": 20
+  },
+  "30:Cprime:3": {
+   "spend_cap": 20
+  },
+  "31:Cprime:1": {
+   "spend_cap": 20
+  },
+  "31:Cprime:2": {
+   "spend_cap": 20
+  },
+  "31:Cprime:3": {
+   "spend_cap": 20
+  },
+  "32:Cprime:1": {
+   "spend_cap": 20
+  },
+  "32:Cprime:2": {
+   "spend_cap": 20
+  },
+  "32:Cprime:3": {
+   "spend_cap": 20
+  },
+  "33:Cprime:1": {
+   "spend_cap": 20
+  },
+  "33:Cprime:2": {
+   "spend_cap": 20
+  },
+  "33:Cprime:3": {
+   "spend_cap": 20
+  },
+  "34:Cprime:1": {
+   "spend_cap": 20
+  },
+  "34:Cprime:2": {
+   "spend_cap": 20
+  },
+  "34:Cprime:3": {
+   "spend_cap": 20
+  },
+  "35:Cprime:1": {
+   "spend_cap": 20
+  },
+  "35:Cprime:2": {
+   "spend_cap": 20
+  },
+  "35:Cprime:3": {
+   "spend_cap": 20
+  },
+  "36:Cprime:1": {
+   "spend_cap": 20
+  },
+  "36:Cprime:2": {
+   "spend_cap": 20
+  },
+  "36:Cprime:3": {
+   "spend_cap": 20
+  },
+  "37:Cprime:1": {
+   "spend_cap": 20
+  },
+  "37:Cprime:2": {
+   "spend_cap": 20
+  },
+  "37:Cprime:3": {
+   "spend_cap": 20
+  },
+  "38:Cprime:1": {
+   "spend_cap": 20
+  },
+  "38:Cprime:2": {
+   "spend_cap": 20
+  },
+  "38:Cprime:3": {
+   "spend_cap": 20
+  },
+  "39:Cprime:1": {
+   "spend_cap": 20
+  },
+  "39:Cprime:2": {
+   "spend_cap": 20
+  },
+  "39:Cprime:3": {
+   "spend_cap": 20
+  },
+  "40:Cprime:1": {
+   "spend_cap": 20
+  },
+  "40:Cprime:2": {
+   "spend_cap": 20
+  },
+  "40:Cprime:3": {
+   "spend_cap": 20
+  },
+  "41:Cprime:1": {
+   "spend_cap": 20
+  },
+  "41:Cprime:2": {
+   "spend_cap": 20
+  },
+  "41:Cprime:3": {
+   "spend_cap": 20
+  },
+  "42:Cprime:1": {
+   "spend_cap": 20
+  },
+  "42:Cprime:2": {
+   "spend_cap": 20
+  },
+  "42:Cprime:3": {
+   "spend_cap": 20
+  },
+  "43:Cprime:1": {
+   "spend_cap": 20
+  },
+  "43:Cprime:2": {
+   "spend_cap": 20
+  },
+  "43:Cprime:3": {
+   "spend_cap": 20
+  },
+  "44:Cprime:1": {
+   "spend_cap": 20
+  },
+  "44:Cprime:2": {
+   "spend_cap": 20
+  },
+  "44:Cprime:3": {
+   "spend_cap": 20
+  },
+  "45:Cprime:1": {
+   "spend_cap": 20
+  },
+  "45:Cprime:2": {
+   "spend_cap": 20
+  },
+  "45:Cprime:3": {
+   "spend_cap": 20
+  },
+  "46:Cprime:1": {
+   "spend_cap": 20
+  },
+  "46:Cprime:2": {
+   "spend_cap": 9,
+   "quota_429": 1
+  },
+  "47:Cprime:1": {
+   "spend_cap": 20
+  },
+  "47:Cprime:2": {
+   "spend_cap": 8,
+   "quota_429": 1
+  },
+  "48:Cprime:1": {
+   "spend_cap": 20
+  },
+  "48:Cprime:2": {
+   "spend_cap": 8
+  },
+  "48:PC:1": {
+   "quota_429": 1
+  },
+  "49:B:1": {
+   "quota_429": 1
+  },
+  "49:Cprime:1": {
+   "spend_cap": 20
+  },
+  "49:Cprime:2": {
+   "spend_cap": 7
+  },
+  "50:B:1": {
+   "quota_429": 1
+  },
+  "50:Cprime:1": {
+   "spend_cap": 20
+  },
+  "50:Cprime:2": {
+   "spend_cap": 7,
+   "quota_429": 1
+  }
+ },
+ "counted_runs_with_errors_in_journal": {
+  "1:Aprime": {
+   "error_retryable": 6,
+   "accepted": 118
+  },
+  "1:prefix": {
+   "accepted": 145,
+   "empty_no_content": 2
+  },
+  "2:Aprime": {
+   "error_retryable": 6,
+   "accepted": 117
+  },
+  "2:Cprime": {
+   "accepted": 242,
+   "error_retryable": 2
+  },
+  "2:prefix": {
+   "accepted": 140,
+   "empty_no_content": 1
+  },
+  "3:Aprime": {
+   "error_retryable": 6,
+   "accepted": 147
+  },
+  "3:B": {
+   "accepted": 128,
+   "empty_no_content": 1
+  },
+  "3:Cprime": {
+   "accepted": 244,
+   "error_retryable": 1
+  },
+  "4:Cprime": {
+   "accepted": 246,
+   "error_retryable": 1
+  },
+  "5:Aprime": {
+   "accepted": 132,
+   "error_retryable": 1,
+   "empty_no_content": 1
+  },
+  "5:Cprime": {
+   "accepted": 247,
+   "error_retryable": 1
+  },
+  "5:prefix": {
+   "accepted": 153,
+   "empty_no_content": 1
+  },
+  "6:Cprime": {
+   "accepted": 240,
+   "error_retryable": 1
+  },
+  "7:B": {
+   "accepted": 120,
+   "empty_no_content": 1
+  },
+  "7:Cprime": {
+   "accepted": 240,
+   "error_retryable": 2
+  },
+  "8:Aprime": {
+   "accepted": 121,
+   "empty_no_content": 1
+  },
+  "8:B": {
+   "accepted": 118,
+   "empty_no_content": 1
+  },
+  "8:prefix": {
+   "accepted": 150,
+   "empty_no_content": 1
+  },
+  "9:Aprime": {
+   "accepted": 121,
+   "empty_no_content": 1
+  },
+  "9:Cprime": {
+   "accepted": 235,
+   "error_retryable": 2
+  },
+  "10:Aprime": {
+   "accepted": 132,
+   "empty_no_content": 1
+  },
+  "10:Cprime": {
+   "accepted": 236,
+   "error_retryable": 3
+  },
+  "10:prefix": {
+   "accepted": 145,
+   "empty_no_content": 1
+  },
+  "11:Cprime": {
+   "accepted": 233,
+   "error_retryable": 2
+  },
+  "12:Aprime": {
+   "accepted": 136,
+   "empty_no_content": 1
+  },
+  "12:Cprime": {
+   "accepted": 238,
+   "error_retryable": 3
+  },
+  "13:Cprime": {
+   "accepted": 245,
+   "error_retryable": 2
+  },
+  "14:B": {
+   "accepted": 115,
+   "empty_no_content": 1
+  },
+  "17:prefix": {
+   "accepted": 141,
+   "empty_no_content": 1
+  },
+  "18:prefix": {
+   "accepted": 154,
+   "empty_no_content": 1
+  },
+  "19:prefix": {
+   "accepted": 135,
+   "empty_no_content": 1
+  },
+  "20:Aprime": {
+   "accepted": 133,
+   "empty_no_content": 1
+  },
+  "20:B": {
+   "accepted": 113,
+   "empty_no_content": 1
+  },
+  "20:prefix": {
+   "accepted": 147,
+   "empty_no_content": 1
+  },
+  "22:B": {
+   "accepted": 120,
+   "empty_no_content": 1
+  },
+  "25:prefix": {
+   "accepted": 129,
+   "empty_no_content": 1
+  },
+  "26:Aprime": {
+   "accepted": 130,
+   "empty_no_content": 2
+  },
+  "26:PC": {
+   "accepted": 61,
+   "empty_no_content": 1
+  },
+  "27:prefix": {
+   "accepted": 153,
+   "empty_no_content": 3
+  },
+  "28:prefix": {
+   "accepted": 137,
+   "empty_no_content": 1
+  },
+  "30:Aprime": {
+   "accepted": 137,
+   "empty_no_content": 1
+  },
+  "30:B": {
+   "accepted": 123,
+   "empty_no_content": 2
+  },
+  "30:prefix": {
+   "accepted": 139,
+   "empty_no_content": 1
+  },
+  "31:Aprime": {
+   "accepted": 121,
+   "empty_no_content": 1
+  },
+  "31:B": {
+   "accepted": 113,
+   "empty_no_content": 1
+  },
+  "32:Aprime": {
+   "accepted": 138,
+   "empty_no_content": 2
+  },
+  "33:prefix": {
+   "accepted": 157,
+   "empty_no_content": 2
+  },
+  "34:prefix": {
+   "accepted": 148,
+   "empty_no_content": 1
+  },
+  "36:Aprime": {
+   "accepted": 141,
+   "empty_no_content": 3
+  },
+  "39:Aprime": {
+   "accepted": 133,
+   "empty_no_content": 1
+  },
+  "39:prefix": {
+   "accepted": 161,
+   "empty_no_content": 3
+  },
+  "40:Aprime": {
+   "accepted": 123,
+   "empty_no_content": 2
+  },
+  "41:Aprime": {
+   "accepted": 127,
+   "empty_no_content": 2
+  },
+  "41:prefix": {
+   "accepted": 154,
+   "empty_no_content": 1
+  },
+  "42:prefix": {
+   "accepted": 152,
+   "empty_no_content": 2
+  },
+  "43:Aprime": {
+   "accepted": 128,
+   "empty_no_content": 1
+  },
+  "43:B": {
+   "accepted": 112,
+   "empty_no_content": 1
+  },
+  "46:Cprime": {
+   "error_retryable": 10,
+   "accepted": 244,
+   "empty_no_content": 1
+  },
+  "47:Cprime": {
+   "error_retryable": 9,
+   "accepted": 243
+  },
+  "48:Cprime": {
+   "error_retryable": 8,
+   "accepted": 257
+  },
+  "48:PC": {
+   "accepted": 64,
+   "error_retryable": 1
+  },
+  "49:B": {
+   "accepted": 130,
+   "error_retryable": 1
+  },
+  "49:Cprime": {
+   "error_retryable": 7,
+   "accepted": 242,
+   "empty_no_content": 4
+  },
+  "49:prefix": {
+   "accepted": 149,
+   "empty_no_content": 1
+  },
+  "50:B": {
+   "accepted": 125,
+   "error_retryable": 1
+  },
+  "50:Cprime": {
+   "error_retryable": 8,
+   "accepted": 245
+  }
+ },
+ "counted_runs_spanning_gap": [
+  "1:Aprime",
+  "2:Aprime",
+  "3:Aprime",
+  "46:Cprime",
+  "47:Cprime",
+  "48:Cprime",
+  "49:Cprime",
+  "50:Cprime"
+ ],
+ "counted_git_heads": {
+  "86c47aa7088b982a324f008509c4c5707e77e5c5": 83,
+  "5d8c0d1a300e620cf6943062c88129f1f8544235": 12,
+  "c6ab3de5c7593d808c9d0f22377ff3247fc8e845": 8,
+  "bf79f9f3d97ac29c08f237c521b62a42043dbe65": 8,
+  "8b2c5f24936a5081375f6f4f306fb255e2080c87": 3,
+  "a09bbb8fb5f5e1a19e69c9a85679450744e2501f": 6,
+  "fb05dcffcdadefff9c6af223994105c58d4489a9": 41,
+  "dea4fff38bc0305453a7e998669c8aa89ba9b75c": 10,
+  "4acb5491e59eeba2eb2a2856777685b6e2f63031": 8,
+  "654b88173901499b3ee04772165f1f69f5e93d2f": 2,
+  "8f2fea3367d8451a9aafb66b94e8d3a7c0c234a0": 6,
+  "8f9e2d86a1e281f984aa1d7f43a2a084aee2f3ad": 20,
+  "3a22825af0be5e73967fd3eb08ec66f716803656": 11
+ },
+ "counted_code_dirty": 0,
+ "counted_caps_sha": {
+  "4824966d9e80b589cc99bacfd9ce57a433f61f8fcd67d4780bed03ece0779ee1": 122,
+  "fccef9c49827b0d18fc6108242b85ff0b4bee72ff5600a3e77aa3f6c8fc2d74b": 32,
+  "ed82452f55da519ac1d505bc049661d732e69a670d88ad6233d1ad66b9cc83ed": 64
+ },
+ "spend_usd": {
+  "study2_by_group": {
+   "main": 105.2394,
+   "p8": 2.9755
+  },
+  "study2_total": 108.2149,
+  "project_other_results_raw": 26.63,
+  "project_total": 134.8449
+ },
+ "spend_failed_arms_usd": 0.8759
+}
