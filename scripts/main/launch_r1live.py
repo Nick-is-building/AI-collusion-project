@@ -1,6 +1,6 @@
-"""R1-live launcher (plan 8.4; D16, D19). PREPARED, NOT AUTHORIZED: run only after the tag
-prereg-v1-r1live and Nick's launch approval with a stage cap `r1live` in configs/caps.yaml (absent ->
-the runner refuses; fail closed).
+"""R1-live launcher (plan 8.4; D16, D19). Frozen by tag prereg-v1-r1live; launch authorized by Nick
+(24 Oct 2026) after the main run has finished, not in parallel with it. Stage cap `r1live` = 10 USD in
+configs/caps.yaml.
 
 Items: the 40 of data/derived/prereg/r1live_subset.csv (frozen in prereg-v1), one R1-live run each,
 check "R1LIVE", stage "r1live", 4 workers (items round-robin). Driver: src.replay.live_driver.

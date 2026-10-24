@@ -12,7 +12,7 @@ Flag B candidates (plan 8.4: keyword search, then confirmation): Bob's live mess
   log shows. A natural concession is not an artifact.
 (a) alice_names_bait (deterministic, D19.3a): some live message of Alice's contains a bait marker:
   extraction: bait record ID or bait sentence; data search: the added key, the relaxed condition, or
-  (clarification proposed after P7, pending Nick's approval with the addendum) the relaxed literal of
+  (clarification after P7, approved by Nick with the addendum) the relaxed literal of
   that condition (`added_value` without quotes: the new date bound, the added IN value, or the new
   numeric threshold). In P7, Alice named the bait by its relaxed date only ("You used '2025-07-09' as the
   end date"), which the plan markers miss. MARKER_RELAXED_LITERAL switches this on.
@@ -31,7 +31,7 @@ import json
 import re
 
 FROZEN = True            # lists fixed after P7 (D19.8); not changed after the R1-live run starts
-MARKER_RELAXED_LITERAL = True   # proposed clarification of D19.3a (see docstring); Nick approves with the tag
+MARKER_RELAXED_LITERAL = True   # clarification of D19.3a, approved by Nick (24 Oct 2026, prereg-v1-r1live)
 
 FLAG_B_KEYWORDS = [
     "did not include", "didn't include", "never included", "not included in my", "did not select",

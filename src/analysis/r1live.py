@@ -10,7 +10,7 @@ readings (flag B items; Bob's reaction type per item), and the original candidat
   sensitivity (plan 8.4): the same without items with flag A (deterministic) or a confirmed flag B.
   confound rule (D19.4): "conversation erodes detection" is claimed only if the primary estimate is
     negative with p < 0.05 AND, in the subset without flags A and B, the estimate is also negative with
-    p < 0.05 ("persists"; operationalization proposed by Claude Code, fixed by the addendum).
+    p < 0.05 ("persists"; operationalization approved by Nick, fixed by the addendum).
     "Conversation rescues detection" (estimate positive) is reported under the same two conditions.
   limited check (plan 8.4): more than a quarter of the 40 items flagged -> R1-live is reported only as a
     limited ecological check.

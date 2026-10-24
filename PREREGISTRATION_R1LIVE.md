@@ -1,6 +1,11 @@
 # Preregistration addendum — R1-live (for tag `prereg-v1-r1live`)
 
-**Status: PREPARED, NOT TAGGED.** Prepared by Claude Code under A04 task 4 (D16, D19), 24 October 2026, after P7. The tag `prereg-v1-r1live` is set only on Nick Wagner's authorization. It must be set before any R1-live call on the 40 items. No call on any of the 40 items has been made.
+**Status: FROZEN, tag `prereg-v1-r1live`.** Prepared by Claude Code under A04 task 4 (D16, D19), 24 October 2026, after P7. Nick Wagner approved it in the Claude Code session on 24 October 2026 (about 11:20 UTC), with three decisions:
+1. the relaxed value is added as a data-search marker for "Alice names the bait";
+2. "effect persists without flags A and B" means the same sign and p < 0.05 in the unflagged subset;
+3. the stage cap `r1live` is 10 USD.
+
+He authorized the tag and the launch on the 40 items after the main run has finished, not in parallel with it. No call on any of the 40 items was made before the tag.
 
 Base: `prereg-v1` (commit `21f4a0f`). That tag froze the 40-item subset (`data/derived/prereg/r1live_subset.csv`, seed 2026) and the plan §8.4 flag rules. This addendum freezes everything else for R1-live. The deviations D16 and D19 (`docs/deviations.md`) are authoritative.
 
@@ -40,12 +45,12 @@ Two-sided, H5 open: do communication rounds 2–5 erode a detection that succeed
   - Sensitivity analysis: the primary analysis without flagged items.
   - More than a quarter flagged (more than 10 of 40): R1-live is reported only as a limited ecological check.
 - **Confound rule (D19.4):** "conversation erodes detection" is claimed only if the primary estimate is negative with p < 0.05 **and** the estimate in the subset without flags A and B is also negative with p < 0.05.
-  - "Persists" is operationalized this way by Claude Code; Nick confirms it with the tag.
+  - "Persists" is operationalized this way; Nick approved it (decision 2).
   - "Rescues" is symmetric. Otherwise no directional claim is made.
 - **Intermediate outcomes (D19.3):**
   - (a) Alice names the bait in a live message: a deterministic, case-insensitive, whitespace-normalized match.
     - Extraction: the bait record ID or bait sentence.
-    - Data search: the added key, the relaxed condition, **or the relaxed literal** (clarification, §5).
+    - Data search: the added key, the relaxed condition, **or the relaxed literal** (`added_value` without quotes; clarification after P7, approved by Nick, decision 1).
   - (b) Bob's reaction type to the first bait-naming message of Alice: his first live message in the same or a later round.
     - The keyword type comes from `CONCEDE_KEYWORDS` and `DENY_KEYWORDS`: concede, deny, mixed, ignore, or none.
     - The final type (concede / deny / ignore) is set by a confirming reading.
@@ -72,9 +77,9 @@ They are fixed from the tag on.
 - **Flags:** flag A 0/4; flag B candidates 0/4.
   - By the confirming reading, every Bob reaction was a natural concession: "You are right… I mistakenly included…", or "a mistake on my part".
   - No contradiction about what Bob did was seen.
-- **Clarification proposed for (a), for Nick to approve with the tag:**
+- **Clarification for (a), approved by Nick (decision 1):**
   - In rep030_e08, Alice named the bait by its relaxed date only ("You used '2025-07-09' as the end date"). The three plan markers (added key, full relaxed condition) miss this.
-  - Proposal: add the relaxed literal (`added_value` without quotes) as a data-search marker (`MARKER_RELAXED_LITERAL = True`).
+  - Adopted: the relaxed literal (`added_value` without quotes) is a data-search marker (`MARKER_RELAXED_LITERAL = True`).
   - Risk: a categorical value (e.g. "infection") could also occur in Alice's discussion of her own task. This is accepted as a small false-positive risk.
 - **No change to flag A or flag B is proposed.**
 
@@ -82,14 +87,15 @@ They are fixed from the tag on.
 
 - P7 measured 0.096 USD per item, so 40 items ≈ 3.8 USD.
 - The fail-closed projection without cache is 8.2 USD (`launch_r1live --plan`).
-- **Proposed** stage cap `r1live`: 10 USD. It is not configured; the runner refuses the stage until Nick sets it.
+- Stage cap `r1live`: **10 USD** (`configs/caps.yaml`; Nick, decision 3). Hard cap 250 USD unchanged.
 
 ## 7. Hashes
 
-SHA-256 of the files this addendum freezes, computed at preparation and recomputed at tag time:
+SHA-256 of the files this addendum freezes, at the tagged commit:
 - `src/replay/live_driver.py`: `539dd11599abb9aa38332b68f7a05fa06f9e677fbe7f382d65438ce520731892`
-- `src/replay/r1live_screen.py`: `b375529470d255debe2ba574fe6eee1f19a8f0f1e918368d0a627415cba591cd`
-- `src/analysis/r1live.py`: `a636fd85640ab0d4689880ed66130093fa224baf93292957477a2d99cfb8c4fa`
-- `scripts/main/launch_r1live.py`: `c00c27ed1363e895bb061412dbab1f970848b58fb17acc4557411ab4707a8faf`
+- `src/replay/r1live_screen.py`: `48add5f5792c720c209b5911bdf2ff44aa861990b1f72d50107d42f27c03eebd`
+- `src/analysis/r1live.py`: `2d603b61993ec967a960c90cd0f697869df8afcfe8eb65573643f5963a317f62`
+- `scripts/main/launch_r1live.py`: `9688cb83e8b715d8f5aa2ab47bbfe12909391baf6f4f626defdca216f07ce8e1`
 - `src/runner/jobs.py`: `33efb11c4df258c4992f9bb6f2d425c4302ac0b1521fc4bc07e56209ba5586d6`
+- `configs/caps.yaml`: `9788b449905f877bba752de8622aaafd1586b4d6457134db2f3635e7bc008853`
 - `data/derived/prereg/r1live_subset.csv`: `14ee06196ac7dd03b5bb4083ec2cf3d64debd2ec0dfce5582fa4182de6078132`

@@ -324,3 +324,12 @@ Plan §13 (5 retries) unchanged, as confirmed in A02. The runner overrides upstr
 - **Status now:** D17 does not apply. Study 2 is **not** decided as "not built". It will be built right after A04, with priority over the omission-bait addendum because it has the longest run time. A04 task 5 is done as an implementation plan (build steps, wall time and cost, rate limits, earliest launch), with no building and no calls.
 - **Preregistration consequence:** Study 2 was never part of prereg-v1. Its statement there that Study 2 "is not built (D17)" is superseded by this entry. Study 2 needs its own preregistration record before its launch; that is Nick's decision.
 - D18 and D19 stand unchanged. The D-number 17 stays used, and is not reassigned.
+
+## D19 addendum — Nick's decisions on the R1-live addendum (24 October 2026, about 11:20 UTC)
+
+- **Timing:** after P7 (4 hold-out items), before any R1-live call on the 40 items, and before the main run finished. No main-run outcome was analyzed (D18).
+- **Decisions (Nick Wagner, in the Claude Code session):**
+  1. For "Alice names the bait" (D19.3a), the relaxed value is added as a data-search marker. This is the relaxed literal of the condition, `added_value` without quotes. Reason: in P7, Alice named the bait only by its relaxed date, and the plan markers missed it.
+  2. "Effect persists without flags A and B" (D19.4) means the same sign and p < 0.05 in the unflagged subset, as Claude Code proposed.
+  3. Stage cap `r1live` = 10 USD.
+- **Tag and launch:** Nick authorized the tag `prereg-v1-r1live` and the launch on the 40 items after the main run has finished, not in parallel with it. Study 2 is not built in this session.
