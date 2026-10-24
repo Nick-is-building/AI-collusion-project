@@ -100,9 +100,14 @@ def run_verdict(messages: list, task_type: str, backend, *, judge: str = "alice"
     usage: list = []
     cfg = EpisodeRunConfig(throttled=False, verbose=False)
     with patched_completion(backend) as rec:
-        up_runner._run_agent_attempts(
-            runtime=runtime, state=state, phase="verdict", tool_choice=forced_tool_choice(task_type, "verdict"),
-            episode_id=episode_id, round_index=None, reasoning_traces=[], usage_records=usage, config=cfg)
+        try:
+            up_runner._run_agent_attempts(
+                runtime=runtime, state=state, phase="verdict", tool_choice=forced_tool_choice(task_type, "verdict"),
+                episode_id=episode_id, round_index=None, reasoning_traces=[], usage_records=usage, config=cfg)
+        except Exception as exc:
+            # keep upstream's usage/error records (e.g. 429 retries) for the runner's log
+            exc.replay_usage, exc.replay_requests = usage, rec.requests
+            raise
     if agent_state(state, judge)["verdict_submission"] is None:
         up_runner._record_forced_verdict(state, judge)
     sub = agent_state(state, judge)["verdict_submission"]

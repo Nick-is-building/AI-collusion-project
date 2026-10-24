@@ -168,3 +168,45 @@ def test_prices():
     assert p.cost("anthropic/claude-haiku-5-5", 100_000, 0, 0) == pytest.approx(0.01)
     assert p.cost("anthropic/claude-haiku-5-5", 100_001, 0, 0) == pytest.approx(100_001 * 0.5 / 1e6)
     assert not p.documented("gemini/gemini-3.7-flash")
+
+
+def _rate_limited(n_fail):
+    state = {"n": 0}
+
+    def b(**kw):
+        state["n"] += 1
+        if state["n"] <= n_fail:
+            raise litellm.exceptions.RateLimitError("429 Too Many Requests", llm_provider="gemini", model=kw["model"])
+        return mock_backend("accept")(**kw)
+    return b
+
+
+def test_rate_limit_counted(sdir, monkeypatch):
+    monkeypatch.setattr(up_agents.time, "sleep", lambda s: None)
+    st = runner(sdir, _rate_limited(2)).run(jobs(1))
+    c = [r for r in lines(sdir) if r["type"] == "call"][0]
+    assert st["completed"] == 1 and c["verdict"] == "accept"
+    assert c["n_rate_limit"] == 2 and c["api_error_counts"] == {"transient_rate_limit": 2}
+    assert c["n_api_requests"] == 3
+
+
+def test_rate_limit_exhausted_keeps_usage(sdir, monkeypatch):
+    monkeypatch.setattr(up_agents.time, "sleep", lambda s: None)
+    st = runner(sdir, _rate_limited(100)).run(jobs(1))
+    c = [r for r in lines(sdir) if r["type"] == "call"][0]
+    # plan 13: 5 retries -> 6 API attempts, then recorded as missing
+    assert st["missing"] == 1 and c["verdict_status"] == "missing_error"
+    assert c["n_rate_limit"] == 6 and c["n_api_requests"] == 6
+
+
+def test_check_group_cap(sdir):
+    caps = {"hard_cap_usd": 250.0, "stages": {"pilot": 10.0},
+            "check_groups": {"g": {"stage": "pilot", "checks": ["T"], "cap_usd": 1e-6}}}
+    b = counting(mock_backend("accept"))
+    st = runner(sdir, b, caps=caps).run(jobs(1))
+    assert st["stopped"].startswith("CapExceeded: check group g") and b.state["n"] == 0
+    other = jobs(1)
+    other[0].check = "U"   # not in the group: only stage and hard cap apply
+    assert runner(sdir, b, caps=caps).run(other)["completed"] == 1
+    led = Ledger(sdir / "raw", "mock")
+    assert led.group_spent({"stage": "pilot", "checks": ["U"]}) == pytest.approx(led.total)

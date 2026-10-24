@@ -83,16 +83,29 @@ class Ledger:
         self.mode = mode
         self.total = 0.0
         self.by_stage: dict[str, float] = {}
+        self.by_check: dict[tuple[str, str], float] = {}
         for rec in iter_call_lines(self.results_dir):
             if rec.get("mode") == mode:
-                self.add(rec.get("stage"), rec.get("cost_usd") or 0.0)
+                self.add(rec.get("stage"), rec.get("cost_usd") or 0.0, check=rec.get("check"))
 
-    def add(self, stage: str, cost: float):
+    def add(self, stage: str, cost: float, check: str | None = None):
         self.total += cost
         self.by_stage[stage] = self.by_stage.get(stage, 0.0) + cost
+        if check is not None:
+            self.by_check[(stage, check)] = self.by_check.get((stage, check), 0.0) + cost
 
-    def check(self, stage: str, projected: float, caps: dict):
-        """Raise CapExceeded if spending `projected` more would exceed the stage or hard cap."""
+    def group_spent(self, group: dict) -> float:
+        return sum(self.by_check.get((group["stage"], c), 0.0) for c in group["checks"])
+
+    def check(self, stage: str, projected: float, caps: dict, check: str | None = None):
+        """Raise CapExceeded if spending `projected` more would exceed the stage cap, the hard cap, or
+        the cap of a check group (caps["check_groups"]) that contains `check`."""
+        for name, g in (caps.get("check_groups") or {}).items():
+            if g["stage"] == stage and check in g["checks"]:
+                spent = self.group_spent(g)
+                if spent + projected > g["cap_usd"]:
+                    raise CapExceeded(f"check group {name}: spent {spent:.4f} + projected {projected:.4f} > "
+                                      f"cap {g['cap_usd']}")
         stage_cap = caps["stages"].get(stage)
         if stage_cap is None:
             raise CapExceeded(f"no cap configured for stage {stage!r}")

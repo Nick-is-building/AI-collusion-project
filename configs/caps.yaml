@@ -2,3 +2,9 @@
 hard_cap_usd: 250.0          # all live calls of the project, all stages
 stages:
   pilot: 10.0                # plan section 12 (technical pilot including P11)
+# Sub-caps on groups of checks within a stage (fail closed, same ledger).
+check_groups:
+  a02_pilot_checks:          # assignment A02: P1 (incl. 3.7-Flash call), P2, P3, P9; pilot cap stays 10
+    stage: pilot
+    checks: [P1, P1-37, P2, P3, P9]
+    cap_usd: 2.0

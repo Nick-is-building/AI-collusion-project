@@ -10,13 +10,17 @@
   retries: upstream `experiments.agents.LLM_MAX_RETRIES` (20) is overridden to `api_max_retries`
   from configs/models.yaml (5, plan section 13) for the duration of the run.
 - Cost: from the logged upstream usage records x configs/prices.yaml. Fail closed: before each
-  call, `Ledger.check` with a conservative pre-check cost; a call to a model without a documented
+  call, `Ledger.check` with a conservative pre-check cost against the stage cap, the hard cap, and
+  any `check_groups` cap in configs/caps.yaml that lists the job's check; a call to a model without a documented
   price is refused unless `allow_undocumented_price` is set for that job.
 - `response_model`: the first value observed for a requested model (in earlier runs of this
   results dir, or in this run) is the reference; any change stops the run after logging the call.
 - Missing: an exception after upstream retries -> status "missing" (verdict_status
   "missing_error"); no verdict after the 3 verdict attempts -> upstream forced reject, logged with
   forced=True and verdict_status "missing_forced" (plan 13: recorded as missing).
+- API errors: upstream records one usage record per failed attempt with `error_category`; the
+  call line carries `api_error_counts` and `n_rate_limit` (429: transient_rate_limit + hard_quota),
+  also for calls that end in an exception.
 - Full request kwargs are saved gzipped under `requests_dir/<run_id>/` (local; reconstructable);
   their SHA-256 is in the JSONL line.
 """
@@ -174,23 +178,27 @@ class Runner:
         if not self.prices.documented(job.model) and not job.allow_undocumented_price:
             raise UnpricedModel(f"{job.model} has no documented price; refused (fail closed)")
         pre = precheck_cost(self.prices, job.model, job.est_input_tokens)
-        self.ledger.check(self.stage, pre, self.caps)
+        self.ledger.check(self.stage, pre, self.caps, check=job.check)
         msgs = job.build_messages()
         t0 = utc_now()
         status, err, res = "complete", None, None
+        exc_usage, exc_requests = [], []
         try:
             res = run_verdict(msgs, job.task_type, self.backend, judge=job.judge, model=job.model,
                               episode_id=cid)
         except Exception as exc:  # after upstream retries (LLMRetryLimitExceededError, 4xx, ...)
             status, err = "missing", f"{type(exc).__name__}: {str(exc)[:1000]}"
-        usage = res.usage if res else []
+            exc_usage, exc_requests = getattr(exc, "replay_usage", []), getattr(exc, "replay_requests", [])
+        usage = res.usage if res else exc_usage
+        requests = res.requests if res else exc_requests
         cost = sum(self.prices.usage_cost(job.model, u) for u in usage)
         models = sorted({u.get("response_model") for u in usage if u.get("response_model")})
-        req_hashes = res.request_hashes if res else []
-        if res and res.requests:
+        error_counts = error_category_counts(usage)
+        req_hashes = [request_hash(r) for r in requests]
+        if requests:
             d = self.requests_dir / self.run_id
             d.mkdir(parents=True, exist_ok=True)
-            for h, r in zip(req_hashes, res.requests):
+            for h, r in zip(req_hashes, requests):
                 with gzip.open(d / f"{h}.json.gz", "wt", encoding="utf-8") as fh:
                     fh.write(canonical_json(r))
         if res is None:
@@ -208,10 +216,11 @@ class Runner:
                    status=status, verdict_status=vstatus, error=err,
                    verdict=res.verdict if res else None, reasoning=res.reasoning if res else None,
                    forced=res.forced if res else None, response_models=models, usage=usage,
+                   api_error_counts=error_counts, n_rate_limit=n_rate_limit(error_counts),
                    cost_usd=cost, est_input_tokens=job.est_input_tokens,
                    response_messages=res.messages_after[len(msgs):] if res else None, meta=job.meta)
         self._write(rec)
-        self.ledger.add(self.stage, cost)
+        self.ledger.add(self.stage, cost, check=job.check)
         stats["cost_usd"] += cost
         stats["completed" if status == "complete" else "missing"] += 1
         ref = self.ref_model.get(job.model)
@@ -220,6 +229,23 @@ class Runner:
                 self.ref_model[job.model] = ref = m
             elif m != ref:
                 raise ModelChanged(f"{job.model}: response_model {m!r} != first observed {ref!r} (call {cid})")
+
+
+RATE_LIMIT_CATEGORIES = ("transient_rate_limit", "hard_quota")  # upstream _classify_llm_error (HTTP 429)
+
+
+def error_category_counts(usage: list) -> dict:
+    """Upstream error records per category (one record per failed API attempt)."""
+    out: dict[str, int] = {}
+    for u in usage:
+        c = u.get("error_category")
+        if c:
+            out[c] = out.get(c, 0) + 1
+    return out
+
+
+def n_rate_limit(counts: dict) -> int:
+    return sum(counts.get(c, 0) for c in RATE_LIMIT_CATEGORIES)
 
 
 def _pkg_version(name):
