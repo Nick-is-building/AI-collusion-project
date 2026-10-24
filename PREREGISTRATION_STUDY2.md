@@ -122,6 +122,24 @@ Implementation:
 
 ## 9. Frozen files
 
-SHA-256 at the tagged commit (`scripts/study2/prereg_hashes.py`):
+SHA-256 of the committed files at commit `62662d4`, the commit before this file's final text; the tagged commit changes only this file. Computed with `scripts/study2/prereg_hashes.py 62662d4`. The analysis code is `src/hysteresis/analysis.py`, `scripts/study2/analyze.py` and `src/reanalysis/transmission.py`.
 
-FILLED_HASHES
+| File (at `62662d4`) | SHA-256 |
+|---|---|
+| `PROJECT_PLAN.md` | `adf1cca5d8ee880906b2b14fbb276f1ec197d3c0fbbd5ca273aab9bd66a35729` |
+| `assignments/A05_study2_build_launch.md` | `b09ae0565714113cb1559d31bfba5c21ba11239873921534b3b8f0b2a55456b0` |
+| `docs/deviations.md` | `94432d16f09ec79b06c4dfeaa88112f2516247b9586f71c26d1eba98373f34a7` |
+| `configs/caps.yaml` | `fccef9c49827b0d18fc6108242b85ff0b4bee72ff5600a3e77aa3f6c8fc2d74b` |
+| `configs/prices.yaml` | `715fdb6b9264508034ee48ba61e950ec4ef7602b15ebacf801954d91e35559b6` |
+| `src/hysteresis/analysis.py` | `c84d043f43bd02f3b8b1bbf543782f67e488fcf00f9dd352e9c9f4a4e7de0b63` |
+| `scripts/study2/analyze.py` | `175d66f54335b923b26bb274c49b1f5fc069bee0fb00a645aee4fd959a79f9ff` |
+| `src/reanalysis/transmission.py` | `7e4fedba10544e39364f30f25f6f3c8805615ee7833c1fb670496ae03d99edc9` |
+| `src/hysteresis/run_arm.py` | `60bd9673dd0a13d576a4fdcd36a7dded702c025a15345d2c8003ceb23cedc248` |
+| `src/hysteresis/status_line.py` | `a5ad6ce18a4930d79b25fe264b7acc69e2eb31726cc023348fa7770b0522e61a` |
+| `src/hysteresis/partner_control.py` | `ff5b34314db0c9b0bc6c2d6a2ee3b487c3832810f9f342ab4703cb5468d32120` |
+| `src/hysteresis/guard.py` | `5af41f222f7761cb84f964fff6e5bae981b525f51c48c61a1b623c6c8b55e62b` |
+| `src/hysteresis/scheduler.py` | `d69f3991961f1410b1bd6d09d3d602b0757340da68301fc0ea8cc778bf961b60` |
+| `src/hysteresis/upstream_tree.py` | `2079f9e6f790cc21c7106e0739ccfd0819140bc1f728515f60ef17843544f920` |
+| `scripts/study2/launch.py` | `784ffeb2b7bbc7ec536bfb1e24a090399f54be865cdad02a757959025c366dd4` |
+| `scripts/study2/fix_n.py` | `51cc194995af96126b693a0c114e185299228165a52edac9e3c2efd594401f07` |
+| `results/summaries/study2_n.json` | `00ba50141e639364975458b7fd1e4b075fe47434c2b7cb1fb89eb59e6857338e` |
