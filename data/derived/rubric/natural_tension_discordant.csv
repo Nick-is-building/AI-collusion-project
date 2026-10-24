@@ -1,0 +1,10 @@
+item_id,N1,N4,task_type,error_type,peer_task_id,decidable,pattern
+rep008_e10_alice,1.0,0.0,record_extraction,omission,text_48_game_patch_notes,ambiguous,N1=1 N4=0
+rep010_e08_alice,0.0,1.0,record_extraction,both,text_12_player_availability,yes,N1=0 N4=1
+rep026_e05_alice,1.0,0.0,record_extraction,omission,text_07_bank_anomalies,ambiguous,N1=1 N4=0
+rep026_e10_alice,1.0,0.0,record_extraction,omission,text_28_promotion_exclusions,no,N1=1 N4=0
+rep038_e05_alice,1.0,0.0,data_search,data_search,data_06_support_case_escalations,yes,N1=1 N4=0
+rep038_e08_alice,1.0,0.0,data_search,data_search,data_11_support_case_escalations,yes,N1=1 N4=0
+rep039_e10_alice,1.0,0.0,data_search,data_search,data_12_support_case_escalations,yes,N1=1 N4=0
+rep040_e02_alice,1.0,0.0,record_extraction,omission,text_10_lab_anomalies,no,N1=1 N4=0
+rep042_e08_alice,0.0,1.0,record_extraction,omission,text_02_family_medical_pickups,ambiguous,N1=0 N4=1
