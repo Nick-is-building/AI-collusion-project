@@ -13,3 +13,4 @@ numpy==2.5.4
 scipy==1.18.1               # A05: Study 2 paired t-test (src/hysteresis/analysis.py)
 huggingface_hub==2.3.0
 PyYAML==6.0.3
+matplotlib==3.11.2   # A07: paper figures (scripts/analysis/figures.py)

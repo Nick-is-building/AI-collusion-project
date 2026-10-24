@@ -111,6 +111,8 @@ def main(argv=None):
     if (ROOT / "scripts" / "analysis" / "a07_addendum.py").exists():   # A07: D28 R6s (A07 calls it D27)
         from scripts.analysis import a07_addendum
         res["addendum"]["D28_R6s"] = a07_addendum.analyze(calls, meta)
+    from scripts.analysis import figure_data   # A07 task 3: data behind paper/figures (descriptive)
+    res["figure_data"] = figure_data.build(calls, meta)
     Path(a.out).write_text(to_json(res))
     print("wrote", a.out)
     return res
