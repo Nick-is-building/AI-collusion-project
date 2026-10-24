@@ -107,3 +107,10 @@ No Study 2 work or result is recorded here. Its inclusion in the plan does not a
 **Decisions:** a technical provenance rule, with no scientific change. Without it, any A06 edit to a tracked file would make Study 2 launches fail.
 **Checks performed:** `pytest tests/test_study2_build.py`: all passed (output in the commit message).
 **Next:** P8.
+
+## 2026-10-24 ~12:55 UTC — Claude Code (Opus 5.5), session A05 — Nick's clarification on P8 (during P8)
+
+**Assignment / authorization:** Nick, in the Claude Code session (verbatim in `PREREGISTRATION_STUDY2.md` §8): P8 on rep001 is pilot data and is not reused; rep001 runs fresh in the main launch; P8 outcomes are never looked at (use is limited to cost, cache share, wall time, errors, the status-line check); the extra sequence counts in the D21 cost calculation; record it in the preregistration.
+**Built or changed:** `PREREGISTRATION_STUDY2.md` §8 (draft, untagged): the verbatim clarification and how the code meets it. No code change was needed. P8 lives under `results/study2/p8/` and the main run under `results/study2/main/`, and scheduler and run list read one group only. `fix_n.py` subtracts P8 spend from the remaining Study 2 cap. The status-line check prints PASS/FAIL only, and the monitor reads journals and metadata only.
+**Checks performed:** none new. So far no P8 trace has been opened except the run logs' tool status lines (e.g. "send_message(err:MessageError: exceeds 200 char limit)" in the prefix log, seen while checking for errors).
+**Next:** P8 completion, status-line check, D21.
