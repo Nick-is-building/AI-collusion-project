@@ -142,3 +142,32 @@ No outcome analysis, completed manuscript, or final submission is attested here.
 - The equivalence reading in `verification.json` is exploratory, and the near-ceiling cells give degenerate [0, 0] intervals.
 **Next:** report to Nick (done in the session), then task 3.
 **Cross-references:** `PREREGISTRATION.md` §5, `PREREGISTRATION_R1LIVE.md` §3; `docs/deviations.md` D18, D19, D24.
+
+## 2026-10-24 13:24–13:30 UTC — Claude Code (Opus 5.5), session A06 — Tasks 3–4: addendum analysis (D25, D26), exploratory readings, final verification run
+
+**Assignment / authorization:** A06 tasks 3 and 4. The analysis code (`scripts/analysis/a06_addendum.py`) was committed in `8e138ca`, before the first addendum call.
+**Checks performed:** `PYTHONPATH=. .venv/bin/python -m scripts.analysis.verify_all` → `results/summaries/verification.json`. Full test suite at `8e138ca`: 470 passed.
+**Observed: addendum (outside the Holm family, α = 0.05):**
+- **D25 omission baits** (50 items, 31 trajectories; counterparts 22 from the main run and 28 from a06; 0 missing).
+  - Detection R1-om 0.64, R4-om 0.83.
+  - **Δ_om = +0.19, sign-flip p = 0.0074, CI [0.065, 0.302].** Significant, so D_om was tested.
+  - **D_om = +0.18, p = 0.011, CI [0.054, 0.295].**
+  - False rejections R0′ 0.02, R4-correct 0.03. Missing sensitivities are identical (0 missing).
+  - Descriptive:
+    - commission detection R1 0.977 / R4 1.000 (109 items);
+    - on the 22 items that have both versions: commission R1 1.00 / R4 1.00 vs omission R1 0.57 / R4 0.91;
+    - natural omissions N1 0.316 / N4 0.158 (19 items).
+  - Deterministic right-reason on omission REJECTs (removed ID or the full sentence): R1 42/64, R4 50/83. The markers miss partial quotes, as the read sample shows. Not read in full.
+- **D26 R5-post** (40 items, descriptive): detection R5-post 0.963, R1 0.988, R1-live 0.900.
+  - R5post − R1 = −0.025, CI [−0.061, 0];
+  - R5post − R1live = +0.063, CI [−0.013, 0.156];
+  - R1live − R1 = −0.088, CI [−0.192, 0].
+**Observed: preregistered right-reason hand check** (seeded 20 per variant, read by Claude Code): 140/140 identify the planted error as the reason for rejecting. The deterministic matches were 17/20 in R1, 19/20 in R2 and R3, and 20/20 in R4, R4n, R5 and R6.
+**Observed: exploratory:**
+- Reading of every deterministic miss among the main-run bait REJECTs: 49/49 right-reason. The markers missed because of punctuation, number format ("$55,000"), the threshold written without its column, or a paraphrase. Readings in `data/derived/rubric/right_reason_readings.csv`.
+- P11 disclosure: 22/32 with the plan markers only, 27/32 with the preregistered analysis markers, 30/32 with the R1-live markers.
+- Equivalence reading (±0.10): every preregistered contrast lies inside the margin except R1-live − R1 (CI [−0.19, 0]). Several intervals are degenerate [0, 0] at the ceiling.
+**Did not work:** none observed.
+**State / limitations:** omission detection rests on 50 items from 31 trajectories with a single bait type (one removed valid record). D26 is descriptive only.
+**Next:** report to Nick. Paper writing or further analyses are Nick's decision.
+**Cross-references:** `docs/deviations.md` D24–D26; `devlog/03_core_experiment.md` A06 run entry.

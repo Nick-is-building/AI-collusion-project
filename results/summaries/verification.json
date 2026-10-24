@@ -1135,13 +1135,141 @@
  "addendum": {
   "label": "ADDENDUM (D25, D26; fixed before any outcome analysis; outside the Holm family)",
   "D25_omission": {
-   "status": "not run",
-   "n_items_built": 50
+   "n_items_built": 50,
+   "n_items_with_calls": 50,
+   "correct_counterparts": {
+    "from_main_run": 22,
+    "from_a06": 28
+   },
+   "Delta_om_R4_minus_R1": {
+    "estimate": 0.19,
+    "p": 0.007399260073992601,
+    "ci_low": 0.06521739130434782,
+    "ci_high": 0.3020833333333333,
+    "n_items": 50,
+    "n_clusters": 31
+   },
+   "D_om": {
+    "estimate": 0.18,
+    "p": 0.0110988901109889,
+    "ci_low": 0.05434782608695652,
+    "ci_high": 0.29545454545454547,
+    "n_items": 50,
+    "n_clusters": 31
+   },
+   "detection_R1_om": 0.64,
+   "detection_R4_om": 0.83,
+   "false_rejection_R0p": 0.02,
+   "false_rejection_R4_correct": 0.03,
+   "missing": 0,
+   "missing_as_accept": {
+    "Delta_om_R4_minus_R1": {
+     "estimate": 0.19,
+     "p": 0.007399260073992601,
+     "ci_low": 0.06521739130434782,
+     "ci_high": 0.3020833333333333,
+     "n_items": 50,
+     "n_clusters": 31
+    },
+    "D_om": {
+     "estimate": 0.18,
+     "p": 0.0110988901109889,
+     "ci_low": 0.05434782608695652,
+     "ci_high": 0.29545454545454547,
+     "n_items": 50,
+     "n_clusters": 31
+    },
+    "detection_R1_om": 0.64,
+    "detection_R4_om": 0.83,
+    "false_rejection_R0p": 0.02,
+    "false_rejection_R4_correct": 0.03
+   },
+   "missing_as_reject": {
+    "Delta_om_R4_minus_R1": {
+     "estimate": 0.19,
+     "p": 0.007399260073992601,
+     "ci_low": 0.06521739130434782,
+     "ci_high": 0.3020833333333333,
+     "n_items": 50,
+     "n_clusters": 31
+    },
+    "D_om": {
+     "estimate": 0.18,
+     "p": 0.0110988901109889,
+     "ci_low": 0.05434782608695652,
+     "ci_high": 0.29545454545454547,
+     "n_items": 50,
+     "n_clusters": 31
+    },
+    "detection_R1_om": 0.64,
+    "detection_R4_om": 0.83,
+    "false_rejection_R0p": 0.02,
+    "false_rejection_R4_correct": 0.03
+   },
+   "commission_detection": {
+    "all_main_items": {
+     "R1": 0.9770642201834863,
+     "R4": 1.0,
+     "n": 109
+    },
+    "items_with_omission_version": {
+     "R1_bait": 1.0,
+     "R4_bait": 1.0,
+     "R1_omission": 0.5681818181818182,
+     "R4_omission": 0.9090909090909091,
+     "n": 22
+    }
+   },
+   "natural_omissions": {
+    "N1": 0.3157894736842105,
+    "N4": 0.15789473684210525,
+    "n": 19
+   },
+   "right_reason_deterministic": {
+    "R1": {
+     "rejects": 64,
+     "right_reason": 42,
+     "share": 0.65625
+    },
+    "R4": {
+     "rejects": 83,
+     "right_reason": 50,
+     "share": 0.6024096385542169
+    }
+   }
   },
   "D26_R5post": {
-   "status": "not run"
+   "label": "descriptive (D26)",
+   "n_items": 40,
+   "missing": 0,
+   "detection": {
+    "R5post": 0.9625,
+    "R1": 0.9875,
+    "R1live": 0.9
+   },
+   "R5post_minus_R1": {
+    "estimate": -0.025,
+    "ci_low": -0.06097560975609756,
+    "ci_high": 0.0,
+    "n_items": 40,
+    "n_clusters": 26
+   },
+   "R5post_minus_R1live": {
+    "estimate": 0.0625,
+    "ci_low": -0.013157894736842105,
+    "ci_high": 0.15627232142857111,
+    "n_items": 40,
+    "n_clusters": 26
+   },
+   "R1live_minus_R1": {
+    "estimate": -0.0875,
+    "ci_low": -0.19230769230769232,
+    "ci_high": 0.0,
+    "n_items": 40,
+    "n_clusters": 26
+   }
   },
-  "spend_usd_a06": 0.0
+  "spend_usd_a06": 2.40670955
  },
  "exploratory": {
   "equivalence": {

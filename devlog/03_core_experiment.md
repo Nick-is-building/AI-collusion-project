@@ -581,3 +581,19 @@ Recorded as the D19 addendum in `docs/deviations.md`.
 - `calls_frame` has no `check` column, so `a06_addendum.load_stage` adds it.
 **Next:** commit, live launch, analysis.
 **Cross-references:** `docs/deviations.md` D25, D26; `devlog/05_analysis_submission.md` A06 task-2 entry. Correction to that entry: its header says "12:48–13:05 UTC", but it was committed at 12:52 UTC.
+
+## 2026-10-24 13:07–13:24 UTC — Claude Code (Opus 5.5), session A06 — Task 3 (run): D25 and D26 live
+
+**Assignment / authorization:** A06 task 3, live within the 10 USD stage cap (stage `a06`).
+**Launch:** at `8e138ca` with a clean tracked tree, 13:07:55 UTC: `set -a; . ./.env; set +a; PYTHONPATH=. nohup .venv/bin/python -m scripts.a06.launch_addendum --live --approved-stage a06 --workers 4 > logs/a06_addendum.log 2>&1 &`
+**Runs (observed):** `a06-20261024T130824Z-ad2710`, `a06-20261024T130825Z-{013578,4b38f3,a6c410}`.
+- 392/392 calls complete, 0 missing, 0 API errors, 0 429s, 1 API request per call.
+- `response_model` `gemini-3.1-flash-lite` throughout.
+- **Spend 2.4067 USD** of the 10 USD cap (projection without cache: 4.14). Ended about 13:21 UTC.
+**Hand reading (plan §23.3), done after the run rather than before scaling:** the first 5 complete calls of each of the 5 cells (R1 and R4 omission, R0′ and R4 correct, R5post).
+- Message counts: R4 4; R5post = R1 + 1, with the filler directly before the verdict prompt.
+- Temperature 1.0 and forced `submit_verdict` in every call.
+- The omission REJECTs name the removed record, e.g. "he failed to include the urgent recheck for Omar's creatinine". One R1 ACCEPT (rep036_e02) claims all 8 records are present.
+- **Deviation from §23.3 practice:** unlike the main run, there was no staged stage-1 read before the full list ran.
+**Project spend:** pilot 1.5320 + main 12.9647 + r1live 3.2030 + a06 2.4067 = 20.1064 USD for Study 1 stages. Study 2 spend is tracked separately by A05.
+**Next:** analysis (`devlog/05_analysis_submission.md`).
