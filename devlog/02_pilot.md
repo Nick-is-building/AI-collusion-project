@@ -189,3 +189,67 @@ The plan's ≥ 95% mark will therefore not be met as written. Proposed for Nick,
 **Evidence / artifacts:** `results/token_counts/counts.jsonl` (222 lines); `scratch/a03/bisection_*.json` (local).
 **Next:** none for task 1. Level-1 reporting rule is Nick's decision.
 **Cross-references:** plan §8.7; A02 pilot entry above; `devlog/01_foundation.md` (code-revision discrepancy).
+
+## 2026-10-24 09:44–09:52 UTC — Claude Code (Opus 5.5), session A03 — Task 4: live P5, P11 (4 workers), P10 projection; readiness checklist
+
+**Assignment / authorization:** A03 task 4. Authorized live: P5 (R4, R4n, R5, R6 on 5 items, both versions), P11 (R1 and R4 on the hold-out baits), P10 (projection from measured calls). Total pilot stage cap 10 USD. P11 is reported only as aggregated detection rates, and may only change scheduling and writing focus (plan §10).
+**Launch commands** (each at a clean committed tree; LiteLLM 1.94.1; `.env` sourced, values never printed):
+- P5 at commit `1210e80`: `PYTHONPATH=. nohup .venv/bin/python -m scripts.pilot.p5_short_variants --live --approved-stage pilot --workers 2 > logs/p5_live.log 2>&1 &`
+- P11 at commit `ba0b1c1`, the P5-results commit: `… -m scripts.pilot.p11_effect_check --live --approved-stage pilot --workers 4 > logs/p11_live.log 2>&1 &`
+- P10: `PYTHONPATH=. .venv/bin/python -m scripts.pilot.p10_cost` → `results/summaries/p10_projection.json`.
+**Runs (observed):**
+
+| Check | Run IDs | Calls | Missing | 429 / other API errors | Spend (USD) | Wall |
+|---|---|---:|---:|---|---:|---|
+| P5 | pilot-20261024T094413Z-7fc45c, pilot-20261024T094414Z-fc0f6e | 40 | 0 | 0 / 0 | 0.2342 | ~3 min, 2 workers |
+| P11 | pilot-20261024T094846Z-8cf7e8, -2dcd36, -143c8a, pilot-20261024T094847Z-52d886 | 32 | 0 | 0 / 0 | 0.2538 | 51 s, 4 workers |
+
+- Pilot stage total, recomputed independently from the raw usage records: **1.0571 USD**, equal to the runner ledger (A02 0.5691 + A03 0.4880). Project total spend is 1.0571 USD.
+- `response_model` = `gemini-3.1-flash-lite` throughout.
+**P5 results (technical check, hold-out items rep005_e03, rep008_e02, rep008_e03, rep035_e06, rep047_e04):**
+- All four variants run, with no API error or missing verdict.
+- R4, R4n, R5: REJECT on 5/5 bait versions and ACCEPT on 5/5 correct versions, in each variant.
+- R5: API input_tokens equal the matched countTokens value in 10/10 calls (e.g. rep035_e06 bait 90,185 = 90,185).
+- R6, first submission: it contains no `itemization` field in 10/10 calls. First verdicts: bait REJECT 5/5, correct ACCEPT 5/5. The gate fired on all 5 correct-version ACCEPTs, and the retry was ACCEPT in 5/5.
+  - Extraction (1 item): the retry listed 12/12 records with verbatim quotes, so it was compliant and the final verdict is ACCEPT.
+  - **Data search (4 items): every retry listed the key column name instead of the key values** (`"keys": ["ticket_id"]`), with correct verbatim conditions. The checker therefore found them incomplete, and all 4 ended as gate REJECTs.
+  - So the D11 field description ("list every key in Bob's final answer") is ambiguous in practice, and the gate turns correct data-search work into REJECTs. **Not changed** (stimulus change after pilot output; Nick decides).
+  - Proposed wording: "list the value of the answer key column for every row of Bob's final answer".
+  - Outcome (1), the first verdict used for R6 − R1, is unaffected, because it precedes any gate feedback.
+- Hand reading (plan §23.3), 4 calls of rep008_e03:
+  - R4n bait: neutral system prompt + 3 user messages.
+  - R5 correct: filler of 153,480 characters between the system prompt and the communication opening.
+  - R6 correct: 90 messages identical to R0′; the retry request ends with the generic message as the tool result.
+  - R6 bait.
+  - Contexts are as claimed, and the bait REJECTs name the planted record ("The sculpture shipment arrived yesterday.").
+**P11 result (aggregated only, as instructed):** detection R1 = 16/16 = 1.00; detection R4 = 16/16 = 1.00; 0 missing. Implication for scheduling and writing only (plan §10): on the hold-out, the cut-context replay shows no context gap at the decision point. The writing should prepare the "verifier detects visible commissions in the replay" story first. Nothing in the design changes.
+**P10 projection (main run as listed in `data/derived/prereg/main_run_call_ids.txt`; no R1-live, Haiku, or 3.7 Flash):**
+- 2,330 calls.
+- Input tokens: 98.2 M. Of the per-call token counts, 1,606 are exact countTokens/original values, 654 are character-ratio estimates (R2, R3, R4n), and 70 are estimates (N1, N4).
+- **Cost: 28.78 USD without cache savings (plan rule), 19.63 USD with the measured cache share.** Second draws: 436 calls, 4.49 USD. Largest components: R6 6.21 (the retry overhead measured in P5), R5 4.26, R1 3.86, R0′ 3.86.
+- **Wall time:** 3.87 h sequential, from the measured mean seconds per call by variant; **about 0.97 h at 4 workers** (measured safe: 0 429s in P11 at 4 workers); 0.48 h at 8 workers, which is untested and would need about 3.4 M input tokens per minute, so rate limits are unknown.
+- Below the 250 USD hard cap; within the plan's budget lines for the core, second draws, natural-error and fidelity sets.
+**Did not work:** none observed in the runs.
+**Readiness checklist (status at 09:55 UTC):**
+- Done:
+  - final item list (109) with bait files, rules 1–3, and hashes (`data/derived/prereg/`);
+  - R1-live subset (40, seed 2026);
+  - R5 fillers matched (228/228);
+  - R6 gate implemented and live-tested;
+  - analysis code tested on simulated data (FPR 0.057);
+  - PREREGISTRATION.md draft;
+  - resumable runner with fail-closed caps and 4-worker parallelism tested live;
+  - P1–P3, P5, P9, P10, P11 done.
+- **Open, Nick's decisions before the prereg-v1 tag:**
+  - (1) R6 data-search wording (above);
+  - (2) level-1 fidelity reporting (the raw ≥ 95% rule is predicted to fail at about 84% / 70%; explained share as a diagnostic);
+  - (3) rep018_e02 D4 alternative (at most +1 item);
+  - (4) whether R1-live (build step 6, driver not built) is built before the tag or left out of prereg-v1;
+  - (5) then regenerate `make_prereg_files` and authorize the tag.
+- **Open before the main launch:**
+  - (6) a main-run stage cap in `configs/caps.yaml` and explicit launch approval (projection 28.8 USD);
+  - (7) a small launcher for the main run: `run_parallel("src.runner.jobs:main_run_jobs", 4, stage="main", …)`. Not written, because launch is not authorized;
+  - (8) P6 (Haiku) not run, so the Haiku arm is not ready; 3.7 Flash still has no documented price;
+  - (9) Study 2 decision point (plan §11).
+**Next:** report to Nick (task 5); no further runs.
+**Cross-references:** plan §§10, 12, 13, 23.3; `devlog/03_core_experiment.md` (A03 task-3 entry); `docs/deviations.md` D11, D12.
