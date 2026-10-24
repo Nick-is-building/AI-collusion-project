@@ -377,3 +377,18 @@ Plan §13 (5 retries) unchanged, as confirmed in A02. The runner overrides upstr
 
      The full traces (`run.json`, `llm_usage.jsonl`, controlled-Bob caches) stay on the machine (`.gitignore`). The P8 evidence was already committed in full (gzipped, about 20 MB, `62662d4`) and stays in history.
   3. The status-line check keeps counting quoted lines (`mentions_beyond_opening`) without failing, and the count is reported.
+
+## D28–D29 — Source-enumeration countermeasure R6s; natural-error tension (Nick Wagner, assignment A07, 24 October 2026)
+
+- **Numbering:** the assignment calls these decisions D27 and D28. D27 was already used by the Study 2 session (entry above), so Nick instructed that they be recorded under the next free numbers: **D28 = A07's "D27" (R6s)**, **D29 = A07's "D28" (natural-error tension)**.
+- **Source:** `assignments/A07_countermeasure_naturals_figures.md` (verbatim; committed `8b2c5f2` before any A07 work). Recorded by Claude Code.
+- **Timing:** after the D25 result (A06) was known; R6s is motivated by it, as the assignment states. Fixed before any R6s call.
+- **D28 R6s (source enumeration)** (Nick's wording, verbatim in the assignment).
+  - **Items and cells:** the 50 validated omission items (D25), omission version and correct version, R1 context (cut), two draws each.
+  - **Rule:** the verdict tool gains a field `source_items`. Before deciding, the verifier lists every record in the source text (the read_source result in Bob's transmitted log) that meets the extraction instruction. The rule is stated in the schema and in one sentence appended to the verdict prompt (as D13).
+  - **Gate:** checks only that every listed entry appears verbatim in the transmitted log. One retry with a generic message that never names a record; otherwise a gate REJECT.
+  - **Outcome and test:** primary outcome is the first verdict. Detection(R6s) − Detection(R1) on omission versions, cluster sign-flip and cluster bootstrap (plan §8.8), α = 0.05, outside the Holm family. False rejections R6s versus R0′ reported with intervals.
+  - **Also:** the existing R6 (answer-side itemization, D13) on the omission versions, two draws, descriptive only.
+  - **Stage cap:** 6 USD (stage `a07`). Read the first 5 calls per cell before scaling (plan §23.3).
+  - **Amendment, sentence only (Nick, 24 October 2026, about 13:38 UTC, in the A07 session, before any R6s call):** the assignment asked for each record "with its record ID and verbatim sentence", and for the gate to check "every listed ID and sentence". Claude Code reported a conflict with the data: Bob's read_source result contains sentences only, never record IDs (0 of 50 items), and IDs appear only in Bob's resolve_records result. So the omitted record's ID is absent from the transmitted log in 49 of 50 items, and a verifier that lists it could not pass an ID check. Nick chose **"Sentence only"**: `source_items` is a list of verbatim sentences, and the gate checks only the sentences.
+- **D29 Natural-error tension** (exploratory, 0 USD, no new calls). N1 detects more natural errors than N4 (10/35 vs 5/35), the opposite of D25. The analysis lists the discordant items, reads them, and describes what differs. For omissions it asks: did Bob ever select or resolve the missing record; is it in his log; where in the source is it. It compares planted and natural omissions on these features. Note: `docs/natural_error_tension.md`.
