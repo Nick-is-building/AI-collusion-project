@@ -9,6 +9,7 @@ results/summaries/verification.json. Sections are kept apart by status:
                 data/derived/rubric/r1live_readings.csv).
                 Natural errors by decidability (D24) are descriptive, as the natural-error set is (plan 8.8).
   addendum      D25 omission baits and D26 R5-post (fixed before any outcome was analysed; outside Holm).
+                D28 R6s source enumeration (A07; fixed before its own run; outside Holm), key "D28_R6s".
                 Reported as "not run" until their call lines exist.
   exploratory   equivalence reading (margin +-0.10) of the preregistered contrasts; right-reason detection
                 by Claude Code reading next to the deterministic markers. Labelled exploratory.
@@ -107,6 +108,9 @@ def main(argv=None):
         res["exploratory"].update(a06_addendum.exploratory(calls, meta))
     else:
         res["addendum"] = {"status": "not run"}
+    if (ROOT / "scripts" / "analysis" / "a07_addendum.py").exists():   # A07: D28 R6s (A07 calls it D27)
+        from scripts.analysis import a07_addendum
+        res["addendum"]["D28_R6s"] = a07_addendum.analyze(calls, meta)
     Path(a.out).write_text(to_json(res))
     print("wrote", a.out)
     return res
