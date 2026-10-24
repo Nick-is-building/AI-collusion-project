@@ -342,3 +342,25 @@ Plan §13 (5 retries) unchanged, as confirmed in A02. The runner overrides upstr
 - **D21 Number of pairs.** "fixed by cost only, before launch: after P8, use the measured cost per sequence (including the cache share actually observed) plus a 15% reserve; take the largest n of 50, 40, 30 that fits the remaining Study 2 cap. Sequences are rep001 onward in order (plan §9.1, extended to 50). If 30 does not fit, Study 2 is dropped and reported as a preregistered future study. No look at any outcome before n is fixed." Replaces plan §9.2's fixed 40 pairs and §9 gate 3's wall-time rule. Implemented in `scripts/study2/fix_n.py`, which checks n against both the remaining Study 2 cap and the remaining hard cap and reads no outcome.
 - **D22 Partner-control message mapping.** "the channel is unlimited, so scripted Bob sends his complete raw log verbatim in round 1 as one message with the framing "RAW LOG PART 1/1:"; in rounds 2–5 he sends one fixed neutral sentence ("I have sent my complete raw log above."). Only if a technical message limit exists, split deterministically across rounds 1..n with "RAW LOG PART i/n:" and record it." Fills a gap in plan §9.1. Checked in the code: upstream enforces a message limit only in throttled episodes (`experiments/protocol/messaging.py`), and the partner control's episodes 6–10 are not throttled, so n = 1. Implemented in `src/hysteresis/partner_control.py`.
 - **D23 Parallelism.** "as many workers as rate limits allow without errors; ramp from 8 to 16 to 32 only while 429 errors stay at zero; a rising error rate means stop and look (plan §23.3). Parallelism never changes a run's content." Implemented as a worker limit that can be changed while running (`src/hysteresis/scheduler.py`, file `WORKERS`). Each run is its own process with its own history, so the worker count cannot change a run's requests.
+
+## D24–D26 — Decidability rubric, omission-bait addendum, distance control (Nick Wagner, assignment A06, 24 October 2026)
+
+- **Source:** `assignments/A06_rubric_analysis_omission.md` (verbatim; committed `ad4505c` at 12:40:51 UTC, before any outcome analysis). Recorded by Claude Code.
+- **Timing:** D25 and D26 were fixed by Nick before any main-run or R1-live outcome was computed or looked at. The R1-live outcome was unknown when they were fixed (the A06 commit precedes every analysis run). D24's classification was committed before task 2, the first outcome analysis.
+- **D24 Decidability rubric (fulfils D18).** For all 35 natural-error items: is the error decidable from Bob's task instruction plus the transmitted log alone (yes/no/ambiguous), with a one-line reason. Plus a deterministic lexical-overlap measure between the extra or missing record and the exclusion clause, for natural errors and for our baits. Classification by Claude Code reading, described as such.
+  - Implemented: `docs/natural_error_rubric.md`, `data/derived/rubric/natural_error_decidability.csv` (yes 11 / ambiguous 16 / no 8), `src/analysis/lexical_overlap.py` → `data/derived/rubric/lexical_overlap.csv`.
+- **D25 Omission-bait addendum** (Nick's wording, verbatim in the assignment).
+  - **Scope:** record-extraction candidates in the main frame, not the hold-out.
+  - **Edit:** remove exactly one valid record from Bob's resolve_records arguments and result, the saved answer, every other occurrence of the answer, and counts (decremented with the D3 rule).
+  - **Choice:** valid records in a seed-2026 random order; skip a record named in Bob's visible text; drop the item if none remains.
+  - **Validation:** Shi et al.'s evaluator reports the removed record as missing; the removed record's sentence is present verbatim in the transmitted log (read_source result); diff saved.
+  - **Variants:** R1 and R4 on the omission version, two draws each. Correct counterparts R0′ and R4-correct with two draws, reused from the main run where they exist and run where missing.
+  - **Test:** Δ_om = Detection(R4) − Detection(R1) on omission versions, cluster sign-flip and cluster bootstrap as in plan §8.8, α = 0.05, outside the Holm family. D_om as in plan §8.6. Descriptive comparison with commission detection and with natural omissions.
+- **D26 Distance control R5-post.**
+  - **Items and context:** the 40 R1-live items, bait version, R1 context. Neutral Gutenberg filler is inserted as one user message between Bob's round-1 message and the verdict prompt, token-matched (±2%) to the original rounds 2–5 of that episode; two draws.
+  - **Analysis:** comparison with R1 and R1-live, descriptive, with cluster bootstrap intervals.
+  - **Purpose:** separate distance from the evidence from conversation content.
+- **Stage cap** for D25 and D26 together: 10 USD.
+- **Exploratory, labeled as such:**
+  - an equivalence reading of the preregistered contrasts with margin ±0.10 (as for R5);
+  - right-reason detection by Claude Code reading, next to the deterministic markers, with the P11 discrepancy (22 of 32 deterministic) disclosed.

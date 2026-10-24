@@ -61,3 +61,33 @@ No outcome analysis, completed manuscript, or final submission is attested here.
 **D18 note:** no analysis script has been or will be run on main-run outcomes until the natural-error rubric is committed.
 **Next:** tag `prereg-v1`.
 **Cross-references:** `docs/deviations.md` D14, D18; `PREREGISTRATION.md` §5.
+
+## 2026-10-24 12:40–12:48 UTC — Claude Code (Opus 5.5), session A06 — Task 1: D24 natural-error decidability rubric and lexical overlap
+
+**Assignment / authorization:** `assignments/A06_rubric_analysis_omission.md` (Nick), task 1 (D24). The assignment was committed verbatim first (`ad4505c`, 12:40:51 UTC). No model call; no main-run, R1-live, N1, or N4 outcome was read or computed (D18). The A05 session works in the same tree, so only explicit paths are staged.
+**Built or changed:**
+- `scripts/a06/dump_natural_errors.py`: reading aid. Writes, per natural-error item, what Alice sees (Bob's Task information, Bob's round-1 framing, the pretty raw log) plus the evaluator result to `scratch/a06/natural/` (local).
+- `docs/natural_error_rubric.md`: the rubric (categories, item-level rule, disclosure of the two working rules made explicit during reading), the result table, and observations.
+- `data/derived/rubric/natural_error_decidability.csv`: 35 rows with `decidable` and a one-line reason.
+- `src/analysis/lexical_overlap.py` → `data/derived/rubric/lexical_overlap.csv`: 185 rows (60 natural-error rows, 125 bait rows; 76 applicable).
+- `tests/test_rubric_a06.py` (4 tests).
+- `docs/deviations.md`: D24–D26 appended.
+**Decisions:**
+- Classification by my reading (D24). I read the instruction, the full source (with valid/invalid markers) and the missing/extra sentences for every extraction item, the SQL, the value domains and the reference SQL for the 6 data-search items, and the code, tests and outputs for the 3 code items.
+- Item-level rule: yes if any component is yes, else ambiguous if any component is ambiguous, else no.
+- The overlap uses the bait builder's word rule unchanged (imported, so `baits_extraction.py`, a prereg-v1 file, is not edited). Not applicable for data search and code, and for one mistyped ID.
+**Checks performed:**
+- `pytest -q tests/test_rubric_a06.py`: 4 passed. The tests cover:
+  - the classification covers exactly the 35 items, and types match;
+  - the plan §8.3 example overlap;
+  - the overlap equals the saved `overlap_words` of all 26 extraction baits;
+  - the CSV is reproducible.
+- `python -m src.analysis.lexical_overlap`: summary as in the rubric document.
+**Observed (classification):** yes 11 / ambiguous 16 / no 8.
+- By type: omission 2/12/5, commission 0/1/2, both 2/2/0, data search 6/0/0, code 1/1/1.
+- All 6 data-search errors have one cause: `'pending review'` in Bob's SQL against `pending_review` in the logged value domain.
+- Mean lexical overlap: natural missing records 0.09 (n 44), natural extra records 0.00 (n 6), extraction baits 1.15 (n 26; ≥ 1 by construction).
+**Did not work:** my first scratch helper was named `src.py` and shadowed the `src` package on import; renamed. Nothing else observed.
+**State / limitations:** a single reader (Claude Code) and no second coder. The two working rules (absent element → no; present but debatable → ambiguous) were made explicit during reading; this is disclosed in the rubric.
+**Next:** task 2 (preregistered analyses), now permitted by D18.
+**Cross-references:** `docs/deviations.md` D18, D24; plan §§8.1, 8.8 (natural-error set).

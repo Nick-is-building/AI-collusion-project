@@ -24,6 +24,7 @@
 
 ## Active work and cross-references
 
+- **A06 (in progress, `assignments/A06_rubric_analysis_omission.md`):** task 1 done: D24 rubric `docs/natural_error_rubric.md`, classification `data/derived/rubric/natural_error_decidability.csv`, overlap `src/analysis/lexical_overlap.py` (entry in `devlog/05_analysis_submission.md`). This satisfies D18; outcome analysis may now run. D24–D26 in `docs/deviations.md`. A06 code: `scripts/a06/`.
 - **Assigned work:** A04 done (`assignments/A04_prereg_launch_r1live.md` + `assignments/A04_addendum_D17_D19.md`, incl. Nick's correction): prereg-v1 and prereg-v1-r1live tagged; main run complete (2,330/2,330); R1-live complete (40/40); Study 2 implementation plan written (not built). A01–A04 done. Next: natural-error rubric (D18), then analysis; Study 2 build (Nick).
 - **Study 2 (A05, `assignments/A05_study2_build_launch.md`):** code `src/hysteresis/` (run_arm, status_line, guard, partner_control, scheduler, analysis, mock_model, upstream_tree), `scripts/study2/` (launch, monitor, fix_n, run_list, analyze, interrupt_check.sh); tests `tests/test_study2_*.py`; decisions D20–D23 in `docs/deviations.md`; caps `stages.study2`, `check_groups.study2_p8`; runs under `results/study2/<group>/repNNN/<arm>/`, logs `logs/study2/`; upstream copy `work/study2/upstream` (local, reproducible).
 - **Active blocks:**
