@@ -12,3 +12,5 @@ logs/
 results/requests/
 # blind check answer key (only its hash is committed)
 blind_check/key.local.json
+# local working copies (unpacked proof package, reruns); reconstructable
+work/
