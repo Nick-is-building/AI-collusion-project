@@ -144,3 +144,48 @@ No pilot has been executed or verified within this DEVLOG. Do not infer that pai
 - 3.7-Flash is available, but plan §8.5 also requires a documented price, which does not exist (still not on the pricing page per the plan).
 **Next (proposed, not started):** Nick's decision on the R0 identity mismatch (token-count bisection, or accept and report). P11 now has baits for 16 of 20 hold-out items (`p11_effect_check --plan`: 32 calls, 0.283 USD), not authorized.
 **Cross-references:** plan §§8.5, 8.7, 10, 13, 23.3; `devlog/03_core_experiment.md` (A02 bait entry); `devlog/01_foundation.md` (code-revision discrepancy).
+
+## 2026-10-24 07:43–07:53 UTC — Claude Code (Opus 5.5), session A03 — Task 1: R0 token bisection; cause found (stored traces differ from what was sent)
+
+**Assignment / authorization:** `assignments/A03_bait_fixes_build_pilot.md` (Nick, 24 Oct 2026), task 1. The free countTokens endpoint is authorized for this bisection. No billable call was made.
+**Built or changed:**
+- `src/replay/token_count.py` (new):
+  - `request_kwargs`: completion kwargs built by upstream's verdict path, via a capturing mock.
+  - `http_body`: the exact JSON body LiteLLM 1.94.1 would POST, captured by a fake HTTP client. No network. The endpoint is `v1alpha/models/gemini-3.1-flash-lite:generateContent`.
+  - `count_tokens`: POST `{"generateContentRequest": {...}}` to the matching `:countTokens`.
+    - Purposes are restricted to `r0_bisection` and `r5_filler`.
+    - It is refused under pytest.
+    - Every count is appended to `results/token_counts/counts.jsonl` (flushed) and reused by body hash.
+    - The key is never logged.
+- `scripts/a03/r0_bisection.py`, with stages `calibrate`, `episodes`, `calls`.
+- `scripts/a03/null_record_check.py`: tests the cause offline.
+- `data/derived/r0_unmatched_records.csv`: per candidate and fidelity item, the number of unmatched `resolve_records` items in the R0 context.
+- `tests/test_token_count.py` (3 tests).
+**Checks performed (observed):**
+- **Calibration:** countTokens equals the input_tokens that the live API reported in P2/P9, in 9/9 items. That is 2 exact-match items plus all 7 mismatched items, e.g. rep022_e07_alice 86,125 = API 86,125 (logged 86,210). So countTokens is a faithful proxy for the request.
+- **Episode bisection:** for each mismatched item, I counted the verdict request of every earlier episode of the same judge, built with the R0 builder.
+  - The difference appears in one episode and then stays constant in every later episode, e.g. rep014_e09_bob −5 in episodes 1–9.
+  - rep022 (−85) and rep007_e09_alice (−30) appear only in the final episode.
+- **Within-episode localization:** system + contents count, no tools, at every logged call of the target and the previous (exact) episode.
+  - The communication-phase offset is −78 in exact episodes, and shifted by exactly the item's mismatch in the target episode (−83 / −163 / −108). The verdict offset shifts the same way (−107 → −112 / −192 / −137).
+  - The shift is present from communication round 1, so the differing content lies in the target episode's task phase.
+  - Task-phase offsets drift within the phase, presumably because task-phase tool results are trimmed after the phase (`memory/cross_episode._trim_completed_episode`); not investigated further.
+- **Cause:** every unmatched `resolve_records` item, stored as `{"record_id": null}`, accounts for exactly 5 tokens that were in the original request but are not in the stored trace.
+  - Prediction "mismatch = −5 × unmatched items in the R0 context" is exact in **30/30** distinct R0 items of P2 and P9:
+    - 23 items have 0 unmatched records and match exactly;
+    - the 7 mismatches have 1, 1, 1, 1, 1, 6 and 17 unmatched items, for −5 … −85.
+  - LiteLLM sends the stored item unchanged (`function_response.response.items[i] = {"record_id": null}`; test `test_http_body_keeps_null_record_ids`). The pinned upstream `_resolve_records` emits exactly that form.
+  - So the original run sent a longer representation of unmatched records than the trace stores. This fits the known code-revision / post-processing gap (`devlog/01_foundation.md`, task-2 entry). The exact original form is unknown; I did not probe alternatives.
+- **Decision per A03:** the stored traces differ from what was sent. Builder unchanged, no R0 rerun, 0 USD.
+- 222 countTokens calls, all HTTP 200. Purpose `r0_bisection` throughout; the log is committed.
+- `pytest tests/test_token_count.py`: 3 passed.
+**Consequence for plan §8.7 level 1 (limitation; rule not changed):** predicted exact-match share of R0 calls = share of items with 0 unmatched records.
+- candidates 146/173 (84.4%; main 83.7%, hold-out 90.0%);
+- fidelity set 44/63 (69.8%);
+- natural-error set 32/35.
+
+The plan's ≥ 95% mark will therefore not be met as written. Proposed for Nick, not adopted: report the raw exact rate as the plan requires, and next to it the share of mismatches fully explained by 5 × unmatched records. The analysis code reports both (see the A03 analysis entry). The bait contrasts compare variants built from the same stored history, so they are unaffected in identity terms. The model sees a slightly shorter form of unmatched-record results than in the original run. This goes on the limitation list for the paper.
+**Did not work:** first script run failed on the module path (`PYTHONPATH=.` needed for scripts outside `-m`); a test helper used the wrong task-type name (`text_extraction`). Both were fixed immediately.
+**Evidence / artifacts:** `results/token_counts/counts.jsonl` (222 lines); `scratch/a03/bisection_*.json` (local).
+**Next:** none for task 1. Level-1 reporting rule is Nick's decision.
+**Cross-references:** plan §8.7; A02 pilot entry above; `devlog/01_foundation.md` (code-revision discrepancy).
