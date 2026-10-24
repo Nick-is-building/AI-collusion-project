@@ -7,6 +7,7 @@ import pytest
 from src.replay.request import messages_hash
 from src.replay.variants import build, load_item
 from src.runner.item_lists import load_bait, main_items, natural_error_items, p5_items, r1live_subset
+from src.replay.r6 import with_prompt_sentence
 from src.runner.jobs import R5_TABLE, main_run_jobs, make_job
 
 
@@ -48,7 +49,7 @@ def test_variant_contexts():
     j1 = make_job("T", row, "R1", "bait")
     assert j1.build_messages() == build(ctx, "CUT", bob_r1_content=b["bob_r1_content"])
     j6 = make_job("T", row, "R6", "correct")
-    assert j6.build_messages() == build(ctx, "CUT") and j6.verdict_fn is not None
+    assert j6.build_messages() == with_prompt_sentence(build(ctx, "CUT")) and j6.verdict_fn is not None   # D13
     with pytest.raises(ValueError):
         make_job("T", row, "R1", "correct")
     with pytest.raises(ValueError):

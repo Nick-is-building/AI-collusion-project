@@ -4,7 +4,8 @@ Variant -> context (src.replay.variants / r5 / r6), version:
   R0   original prefix, correct only            R0p  cut context (= CUT), correct only
   R1   cut context with the bait, bait only     R2, R3, R4, R4n   both versions
   R5   R4 + matched filler (data/derived/r5_fillers.csv), both versions
-  R6   cut context (R1 on bait, R0' on correct) + itemization gate (src.replay.r6), both versions
+  R6   cut context (R1 on bait, R0' on correct) + one verdict-prompt sentence (D13) + itemization gate
+       (src.replay.r6), both versions
   N1   cut context on a natural-error item       N4   R4 context on a natural-error item (no bait)
   FR0  R0 on a fidelity case (judge alice or bob)
 
@@ -27,7 +28,7 @@ import numpy as np
 import pandas as pd
 
 from src.replay.r5 import build_r5
-from src.replay.r6 import run_r6
+from src.replay.r6 import run_r6, with_prompt_sentence
 from src.replay.traces import episode_bounds, get_log_raw, load_trace
 from src.replay.variants import build, load_item
 from src.runner.estimates import input_tokens
@@ -87,7 +88,8 @@ def make_job(check: str, row, variant: str, version: str = "correct", draw: int 
         bv = {"R0p": "CUT", "R1": "CUT", "R6": "CUT", "N1": "CUT", "N4": "R4"}.get(variant, variant)
 
         def builder():
-            return build(load_item(trace, ep), bv, bob_r1_content=content)
+            msgs = build(load_item(trace, ep), bv, bob_r1_content=content)
+            return with_prompt_sentence(msgs) if variant == "R6" else msgs   # D13
     if variant == "R6":
         if content is None:
             content, raw = original_bob_message(trace, ep)

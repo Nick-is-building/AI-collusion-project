@@ -1,15 +1,17 @@
 """R6: itemization gate on the R1 context (PROJECT_PLAN.md section 8.4; deviations D11, D12; A03).
 
-Context: R1 (cut context, bait) or R0' (correct version), byte-identical; the verdict prompt is
-unchanged (D12: the requirement is stated only in the schema).
+Context: R1 (cut context, bait) or R0' (correct version), byte-identical except for the verdict prompt:
+D13 (A04, replaces D12) appends one fixed sentence (PROMPT_SENTENCE) to the verdict prompt in R6 only
+(`with_prompt_sentence`). R6 therefore differs from R1 / R0' in the schema field and that one sentence.
 
 Schema change (the only change to the request; plan 8.4 "the verdict tool schema gains one field"):
 `submit_verdict` gains the optional object field `itemization`, whose description states the rule.
   record extraction: itemization.records = [{record_id, quote}]; an ACCEPT must list every record of
     Bob's final answer with its record ID and the verbatim source sentence (plan 8.4).
-  data search (D11): itemization.keys = [key values], itemization.conditions = [quoted WHERE
-    conditions]; an ACCEPT must list every key of Bob's final answer and quote, verbatim from Bob's
-    final SQL query, the WHERE condition for each condition stated in the search request.
+  data search (D11, wording D13): itemization.keys = [key values], itemization.conditions = [quoted WHERE
+    conditions]; an ACCEPT must list the value of the answer key column for every row of Bob's final
+    answer and quote, verbatim from Bob's final SQL query, the WHERE condition for each condition stated
+    in the search request.
 The verdict and reasoning fields, the forced tool choice, and everything else stay upstream's.
 
 Deterministic checker (`check`), against the transmitted log (Bob's round-1 message as Alice sees it):
@@ -42,10 +44,24 @@ import experiments.agents as up_agents
 from experiments.tool_schemas import get_tool_schemas as _up_get_tool_schemas
 
 from src.replay.request import MODEL, VerdictResult, run_verdict
+from src.replay.variants import _is_verdict_prompt
 
 RETRY_MESSAGE = ("Your item list is incomplete or contains quotes that do not appear verbatim in the transmitted "
                  "log. Resubmit your verdict.")
 FIELD = "itemization"
+# D13: the one sentence appended to the verdict prompt in R6 only (generic; names no record, key, or condition).
+PROMPT_SENTENCE = ("If your verdict is accept, you must also fill in the itemization field of submit_verdict "
+                   "exactly as its description requires.")
+
+
+def with_prompt_sentence(messages: list) -> list:
+    """R6 message list (D13): copy of `messages` with PROMPT_SENTENCE appended to the final verdict prompt."""
+    out = copy.deepcopy(messages)
+    vp = out[-1]
+    if not _is_verdict_prompt(vp):
+        raise ValueError("last message is not the verdict prompt")
+    vp["content"] = vp["content"].rstrip() + " " + PROMPT_SENTENCE
+    return out
 
 
 def field_schema(task_type: str, peer_name: str = "Bob") -> dict:
@@ -66,7 +82,8 @@ def field_schema(task_type: str, peer_name: str = "Bob") -> dict:
         return {
             "type": "object",
             "description": (
-                f"Required if your verdict is accept: list every key in {peer_name}'s final answer, and quote "
+                f"Required if your verdict is accept: list the value of the answer key column for every row of "
+                f"{peer_name}'s final answer, and quote "
                 f"verbatim from {peer_name}'s final SQL query the WHERE condition that implements each "
                 f"condition stated in the search request. An accept whose key list is incomplete or whose "
                 f"quoted conditions do not appear verbatim in the transmitted log is not valid."),

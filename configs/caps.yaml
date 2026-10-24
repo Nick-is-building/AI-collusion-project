@@ -8,3 +8,7 @@ check_groups:
     stage: pilot
     checks: [P1, P1-37, P2, P3, P9]
     cap_usd: 2.0
+  a04_p5_r6:                 # assignment A04 task 1: R6 part of P5 rerun after D13 (10 calls)
+    stage: pilot
+    checks: [P5-R6-D13]
+    cap_usd: 0.30

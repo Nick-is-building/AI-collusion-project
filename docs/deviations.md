@@ -247,3 +247,72 @@ Plan §13 (5 retries) unchanged, as confirmed in A02. The runner overrides upstr
 - Target per item and version: count(R1 or R0′) − count(R4), using countTokens of the full request. Band ±2%.
 - Result: 228 of 228 (109 main + 5 P5 items × 2 versions) within the band; max |relative error| 1.83%. Errors are all positive (+1.4% to +1.8%) because the first estimate lands just inside the band. Bait and correct targets are identical for every item (the bait adds the same tokens to R1 and R4).
 - Table: `data/derived/r5_fillers.csv`. countTokens log: `results/token_counts/counts.jsonl`.
+
+## D13 — R6 wording for data search, and one sentence in the R6 verdict prompt (replaces D12)
+
+- **Date / approval:** 24 October 2026; Nick Wagner, assignment A04 (`assignments/A04_prereg_launch_r1live.md`), committed 10:09 UTC.
+- **Timing:** after the P5 pilot (A03), before any main-run call and before prereg-v1. P5 ran on hold-out items only. Reason (technical, after P5): the manipulation did not reach the first verdict, since 0 of 10 first submissions were itemized. Also, every data-search retry listed the key column name instead of the key values (`devlog/02_pilot.md`, A03 task-4 entry).
+- **Rule:**
+  - Data-search item list: "the value of the answer key column for every row of Bob's final answer", plus the quoted conditions (D11).
+  - The rule is stated in the schema field description and, in addition, in one sentence appended to the verdict prompt in R6 only.
+- **Consequence:** R6 now differs from R1 (bait) and R0′ (correct) in the schema field and one prompt sentence. D12's "messages byte-identical to R1" no longer holds.
+- **Implementation (`src/replay/r6.py`, `src/runner/jobs.py`):**
+  - `field_schema("data_search")` begins "Required if your verdict is accept: list the value of the answer key column for every row of Bob's final answer, and quote verbatim from Bob's final SQL query the WHERE condition that implements each condition stated in the search request. …". The record-extraction description is unchanged.
+  - **Sentence wording (Claude Code's choice; A04 fixes only that there is one sentence):** `PROMPT_SENTENCE` = "If your verdict is accept, you must also fill in the itemization field of submit_verdict exactly as its description requires." It names no record, key, or condition.
+  - The sentence is appended with one space to the end of the verdict prompt (`with_prompt_sentence`), for both task types and both versions. The checker, the retry message, and the gate are unchanged.
+  - Tests: `test_d13_prompt_sentence_only_change`, `test_d13_data_search_wording` (`tests/test_r6.py`); `tests/test_jobs.py::test_variant_contexts`.
+- **Rerun:** R6 part of P5 (5 hold-out items, both versions, check `P5-R6-D13`, cap 0.30 USD). The result is in `devlog/02_pilot.md`, A04 entry.
+
+## D14 — Fidelity level 1: raw exact-match rate plus the storage-adjusted rate
+
+- **Date / approval:** 24 October 2026; Nick Wagner, assignment A04.
+- **Timing:** before the main run. The cause was found in A03 task 1 from pilot calls and free token counts.
+- **Rule:** report the raw exact-match rate (plan §8.7 rule) and, next to it, the rate after accounting for the documented storage difference (−5 tokens per unmatched `resolve_records` item), with the evidence (`devlog/02_pilot.md`, A03 task-1 entry; `data/derived/r0_unmatched_records.csv`). Neither rate is relabeled as a pass of the original rule.
+- **Implementation:** `src/analysis/fidelity.py` (see the A04 entry in `devlog/05_analysis_submission.md`).
+
+## D15 — rep018_e02: D4 applied consistently
+
+- **Date / approval:** 24 October 2026; Nick Wagner, assignment A04. Before any bait was run on a main item.
+- **Rule:** a bait record that already appears in one of Bob's `resolve_records` calls is treated like a record named in Bob's visible text (D4). The next eligible record in the fixed order is taken, and the item is dropped only if none remains. This replaces the explicit drop added in A03 (D7, "Implementation detail").
+- **Result:** in `devlog/03_core_experiment.md`, A04 entry.
+
+## D16 — R1-live gets its own preregistration addendum; build order
+
+- **Date / approval:** 24 October 2026; Nick Wagner, assignment A04.
+- **Rule:**
+  - prereg-v1 covers everything except the R1-live driver. The R1-live subset of 40 and the flag rules (plan §8.4) are frozen in prereg-v1.
+  - After P7, a tag `prereg-v1-r1live` freezes the driver and any flag-rule clarification, before the R1-live run.
+  - Building R1-live moves ahead of Haiku, 3.7 Flash, and Study 2. This is a scheduling change that plan §10 permits.
+- **P11 note (A04):** P11 is pilot data on the hold-out. Per plan §10 it changes only scheduling and writing focus. Baits, variants, sample, and analysis are not changed because of it.
+
+## D17 — Study 2 not built (decision point, plan §11)
+
+- **Date / approval:** 24 October 2026; Nick Wagner, A04 addendum (`assignments/A04_addendum_D17_D19.md`), received about 10:45 UTC, after an independent review.
+- **Timing:** before the main run started. Study 2 has no data of any kind.
+- **Reason (technology and time only):** the remaining build and run time is needed for R1-live, an omission-bait addendum, and the paper. Study 2 would add three untested components.
+- **Consequence:** plan §§9.1–9.3 go into the appendix as a preregistered future study. A04 task 5 (Study 2 estimate) is skipped.
+
+## D18 — Analysis order: natural-error rubric before any outcome analysis
+
+- **Date / approval:** 24 October 2026; Nick Wagner, A04 addendum. Before the main run.
+- **Rule:** the analysis scripts (`scripts/analysis/run_study1.py` and `src/analysis/*`) are not run on main-run outcomes, including N1/N4, until a decidability rubric and classification for the natural-error set have been written and committed (next assignment).
+- **Allowed meanwhile:** operational monitoring (errors, missing verdicts, cost, `response_model`). The plan §23.3 first-5 read of requests and responses is part of launching, not outcome analysis. It looks at whether contexts and calls are normal.
+
+## D19 — R1-live: P7 on 4 items; content of the prereg-v1-r1live addendum
+
+- **Date / approval:** 24 October 2026; Nick Wagner, A04 addendum. Before P7 and before any R1-live call.
+- **P7:** 4 items instead of 2 (plan §10), cap 2 USD.
+- **The addendum prepared for tag `prereg-v1-r1live` fixes, before the R1-live run** (Nick's points, verbatim in `assignments/A04_addendum_D17_D19.md`):
+  1. two-sided question (H5): do rounds 2–5 erode a detection that succeeds at the decision point;
+  2. comparison d_i = y(R1-live) − mean of the two R1 draws of the same item, with a hash check that Alice's context up to the cut is byte-identical to the R1 bait request;
+  3. intermediate outcomes:
+     - (a) Alice names the bait in a live message (deterministic);
+     - (b) Bob's reaction type (concede / deny / ignore: keyword list plus confirming reading);
+     - (c) final detection conditional on (a) and (b);
+  4. confound rule: "conversation erodes detection" is claimed only if the effect persists without flags A and B;
+  5. a pre-set fallback if the API rejects Bob's modified turns (whether Bob's signatures are then removed); Alice's context is never changed;
+  6. correct-version reference: the original trajectories of the 40 items with their natural verdicts, as the false-rejection reference;
+  7. driver scope: rounds 2–5, close of the communication phase, verdict phase of both agents; no feedback, no reflection;
+  8. the flag-B and reaction-type keyword lists are fixed after P7, and confirming readings are done by Claude Code and described as such;
+  9. the subset composition is reported without change.
+- **Relation to the plan:** points 1–2 make plan §8.8's "R1-live − R1" test concrete (two-sided, against the R1 draw mean). Points 3–4 and 6 add pre-specified secondary readings; the plan's primary analysis on all 40 items and the without-flags sensitivity analysis (§8.4) stay.
