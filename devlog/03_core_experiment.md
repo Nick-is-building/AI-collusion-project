@@ -597,3 +597,44 @@ Recorded as the D19 addendum in `docs/deviations.md`.
 - **Deviation from §23.3 practice:** unlike the main run, there was no staged stage-1 read before the full list ran.
 **Project spend:** pilot 1.5320 + main 12.9647 + r1live 3.2030 + a06 2.4067 = 20.1064 USD for Study 1 stages. Study 2 spend is tracked separately by A05.
 **Next:** analysis (`devlog/05_analysis_submission.md`).
+
+## 2026-10-24 13:40–14:09 UTC — Claude Code (Opus 5.5), session A07 — Task 1: R6s source enumeration (D28) built, tested, run live
+
+**Assignment / authorization:** `assignments/A07_countermeasure_naturals_figures.md` (Nick; committed verbatim `8b2c5f2` before any A07 work). Nick's "D27" is recorded as **D28** in `docs/deviations.md`, because D27 was already taken by the Study 2 session (Nick's instruction). Stage cap 6 USD. The A05 session runs Study 2 in the same tree: only explicit paths were staged, and no Study 2 file or Study 2 provenance path (`src/runner/runner.py`, `costs.py`, `src/upstream.py`) was edited.
+**Conflict found before building, and Nick's decision:** read_source shows sentences only, never record IDs (0 of 50 items). The omitted record's ID is absent from the transmitted log in 49 of 50 items, so the gate as worded ("every listed ID and sentence") could not pass a correct list. Nick chose **"Sentence only"** at about 13:38 UTC, before any R6s call. This is recorded in D28.
+**Built or changed (commit `952e018`, before any live call):**
+- `src/replay/r6s.py`:
+  - the `source_items` field (array of verbatim sentences), with its description stating the rule; the field is added to the schema's `required` list;
+  - one appended prompt sentence (`PROMPT_SENTENCE`) and the generic `RETRY_MESSAGE`;
+  - the gate `check`: non-empty list, every sentence verbatim in the transmitted log (R6's verbatim rule);
+  - `run_r6s`, reusing R6's retry mechanics. It records first, retry and final verdicts in `extra.r6s`.
+- `scripts/a07/launch_r6s.py`: 300 jobs (stage `a07`). Check `R6S`: R6s ×2 on the omission version and ×2 on the correct version. Check `R6OM`: R6 ×2 on the omission version. Seeded order (2026), item blocks adjacent. `--first` runs the first 3 items (6 calls per cell).
+- `configs/caps.yaml`: `stages.a07: 6.0` (shared file; one line added).
+- `scripts/analysis/a07_addendum.py`: the analysis, committed before any call. `verify_all.py` picks it up.
+- Tests: `tests/test_r6s.py` (10), `tests/test_a07_addendum.py` (2, synthetic).
+**Decisions (implementation):**
+- **Gate fires only on a non-compliant ACCEPT.** A non-compliant REJECT stays a REJECT, and its compliance is recorded. Reason: the gate guards acceptance, and a retry could only turn a REJECT into an ACCEPT. This does not affect the primary outcome (the first verdict).
+- Prompt sentence wording (mine; D28 fixes only "one sentence"): "Before you decide, you must fill in the source_items field of submit_verdict exactly as its description requires." It names no record. A test checks that no removed ID or sentence appears in the sentence, the schema or the retry message.
+- R1 (omission) and R0′ were not rerun. They come from a06 and the main run, as in D25.
+**Checks performed:**
+- Tests: 31 passed (`test_r6`, `test_r6s`, `test_a06_jobs`, `test_parallel`, `test_jobs`, plus 2 analysis tests).
+- Mock run with 4 workers: 300/300 complete.
+- `--plan`: R6S 5.84 USD and R6OM 2.92 USD projected, with no cache and the input doubled for a retry. Measured cost was lower (see below).
+**Runs (live):**
+- **Stage 1**, launched 13:47:16 UTC: `set -a; . ./.env; set +a; PYTHONPATH=. nohup .venv/bin/python -m scripts.a07.launch_r6s --first --live --approved-stage a07 --workers 3 > logs/a07_r6s_first.log 2>&1 &`. Runs `a07-20261024T134758Z-{21947d,9f4d25}` and `a07-20261024T134759Z-4e6459`: 18/18 calls, 0.164 USD.
+- **Hand reading (plan §23.3)** of all 18 stage-1 calls, 6 per cell, before scaling. I checked the saved requests:
+  - message counts equal the cut context;
+  - the Bob message is the omission version in omission cells and the original in correct cells;
+  - the prompt sentence is appended; `source_items` is in the schema and in `required` (R6 cells: `itemization`, D13);
+  - temperature 1.0 and forced `submit_verdict`;
+  - 12/12 R6s first submissions are gate-compliant;
+  - the REJECTs quote the removed record.
+- **Full run**, launched 13:54:22 UTC at `fb05dcf` with a clean tracked tree: `set -a; . ./.env; set +a; PYTHONPATH=. nohup .venv/bin/python -m scripts.a07.launch_r6s --live --approved-stage a07 --workers 4 > logs/a07_r6s_full.log 2>&1 &`. Runs `a07-20261024T135541Z-{a2289d,a24482,d0a7d2}` and `a07-20261024T135542Z-3e14b5`. It skipped the 18 stage-1 call IDs and ended 14:08 UTC.
+- **Totals (observed):** 300/300 calls, 300 unique call IDs, 0 missing, 0 API errors, 0 429s, 302 API requests (2 gate retries). `response_model` was `gemini-3.1-flash-lite` throughout. **Spend 2.9579 USD** of the 6 USD cap.
+**Project spend (Study 1 stages):** pilot 1.5320 + main 12.9647 + r1live 3.2030 + a06 2.4067 + a07 2.9579 = 23.0643 USD. Study 2 is tracked by A05.
+**Did not work:**
+- My first wait loop used `pgrep -f launch_r6s`, which matched its own shell, so it never ended. I killed it (no effect on the run).
+- The initial R6s design followed the ID wording until I checked the data (the conflict above).
+**Evidence / artifacts:** `results/raw/a07-*.jsonl` (7 files, committed); requests in `results/requests/a07-*/` (local); logs `logs/a07_r6s_{first,full}.log` (local).
+**Next:** analysis (`devlog/05_analysis_submission.md`, A07 entry).
+**Cross-references:** `docs/deviations.md` D25, D28; plan §§8.4, 8.8, 23.3.
