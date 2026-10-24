@@ -11,7 +11,7 @@
 | [`devlog/01_foundation.md`](devlog/01_foundation.md) | Repository setup, dependencies, upstream pinning, pre-sprint artifact intake and provenance, baseline verification, shared infrastructure | A01 tasks 0–2 done (prereg-v0, env, data provenance, Study 0 reproduced); A02 LICENSE check |
 | [`devlog/02_pilot.md`](devlog/02_pilot.md) | Technical pilots, cost/timing measurements, feasibility checks, problems, go/no-go recommendations | A02: live P1, P2, P3, P9 (0.57 USD). A03: R0 mismatch cause found (task 1); P5, P11, P10 (task 4). A04: R6 rerun after D13 (task 1) |
 | [`devlog/03_core_experiment.md`](devlog/03_core_experiment.md) | Study 1: context reconstruction, bait generation, replay, controls, fidelity, R1-live, model comparison | A01 tasks 3–7; A02 D2–D4; A03: D6/D7 baits (109 main), blind-check package (tablet), R5, R6, N1/N4, job lists, parallel runner |
-| [`devlog/04_hysteresis.md`](devlog/04_hysteresis.md) | Study 2: branching trajectories, channel changes, partner intervention, run validity, persistence analyses | A04 task 5: implementation plan only (`docs/study2_implementation_plan.md`); D17 withdrawn, build follows A04 |
+| [`devlog/04_hysteresis.md`](devlog/04_hysteresis.md) | Study 2: branching trajectories, channel changes, partner intervention, run validity, persistence analyses | A04 task 5: implementation plan (`docs/study2_implementation_plan.md`). A05: build + analysis code + mock dry run done (tasks 1–2); P8, n (D21), prereg-study2, launch pending |
 | [`devlog/05_analysis_submission.md`](devlog/05_analysis_submission.md) | Statistical implementation, result validation, figures, paper, reproducibility and submission checks | A03: analysis code + simulation tests, PREREGISTRATION.md draft. A04: D14, prereg-v1 tagged; no outcome analysis before the natural-error rubric (D18) |
 
 ## Reading and linking rules
@@ -25,6 +25,7 @@
 ## Active work and cross-references
 
 - **Assigned work:** A04 done (`assignments/A04_prereg_launch_r1live.md` + `assignments/A04_addendum_D17_D19.md`, incl. Nick's correction): prereg-v1 and prereg-v1-r1live tagged; main run complete (2,330/2,330); R1-live complete (40/40); Study 2 implementation plan written (not built). A01–A04 done. Next: natural-error rubric (D18), then analysis; Study 2 build (Nick).
+- **Study 2 (A05, `assignments/A05_study2_build_launch.md`):** code `src/hysteresis/` (run_arm, status_line, guard, partner_control, scheduler, analysis, mock_model, upstream_tree), `scripts/study2/` (launch, monitor, fix_n, run_list, analyze, interrupt_check.sh); tests `tests/test_study2_*.py`; decisions D20–D23 in `docs/deviations.md`; caps `stages.study2`, `check_groups.study2_p8`; runs under `results/study2/<group>/repNNN/<arm>/`, logs `logs/study2/`; upstream copy `work/study2/upstream` (local, reproducible).
 - **Active blocks:**
   - `devlog/02_pilot.md`: A04 task-1 entry (R6 rerun); P7 entry;
   - `devlog/03_core_experiment.md`: A04 entries (D15, launcher, main run, R1-live driver);

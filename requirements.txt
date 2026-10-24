@@ -10,5 +10,6 @@ python-dotenv==1.2.2
 pandas==3.1.0
 pyarrow==26.0.0
 numpy==2.5.4
+scipy==1.18.1               # A05: Study 2 paired t-test (src/hysteresis/analysis.py)
 huggingface_hub==2.3.0
 PyYAML==6.0.3

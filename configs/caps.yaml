@@ -1,9 +1,10 @@
 # Cost caps (assignment A01; PROJECT_PLAN.md section 12). Runners fail closed.
-hard_cap_usd: 250.0          # all live calls of the project, all stages
+hard_cap_usd: 330.0          # all live calls of the project, all stages (D20, A05: raised from 250)
 stages:
   pilot: 10.0                # plan section 12 (technical pilot including P11)
   main: 40.0                 # assignment A04 task 3: main run (2,330 calls; P10 projection 28.8 USD)
   r1live: 10.0               # Nick, 24 Oct 2026 (prereg-v1-r1live): R1-live on the 40 items
+  study2: 250.0              # D20 (A05): Study 2 stage cap including P8; read by src/hysteresis/guard.py
 # Sub-caps on groups of checks within a stage (fail closed, same ledger).
 check_groups:
   a02_pilot_checks:          # assignment A02: P1 (incl. 3.7-Flash call), P2, P3, P9; pilot cap stays 10
@@ -18,3 +19,7 @@ check_groups:
     stage: pilot
     checks: [P7]
     cap_usd: 2.0
+  study2_p8:                 # A05 task 3: P8, one sequence through all arms (guard key study2_<group>)
+    stage: study2
+    checks: [P8]
+    cap_usd: 5.0
