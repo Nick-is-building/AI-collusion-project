@@ -251,3 +251,20 @@ def test_counted_run_is_earliest_complete(tmp_path):
         (d / "run.json").write_text(json.dumps({"results": [{}] * eps}))
     st = scan(tmp_path / "g", 1, "B")
     assert st.complete and st.complete_run().parent.name == "r2" and st.attempts == 3
+
+
+def test_failed_launches_count_as_attempts(tmp_path):
+    """A launch that dies before writing study2_meta.json (here: live refused, no API call) still
+    counts toward MAX_ATTEMPTS, so the scheduler does not relaunch it forever."""
+    from src.hysteresis.scheduler import MAX_ATTEMPTS, Scheduler
+    s = Scheduler(out_root=tmp_path, group="t", seqs=[1], workers=2, backend="live", approved_stage=None,
+                  log_dir=tmp_path / "logs", poll_s=0.5)
+    result = s.run()
+    ev = [json.loads(x) for x in (tmp_path / "t/scheduler.jsonl").read_text().splitlines()]
+    n = {}
+    for e in ev:
+        if e["event"] == "launch":
+            n[e["arm"]] = n.get(e["arm"], 0) + 1
+    assert n == {"prefix": MAX_ATTEMPTS, "Cprime": MAX_ATTEMPTS}
+    assert sorted(map(tuple, result["failed"])) == [(1, "Cprime"), (1, "prefix")]
+    assert not list(tmp_path.rglob(JOURNAL))

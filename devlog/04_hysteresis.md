@@ -114,3 +114,18 @@ No Study 2 work or result is recorded here. Its inclusion in the plan does not a
 **Built or changed:** `PREREGISTRATION_STUDY2.md` §8 (draft, untagged): the verbatim clarification and how the code meets it. No code change was needed. P8 lives under `results/study2/p8/` and the main run under `results/study2/main/`, and scheduler and run list read one group only. `fix_n.py` subtracts P8 spend from the remaining Study 2 cap. The status-line check prints PASS/FAIL only, and the monitor reads journals and metadata only.
 **Checks performed:** none new. So far no P8 trace has been opened except the run logs' tool status lines (e.g. "send_message(err:MessageError: exceeds 200 char limit)" in the prefix log, seen while checking for errors).
 **Next:** P8 completion, status-line check, D21.
+
+## 2026-10-24 12:58–13:10 UTC — Claude Code (Opus 5.5), session A05 — P8 interruption: branch launches refused (provenance), scheduler relaunch loop; fixes
+
+**Observed (P8, run `results/study2/p8/`):**
+- The prefix finished at 12:58:49 UTC (rc 0).
+- Every B and A′ launch then failed within about 10 s with `LiveNotAuthorized: Study 2 code paths have uncommitted changes (provenance): [' M configs/caps.yaml']`. Session A06 had added its own stage cap `a06: 10.0` to `configs/caps.yaml`, not yet committed.
+- These launches died before `study2_meta.json`, so the scheduler did not count them as attempts and relaunched every ~10 s (about 10 launches each, 12:58:49–12:59:41).
+- No API call was made by any of them: they fail before the model is reached, and no journal exists under B/ or A′/.
+- I stopped the scheduler process (pid 52300). The C′ child (pid 52305) kept running. A STOP file would also have stopped C′.
+**Built or changed:**
+- `src/hysteresis/run_arm.py`: `PROVENANCE_PATHS` narrowed to the code a run executes (src/hysteresis, scripts/study2, src/runner/costs.py, src/runner/runner.py, src/upstream.py, src/__init__.py, third_party). `configs/` is shared with A06, so the SHA-256 of `configs/caps.yaml` and `configs/prices.yaml` in effect is recorded per run (`config_sha256`). The guard still enforces the caps on disk and fails closed without a `study2` entry.
+- `src/hysteresis/scheduler.py`: attempts = max(run directories, launch events in `scheduler.jsonl`), so launches that die early count toward MAX_ATTEMPTS = 3.
+- `tests/test_study2_build.py`: `test_failed_launches_count_as_attempts`, in live mode refused under pytest: exactly 3 launches per arm, and no journal.
+**Checks performed:** `pytest tests/test_study2_build.py -k "failed_launches or scheduler or counted or live_refused"`: 4 passed.
+**Next:** commit, then restart the P8 scheduler with the same command. It continues: the prefix is complete, C′ runs as an orphan (detected), and B and A′ launch.

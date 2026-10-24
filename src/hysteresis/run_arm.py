@@ -83,11 +83,14 @@ def upstream_argv(arm: str, seq: int, output_dir: Path, *, resume_from: str = ""
     return argv
 
 
-# Paths whose committed state a Study 2 run executes. Another session may edit unrelated tracked
-# files in the same working tree (A06), so provenance is required for these paths only; the
-# whole-tree dirty flag is still recorded in study2_meta.json.
-PROVENANCE_PATHS = ("src/hysteresis", "scripts/study2", "src/runner", "src/upstream.py", "src/reanalysis",
-                    "src/__init__.py", "configs", "third_party")
+# Code a Study 2 run executes; it must be committed. Another session may edit other tracked files in
+# the same working tree (A06), including configs/caps.yaml (shared), so configs are not required
+# clean: the SHA-256 of caps.yaml and prices.yaml in effect is recorded in study2_meta.json, and the
+# guard enforces the caps on disk (failing closed without a study2 entry). The whole-tree dirty flag
+# is recorded too.
+PROVENANCE_PATHS = ("src/hysteresis", "scripts/study2", "src/runner/costs.py", "src/runner/runner.py",
+                    "src/upstream.py", "src/__init__.py", "third_party")
+CONFIG_FILES = ("configs/caps.yaml", "configs/prices.yaml")
 
 
 def study2_code_dirty() -> list[str]:
@@ -230,6 +233,7 @@ def main(argv=None):
     meta = {"arm": a.arm, "seq": a.seq, "group": a.group, "backend": a.backend,
             "run_dir": output_path.parent.name, "started_at": utc_now(), "git_head": head, "git_dirty": dirty,
             "study2_code_dirty": study2_code_dirty(),
+            "config_sha256": {f: sha256_file(ROOT / f) for f in CONFIG_FILES},
             "upstream_copy": tree_meta, "argv": sys.argv, "upstream_argv": upstream_argv(
                 a.arm, a.seq, out_dir, resume_from=resume, pc_cache=pc_cache),
             "resume_from": resume, "resume_from_sha256": sha256_file(resume) if resume else None,

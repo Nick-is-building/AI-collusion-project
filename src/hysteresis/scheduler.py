@@ -176,6 +176,21 @@ class Scheduler:
                 self.log(event="exit", seq=key[0], arm=key[1], pid=p.pid, rc=rc)
                 del self.running[key]
 
+    def launches(self) -> dict:
+        """Launch count per (seq, arm) from the event log: counts launches that died before writing
+        study2_meta.json (e.g. a refused live check), which the run directories cannot show."""
+        out: dict = {}
+        if self.events.exists():
+            for line in self.events.read_text().splitlines():
+                ev = json.loads(line)
+                if ev.get("event") == "launch":
+                    k = (ev["seq"], ev["arm"])
+                    out[k] = out.get(k, 0) + 1
+        return out
+
+    def attempts(self, st: ArmState, launches: dict | None = None) -> int:
+        return max(st.attempts, (launches if launches is not None else self.launches()).get((st.seq, st.arm), 0))
+
     def orphans(self) -> set:
         """(seq, arm) launched by an earlier scheduler instance (launch event without exit event)
         whose process is still a live run_arm process. Covers the window before a child has written
@@ -208,7 +223,8 @@ class Scheduler:
         self.reap()
         states = self.state()
         done = sum(st.complete for st in states.values())
-        failed = [k for k, st in states.items() if not st.complete and st.attempts >= MAX_ATTEMPTS
+        launches = self.launches()
+        failed = [k for k, st in states.items() if not st.complete and self.attempts(st, launches) >= MAX_ATTEMPTS
                   and k not in self.running]
         if self.stopped():
             return {"done": done, "total": len(states), "running": len(self.running), "failed": failed,
@@ -219,7 +235,7 @@ class Scheduler:
             if len(self.running) >= self.current_workers():
                 break
             key = (st.seq, st.arm)
-            if (st.complete or key in self.running or key in orphans or st.attempts >= MAX_ATTEMPTS
+            if (st.complete or key in self.running or key in orphans or self.attempts(st, launches) >= MAX_ATTEMPTS
                     or st.alive_elsewhere()):
                 continue
             cmd = self.command(st, states)
@@ -230,7 +246,8 @@ class Scheduler:
             with open(log_path, "w") as fh:
                 p = subprocess.Popen(cmd, cwd=ROOT, env=self.env, stdout=fh, stderr=subprocess.STDOUT)
             self.running[key] = p
-            self.log(event="launch", seq=st.seq, arm=st.arm, pid=p.pid, attempt=st.attempts + 1,
+            launches[key] = launches.get(key, 0) + 1
+            self.log(event="launch", seq=st.seq, arm=st.arm, pid=p.pid, attempt=launches[key],
                      cmd=cmd[2:], log=str(log_path))
         return {"done": done, "total": len(states), "running": len(self.running), "failed": failed,
                 "stopped": False}
@@ -248,5 +265,6 @@ class Scheduler:
 
     def _launchable(self) -> bool:
         states = self.state()
-        return any(not st.complete and st.attempts < MAX_ATTEMPTS and self.command(st, states) is not None
-                   for st in states.values())
+        launches = self.launches()
+        return any(not st.complete and self.attempts(st, launches) < MAX_ATTEMPTS
+                   and self.command(st, states) is not None for st in states.values())
