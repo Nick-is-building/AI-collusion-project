@@ -147,3 +147,13 @@ No Study 2 work or result is recorded here. Its inclusion in the plan does not a
 **Did not work:** the provenance refusal and relaunch loop (previous entries).
 **Open for Nick:** storage of the main run (about 1 GB gzipped for 50 sequences) in git.
 **Next:** commit, write the hashes into `PREREGISTRATION_STUDY2.md`, commit, tag `prereg-study2`, push, launch the main run at 8 workers.
+
+## 2026-10-24 13:15–13:20 UTC — Claude Code (Opus 5.5), session A05 — Task 4 done (prereg-study2); Task 5: main run launched
+
+**Assignment / authorization:** A05 task 4 (preregistration, tag) and task 5 (launch authorized if P8 passed and n ≥ 30: P8 passed, n = 50).
+**Preregistration:** `PREREGISTRATION_STUDY2.md` final at `c6ab3de`, tag `prereg-study2` (annotated, pushed; tag object `64dd86b`). The frozen-file hashes are computed at `62662d4` with `scripts/study2/prereg_hashes.py`. Nothing in Study 2 was computed or read before the tag except P8's operational figures and the status-line PASS.
+**Launch (exact):** `set -a && . ./.env && set +a && PYTHONPATH=. nohup .venv/bin/python -m scripts.study2.launch --group main --seqs 1-50 --workers 8 --backend live --approved-stage study2 > logs/study2_main.log 2>&1 &` at 13:16:50 UTC, HEAD `c6ab3de`, Study 2 code paths clean. Runs under `results/study2/main/`, per-run logs `logs/study2/main/`.
+**Observed in the first 60 s:** 8 launches (prefixes rep001–rep008), 87 calls, all accepted, 0 errors, 0 rate-limit errors, `response_model` constant.
+**Scheduling note (inferred from the frozen priority B, PC, prefix, C′, A′):** all 50 prefixes launch before any C′ or A′. The first complete sequence will therefore arrive after roughly 60–75 min, not about 20 min. Workers stay at 8 until that sequence has been read by hand (A05 task 5). I did not change the frozen scheduler (it would be a post-tag change). Cost: wall time only, not content.
+**Built:** `scripts/study2/watch.py`: operational watcher; it exits on errors, 429s, a model change, STOP, a failed attempt, scheduler end, or completion of a given sequence. It reads only what the monitor reads.
+**Next:** hand-read sequence 1 (operational: contexts, messages and status line look as designed; no rate computed), then ramp to 16 and 32 workers only while 429s stay at zero (D23).
