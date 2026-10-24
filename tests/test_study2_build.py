@@ -268,3 +268,14 @@ def test_failed_launches_count_as_attempts(tmp_path):
     assert n == {"prefix": MAX_ATTEMPTS, "Cprime": MAX_ATTEMPTS}
     assert sorted(map(tuple, result["failed"])) == [(1, "Cprime"), (1, "prefix")]
     assert not list(tmp_path.rglob(JOURNAL))
+
+
+def test_attempts_reset_event(tmp_path):
+    from src.hysteresis.scheduler import Scheduler
+    s = Scheduler(out_root=tmp_path, group="t", seqs=[1], workers=1, backend="mock", log_dir=tmp_path / "l")
+    for _ in range(4):
+        s.log(event="launch", seq=1, arm="B", pid=1)
+    assert s.launches() == {(1, "B"): 4}
+    s.log(event="attempts_reset", reason="test")
+    s.log(event="launch", seq=1, arm="B", pid=2)
+    assert s.launches() == {(1, "B"): 1}

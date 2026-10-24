@@ -42,11 +42,16 @@ def main(argv=None):
     ap.add_argument("--reserve-slots", type=int, default=None,
                     help="cost-guard reserve slots per process (default: the worker limit at launch)")
     ap.add_argument("--plan", action="store_true", help="print what would be launched now, launch nothing")
+    ap.add_argument("--reset-attempts", default="", metavar="REASON",
+                    help="log an attempts_reset event (launch counts restart from here), e.g. after a fixed "
+                         "launcher bug; the reason is recorded")
     a = ap.parse_args(argv)
     if a.backend == "live" and a.approved_stage != "study2":
         raise SystemExit("live needs --approved-stage study2")
     s = Scheduler(out_root=Path(a.out_root), group=a.group, seqs=parse_seqs(a.seqs), workers=a.workers,
                   backend=a.backend, approved_stage=a.approved_stage, reserve_slots=a.reserve_slots)
+    if a.reset_attempts:
+        s.log(event="attempts_reset", reason=a.reset_attempts)
     if a.plan:
         states = s.state()
         for (seq, arm), st in sorted(states.items()):

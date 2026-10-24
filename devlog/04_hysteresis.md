@@ -128,4 +128,4 @@ No Study 2 work or result is recorded here. Its inclusion in the plan does not a
 - `src/hysteresis/scheduler.py`: attempts = max(run directories, launch events in `scheduler.jsonl`), so launches that die early count toward MAX_ATTEMPTS = 3.
 - `tests/test_study2_build.py`: `test_failed_launches_count_as_attempts`, in live mode refused under pytest: exactly 3 launches per arm, and no journal.
 **Checks performed:** `pytest tests/test_study2_build.py -k "failed_launches or scheduler or counted or live_refused"`: 4 passed.
-**Next:** commit, then restart the P8 scheduler with the same command. It continues: the prefix is complete, C′ runs as an orphan (detected), and B and A′ launch.
+**Next:** commit, then restart the P8 scheduler with `--reset-attempts` (operator event `attempts_reset` with the reason, added to the append-only `scheduler.jsonl`; launch counts restart after it, so the refused launches of the fixed bug do not exhaust B/A′). It continues: the prefix is complete, C′ runs as an orphan (detected), and B and A′ launch.

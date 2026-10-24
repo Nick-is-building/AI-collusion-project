@@ -183,7 +183,9 @@ class Scheduler:
         if self.events.exists():
             for line in self.events.read_text().splitlines():
                 ev = json.loads(line)
-                if ev.get("event") == "launch":
+                if ev.get("event") == "attempts_reset":     # operator event with a reason (append-only log)
+                    out = {}
+                elif ev.get("event") == "launch":
                     k = (ev["seq"], ev["arm"])
                     out[k] = out.get(k, 0) + 1
         return out
