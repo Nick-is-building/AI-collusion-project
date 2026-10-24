@@ -1,0 +1,14 @@
+# secrets and local environment
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+# downloaded upstream data (reproduced by data/download.py and checksums)
+data/raw/
+# local logs and reconstructable full request payloads
+logs/
+results/requests/
+# blind check answer key (only its hash is committed)
+blind_check/key.local.json

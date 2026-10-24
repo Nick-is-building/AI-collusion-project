@@ -1,0 +1,14 @@
+# Reanalyse Shi et al., Stand 2026-10-23
+# Quelle Daten: https://huggingface.co/datasets/SALT-NLP/agent-collusion, Revision 2eba8f3771e8fbcc0f49f6cbbfd2111b939a117a (abgerufen ueber resolve/main am 2026-10-23)
+# Quelle Code: https://github.com/SALT-NLP/agent-collusion, Commit 5afb2c595aa3eff6b9b829a032f4f117b36ee54d
+# Pfade: data/episodes/<exp>/<cond>.parquet -> ep_<cond>.parquet, data/agents/<exp>/<cond>.parquet -> ag_<cond>.parquet
+8220b9b1aefe7c6dadfb35362aeec8714805a3683f122679beaf30f1ee9cfd1a  reanalyse_shi.py
+b4d79b08d1a224ad19a31a6f3078fa5d27a02dd8155ce4e39678149802b9c295  ag_communication__gemini-3-1-flash-lite__unconstrained.parquet
+c92c01752b4c0964a018753b395597e42a95f23f3c2761fdd80e17ec22450b18  ag_communication__gemini-3-7-flash__unconstrained.parquet
+00562752c025dc1ca12975461c3d9d0f29b36d5e99a9b19035279e8cf0060d13  ag_main__gemini-3-1-flash-lite.parquet
+761f5bb461ddebdbf19a171ca78d47d3cf09eff6183654ca604986099ec3b710  ag_main__gemini-3-7-flash.parquet
+f229976ec29a82338990409074854f765df8a118e4fdf97b146de5939c18c0db  ep_communication__gemini-3-1-flash-lite__unconstrained.parquet
+82e488e984b1abc65eab86a132e50a3bb79b83ad5e8f4cbdc3ccd8a219f2efe3  ep_communication__gemini-3-7-flash__unconstrained.parquet
+3d9439c7e08f758c3817f152ec4ea603fb084741b4ec771e9a42bacacd5e849f  ep_main__gemini-3-1-flash-lite.parquet
+bfbd08a254cfeeb386f16821365da93f80c96a00047e74c2e6f219606334302f  ep_main__gemini-3-7-flash.parquet
+209ebe5164a85081e8d641b1acc558cc47909f1d7c1833ee0728dd185e572779  urteile_reanalyse.csv
