@@ -4,7 +4,7 @@
   fig1_discrimination   Shi et al.'s 53 conditions, unconstrained and constrained/other as separate groups
   fig2_ladder           detection and false rejection by variant, commissions and omissions side by side
   fig3_distance         R1 (cut), R5-post, R1-live on the 40 R1-live items; false rejection R0 vs R0' (cut)
-  fig4_countermeasure   operating points (false rejection, detection): R1/R0', R4, R6, R6s, first and gated
+  fig4_countermeasure   operating points (false rejection, detection): R1/R0', R4, R6, R6s, R6x, first and gated
   fig5_study2           slot for Study 2 (not drawn until figure_data.study2 is filled)
 
 Output: paper/figures/<name>.pdf and .png (300 dpi).
@@ -115,10 +115,13 @@ def fig2_ladder(fd: dict):
     _ladder_panel(axes[1], lad["omission"], f"Planted omissions ({n_o} items)")
     axes[0].set_ylabel("Share of REJECT verdicts")
     axes[0].legend(loc="center left", fontsize=7)
-    fig.text(0.0, -0.13, "R1 = workflow context (cut); its correct-version counterpart is R0'. R6 and R6s: "
+    om_fr = lad["omission"]["false_rejection"]
+    tail = ("R6 on omissions: detection and false rejection measured on the same 50 items (D28, D31)."
+            if "R6 first" in om_fr else
+            "R6 on omissions ran on omission versions only, so it has no false-rejection point there.")
+    fig.text(0.0, -0.13, "R1 = workflow context (cut); its correct-version counterpart is R0'. R6, R6s, R6x: "
              "'first' = model's first verdict, 'gated' = after the gate. 95% cluster bootstrap intervals.\n"
-             "R6 on omissions ran on omission versions only, so it has no false-rejection point there.",
-             fontsize=7, color=MUTED)
+             + tail, fontsize=7, color=MUTED)
     return _save(fig, "fig2_ladder")
 
 
@@ -144,7 +147,8 @@ def fig3_distance(fd: dict):
 
 # Label placement for the crowded commission corner of Fig. 4 (layout only; positions are in points).
 LABEL_OFFSET = {("commission", "R1 / R0'"): (-48, -14), ("commission", "R4"): (-30, 8),
-                ("commission", "R6 first"): (14, -16), ("omission", "R6 first"): (-4, 6)}
+                ("commission", "R6 first"): (16, 4), ("omission", "R6 first"): (-4, 6),
+                ("omission", "R6x first"): (-50, -16)}
 
 
 def fig4_countermeasure(fd: dict):
@@ -164,7 +168,8 @@ def fig4_countermeasure(fd: dict):
             ax.annotate(p["variant"] + (" *" if hollow else ""), (f["estimate"], d["estimate"]),
                         xytext=LABEL_OFFSET.get((err_type, p["variant"]), (5, -9)), textcoords="offset points",
                         fontsize=6.5, color=INK,
-                        arrowprops=dict(arrowstyle="-", color=MUTED, lw=0.5) if (err_type, p["variant"]) in LABEL_OFFSET and err_type == "commission" else None)
+                        arrowprops=dict(arrowstyle="-", color=MUTED, lw=0.5) if (err_type, p["variant"]) in LABEL_OFFSET
+                        and (err_type == "commission" or p["variant"] == "R6x first") else None)
     for err_type, (col, mk) in style.items():
         ax.plot([], [], mk, color=col, label=f"Planted {err_type}s")
     ax.legend(loc="lower right", fontsize=7)
@@ -172,9 +177,10 @@ def fig4_countermeasure(fd: dict):
     ax.set_ylabel("Detection (error versions)")
     ax.set_xlim(-0.01, None)
     ax.set_ylim(0.4, 1.03)
-    fig.text(0.0, -0.11, "* R6 on omissions: false rejection taken from the commission items' correct versions "
-             "(not measured on the omission items).\n95% cluster bootstrap intervals in both directions.",
-             fontsize=7, color=MUTED)
+    star = ("* R6 on omissions: false rejection taken from the commission items' correct versions "
+            "(not measured on the omission items).\n" if any("note" in p for p in pts) else "")
+    fig.text(0.0, -0.11, star + "R6 = answer-side itemization, R6s = source enumeration, R6x = exhaustive source "
+             "classification.\n95% cluster bootstrap intervals in both directions.", fontsize=7, color=MUTED)
     return _save(fig, "fig4_countermeasure")
 
 

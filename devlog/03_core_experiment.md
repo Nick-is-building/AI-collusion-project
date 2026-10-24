@@ -638,3 +638,32 @@ Recorded as the D19 addendum in `docs/deviations.md`.
 **Evidence / artifacts:** `results/raw/a07-*.jsonl` (7 files, committed); requests in `results/requests/a07-*/` (local); logs `logs/a07_r6s_{first,full}.log` (local).
 **Next:** analysis (`devlog/05_analysis_submission.md`, A07 entry).
 **Cross-references:** `docs/deviations.md` D25, D28; plan §§8.4, 8.8, 23.3.
+
+## 2026-10-24 14:26–14:56 UTC — Claude Code (Opus 5.5), session A08 — Task 1–2: R6x (D30) built, tested, run live; R6 on the omission items' correct versions (D31)
+
+**Assignment / authorization:** `assignments/A08_exhaustive_classification.md` (Nick; committed verbatim `654b881` before any A08 work). Recorded as D30 (R6x) and D31 (R6 correct versions) in `docs/deviations.md` (`4acb549`, before any code or call). Stage cap 6 USD (stage `a08`). The Study 2 session (A05) was running in the same tree throughout (8 workers): only explicit paths were staged, the A06 coordination rules were followed, and no Study 2 file or provenance path was edited (`configs/caps.yaml` got one appended line, as in A06/A07).
+**Built or changed (commit `8f2fea3`, before any live call):**
+- `src/replay/r6x.py`: the `source_classification` field (array of `{sentence, label}`, label enum include/exclude, in `required`), its description stating the rule, one appended prompt sentence (`PROMPT_SENTENCE`), the generic `RETRY_MESSAGE`; `source_sentences` (non-empty lines of the single read_source result); the gate `check` (each source sentence exactly once, verbatim after outer-whitespace strip, no non-source entries, valid labels; missing/duplicated/extra/bad labels recorded, plus `compliant_ignoring_extra`); `label_of`; `run_r6x` with R6's retry mechanics. Gate fires only on a non-compliant ACCEPT (D30).
+- `scripts/a08/launch_r6x.py`: 300 jobs. Check `R6X`: R6x ×2 on omission and ×2 on correct versions. Check `R6COR` (D31): R6 ×2 on correct versions. Seeded order (2026), item blocks adjacent, `--first` = first 3 items (6 calls per cell).
+- `configs/caps.yaml`: `stages.a08: 6.0`.
+- `scripts/analysis/a08_addendum.py` (committed before any call) and the `verify_all.py` hook (key `addendum.D30_D31_R6x`).
+- Tests: `tests/test_r6x.py` (12), `tests/test_a08_addendum.py` (1, synthetic).
+**Decisions (implementation; the rule is Nick's):** listed in D30 (choices 1–6) and D31. Data check before building: in 50/50 items exactly one read_source call; 16–24 non-empty lines; no duplicate line; the removed sentence is exactly one line; the read_source result is identical in the correct version (tested).
+**Checks performed:**
+- Tests: 42 passed (`test_r6`, `test_r6s`, `test_r6x`, `test_a07_addendum`, `test_a08_addendum`, `test_jobs`, `test_parallel`, `test_verify_all`). Mock run with 4 workers: 300/300 complete.
+- `--plan`: R6X 5.84 USD, R6COR 2.92 USD projected (no cache, input doubled for a retry), above the cap; the runner fails closed, and A07's identical projection measured 2.96 USD. Measured below.
+**Runs (live):**
+- **Stage 1**, 14:34:31 UTC at `8f2fea3`: `set -a && . ./.env && set +a && PYTHONPATH=. nohup .venv/bin/python -m scripts.a08.launch_r6x --first --live --approved-stage a08 --workers 3 > logs/a08_r6x_first.log 2>&1 &`. Runs `a08-20261024T14351{3Z-0a0184,4Z-553631,5Z-25a7a8}`: 18/18, 0.219 USD.
+- **Hand reading (plan §23.3)** of all 18 stage-1 calls before scaling:
+  - every saved request equals the job's built messages (cut context; omission or original Bob message); the prompt sentence of its own variant is appended; only its own field is in the schema; temperature 1.0, max_tokens 64,000, reasoning high, forced `submit_verdict`; 1 API request per call; `response_model` constant (inline script; 0 problems);
+  - 12/12 R6x first submissions compliant (all source sentences listed once, labels valid);
+  - every reasoning engages with the task; omission REJECTs quote the removed record.
+  - Observation: two omission ACCEPTs (rep044_e07 d2, rep036_e02 d2) labeled the removed sentence include, so the include count exceeds Bob's answer, and still accepted. A substantive outcome, not a malfunction.
+- **Full run, first launch refused (no call made):** at 14:38:01 UTC; every worker raised `LiveNotAuthorized: live mode needs a clean, committed working tree (provenance)`, because I had edited `scripts/analysis/figure_data.py` and `figures.py` while the workers were starting. No raw file or call was produced. I stashed the two edits, committed the stage-1 raw files (`8f9e2d8`), and relaunched; no tracked file was edited until the run ended.
+- **Full run**, 14:39:22 UTC at `8f9e2d8` (differs from `8f2fea3` only by the stage-1 raw files): same command without `--first`, `--workers 4`, log `logs/a08_r6x_full.log`. Runs `a08-20261024T14400{7Z-c08f68,8Z-7d5353,8Z-ed4b3c,9Z-e7b591}`; skipped the 18 stage-1 call IDs; ended 14:55:55 UTC.
+- **Totals (observed, independent count over all a08 lines):** 300/300 calls, 300 unique call IDs, all `verdict_status` ok, 0 API errors, 0 429s, 301 API requests (1 gate retry), `response_model` gemini-3.1-flash-lite throughout. **Spend 3.5656 USD** of the 6 USD cap. Raw lines committed in `8f9e2d8` and `3a22825`.
+**Project spend (Study 1 stages):** 23.0643 (to A07) + a08 3.5656 = 26.6299 USD. Study 2 is tracked by A05.
+**Did not work:** the refused first full launch above (self-inflicted; the provenance guard worked as designed). A pandas `~` on an object-dtype bool column in my first analysis draft would have miscounted `field_absent`; the deprecation warning exposed it in the synthetic test, and it was fixed (and asserted) before the commit.
+**Evidence / artifacts:** `results/raw/a08-*.jsonl` (7 files, committed); requests `results/requests/a08-*/` (local, hashed in the lines); logs `logs/a08_r6x_{first,full}.log` (local).
+**Next:** analysis (`devlog/05_analysis_submission.md`, A08 entry).
+**Cross-references:** `docs/deviations.md` D25, D28, D30, D31; plan §§8.4, 8.8, 23.3.

@@ -12,7 +12,9 @@ bootstrap intervals (plan 8.8: 10,000 resamples of trajectories, seed 2026; cell
   ladder          detection (bait / omission versions) and false rejection (correct versions) per variant,
                   commissions (main run, 109 items) and omissions (D25 items, 50).
   distance        the 40 R1-live items: detection R1, R5-post, R1-live; and false rejections R0 vs R0' (cut).
-  countermeasure  operating points (false rejection, detection) for R1/R0', R4, R6, R6s, first and gated.
+  countermeasure  operating points (false rejection, detection) for R1/R0', R4, R6, R6s, R6x, first and gated.
+                  A08: R6's omission point uses its own false rejection on the omission items' correct
+                  versions (D31, stage a08) instead of the commission items' rate; R6x (D30) is added.
   study2          slot, filled when the Study 2 analysis is added (not by A07).
 """
 from __future__ import annotations
@@ -24,6 +26,7 @@ import pandas as pd
 
 from scripts.analysis.a06_addendum import _ci, cluster_meta, load_stage, r1live_series
 from scripts.analysis.a07_addendum import comparison_cells, load_a07
+from scripts.analysis.a08_addendum import load_a08
 from src.analysis.primary import cell
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -54,7 +57,8 @@ def _rate(series: pd.Series, meta) -> dict:
     return _ci(series.dropna(), meta)
 
 
-def ladder(main: pd.DataFrame, a06: pd.DataFrame, a07: pd.DataFrame, comp: pd.DataFrame, meta) -> dict:
+def ladder(main: pd.DataFrame, a06: pd.DataFrame, a07: pd.DataFrame, comp: pd.DataFrame, meta,
+           a08: pd.DataFrame | None = None) -> dict:
     com = {"detection": {}, "false_rejection": {}}
     for v in ("R1", "R2", "R3", "R4", "R4n", "R5"):
         com["detection"][v] = _rate(cell(main, v, "bait"), meta)
@@ -81,9 +85,19 @@ def ladder(main: pd.DataFrame, a06: pd.DataFrame, a07: pd.DataFrame, comp: pd.Da
         om["detection"]["R6s gated"] = _rate(cell(a07, "R6s", "omission", "r6s_final_y"), meta)
         om["false_rejection"]["R6s first"] = _rate(cell(a07, "R6s", "correct", "r6s_first_y"), meta)
         om["false_rejection"]["R6s gated"] = _rate(cell(a07, "R6s", "correct", "r6s_final_y"), meta)
-    return {"commission": com, "omission": om,
-            "note": "omission R6 was run on omission versions only (D28); its false rejection is not measured "
-                    "on these items"}
+    note = ("omission R6 was run on omission versions only (D28); its false rejection is not measured "
+            "on these items")
+    if a08 is not None and len(a08):
+        if (a08.variant == "R6").any():   # D31
+            om["false_rejection"]["R6 first"] = _rate(cell(a08, "R6", "correct", "r6_first_y"), meta)
+            om["false_rejection"]["R6 gated"] = _rate(cell(a08, "R6", "correct", "r6_final_y"), meta)
+            note = "omission R6: detection from a07 (D28), false rejection from a08 (D31), same 50 items"
+        if (a08.variant == "R6x").any():  # D30
+            om["detection"]["R6x first"] = _rate(cell(a08, "R6x", "omission", "r6x_first_y"), meta)
+            om["detection"]["R6x gated"] = _rate(cell(a08, "R6x", "omission", "r6x_final_y"), meta)
+            om["false_rejection"]["R6x first"] = _rate(cell(a08, "R6x", "correct", "r6x_first_y"), meta)
+            om["false_rejection"]["R6x gated"] = _rate(cell(a08, "R6x", "correct", "r6x_final_y"), meta)
+    return {"commission": com, "omission": om, "note": note}
 
 
 def distance(main: pd.DataFrame, a06: pd.DataFrame, meta) -> dict:
@@ -107,11 +121,11 @@ def countermeasure(lad: dict) -> dict:
            ("commission", "R6 gated", c["detection"]["R6 gated"], c["false_rejection"]["R6 gated"]),
            ("omission", "R1 / R0'", o["detection"]["R1"], o["false_rejection"]["R1 (R0')"]),
            ("omission", "R4", o["detection"]["R4"], o["false_rejection"]["R4"])]
-    for k in ("R6s first", "R6s gated"):
-        if k in o["detection"]:
+    for k in ("R6 first", "R6 gated", "R6s first", "R6s gated", "R6x first", "R6x gated"):
+        if k in o["detection"] and k in o["false_rejection"]:
             pts.append(("omission", k, o["detection"][k], o["false_rejection"][k]))
     out = [dict(error=e, variant=v, detection=d, false_rejection=f) for e, v, d, f in pts]
-    if "R6 first" in o["detection"]:
+    if "R6 first" in o["detection"] and "R6 first" not in o["false_rejection"]:   # before D31 only
         for k in ("R6 first", "R6 gated"):
             out.append(dict(error="omission", variant=k, detection=o["detection"][k],
                             false_rejection=c["false_rejection"][k],
@@ -124,8 +138,9 @@ def build(main_calls: pd.DataFrame, main_meta: pd.DataFrame) -> dict:
     meta = cluster_meta()
     a06 = load_stage("a06")
     a07 = load_a07()
+    a08 = load_a08()
     comp = comparison_cells(main_calls.assign(check="MAIN"), a06)
-    lad = ladder(main_calls, a06, a07, comp, meta)
+    lad = ladder(main_calls, a06, a07, comp, meta, a08)
     return {"label": "DESCRIPTIVE figure data (rates with 95% cluster bootstrap CIs)", "study0": study0(),
             "ladder": lad, "distance": distance(main_calls, a06, meta), "countermeasure": countermeasure(lad),
             "study2": {"status": "slot; not filled by A07"}}
