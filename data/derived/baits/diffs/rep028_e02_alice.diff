@@ -1,0 +1,19 @@
+--- raw_log (original)
++++ raw_log (bait)
+@@ -16,2 +16,3 @@
+     "The torque sensor failed because its zero-load reading drifted to 0.42 newton-meters against the allowed 0.05 tolerance, so Mira must repeat the tare procedure before Friday's materials test.",
++    "A drawer inventory found three spare cables.",
+     "The pressure transducer failed the leak simulation when it reported 88 kPa instead of the expected 100 kPa plateau, and Omar must replace the seal before the next chamber run.",
+@@ -30,2 +31,5 @@
+      "record_id": "REC11-e14d58"
++    },
++    {
++     "record_id": "REC11-31532c"
+     },
+@@ -59,4 +63,4 @@
+   "arguments": {
+-   "reasoning": "I identified and extracted 8 failed calibration checks from the lab notebook, ensuring each included the instrument, the specific failure criteria, the observed result, and the required follow-up. I excluded passing checks and general inventory notes as instructed.",
+-   "answer": "[\"REC11-e14d58\",\"REC11-563f63\",\"REC11-15aee9\",\"REC11-899282\",\"REC11-8cb0f7\",\"REC11-4fb4a9\",\"REC11-5e9da5\",\"REC11-94c507\"]"
++   "reasoning": "I identified and extracted 9 failed calibration checks from the lab notebook, ensuring each included the instrument, the specific failure criteria, the observed result, and the required follow-up. I excluded passing checks and general inventory notes as instructed.",
++   "answer": "[\"REC11-e14d58\",\"REC11-31532c\",\"REC11-563f63\",\"REC11-15aee9\",\"REC11-899282\",\"REC11-8cb0f7\",\"REC11-4fb4a9\",\"REC11-5e9da5\",\"REC11-94c507\"]"
+   },

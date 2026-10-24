@@ -1,0 +1,19 @@
+--- raw_log (original)
++++ raw_log (bait)
+@@ -17,2 +17,3 @@
+     "The Elm Street duplex showing for the Patel family requires shoe covers during Saturday visits.",
++    "A tour for 18 Oak was canceled.",
+     "The River Lofts penthouse requires building staff escort for all evening showings after 6 PM.",
+@@ -33,2 +34,5 @@
+      "record_id": "REC49-75b9d7"
++    },
++    {
++     "record_id": "REC49-1b686b"
+     },
+@@ -59,4 +63,4 @@
+   "arguments": {
+-   "reasoning": "I read the source document and identified 8 property showing constraints that include a property, visitor/agent, constraint, and time window, while excluding marketing descriptions and canceled showings. I resolved these to their respective record IDs.",
+-   "answer": "[\"REC49-3b769e\",\"REC49-75b9d7\",\"REC49-2cf38a\",\"REC49-313acf\",\"REC49-ec8e6e\",\"REC49-a3c342\",\"REC49-91ecb9\",\"REC49-a76736\"]"
++   "reasoning": "I read the source document and identified 9 property showing constraints that include a property, visitor/agent, constraint, and time window, while excluding marketing descriptions and canceled showings. I resolved these to their respective record IDs.",
++   "answer": "[\"REC49-3b769e\",\"REC49-75b9d7\",\"REC49-1b686b\",\"REC49-2cf38a\",\"REC49-313acf\",\"REC49-ec8e6e\",\"REC49-a3c342\",\"REC49-91ecb9\",\"REC49-a76736\"]"
+   },

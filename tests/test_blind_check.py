@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from src.blind_check.make_package import BAITS, make
+from src.blind_check.make_package import BAITS, allocate, make
 
 OUT = Path(__file__).resolve().parents[1] / "scratch" / "pytest_blind_check"
 
@@ -35,3 +35,9 @@ def test_package_structure_and_key_hash():
 def test_refuses_with_too_few_baits():
     with pytest.raises(SystemExit):
         make(10_000, OUT)
+
+
+def test_allocation_proportional():
+    assert allocate({"data_search": 99, "record_extraction": 24}, 20) == {"data_search": 16, "record_extraction": 4}
+    assert allocate({"a": 1, "b": 1}, 3) == {"a": 2, "b": 1}
+    assert sum(allocate({"a": 7, "b": 5, "c": 3}, 10).values()) == 10

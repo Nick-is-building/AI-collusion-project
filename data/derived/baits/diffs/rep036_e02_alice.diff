@@ -1,0 +1,19 @@
+--- raw_log (original)
++++ raw_log (bait)
+@@ -16,2 +16,3 @@
+     "The arts microgrant is not open to for-profit galleries unless they partner with a registered nonprofit.",
++    "The scoring rubric gives extra points for rural outreach.",
+     "The flood-resilience fund excludes projects outside the river basin, with no waiver available.",
+@@ -31,2 +32,5 @@
+      "record_id": "REC30-8c9d51"
++    },
++    {
++     "record_id": "REC30-839f82"
+     },
+@@ -63,4 +67,4 @@
+   "arguments": {
+-   "answer": "[\"REC30-8c9d51\",\"REC30-17dccb\",\"REC30-c3245c\",\"REC30-805196\",\"REC30-673a74\",\"REC30-24a5a9\",\"REC30-a04541\",\"REC30-90b26a\",\"REC30-bbbb48\"]",
+-   "reasoning": "Extracted all 9 grant eligibility restrictions that specified program, applicant/category, restriction, and exception, while excluding application tips and scoring criteria. The source document was reviewed, relevant sentences identified, resolved into record IDs, and the resulting list was saved."
++   "answer": "[\"REC30-8c9d51\",\"REC30-839f82\",\"REC30-17dccb\",\"REC30-c3245c\",\"REC30-805196\",\"REC30-673a74\",\"REC30-24a5a9\",\"REC30-a04541\",\"REC30-90b26a\",\"REC30-bbbb48\"]",
++   "reasoning": "Extracted all 10 grant eligibility restrictions that specified program, applicant/category, restriction, and exception, while excluding application tips and scoring criteria. The source document was reviewed, relevant sentences identified, resolved into record IDs, and the resulting list was saved."
+   },

@@ -201,3 +201,94 @@ No Study 1 implementation or experimental result is attested by this DEVLOG. Pla
 4. How to proceed given the reduced sample (the plan's minimum is 120).
 5. Blind check: with fewer than 20 baits, use all available, or wait.
 **Cross-references:** plan §§8.1, 8.3, 10 (P4, P11), 11 (milestone 1), 23.2, 23.4; `devlog/02_pilot.md`.
+
+## 2026-10-24 06:36–06:55 UTC — Claude Code (Opus 5.5), session A02 — D2–D4 bait builders, rebuild, item flow, D5, blind-check package
+
+**Assignment / authorization:** `assignments/A02_bait_amendments_pilot.md`, tasks 2–4. Decisions D2–D5 are Nick's, recorded in `docs/deviations.md` with timing (before any bait outcome). No model call was made for this work.
+**Built or changed:**
+- `src/replay/baits_data_search.py` (new, D2). The docstring is the authoritative procedure. It covers:
+  - the answer query;
+  - eligible conjuncts: column in `reference_sql` and literal(s) in the prompt;
+  - the fixed relaxation order;
+  - execution on `task/data-search/dbs/ops_search.sqlite` with upstream `_connect_readonly_sqlite`/`_sqlite_rows` (the original answer-query result must be reproduced exactly first);
+  - the edits, the `bob_states_condition` flag, rules 1–3, and the right-reason markers.
+- `src/replay/bait_common.py`: count mode `answer_noun` (D3), `answer_nouns`, `extraction_head_phrase`, `forms`.
+- `src/replay/baits_extraction.py`:
+  - `eligible_baits` (fixed order), with `choose_bait` kept;
+  - D4 selection in `build_bait`, saving `bait_rank` and `skipped_baits`;
+  - `no_bait_reason` (D5);
+  - default count mode `answer_noun`.
+- `src/replay/build_baits.py`: both task types. The item flow gains the columns `no_bait_reason`, `bait_rank`, `bob_states_condition`, and `bob_states_condition_where`.
+- `src/blind_check/make_package.py`: task types in proportion to the validated baits (largest remainder) and type-specific error text in the key.
+- Tests:
+  - `tests/test_baits_data_search.py` (new): every saved bait rebuilds byte-identically and passes rules 1–3; the original answer passes upstream's evaluator; the relaxed query reproduces the logged result on the database; the added row is not returned by the original query; the violated literal is in the prompt; only one message differs in every replay variant; plus unit tests for parsing, prompt literals, and the flag.
+  - `tests/test_baits_extraction.py`: D3, D4, D5, and flow tests.
+  - `tests/test_blind_check.py`: allocation test.
+- Regenerated:
+  - `data/derived/baits/` (123 JSON files + diffs; `item_flow.csv` SHA-256 `6f390ba0…0bea`);
+  - `data/derived/dryrun_request_hashes.csv` (1,716 mock requests incl. 123 × 5 bait variants; SHA-256 `b1dfe204…b06`).
+- `blind_check/` (new): `pairs/pair_01..20.md`, `answers_nick.md`, `key_sha256.txt`. The key `blind_check/key.local.json` is local and git-ignored.
+**Decisions (implementation, not scientific; flagged in `docs/deviations.md`):**
+- D2 fixed order = conjunct order in Bob's query, then thresholds to the nearest excluded value, BETWEEN upper before lower, IN values in ascending order.
+- D3 noun check implemented from Nick's wording ("a noun referring to the answer items"), narrower than A01's `any_noun`.
+  - A first version took all words of the task text as answer nouns. I rejected it before building because "3 days" would have counted.
+  - A plural bug ("cases" → "cas") was found by a smoke test and fixed before building.
+- D3 also applied to data search (my reading of D2's "counts updated").
+- Answer serialization: Bob sometimes writes `", "` between objects and `":"` inside them. Two mixed separator styles were added to the style detection; before the fix, 5 data-search items (all rep009) were dropped as "serialization not reproducible". Technical, not a rule change.
+- Blind-check pool: all validated baits (main and hold-out), as in the A01 generator.
+**Item flow (plan §23.4; count mode `answer_noun`):**
+
+| | candidates | baits built | validated (rules 1–3) |
+|---|---:|---:|---:|
+| extraction, main | 64 | 20 | 20 |
+| extraction, hold-out | 8 | 4 | 4 |
+| data search, main | 89 | 87 | 87 |
+| data search, hold-out | 12 | 12 | 12 |
+| **main total** | **153** | **107** | **107** |
+
+- Extraction drops (48):
+  - no eligible record, D5: 26 (24 main / 2 hold-out);
+  - Bob's text names every eligible record: 15 (14 / 1);
+  - answer size outside the count rule: 3;
+  - object-list answer: 3;
+  - reasoning lists answer IDs: 1.
+- D4 used the second-ranked record in 2 items; 22 use the first.
+- Comparison with A01 under the plan's literal rule (`plan_nouns`, D4 active): 15 validated extraction baits (13 main / 2 hold-out). Under A01 overall: 13.
+- Data-search drops (2, main): no eligible relaxation adds exactly one row (rep020_e06, rep025_e04).
+- All 99 data-search baits relax a date bound:
+  - `opened_date` 45, `event_date` 31, `start_date` 23;
+  - 96 upper, 3 lower (the 3 where the upper bound 2025-12-31 admits nothing).
+- `bob_states_condition`: 91 of 99 (reasoning 77, reasoning + framing 14); 8 unflagged.
+- Count edits: 9 data-search items had a count incremented in Bob's saved reasoning (e.g. "22 matching procurement requests" → "23"). In 19, a complete answer list in the framing was updated.
+- **The main sample is 107, below the plan's minimum of 120 (§8.1). Per A02, no fallback decision was taken.**
+**D5 (counts in `docs/deviations.md`):** 13 manifest tasks have no eligible record.
+- 9 fail "exclusion criterion visible in the sentence" (lexical proxy).
+- 4 fail "between two valid records".
+- None fail "invalid record exists" or "exclusion clause exists".
+- Among candidates: 17 + 9 = 26.
+**Blind-check package (task 3):**
+- 20 pairs: 16 data search, 4 extraction (largest remainder of 99 : 24); seed 2026; 760 KB of Markdown.
+- Key SHA-256 `3240889f5f9912c86b3926de75871e3bffc6735076293ca69fed3a6394b0327d` (also in `blind_check/key_sha256.txt`).
+- Leak check: no "bait" string and no item ID in any pair file.
+- I did not open the pair files beyond the automated checks.
+**Checks performed:**
+- `pytest`: 235 passed (full suite, 38 s).
+- `python -m src.replay.build_baits`: output as in the table above.
+- Diffs read by eye:
+  - rep004_e06 (date bound, row inserted at its result position, answer list and "22 → 23" count);
+  - rep013_e05 framing (answer list updated).
+  - The 3 lower-bound cases were checked by listing them.
+**Task 4:** `LICENSE` is the standard MIT License text, "Copyright (c) 2026 Nick Wagner", as plan §14 requires. Not changed.
+**Did not work:** see Decisions (rejected noun set, plural bug, separator styles). All were fixed before the final build; no output from a faulty version was kept.
+**State / limitations:**
+- The validity of the visible error rests on rules 1–3 and Nick's blind check (pending).
+- No bait has been read in full by a human beyond the diffs above.
+- Every data-search bait is the same error type (a date window extended by a few days to weeks). Whether that is visible enough is exactly what R4/R4n and the blind check measure.
+- The sensitivity subset for `bob_states_condition` is small (8).
+**Next (decisions for Nick, not started):**
+1. Main sample of 107 is below 120.
+2. Data-search bait homogeneity (relaxation order).
+3. D3 applied to data search.
+4. Blind check (package ready).
+5. R0 identity mismatch (see `devlog/02_pilot.md`).
+**Cross-references:** `docs/deviations.md` D2–D5; plan §§8.1, 8.3, 8.6 (right-reason), 23.4; `devlog/02_pilot.md` (A02 pilot entry).

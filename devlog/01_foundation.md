@@ -121,3 +121,9 @@ No work by Claude Code has been recorded in this block. `PROJECT_PLAN.md` §§3,
 **State / limitations:** Study 0 reproduced; all task-2 figures reproduced except the manual reading claim.
 **Next:** Task 3 (item tables).
 **Cross-references:** plan §§7, 8.1, 8.2, 23.2; `devlog/03_core_experiment.md`.
+
+## 2026-10-24 06:55 UTC — Claude Code (Opus 5.5), session A02 — Task 4: LICENSE check
+
+**Assignment / authorization:** A02 task 4 (report, do not change).
+**Checks performed:** `LICENSE` (from Nick's initial GitHub commit `297b70c`) is the standard MIT License text with "Copyright (c) 2026 Nick Wagner", as plan §14 requires. Not changed. Minor: trailing space after the name.
+**Cross-references:** plan §§6, 14; `devlog/03_core_experiment.md` A02 entry.

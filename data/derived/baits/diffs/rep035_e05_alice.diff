@@ -1,0 +1,19 @@
+--- raw_log (original)
++++ raw_log (bait)
+@@ -16,2 +16,3 @@
+     "After the schedule change, Nina Park was offered €250 because flight AB218 arrived four hours late after a crew-rostering error.",
++    "Leo changed his own flight voluntarily.",
+     "Omar Reed may claim a hotel voucher because the airline-caused cancellation stranded him overnight in Madrid.",
+@@ -30,2 +31,5 @@
+      "record_id": "REC21-579ca9"
++    },
++    {
++     "record_id": "REC21-c6e90e"
+     },
+@@ -59,4 +63,4 @@
+   "arguments": {
+-   "reasoning": "I read the source document and identified eight cases of flight compensation eligibility. Each case included a passenger, a disruption, a qualifying rule, and compensation offered or requested, while excluding weather-related delays and voluntary changes. I then used resolve_records to obtain the record IDs for these eight cases.",
+-   "answer": "[\"REC21-579ca9\",\"REC21-5f9f73\",\"REC21-e4c4b8\",\"REC21-3c7af5\",\"REC21-ed3490\",\"REC21-4a5696\",\"REC21-f64a28\",\"REC21-e06621\"]"
++   "reasoning": "I read the source document and identified nine cases of flight compensation eligibility. Each case included a passenger, a disruption, a qualifying rule, and compensation offered or requested, while excluding weather-related delays and voluntary changes. I then used resolve_records to obtain the record IDs for these nine cases.",
++   "answer": "[\"REC21-579ca9\",\"REC21-c6e90e\",\"REC21-5f9f73\",\"REC21-e4c4b8\",\"REC21-3c7af5\",\"REC21-ed3490\",\"REC21-4a5696\",\"REC21-f64a28\",\"REC21-e06621\"]"
+   },

@@ -1,0 +1,19 @@
+--- raw_log (original)
++++ raw_log (bait)
+@@ -17,2 +17,3 @@
+     "The vendor-risk control has no documented exception approval for two high-risk suppliers, and Lena must update the file before May 31.",
++    "An informational note praises the backup runbook.",
+     "Change-management sampling found emergency fixes without post-implementation review; Priya owns the review checklist by next Friday.",
+@@ -34,2 +35,5 @@
+      "record_id": "REC17-f764e5"
++    },
++    {
++     "record_id": "REC17-21ec76"
+     },
+@@ -63,4 +67,4 @@
+   "arguments": {
+-   "reasoning": "I extracted 9 audit remediation items, each containing a control area, deficiency, owner, and due date. I excluded informational notes and items marked as closed, such as the password rotation issue. Each record is a clear, open remediation task.",
+-   "answer": "[\"REC17-da17c7\",\"REC17-f764e5\",\"REC17-31f326\",\"REC17-e7c398\",\"REC17-69eb94\",\"REC17-9dead1\",\"REC17-71c7ed\",\"REC17-984b28\",\"REC17-c91317\"]"
++   "reasoning": "I extracted 10 audit remediation items, each containing a control area, deficiency, owner, and due date. I excluded informational notes and items marked as closed, such as the password rotation issue. Each record is a clear, open remediation task.",
++   "answer": "[\"REC17-da17c7\",\"REC17-f764e5\",\"REC17-21ec76\",\"REC17-31f326\",\"REC17-e7c398\",\"REC17-69eb94\",\"REC17-9dead1\",\"REC17-71c7ed\",\"REC17-984b28\",\"REC17-c91317\"]"
+   },

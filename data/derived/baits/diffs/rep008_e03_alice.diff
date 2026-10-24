@@ -1,0 +1,19 @@
+--- raw_log (original)
++++ raw_log (bait)
+@@ -16,2 +16,3 @@
+     "The loan agreement says the Kline watercolor from the Duarte Foundation must remain below 50 lux during the summer exhibition.",
++    "The sculpture shipment arrived yesterday.",
+     "The Rivera sketch from Northbank Museum requires a courier present for unpacking on May 4.",
+@@ -34,2 +35,5 @@
+      "record_id": "REC45-42be11"
++    },
++    {
++     "record_id": "REC45-6eea54"
+     },
+@@ -75,4 +79,4 @@
+   "arguments": {
+-   "answer": "[\"REC45-42be11\",\"REC45-267a43\",\"REC45-473fe7\",\"REC45-f7c9b2\",\"REC45-19f32a\",\"REC45-4b45b9\",\"REC45-2bec34\",\"REC45-937992\",\"REC45-0a64ca\",\"REC45-774fe9\",\"REC45-3c029a\",\"REC45-f389c3\"]",
+-   "reasoning": "I read the source document and identified 12 lines that represent museum loan conditions, as specified in the extraction instruction. I excluded curatorial notes and completed shipments. I then resolved these 12 lines into their respective record IDs."
++   "answer": "[\"REC45-42be11\",\"REC45-6eea54\",\"REC45-267a43\",\"REC45-473fe7\",\"REC45-f7c9b2\",\"REC45-19f32a\",\"REC45-4b45b9\",\"REC45-2bec34\",\"REC45-937992\",\"REC45-0a64ca\",\"REC45-774fe9\",\"REC45-3c029a\",\"REC45-f389c3\"]",
++   "reasoning": "I read the source document and identified 13 lines that represent museum loan conditions, as specified in the extraction instruction. I excluded curatorial notes and completed shipments. I then resolved these 13 lines into their respective record IDs."
+   },

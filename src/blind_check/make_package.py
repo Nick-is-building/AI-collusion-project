@@ -1,7 +1,10 @@
 """Blind bait check package for Nick (PROJECT_PLAN.md section 8.3, rule 4; A01 task 7).
 
-Draws N random items with a validated bait (seed SEED, numpy default_rng; draw order: item sample,
-then one shuffle per pair) and writes, per pair, one Markdown file with only
+Draws N random items with a validated bait, task types in proportion to the validated baits
+(assignment A02: largest-remainder allocation of N over the task types; all validated baits, main
+list and pilot hold-out). Seed SEED, numpy default_rng; draw order: per task type in sorted order
+one sample without replacement from that type's items sorted by item_id; then one permutation of the
+pair order; then one A/B coin per pair. Writes, per pair, one Markdown file with only
   - Bob's task information (the "### Bob's Task information" section of Alice's communication-phase
     prompt), and
   - the transmitted raw log of both versions (pretty-printed JSON, identical formatting),
@@ -42,14 +45,32 @@ def pretty(raw: str) -> str:
     return json.dumps(json.loads(raw), indent=2, ensure_ascii=False)
 
 
+def allocate(counts: dict, n: int) -> dict:
+    """Largest-remainder allocation of n over the types (ties by type name)."""
+    total = sum(counts.values())
+    quota = {t: n * c / total for t, c in counts.items()}
+    alloc = {t: int(q) for t, q in quota.items()}
+    for t in sorted(quota, key=lambda t: (-(quota[t] - alloc[t]), t))[:n - sum(alloc.values())]:
+        alloc[t] += 1
+    return alloc
+
+
 def make(n: int, out: Path, seed: int = SEED, baits_dir: Path = BAITS) -> dict:
     recs = [json.loads(p.read_text()) for p in sorted(baits_dir.glob("*.json"))]
     if len(recs) < n:
         raise SystemExit(f"blocked: {len(recs)} validated baits, {n} pairs required")
     rng = np.random.default_rng(seed)
-    chosen = [recs[i] for i in sorted(rng.choice(len(recs), size=n, replace=False))]
+    by_type: dict = {}
+    for r in recs:
+        by_type.setdefault(r["task_type"], []).append(r)
+    alloc = allocate({t: len(v) for t, v in by_type.items()}, n)
+    chosen = []
+    for t in sorted(by_type):
+        items = sorted(by_type[t], key=lambda r: r["item_id"])
+        chosen += [items[i] for i in sorted(rng.choice(len(items), size=alloc[t], replace=False))]
+    chosen = [chosen[i] for i in rng.permutation(len(chosen))]
     (out / "pairs").mkdir(parents=True, exist_ok=True)
-    key, form = {"seed": seed, "n": n, "pairs": {}}, ["# Blind bait check — answers (Nick)\n",
+    key, form = {"seed": seed, "n": n, "allocation": alloc, "pairs": {}}, ["# Blind bait check — answers (Nick)\n",
         "For each pair: which version (A or B) contains the planted error, and what the error is.\n"]
     for k, rec in enumerate(chosen, 1):
         from src.replay.traces import episode_bounds, get_log_raw, load_trace
@@ -66,15 +87,20 @@ def make(n: int, out: Path, seed: int = SEED, baits_dir: Path = BAITS) -> dict:
             f"# {pid}\n\n## Task information\n\n{task_information(rec['trace'], rec['ep_index'])}\n\n"
             f"## Version A — transmitted log\n\n```json\n{pretty(a)}\n```\n\n"
             f"## Version B — transmitted log\n\n```json\n{pretty(b)}\n```\n")
-        key["pairs"][pid] = {"item_id": rec["item_id"], "bait_version": "A" if bait_is_a else "B",
-                             "bait_id": rec["bait_id"], "bait_sentence": rec["bait_sentence"]}
+        key["pairs"][pid] = {"item_id": rec["item_id"], "task_type": rec["task_type"],
+                             "bait_version": "A" if bait_is_a else "B", "bait_id": rec["bait_id"]}
+        if rec["task_type"] == "record_extraction":
+            key["pairs"][pid]["error"] = f"invalid record added: {rec['bait_sentence']}"
+        else:
+            key["pairs"][pid]["error"] = (f"query condition relaxed: {rec['original_condition']} -> "
+                                          f"{rec['relaxed_condition']}; extra row {rec['added_key']}")
         form.append(f"\n## {pid}\n\n- Bait version (A/B):\n- The error:\n")
     (out / "answers_nick.md").write_text("".join(form))
     key_bytes = json.dumps(key, indent=1, ensure_ascii=False).encode()
     (out / "key.local.json").write_bytes(key_bytes)
     digest = hashlib.sha256(key_bytes).hexdigest()
     (out / "key_sha256.txt").write_text(f"{digest}  key.local.json\n")
-    return {"n": n, "key_sha256": digest}
+    return {"n": n, "allocation": alloc, "key_sha256": digest}
 
 
 def main():

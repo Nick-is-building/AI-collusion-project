@@ -7,6 +7,10 @@ Bait choice per task (deterministic):
   exclusion clause (text after "Exclude"/"exclude") that is not also in the inclusion part of the
   instruction. Highest overlap wins; ties go to the earliest in source order. Tasks without such a
   record get no bait. All chosen baits were read against their instruction (devlog 03, task-6 entry).
+  D4 (A02): the eligible records are tried in this order (`eligible_baits`); one named in Bob's visible
+  text (saved reasoning, round-1 framing) is skipped; the item is dropped only if all are skipped.
+  D5: `no_bait_reason` reports the first failing condition for a task without an eligible record.
+  Counts: D3 rule (count mode "answer_noun", bait_common).
 
 Edits (every occurrence of Bob's answer in Alice's verdict-time context, which is Bob's round-1
 message only):
@@ -37,7 +41,8 @@ from experiments.evaluation import evaluate_extraction_artifact
 from experiments.protocol.messaging import _format_private_raw_log
 from experiments.protocol.records import _record_index
 
-from src.replay.bait_common import Ambiguous, increment_counts, pretty_log, stray_counts, unified_diff
+from src.replay.bait_common import (Ambiguous, answer_nouns, extraction_head_phrase, increment_counts, pretty_log,
+                                    stray_counts, unified_diff)
 from src.replay.traces import episode_bounds, get_log_raw, load_trace
 from src.replay.variants import load_item
 
@@ -69,25 +74,59 @@ def source_lines(task_id: str) -> list[tuple[str, str]]:
     return out
 
 
-def choose_bait(task_id: str):
-    """(bait_id, sentence, overlap words) or None."""
+def eligible_baits(task_id: str) -> list:
+    """All eligible bait records [(bait_id, sentence, overlap words)] in the fixed order: highest
+    overlap with the exclusion clause first, ties by source order (A01 rule; D4 takes the first one
+    that Bob's visible text does not name or contradict)."""
     t = manifest()[task_id]
     ins = t["extraction_instruction"]
     m = re.search(r"\b[Ee]xclude\b(.*)$", ins)
     if not m:
-        return None
+        return []
     excl = _words(m.group(1)) - _words(ins[:m.start()])
     ref = {r["id"] for r in t["reference_items"]}
     inv = set(t["invalid_item_markers"])
     lines = source_lines(task_id)
-    best = None
+    out = []
     for i in range(1, len(lines) - 1):
         rid, sent = lines[i]
         if rid in inv and lines[i - 1][0] in ref and lines[i + 1][0] in ref:
             ov = _words(sent) & excl
-            if ov and (best is None or len(ov) > len(best[2])):
-                best = (rid, sent, sorted(ov))
-    return best
+            if ov:
+                out.append((-len(ov), i, (rid, sent, sorted(ov))))
+    return [x[2] for x in sorted(out)]
+
+
+def choose_bait(task_id: str):
+    """First eligible bait record (A01 rule) or None."""
+    e = eligible_baits(task_id)
+    return e[0] if e else None
+
+
+NO_BAIT_REASONS = ("no exclusion clause in the instruction", "no invalid record in the source",
+                   "no invalid record directly between two valid records",
+                   "exclusion criterion not visible in the sentence (no lexical overlap)")
+
+
+def no_bait_reason(task_id: str) -> str | None:
+    """D5: the first plan 8.3 condition that fails for a task without an eligible record (None if a
+    record is eligible). Conditions checked in this order: exclusion clause exists; invalid record
+    exists in the source; one lies directly between two valid records; its sentence shares a content
+    word with the exclusion clause (the A01 lexical proxy for "visibly meets an exclusion criterion")."""
+    if eligible_baits(task_id):
+        return None
+    t = manifest()[task_id]
+    if not re.search(r"\b[Ee]xclude\b", t["extraction_instruction"]):
+        return NO_BAIT_REASONS[0]
+    lines = source_lines(task_id)
+    inv = set(t["invalid_item_markers"])
+    ref = {r["id"] for r in t["reference_items"]}
+    if not any(rid in inv for rid, _ in lines):
+        return NO_BAIT_REASONS[1]
+    if not any(lines[i][0] in inv and lines[i - 1][0] in ref and lines[i + 1][0] in ref
+               for i in range(1, len(lines) - 1)):
+        return NO_BAIT_REASONS[2]
+    return NO_BAIT_REASONS[3]
 
 
 def _bait_markers(task_id: str, bait_id: str) -> tuple[set, set]:
@@ -135,23 +174,44 @@ def _insert_pos(ids: list, bait_pos: int, pos: dict) -> int:
     return sum(o < bait_pos for o in order)
 
 
-def build_bait(trace: str, ep_index: int, count_mode: str = "plan_nouns") -> dict:
-    """Bait version of one candidate. Raises Ambiguous if the item must be dropped."""
+def build_bait(trace: str, ep_index: int, count_mode: str = "answer_noun") -> dict:
+    """Bait version of one candidate. Raises Ambiguous if the item must be dropped.
+
+    D4: the eligible records are tried in the fixed order; a record whose ID or distinctive words
+    appear in Bob's visible text (his saved reasoning or his round-1 framing) is skipped. The item is
+    dropped only if every eligible record is skipped. All other checks are item-level."""
     t = load_trace(trace)
     P = t["results"][ep_index]["agents"]["bob"]
     task_id = P["task_id"]
-    choice = choose_bait(task_id)
+    eligible = eligible_baits(task_id)
+    if not eligible:
+        raise Ambiguous(f"no bait record for {task_id}: {no_bait_reason(task_id)}")
+    nouns = answer_nouns(extraction_head_phrase(manifest()[task_id]["extraction_instruction"]))
+    ps, pe = episode_bounds(t, ep_index, "bob")
+    raw = get_log_raw(P["messages"], ps, pe)
+    log = json.loads(raw)
+    ctx = load_item(trace, ep_index)
+    msg = ctx.messages[ctx.cut_idx]["content"]
+    if msg.count(raw) != 1:
+        raise Ambiguous("raw log not exactly once in Bob's message")
+    bob_text = " ".join([str(e["arguments"].get("reasoning", "")) for e in log if e["tool"] == "save_final_answer"]
+                        + msg.split(raw))
+    skipped, choice = [], None
+    for cand in eligible:
+        hits = _mentions_bait(bob_text, cand[0], _bait_markers(task_id, cand[0]))
+        if hits:
+            skipped.append({"bait_id": cand[0], "hits": hits})
+        else:
+            choice = cand
+            break
     if choice is None:
-        raise Ambiguous(f"no bait record for {task_id}")
+        raise Ambiguous(f"Bob's text names every eligible bait record {skipped}")
     bait_id, bait_sent, overlap = choice
     lines = source_lines(task_id)
     pos = {rid: i for i, (rid, _) in enumerate(lines)}
     sent2id = {s: rid for rid, s in lines}
     bpos = pos[bait_id]
 
-    ps, pe = episode_bounds(t, ep_index, "bob")
-    raw = get_log_raw(P["messages"], ps, pe)
-    log = json.loads(raw)
     dwords = _bait_markers(task_id, bait_id)
     final_ids = json.loads([e for e in log if e["tool"] == "save_final_answer"][-1]["arguments"]["answer"]) \
         if any(e["tool"] == "save_final_answer" for e in log) else []
@@ -163,7 +223,7 @@ def build_bait(trace: str, ep_index: int, count_mode: str = "plan_nouns") -> dic
                 raise Ambiguous(f"Bob's saved reasoning refers to the bait record {hits}")
             if any(isinstance(x, str) and x in reasoning for x in final_ids):
                 raise Ambiguous("Bob's saved reasoning lists answer IDs")
-            stray = stray_counts(reasoning, len(final_ids), count_mode)
+            stray = stray_counts(reasoning, len(final_ids), count_mode, nouns)
             if stray:
                 raise Ambiguous(f"answer size appears in reasoning outside the count rule {stray}")
     if _format_private_raw_log({"private_raw_log": log}) != raw:
@@ -196,14 +256,10 @@ def build_bait(trace: str, ep_index: int, count_mode: str = "plan_nouns") -> dic
                 raise Ambiguous("answer serialization not reproducible")
             ans.insert(k, bait_id)
             a["answer"] = json.dumps(ans, separators=seps[0], ensure_ascii=False)
-            a["reasoning"], ch = increment_counts(a["reasoning"], len(ans) - 1, count_mode)
+            a["reasoning"], ch = increment_counts(a["reasoning"], len(ans) - 1, count_mode, nouns)
             edits.append(f"save_final_answer seq {e['seq']}: inserted at position {k}; counts {ch}")
     new_raw = _format_private_raw_log({"private_raw_log": new_log})
 
-    ctx = load_item(trace, ep_index)
-    msg = ctx.messages[ctx.cut_idx]["content"]
-    if msg.count(raw) != 1:
-        raise Ambiguous("raw log not exactly once in Bob's message")
     head, tail = msg.split(raw)
     hits = _mentions_bait(head + " " + tail, bait_id, dwords)
     if hits:
@@ -230,10 +286,10 @@ def build_bait(trace: str, ep_index: int, count_mode: str = "plan_nouns") -> dic
             raise Ambiguous("framing mentions answer IDs outside a complete answer list")
         if any(dict(lines)[rid][:40] in check for rid in final_answer):
             raise Ambiguous("framing quotes an answer sentence")
-        stray = stray_counts(check, n, count_mode)
+        stray = stray_counts(check, n, count_mode, nouns)
         if stray:
             raise Ambiguous(f"answer size appears in framing outside the count rule {stray}")
-        part, ch = increment_counts(part, n, count_mode)
+        part, ch = increment_counts(part, n, count_mode, nouns)
         if ch:
             edits.append(f"framing counts {ch}")
         new_parts.append(part)
@@ -243,6 +299,7 @@ def build_bait(trace: str, ep_index: int, count_mode: str = "plan_nouns") -> dic
     ev = evaluate_extraction_artifact(task, {"extraction_artifact": {
         "answer": [e for e in new_log if e["tool"] == "save_final_answer"][-1]["arguments"]["answer"]}})
     return dict(task_id=task_id, bait_id=bait_id, bait_sentence=bait_sent, overlap_words=overlap,
+                bait_rank=len(skipped), skipped_baits=skipped,
                 answer_size=n, bob_r1_content=new_msg, new_raw_log=new_raw, original_raw_log=raw,
                 original_bob_r1_content=msg, edits=edits, evaluator=ev)
 
