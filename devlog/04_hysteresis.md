@@ -157,3 +157,14 @@ No Study 2 work or result is recorded here. Its inclusion in the plan does not a
 **Scheduling note (inferred from the frozen priority B, PC, prefix, C′, A′):** all 50 prefixes launch before any C′ or A′. The first complete sequence will therefore arrive after roughly 60–75 min, not about 20 min. Workers stay at 8 until that sequence has been read by hand (A05 task 5). I did not change the frozen scheduler (it would be a post-tag change). Cost: wall time only, not content.
 **Built:** `scripts/study2/watch.py`: operational watcher; it exits on errors, 429s, a model change, STOP, a failed attempt, scheduler end, or completion of a given sequence. It reads only what the monitor reads.
 **Next:** hand-read sequence 1 (operational: contexts, messages and status line look as designed; no rate computed), then ramp to 16 and 32 workers only while 429s stay at zero (D23).
+
+## 2026-10-24 13:25–13:35 UTC — Claude Code (Opus 5.5), session A05 — Nick's answers recorded (D27); export of the committed record
+
+**Assignment / authorization:** Nick's answers in the session (verbatim in `docs/deviations.md` D27): H7 confirmed as preregistered; do not commit the 1 GB raw run but derived per-call tables, file hashes and a manifest (HF dataset later, separate assignment); quoted status lines acceptable, with their frequency reported.
+**Built or changed:**
+- `docs/deviations.md` D27.
+- `PREREGISTRATION_STUDY2.md` §10, a post-tag record. The tag keeps the original text.
+- `scripts/study2/export.py`: writes `manifest.csv`, `files_sha256.txt`, `calls.csv.gz` per group, with operational fields only. Tested on the mock interrupt-check output: 11 runs, 1,005 calls, 44 files hashed.
+- `.gitignore`: main-run journals, Bob caches and any `run.json.gz` stay local.
+**State:** the main run continues at 8 workers. The export runs after the run completes (and can be rerun at any time).
+**Next:** hand-read sequence 1, then ramp up.

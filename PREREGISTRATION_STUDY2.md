@@ -143,3 +143,8 @@ SHA-256 of the committed files at commit `62662d4`, the commit before this file'
 | `scripts/study2/launch.py` | `784ffeb2b7bbc7ec536bfb1e24a090399f54be865cdad02a757959025c366dd4` |
 | `scripts/study2/fix_n.py` | `51cc194995af96126b693a0c114e185299228165a52edac9e3c2efd594401f07` |
 | `results/summaries/study2_n.json` | `00ba50141e639364975458b7fd1e4b075fe47434c2b7cb1fb89eb59e6857338e` |
+
+## 10. Post-tag record (added after tag `prereg-study2`; the tagged text above is unchanged in the tag)
+
+- **24 October 2026, about 13:25 UTC, after the main-run launch and before any Study 2 outcome was computed or read:** Nick confirmed the H7 test exactly as preregistered in §4 (paired t-test PC − B on Alice's strict_full, episodes 6–8, two-sided, plus sequence bootstrap). The "pending" note in §4 is resolved without change.
+- On the same occasion: quoted status lines in later messages are acceptable, and their frequency is reported. The main run's full traces stay on the machine; git holds the derived per-call table, the file hashes and the manifest (D27, `docs/deviations.md`).

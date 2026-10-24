@@ -364,3 +364,16 @@ Plan §13 (5 retries) unchanged, as confirmed in A02. The runner overrides upstr
 - **Exploratory, labeled as such:**
   - an equivalence reading of the preregistered contrasts with margin ±0.10 (as for R5);
   - right-reason detection by Claude Code reading, next to the deterministic markers, with the P11 discrepancy (22 of 32 deterministic) disclosed.
+
+## D27 — Study 2: Nick's answers after the tag (H7 test, raw-run storage, quoted status lines)
+
+- **Date / approval:** 24 October 2026, Nick Wagner, in the A05 Claude Code session, received at about 13:25 UTC. This was after tag `prereg-study2` (`c6ab3de`) and after the main-run launch (13:16:50 UTC), but before any Study 2 outcome was computed or read (none has been).
+- **Decisions (verbatim):** "(1) H7 test confirmed as you preregistered it: paired t-test PC − B on Alice's strict_full, episodes 6–8, two-sided, plus sequence bootstrap. (2) Do not commit the full 1 GB raw run to git. Commit derived per-call tables, per-sequence file hashes, and a manifest; keep the full traces on the machine; they will be uploaded as a Hugging Face dataset before submission (separate assignment). (3) Quoted status lines: acceptable; report how often it happens."
+- **Consequences:**
+  1. The H7 procedure in `PREREGISTRATION_STUDY2.md` §4 is confirmed unchanged. It is no longer "pending".
+  2. Storage deviates from CLAUDE.md's rule that raw run evidence is committed. For the main run, git holds:
+     - `results/study2/main/manifest.csv`, `files_sha256.txt` (SHA-256 and size of every raw file) and `calls.csv.gz` (derived per-call table), all from `scripts/study2/export.py`;
+     - `scheduler.jsonl`, `runs.csv`, and each run's `study2_meta.json`.
+
+     The full traces (`run.json`, `llm_usage.jsonl`, controlled-Bob caches) stay on the machine (`.gitignore`). The P8 evidence was already committed in full (gzipped, about 20 MB, `62662d4`) and stays in history.
+  3. The status-line check keeps counting quoted lines (`mentions_beyond_opening`) without failing, and the count is reported.

@@ -21,3 +21,8 @@ scratch/
 results/study2/**/run.json
 results/study2/**/run.json.tmp
 results/study2/STOP
+# Study 2 main run (D27): full traces stay local (HF dataset later); committed: manifest.csv,
+# files_sha256.txt, calls.csv.gz, scheduler.jsonl, runs.csv, study2_meta.json
+results/study2/main/**/llm_usage.jsonl
+results/study2/main/**/bob_cache/
+results/study2/main/**/run.json.gz
