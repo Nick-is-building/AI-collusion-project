@@ -1,0 +1,14 @@
+# Model routes and request parameters (PROJECT_PLAN.md sections 2.1, 6, 8.5).
+# Gemini parameters equal Shi et al.'s run_config.llm_request_parameters in every trace.
+primary:
+  route: gemini/gemini-3.1-flash-lite
+  temperature: 1.0
+  max_output_tokens: 64000
+  reasoning_effort: high
+optional_availability_only:
+  route: gemini/gemini-3.7-flash       # P1 availability call only; no documented price
+haiku:
+  route: anthropic/claude-haiku-5-5     # checked in P6 (not prepared in A01)
+litellm_version: "1.94.1"
+verdict_attempts: 3                     # upstream VERDICT_ATTEMPTS
+api_max_retries: 5                      # plan section 13 (upstream LLM_MAX_RETRIES = 20 is overridden)

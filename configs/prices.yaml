@@ -1,0 +1,20 @@
+# USD per 1M tokens. Source: PROJECT_PLAN.md section 6 (official pricing pages checked 23 Oct 2026).
+# The cost tracker uses this table, not LiteLLM's cost map.
+models:
+  gemini/gemini-3.1-flash-lite:
+    documented: true
+    tiers:
+      - {max_prompt_tokens: null, input: 0.25, cached_input: 0.025, output: 1.50}   # output includes thinking
+  anthropic/claude-haiku-5-5:
+    documented: true
+    tiers:
+      - {max_prompt_tokens: 100000, input: 0.10, cached_input: 0.01, output: 0.50}
+      - {max_prompt_tokens: null, input: 0.50, cached_input: 0.05, output: 2.50}
+  gemini/gemini-3.7-flash:
+    # NOT A DOCUMENTED PRICE. The model is no longer on the pricing page (plan 8.5).
+    # Fail closed: the runner refuses calls to an undocumented model unless the caller passes
+    # allow_undocumented_price (P1 availability call only). This conservative placeholder
+    # (10x Flash-Lite) is used only to charge that single call against the caps.
+    documented: false
+    tiers:
+      - {max_prompt_tokens: null, input: 2.50, cached_input: 0.25, output: 15.00}
