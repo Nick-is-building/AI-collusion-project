@@ -1,41 +1,38 @@
-"""P11 effect check (plan section 10; scheduling only, never confirmatory): R1 and R4 on the bait
-versions of all pilot hold-out items (20) = 40 calls.
+"""P11 effect check (plan section 10; A03 task 4; scheduling only, never confirmatory): R1 and R4 on the
+bait versions of all hold-out items with a validated bait (16 of 20) = 32 calls.
 
-Bait content is read from data/derived/baits/<item_id>.json (field "bob_r1_content", task 6).
-Items without a bait file are reported; if none exists the check is blocked (plan printed only).
+Report (A03): aggregated detection rates only (share of REJECT on bait versions, R1 and R4, overall).
+Its result may only change the schedule and the focus of the writing (plan 10).
 
-  .venv/bin/python -m scripts.pilot.p11_effect_check [--plan]
+  .venv/bin/python -m scripts.pilot.p11_effect_check [--plan] [--live --approved-stage pilot] [--workers N]
 """
-from scripts.pilot.common import execute, holdout, load_bait, make_job, parser
+from scripts.pilot.common import execute_parallel, parser, read_calls
+from src.runner.item_lists import holdout_items
+from src.runner.jobs import make_job
 
 
 def jobs():
-    out, missing = [], []
-    for r in holdout().itertuples():
-        b = load_bait(r.item_id)
-        if b is None:
-            missing.append(r.item_id)
-            continue
-        out += [make_job("P11", r, v, version="bait", bob_r1_content=b) for v in ("R1", "R4")]
-    return out, missing
+    return [make_job("P11", r, v, "bait") for r in holdout_items().itertuples() for v in ("R1", "R4")]
 
 
-def planned_jobs():
-    """The 40 jobs as they will be, with correct-version content (for projection only)."""
-    return [make_job("P11", r, v, version="bait") for r in holdout().itertuples() for v in ("R1", "R4")]
+def evaluate(paths):
+    calls = [c for p in paths for c in read_calls(p) if c["check"] == "P11"]
+    out = {"calls": len(calls), "missing": sum(c["verdict_status"] != "ok" for c in calls)}
+    for v in ("R1", "R4"):
+        ys = [c["verdict"] == "reject" for c in calls if c["variant"] == v and c["verdict_status"] == "ok"]
+        out[f"detection_{v}"] = (sum(ys) / len(ys)) if ys else None
+        out[f"n_{v}"] = len(ys)
+    return out
 
 
 def main(argv=None):
-    args = parser("P11 effect check").parse_args(argv)
-    js, missing = jobs()
-    if missing:
-        print(f"P11: baits missing for {len(missing)} of {len(holdout())} hold-out items")
-    if not js:
-        print("P11: blocked: baits not built")
-        from scripts.pilot.common import report_plan
-        report_plan("P11 effect check (projected, baits not built)", planned_jobs())
-        return None
-    return execute("P11 effect check", js, args)
+    ap = parser("P11 effect check")
+    ap.add_argument("--workers", type=int, default=1)
+    args = ap.parse_args(argv)
+    stats = execute_parallel("P11 effect check", "scripts.pilot.p11_effect_check:jobs", jobs(), args)
+    if stats:
+        print("P11 (aggregated only):", evaluate([s["run_path"] for s in stats]))
+    return stats
 
 
 if __name__ == "__main__":

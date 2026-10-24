@@ -213,3 +213,37 @@ Plan §13 (5 retries) unchanged, as confirmed in A02. The runner overrides upstr
 
 - D3 as implemented in A02 (narrow noun rule, also applied to data search) is confirmed by Nick.
 - The countTokens endpoint (free) is authorized for the R0 bisection and for R5 filler matching (`src/replay/token_count.py`).
+
+## D8 addendum — expected precision with the analysis code (simulation)
+
+- Simulation (`src/analysis/simulate.py`, clearly synthetic) with the real main-list structure: 109 items in 43 trajectories, two draws for R1-bait and R4-bait, logistic model with trajectory and item random effects (SD 0.5 or 1.0), cluster bootstrap with 2,000 resamples, 60 datasets per scenario.
+- Mean half-width of the 95% interval for Δ: 0.068–0.087 across eight scenarios (R1/R4 = 0.2/0.2, 0.2/0.6, 0.1/0.8, 0.5/0.5).
+- The plan's orientation figure scaled to 109 items (±10.5 pp) is more conservative because it ignores the paired correlation and the second draws. Output: `scratch/a03/precision_sim.txt` (local); procedure in `devlog/05_analysis_submission.md`.
+
+## D11 — R6 item list for data search: answer keys plus quoted WHERE conditions
+
+- **Date / approval:** 24 October 2026; Nick Wagner, in the Claude Code session at about 09:30 UTC (AskUserQuestion, option "Keys + conditions"). Before any R6 call.
+- **Reason (Claude Code's report):** plan §8.4 asks for "key and the values of every filter column" for data search. After D2, Bob's queries return only the key column, so filter values never appear in the transmitted log. Under the plan's checker ("every quote appears verbatim in the transmitted log"), the gate would reject every data-search ACCEPT.
+- **Rule:** an ACCEPT must list every answer key, plus, for each condition stated in the search request, the matching WHERE condition quoted verbatim from Bob's final query. The checker verifies that the keys are complete and that every quoted condition appears verbatim in the log. This mirrors D2: the error lives in the SQL condition.
+- **Implementation (`src/replay/r6.py`, `check`):**
+  - "Keys complete": every key value of Bob's final saved answer is listed as text.
+  - At least one condition must be quoted: an empty list counts as an incomplete item list.
+  - "Verbatim": a non-empty exact substring of Bob's round-1 message or of a string value in the parsed raw log.
+  - Known looseness, inherited from the plan's substring rule: a fragment of a real condition (e.g. `amount >= 1` inside `amount >= 10000`) also counts as verbatim. Extra listed items are not penalized, because the plan checks completeness only.
+
+## D12 — R6 requirement stated only in the tool schema
+
+- **Date / approval:** 24 October 2026; Nick Wagner, same session (option "Schema only"). Before any R6 call.
+- The rule text is the description of the new `itemization` field of `submit_verdict`, the only change named by plan §8.4. The R6 messages, including the verdict prompt, are byte-identical to R1 (bait) or R0′ (correct); test `test_schema_field_and_unchanged_messages`.
+- **Implementation choices (Claude Code, documented in `src/replay/r6.py`):**
+  - The field is optional in the schema, and `required` stays `[reasoning, verdict]`; its description says "Required if your verdict is accept".
+  - The retry keeps the model's `submit_verdict` call and replaces its tool result with `{"recorded": false, "error": "<plan 8.4 message verbatim>"}`. Upstream's verdict phase (3 attempts) then runs once more.
+  - Three outcomes are logged per call (`extra.r6`): the first verdict, gate firing with the retry verdict, and the final gated verdict.
+  - No verdict after the retry counts as a gate REJECT.
+
+## Implementation notes for R5 (A03; no scientific change)
+
+- Filler: Project Gutenberg eBook #1228 (Darwin, *On the Origin of Species*, 1st edition), SHA-256 `362142cb…60b9`. The body runs from the second "INTRODUCTION." heading to the end marker, with paragraphs unwrapped. The filler is a prefix of n characters, cut at whitespace.
+- Target per item and version: count(R1 or R0′) − count(R4), using countTokens of the full request. Band ±2%.
+- Result: 228 of 228 (109 main + 5 P5 items × 2 versions) within the band; max |relative error| 1.83%. Errors are all positive (+1.4% to +1.8%) because the first estimate lands just inside the band. Bait and correct targets are identical for every item (the bait adds the same tokens to R1 and R4).
+- Table: `data/derived/r5_fillers.csv`. countTokens log: `results/token_counts/counts.jsonl`.

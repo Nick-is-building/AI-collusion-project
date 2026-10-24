@@ -63,27 +63,24 @@ def test_p1_with_37(sdir):
     assert {c["model"] for c in calls(sdir)} == {"gemini/gemini-3.1-flash-lite", "gemini/gemini-3.7-flash"}
 
 
-def test_p11_blocked_then_with_baits(sdir, monkeypatch):
-    monkeypatch.setattr(common, "BAITS", sdir / "baits")
-    assert p11_effect_check.main(args(sdir)) is None
-    (sdir / "baits").mkdir()
-    rows = common.holdout().head(2)
-    for r in rows.itertuples():
-        from src.replay.variants import load_item
-        ctx = load_item(r.trace, r.ep_index)
-        (sdir / "baits" / f"{r.item_id}.json").write_text(
-            json.dumps({"bob_r1_content": ctx.messages[ctx.cut_idx]["content"] + " BAIT"}))
+def test_p11_runs_on_validated_holdout_baits(sdir):
+    from src.runner.item_lists import holdout_items
     st = p11_effect_check.main(args(sdir))
-    assert st["completed"] == 4
+    n = len(holdout_items())
+    assert sum(x["completed"] for x in st) == 2 * n
     cs = calls(sdir)
     assert all(c["version"] == "bait" for c in cs) and {c["variant"] for c in cs} == {"R1", "R4"}
 
 
-def test_p10_measured_and_projection(sdir, capsys):
+def test_p10_measured_and_projection(sdir):
+    import pandas as pd
     p2_r0_identity.main(args(sdir))
-    out = p10_cost.main(["--results-dir", str(sdir / "raw")])
-    assert out["total"] < 250 and out["n_main"] <= 148
-    assert "P2" in capsys.readouterr().out
+    m = p10_cost.measured(sdir / "raw", mode="mock")
+    assert len(m) == 10 and set(m.variant) == {"R0"}
+    out = p10_cost.main(["--results-dir", str(sdir / "raw"), "--out", str(sdir / "p10.json"), "--mode", "mock"])
+    from src.runner.jobs import main_run_jobs
+    from src.runner.item_lists import main_items
+    assert out["calls"] == len(main_run_jobs()) and out["second_draw_calls"] == 4 * len(main_items())
 
 
 def test_live_refused_from_cli(sdir):

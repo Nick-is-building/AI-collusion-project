@@ -139,3 +139,18 @@ def read_calls(path) -> list[dict]:
         if r.get("type") == "call":
             out.append(r)
     return out
+
+
+def execute_parallel(name: str, factory: str, jobs: list[Job], args) -> list[dict] | None:
+    """Like `execute`, but runs `factory` in args.workers processes (src.runner.parallel)."""
+    from src.runner.parallel import run_parallel
+    report_plan(name, jobs)
+    if args.plan or not jobs:
+        return None
+    mode = "live" if args.live else "mock"
+    rdir, qdir = DIRS[mode]
+    stats = run_parallel(factory, max(1, args.workers), stage=STAGE, mode=mode, results_dir=args.results_dir or rdir,
+                         requests_dir=args.requests_dir or qdir, approved_stage=args.approved_stage, seed=SEED)
+    for s in stats:
+        print(f"{name}: {mode} {s}")
+    return stats

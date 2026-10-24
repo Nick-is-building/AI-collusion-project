@@ -379,3 +379,52 @@ Under the corrected rule, **0 of 9 survive** (0 of all 16 main candidates of the
 - The data-search baits were not read individually beyond the automated rules.
 **Next:** task 3 (build steps 3–5).
 **Cross-references:** `docs/deviations.md` D6–D10; plan §§8.1, 8.3, 23.4; A02 bait entry above.
+
+## 2026-10-24 09:20–09:45 UTC — Claude Code (Opus 5.5), session A03 — Task 3 (build steps 3–4): R5, R6 gate, N1/N4, job lists, parallel runner
+
+**Assignment / authorization:** A03 task 3, plus Nick's in-session decisions D11 and D12 (R6; `docs/deviations.md`). countTokens (free) was used for R5 matching only. No billable call was made.
+**Built or changed:**
+- `src/replay/r5.py`:
+  - Gutenberg filler (eBook #1228, SHA-256 pinned), `filler_text`, `build_r5`.
+  - countTokens matching to ±2% (`match_item`); table `data/derived/r5_fillers.csv`.
+  - Raw text in `data/raw/filler/pg1228.txt` (git-ignored); downloaded with curl from `https://www.gutenberg.org/cache/epub/1228/pg1228.txt` at 09:19 UTC.
+- `src/replay/r6.py`:
+  - `itemization` field (`field_schema`) via a scoped patch of `experiments.agents.get_tool_schemas`.
+  - Deterministic `check`; `run_r6` with the generic retry and three recorded outcomes in `VerdictResult.extra["r6"]`.
+- `src/replay/request.py`: `VerdictResult.extra`.
+- `src/runner/runner.py`: `Job.verdict_fn` (R6) and `extra` logged per call line.
+- `src/runner/item_lists.py`: `main_items` (109), `holdout_items` (16), `p5_items` (5 hold-out items: rep005_e03, rep008_e02, rep008_e03 extraction, rep035_e06, rep047_e04), `r1live_subset` (40), `natural_error_items` (35). Each draw has its own seed-2026 generator.
+- `src/runner/jobs.py`: `make_job` for R0, R0p, R1–R6, R4n, N1, N4, FR0; `main_run_jobs` (2,330 calls, seeded order, item blocks adjacent).
+  - R5 looks up its filler at build time and fails closed when none is matched.
+  - The R6 pre-check estimate is doubled so it covers the retry.
+- `src/runner/parallel.py`: process-parallel launcher.
+  - Threads are unsafe because upstream globals are swapped per call.
+  - Items are assigned to workers round-robin.
+  - Each worker gets an equal share of the remaining cap headroom, so the total stays fail-closed.
+- `scripts/pilot/p5_short_variants.py` (new); `scripts/pilot/p11_effect_check.py` (rewritten on validated hold-out baits); `scripts/pilot/common.py` (`execute_parallel`); `scripts/pilot/p10_cost.py` (rewritten: measured per-variant inputs, exact token counts where available).
+- Tests:
+  - new: `tests/test_r6.py` (6), `tests/test_jobs.py` (5), `tests/test_parallel.py` (3);
+  - `tests/test_pilot_scripts.py`: the P11 and P10 tests were rewritten for the new interfaces. The old P11 test used A01's placeholder-bait mechanism, which no longer exists.
+**Already present (A01) and reused unchanged:** R2, R3, R4, R4n builders in `src/replay/variants.py`, with tests in `tests/test_replay_contexts.py`.
+**Decisions:** recorded in `docs/deviations.md` (D11, D12, R5 notes).
+- R6 retry: the model's tool call stays; its tool result is replaced with the plan's message.
+- R6 checker looseness: substring rule, extras allowed.
+**Checks performed:**
+- R5: 228/228 within ±2% (max +1.83%); 4–5 countTokens calls per item and version. Log `logs/r5_match_p5.log`, `logs/r5_match_main.log` (local). Launch command:
+
+  ```
+  set -a; . ./.env; set +a; PYTHONPATH=. nohup .venv/bin/python -m src.replay.r5 --items p5 --live > logs/r5_match_p5.log 2>&1 && PYTHONPATH=. nohup .venv/bin/python -m src.replay.r5 --items main --live > logs/r5_match_main.log 2>&1 &
+  ```
+
+- `tests/test_jobs.py`: R5 messages rebuilt from the table reproduce the stored `messages_sha256`.
+- Mock P5 with 2 worker processes: 40 calls, 40 unique IDs. In every saved request, the `itemization` field is present exactly in the R6 calls, so there is no cross-call leak between processes.
+- R6 mock tests (gate, retry, verbatim rule, data-search checker) pass.
+- Full suite: 306 passed (112 s).
+**Did not work:**
+- The first `main_run_jobs` build failed while R5 matching was incomplete (lookup at job creation); the lookup was moved into the builder.
+- A test expected `amount >= 1` to fail the verbatim check, but it is a substring of `amount >= 10000`. This is a property of the agreed rule, now documented as a limitation in D11.
+**State / limitations:**
+- R6 was tested only with a mock model; whether Gemini fills the `itemization` field is P5's question.
+- R1-live (step 6), Haiku and 3.7 Flash were not built.
+**Next:** analysis entry in `devlog/05_analysis_submission.md`; then P5, P11, P10 live (task 4).
+**Cross-references:** `docs/deviations.md` D11, D12; plan §§8.4, 8.5, 10, 11 (build order steps 3–4).

@@ -1,88 +1,153 @@
-"""P10 cost (plan section 10): measured cost per call from logged usage, and a projection of the
-total cost (pass: projected total below the 250 USD hard cap).
+"""P10 cost and wall-time projection for the main run (plan sections 10, 12; A03 task 4). Makes no call.
 
-Measured: the ledger over results/raw/*.jsonl (live) or logs/mock_runs/raw (mock), per check:
-calls, cost, mean cost per call, mean input/output tokens.
-Projection (plan section 12 call counts; makes no call): token estimates from
-src/runner/estimates.py (R0 = original input tokens; other variants scaled by request characters;
-output = p95 of original verdict calls), Flash-Lite prices without cache savings:
-  core: per main item (min(n_main, 148)) bait R1 R2 R3 R4 R4n R5 R6 + correct R0 R0' R2 R3 R4 R4n R5 R6
-        + second draws of R1(bait), R0', R4(bait), R4(correct)            = 19 calls per item
-  natural-error set: N1 (cut) and N4 (R4) per item
-  fidelity set: R0 x 3 samples per case
-  Haiku: R1(bait), R0', R4(bait), R4(correct) per main item at Haiku prices (Gemini token counts)
-  R1-live: 40 items x 10 calls (rounds 2-5 both agents + 2 verdicts) at 1.1 x cut tokens (rough)
-  3.7 Flash: not projected (no documented price)
+Main-run list: src.runner.jobs.main_run_jobs() (109 main items x 19 calls incl. the second draws of
+the four primary cells, N1/N4 on 35 natural-error items, R0 x 3 on 63 fidelity cases). Not included:
+R1-live, Haiku, Gemini 3.7 Flash (not built / not authorized).
 
-  .venv/bin/python -m scripts.pilot.p10_cost [--live]
+Input tokens per call (request as sent):
+  R0, FR0     original logged input_tokens - 5 x unmatched resolve_records items (A03 task 1; exact
+              for 30/30 pilot items); fidelity/natural items without an unmatched count use the original
+  R1, R0', R6 countTokens of the cut context (data/derived/r5_fillers.csv, count_R1_or_R0p; exact)
+  R4, R5      countTokens (count_R4, count_R5; exact)
+  R2, R3, R4n count(CUT or R4) x chars(variant) / chars(CUT or R4) (signature-stripped characters;
+              estimate)
+  N1, N4      src.runner.estimates.input_tokens (character-ratio estimate from the original tokens)
+Measured from live pilot calls (results/raw, stage pilot), per variant group with a pooled fallback:
+  output tokens per call (billable, all attempts), API requests per call, input-token multiplier of R6
+  (all requests of the call / first request), cached-input share, wall seconds per call.
+Cost: Flash-Lite prices (configs/prices.yaml); two figures: no cache savings (plan 12, conservative)
+and with the measured cached share. Wall time: sum of measured seconds per call / parallelism
+(no rate-limit model; 429 counts of the pilot reported).
+
+  .venv/bin/python -m scripts.pilot.p10_cost
 """
+from __future__ import annotations
+
+import datetime as dt
+import json
+from pathlib import Path
+
+import numpy as np
 import pandas as pd
 
-from scripts.pilot.common import DIRS, ROOT, candidates, fidelity, parser
 from src.runner.costs import PriceTable, iter_call_lines, load_yaml
-from src.runner.estimates import input_tokens, projected_call_cost
+from src.runner.estimates import input_tokens, nosig_chars, r0_tokens
 
+ROOT = Path(__file__).resolve().parents[2]
 FL = "gemini/gemini-3.1-flash-lite"
-HAIKU = "anthropic/claude-haiku-5-5"
-CORE = ["R1", "R2", "R3", "R4", "R4n", "R5", "R6"] + ["R0", "R0p", "R2", "R3", "R4", "R4n", "R5", "R6"] + \
-       ["R1", "R0p", "R4", "R4"]
+GROUP = {"R0": "R0", "FR0": "R0", "R0p": "CUT", "R1": "CUT", "CUT": "CUT", "N1": "CUT", "R2": "R2", "R3": "R3",
+         "R4": "R4", "R4n": "R4", "N4": "R4", "R5": "R5", "R6": "R6"}
 
 
-def measured(results_dir):
-    rows = [dict(check=r["check"], cost=r["cost_usd"] or 0.0,
-                 inp=sum(u.get("input_tokens") or 0 for u in r["usage"]),
-                 out=sum(u.get("billable_output_tokens") or u.get("provider_output_tokens") or 0 for u in r["usage"]))
-            for r in iter_call_lines(results_dir)]
-    if not rows:
-        return None
-    d = pd.DataFrame(rows)
-    return d.groupby("check").agg(calls=("cost", "size"), cost_usd=("cost", "sum"), mean_cost=("cost", "mean"),
-                                  mean_in=("inp", "mean"), mean_out=("out", "mean"))
+def _ts(s):
+    return dt.datetime.strptime(s, "%Y-%m-%dT%H:%M:%S.%fZ")
 
 
-def projection(prices=None):
+def measured(results_dir=ROOT / "results" / "raw", mode: str = "live") -> pd.DataFrame:
+    rows = []
+    for r in iter_call_lines(results_dir):
+        if r.get("mode") != mode:
+            continue
+        if r.get("model") != FL or r.get("check") in ("P1",):
+            continue
+        u = r["usage"]
+        first_in = next((x.get("input_tokens") for x in u if x.get("input_tokens")), None)
+        tot_in = sum(x.get("input_tokens") or 0 for x in u)
+        rows.append(dict(check=r["check"], variant=r["variant"], group=GROUP.get(r["variant"], r["variant"]),
+                         n_req=r["n_api_requests"], first_in=first_in, tot_in=tot_in,
+                         cached=sum(x.get("cached_input_tokens") or 0 for x in u),
+                         out=sum((x.get("billable_output_tokens") if x.get("billable_output_tokens") is not None
+                                  else x.get("provider_output_tokens") or 0) for x in u),
+                         sec=(_ts(r["ts_end_utc"]) - _ts(r["ts_start_utc"])).total_seconds(),
+                         n429=r.get("n_rate_limit", 0), cost=r.get("cost_usd") or 0.0, status=r["verdict_status"]))
+    return pd.DataFrame(rows)
+
+
+def per_group(m: pd.DataFrame) -> dict:
+    pooled = dict(out=m.out.mean(), n_req=m.n_req.mean(), mult=1.0, cache=m.cached.sum() / m.tot_in.sum(),
+                  sec=m.sec.mean(), n=len(m))
+    out = {"pooled": pooled}
+    for g, d in m.groupby("group"):
+        out[g] = dict(out=d.out.mean(), n_req=d.n_req.mean(), mult=(d.tot_in / d.first_in).mean(),
+                      cache=d.cached.sum() / d.tot_in.sum(), sec=d.sec.mean(), n=len(d))
+    return out
+
+
+def job_tokens(job, r5: dict, unmatched: dict) -> tuple[int, str]:
+    v, item = job.variant, job.item_id
+    if v in ("R0", "FR0"):
+        return r0_tokens()[item] - 5 * unmatched.get(item, 0), "exact"
+    key = (item, job.version)
+    if key in r5:
+        c = r5[key]
+        if v in ("R1", "R0p", "R6"):
+            return c["count_R1_or_R0p"], "exact"
+        if v == "R4":
+            return c["count_R4"], "exact"
+        if v == "R5":
+            return c["count_R5"], "exact"
+        if v in ("R2", "R3"):
+            return int(round(c["count_R1_or_R0p"] * nosig_chars(item, v) / nosig_chars(item, "CUT"))), "ratio"
+        if v == "R4n":
+            return int(round(c["count_R4"] * nosig_chars(item, "R4n") / nosig_chars(item, "R4"))), "ratio"
+    est = {"N1": "CUT", "N4": "R4"}.get(v, v)
+    return input_tokens(item, est), "estimate"
+
+
+def projection(jobs=None, m: pd.DataFrame | None = None, prices=None) -> dict:
+    from src.runner.jobs import R5_TABLE, main_run_jobs
     prices = prices or PriceTable()
-    c = candidates()
-    main = c[c.set == "main"].sort_values("item_id")
-    n_main = min(len(main), 148)
-    main = main.head(n_main)  # cost projection only; which items survive is decided by bait validation
-    comp = {}
-    comp["core (Flash-Lite)"] = (len(main) * len(CORE), sum(
-        projected_call_cost(prices, FL, input_tokens(i, v)) for i in main.item_id for v in CORE))
-    nat = pd.read_csv(ROOT / "data" / "derived" / "items" / "natural_error_set.csv")
-    comp["natural-error N1, N4"] = (2 * len(nat), sum(
-        projected_call_cost(prices, FL, input_tokens(i, v)) for i in nat.item_id for v in ("CUT", "R4")))
-    fid = fidelity().drop_duplicates("item_id")
-    comp["fidelity R0 x3"] = (3 * len(fid), 3 * sum(projected_call_cost(prices, FL, input_tokens(i, "R0"))
-                                                    for i in fid.item_id))
-    comp["Haiku R1/R0'/R4 both"] = (4 * len(main), sum(
-        projected_call_cost(prices, HAIKU, input_tokens(i, v)) for i in main.item_id
-        for v in ("R1", "R0p", "R4", "R4")))
-    live = main.item_id.tolist()[:40]
-    comp["R1-live (rough)"] = (10 * len(live), sum(
-        10 * projected_call_cost(prices, FL, int(1.1 * input_tokens(i, "CUT"))) for i in live))
-    return n_main, comp
+    jobs = jobs if jobs is not None else main_run_jobs()
+    m = measured() if m is None else m
+    g = per_group(m)
+    r5 = {(r.item_id, r.version): r._asdict() for r in pd.read_csv(R5_TABLE).itertuples()}
+    un = dict(pd.read_csv(ROOT / "data" / "derived" / "r0_unmatched_records.csv")[["item_id", "n_unmatched"]].values)
+    rows = []
+    for j in jobs:
+        tok, src = job_tokens(j, r5, un)
+        st = g.get(GROUP.get(j.variant, j.variant), g["pooled"])
+        n_req = max(st["n_req"], 1.0)
+        tot_in = tok * (st["mult"] if j.variant == "R6" else n_req)
+        out = st["out"]
+        nocache = prices.cost(FL, int(tot_in), 0, int(out))
+        cache = prices.cost(FL, int(tot_in), int(tot_in * st["cache"]), int(out))
+        rows.append(dict(variant=j.variant, version=j.version, draw=j.draw, tokens=tok, source=src, tot_in=tot_in,
+                         out=out, usd_nocache=nocache, usd_cache=cache, sec=st["sec"]))
+    d = pd.DataFrame(rows)
+    second = (d.draw == 2) & d.variant.isin(["R1", "R0p", "R4"])   # second draws of the four primary cells
+    summary = dict(calls=len(d), input_tokens=int(d.tot_in.sum()), usd_nocache=float(d.usd_nocache.sum()),
+                   usd_cache=float(d.usd_cache.sum()), second_draw_calls=int(second.sum()),
+                   second_draw_usd_nocache=float(d[second].usd_nocache.sum()),
+                   sequential_hours=float(d.sec.sum() / 3600), token_sources=d.source.value_counts().to_dict(),
+                   by_variant=d.groupby("variant").agg(calls=("variant", "size"), usd_nocache=("usd_nocache", "sum"),
+                                                       usd_cache=("usd_cache", "sum"), mean_tokens=("tokens", "mean"))
+                   .round(3).reset_index().to_dict("records"))
+    for p in (1, 4, 8, 16):
+        summary[f"wall_hours_parallel_{p}"] = summary["sequential_hours"] / p
+        summary[f"input_tpm_parallel_{p}"] = summary["input_tokens"] / max(d.sec.sum() / p / 60, 1e-9)
+    summary["measured"] = {k: {kk: (round(vv, 4) if isinstance(vv, float) else vv) for kk, vv in v.items()}
+                           for k, v in g.items()}
+    summary["pilot_429"] = int(m.n429.sum())
+    summary["pilot_missing"] = int((m.status != "ok").sum())
+    summary["hard_cap_usd"] = load_yaml("caps.yaml")["hard_cap_usd"]
+    return summary
 
 
 def main(argv=None):
-    args = parser("P10 cost").parse_args(argv)
-    mode = "live" if args.live else "mock"
-    rdir = args.results_dir or DIRS[mode][0]
-    m = measured(rdir)
-    print(f"P10 measured ({mode}, {rdir}):")
-    print(m.to_string() if m is not None else "  no logged calls")
-    if mode == "mock":
-        print("  (mock: costs use stand-in token counts, not real spend)")
-    n_main, comp = projection()
-    print(f"P10 projection for the main runs (n_main = {n_main}; no call made):")
-    total = 0.0
-    for k, (n, usd) in comp.items():
-        total += usd
-        print(f"  {k:28s} {n:6d} calls  {usd:8.2f} USD")
-    cap = load_yaml("caps.yaml")["hard_cap_usd"]
-    print(f"  {'total':28s} {sum(n for n, _ in comp.values()):6d} calls  {total:8.2f} USD  "
-          f"(hard cap {cap}; below cap: {total < cap})")
-    return dict(total=total, components=comp, n_main=n_main)
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--results-dir", default=str(ROOT / "results" / "raw"), help="measured pilot calls")
+    ap.add_argument("--out", default=str(ROOT / "results" / "summaries" / "p10_projection.json"))
+    ap.add_argument("--mode", default="live", help="mode of the measured calls (mock only for tests)")
+    a = ap.parse_args(argv)
+    s = projection(m=measured(Path(a.results_dir), a.mode))
+    out = Path(a.out)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(s, indent=1, default=lambda o: o.item() if hasattr(o, "item") else str(o)))
+    print(json.dumps({k: v for k, v in s.items() if k not in ("by_variant", "measured")}, indent=1,
+                     default=lambda o: o.item() if hasattr(o, "item") else str(o)))
+    print(pd.DataFrame(s["by_variant"]).to_string())
+    return s
 
 
 if __name__ == "__main__":

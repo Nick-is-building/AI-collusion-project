@@ -71,6 +71,9 @@ class Job:
     model: str = "gemini/gemini-3.1-flash-lite"
     allow_undocumented_price: bool = False
     meta: dict = field(default_factory=dict)
+    # optional replacement for run_verdict with the same signature (R6 gate: src.replay.r6.run_r6
+    # bound to the item's transmitted log); its VerdictResult.extra is logged as `extra`
+    verdict_fn: Callable | None = None
 
     def call_id(self, stage: str) -> str:
         return f"{stage}:{self.check}:{self.item_id}:{self.variant}:{self.version}:{self.draw}"
@@ -184,8 +187,8 @@ class Runner:
         status, err, res = "complete", None, None
         exc_usage, exc_requests = [], []
         try:
-            res = run_verdict(msgs, job.task_type, self.backend, judge=job.judge, model=job.model,
-                              episode_id=cid)
+            fn = job.verdict_fn or run_verdict
+            res = fn(msgs, job.task_type, self.backend, judge=job.judge, model=job.model, episode_id=cid)
         except Exception as exc:  # after upstream retries (LLMRetryLimitExceededError, 4xx, ...)
             status, err = "missing", f"{type(exc).__name__}: {str(exc)[:1000]}"
             exc_usage, exc_requests = getattr(exc, "replay_usage", []), getattr(exc, "replay_requests", [])
@@ -218,7 +221,8 @@ class Runner:
                    forced=res.forced if res else None, response_models=models, usage=usage,
                    api_error_counts=error_counts, n_rate_limit=n_rate_limit(error_counts),
                    cost_usd=cost, est_input_tokens=job.est_input_tokens,
-                   response_messages=res.messages_after[len(msgs):] if res else None, meta=job.meta)
+                   response_messages=res.messages_after[len(msgs):] if res else None, meta=job.meta,
+                   extra=res.extra if res else None)
         self._write(rec)
         self.ledger.add(self.stage, cost, check=job.check)
         stats["cost_usd"] += cost

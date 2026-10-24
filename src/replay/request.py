@@ -80,6 +80,7 @@ class VerdictResult:
     requests: list = field(default_factory=list)       # exact kwargs of every API call
     usage: list = field(default_factory=list)          # upstream usage records
     messages_after: list = field(default_factory=list)  # judge's list after the phase
+    extra: dict = field(default_factory=dict)           # variant-specific outcomes (R6 gate)
 
     @property
     def request_hashes(self):

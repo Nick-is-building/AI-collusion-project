@@ -9,10 +9,10 @@
 | Block | Topic / when to read | Current status |
 |---|---|---|
 | [`devlog/01_foundation.md`](devlog/01_foundation.md) | Repository setup, dependencies, upstream pinning, pre-sprint artifact intake and provenance, baseline verification, shared infrastructure | A01 tasks 0–2 done (prereg-v0, env, data provenance, Study 0 reproduced); A02 LICENSE check |
-| [`devlog/02_pilot.md`](devlog/02_pilot.md) | Technical pilots, cost/timing measurements, feasibility checks, problems, go/no-go recommendations | A02: live P1, P2, P3, P9 run (0.57 USD); R0 identity mismatch open |
-| [`devlog/03_core_experiment.md`](devlog/03_core_experiment.md) | Study 1: context reconstruction, bait generation, replay, controls, fidelity, R1-live, model comparison | A01 tasks 3–7; A02: D2–D4 baits (107 main, below 120), blind-check package ready |
+| [`devlog/02_pilot.md`](devlog/02_pilot.md) | Technical pilots, cost/timing measurements, feasibility checks, problems, go/no-go recommendations | A02: live P1, P2, P3, P9 (0.57 USD). A03: R0 mismatch cause found (task 1); P5, P11, P10 (task 4) |
+| [`devlog/03_core_experiment.md`](devlog/03_core_experiment.md) | Study 1: context reconstruction, bait generation, replay, controls, fidelity, R1-live, model comparison | A01 tasks 3–7; A02 D2–D4; A03: D6/D7 baits (109 main), blind-check package (tablet), R5, R6, N1/N4, job lists, parallel runner |
 | [`devlog/04_hysteresis.md`](devlog/04_hysteresis.md) | Study 2: branching trajectories, channel changes, partner intervention, run validity, persistence analyses | Not started |
-| [`devlog/05_analysis_submission.md`](devlog/05_analysis_submission.md) | Statistical implementation, result validation, figures, paper, reproducibility and submission checks | Not started |
+| [`devlog/05_analysis_submission.md`](devlog/05_analysis_submission.md) | Statistical implementation, result validation, figures, paper, reproducibility and submission checks | A03: analysis code + simulation tests, PREREGISTRATION.md draft (untagged) |
 
 ## Reading and linking rules
 
@@ -24,22 +24,31 @@
 
 ## Active work and cross-references
 
-- **Assigned work:** A02 (`assignments/A02_bait_amendments_pilot.md`): tasks 1–4 done, reported. A01 done (its task 7 is superseded by A02 task 3).
-- **Active blocks:** `devlog/02_pilot.md` (A02 pilot entry: P1, P2, P3, P9 results, R0 identity mismatch), `devlog/03_core_experiment.md` (A02 bait entry: D2–D4, item flow, D5, blind check). Earlier: `devlog/01_foundation.md` (A01 tasks 0–2).
-- **Deviations:** `docs/deviations.md` (D1: frame of 173 candidates; D2–D5: bait amendments from A02). All were approved by Nick before any bait outcome was observed.
-- **Raw run evidence:** `results/raw/*.jsonl` (committed); request payloads in `results/requests/` (local, hashed); launch logs in `logs/` (local).
-- **Blind check:** `blind_check/` (20 pair files, answer form, key hash); key `blind_check/key.local.json` local only.
-- **Code map:** `src/replay/` (traces, variants, request, item_tables, dry_run, bait_common, baits_extraction, baits_data_search, build_baits), `src/reanalysis/` (candidate_audit, transmission), `src/runner/` + `scripts/pilot/` (harness), `src/blind_check/`; derived tables in `data/derived/`; local scratch in `scratch/` (git-ignored).
+- **Assigned work:** A03 (`assignments/A03_bait_fixes_build_pilot.md`): tasks 1–3 done; task 4 (P5, P11, P10 live) and task 5 (report) follow. A02 and A01 done.
+- **Active blocks:**
+  - `devlog/02_pilot.md`: A03 task-1 entry (R0 bisection) and the pilot entries;
+  - `devlog/03_core_experiment.md`: A03 task-2 entry (baits, blind check) and task-3 entry (R5, R6, jobs, parallel runner);
+  - `devlog/05_analysis_submission.md`: A03 analysis entry.
+- **Deviations:** `docs/deviations.md` D1–D12 (D6–D10 from A03; D7 corrected and D11–D12 decided by Nick in the A03 session). All were made before any bait was run.
+- **Preregistration:** `PREREGISTRATION.md` (draft, **not tagged**); materials in `data/derived/prereg/` (`make_prereg_files.py` regenerates them; rerun before tagging).
+- **Raw run evidence:** `results/raw/*.jsonl` (committed); countTokens log `results/token_counts/counts.jsonl` (committed); request payloads in `results/requests/` (local, hashed); launch logs in `logs/` (local).
+- **Blind check:** `blind_check/` (INSTRUCTIONS.md, ANSWERS.md, 20 pair files, key hash); key `blind_check/key.local.json` local only. Optional per D10.
+- **Code map:**
+  - `src/replay/`: traces, variants (R0, CUT, R2, R3, R4, R4n), r5, r6, request, token_count, item_tables, dry_run, bait_common, baits_extraction, baits_data_search, build_baits.
+  - `src/runner/`: runner, costs, estimates, item_lists, jobs, parallel; pilot scripts in `scripts/pilot/` (P1–P3, P5, P9–P11).
+  - `src/analysis/`: stats, primary, fidelity, meta, simulate; `scripts/analysis/run_study1.py`.
+  - Also `scripts/a03/` (bisection), `scripts/prereg/`, `src/reanalysis/`, `src/blind_check/`.
+  - Derived tables in `data/derived/`; local scratch in `scratch/` (git-ignored).
 - **Relevant dependencies:** `PROJECT_PLAN.md` (complete approved design as supplied; do not silently modify); initial technical setup and all claims of reproduced prior work belong in `01_foundation.md` once actually checked.
-- **Pending decisions:** Refer to `PROJECT_PLAN.md` §18, plus the A02 "Next" lists in `devlog/02_pilot.md` and `devlog/03_core_experiment.md`:
-  - main sample 107 < 120;
-  - data-search bait homogeneity (all date bounds);
-  - D3 applied to data search;
-  - the R0 identity mismatch (token-count bisection);
-  - the blind check by Nick.
+- **Pending decisions for Nick:**
+  - level-1 fidelity reporting (the raw 95% rule is expected to fail; explained share as a diagnostic);
+  - rep018_e02 D4 alternative (at most +1 item);
+  - main-run stage cap and launch approval;
+  - prereg-v1 tag;
+  - R1-live driver (build step 6).
 
   These are not actions Claude Code may take on its own.
-- **Decisions already made by the researcher:** repository `Nick-is-building/AI-collusion-project`, private until submission, must be public at submission (plan §11, milestone 6); blind bait check by Nick (plan §8.3, §18.4); Claude Code may commit and push (see `CLAUDE.md`, Git rules).
+- **Decisions already made by the researcher:** repository `Nick-is-building/AI-collusion-project`, private until submission, must be public at submission (plan §11, milestone 6); blind check no longer required (D10); Claude Code may commit and push (see `CLAUDE.md`, Git rules).
 
 ## Adding or splitting blocks
 
