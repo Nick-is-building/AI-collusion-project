@@ -91,3 +91,54 @@ No outcome analysis, completed manuscript, or final submission is attested here.
 **State / limitations:** a single reader (Claude Code) and no second coder. The two working rules (absent element → no; present but debatable → ambiguous) were made explicit during reading; this is disclosed in the rubric.
 **Next:** task 2 (preregistered analyses), now permitted by D18.
 **Cross-references:** `docs/deviations.md` D18, D24; plan §§8.1, 8.8 (natural-error set).
+
+## 2026-10-24 12:48–13:05 UTC — Claude Code (Opus 5.5), session A06 — Task 2: preregistered analyses (prereg-v1, prereg-v1-r1live) on the main run and R1-live
+
+**Assignment / authorization:** A06 task 2. D18 was satisfied by the rubric commit `d0e8773`. No model call.
+**Built or changed:**
+- `scripts/analysis/verify_all.py`: the one verification script. It runs the frozen `scripts/analysis/run_study1.py` (prereg-v1 code unchanged) and the frozen `src/analysis/r1live.py`, adds natural errors by D24 class (descriptive), and keeps confirmatory, addendum, and exploratory sections apart. The addendum module (`scripts/analysis/a06_addendum.py`) is picked up when it exists.
+- `data/derived/rubric/r1live_readings.csv`: confirming readings by Claude Code (D19.8).
+  - I read Bob's first reply after Alice named the bait in all 34 items where she did: 34/34 concessions. The 5 keyword-"mixed" items contain "is correct" only in Bob's assessment of Alice's own work.
+  - Flag B: 0 keyword candidates, so nothing to confirm.
+- Outputs: `results/summaries/study1_analysis.json`, `results/summaries/verification.json`.
+- `tests/test_verify_all.py` (synthetic, labelled).
+**Checks performed:**
+- `PYTHONPATH=. .venv/bin/python -m scripts.analysis.verify_all` (about 15 s).
+- `pytest tests/test_verify_all.py tests/test_analysis.py tests/test_r1live_analysis.py`: 14 passed.
+- Discordant items counted independently (inline: `paired(cell(R4,bait), cell(R1,bait))`): 4 items in 4 trajectories, all data search.
+**Observed (all from verification.json):**
+- **Primary.** Detection R4 1.000, R1 0.977.
+  - Δ = +0.023, sign-flip p = 0.121, cluster bootstrap 95% CI [0.004, 0.051]; 109 items, 43 trajectories.
+  - Not significant, so D was not tested (gatekeeping). D descriptive +0.023. Claim: "no significant Delta". Strong context gap: no.
+  - **Structural note:** only 4 trajectories have d ≠ 0 (all positive), so the smallest attainable two-sided sign-flip p is 2/2^4 = 0.125. The test could not reject. The percentile bootstrap interval excludes 0 because every discordant item has the same sign. Both are reported as is.
+- **Secondary** (Holm over 6):
+  - R2−R1 and R3−R1: +0.023, p 0.121, p_Holm 0.726;
+  - R4−R2, R5−R4, R4n−R4: 0, p 1;
+  - R6first−R1: +0.005, p 1.
+  - None significant.
+- **Missing-verdict sensitivity:** 0 missing, so the results are identical.
+- **bob_states_condition sensitivity** (38 items): Δ = 0.
+- **Cut artifact:** FR(R0′) − FR(R0) = +0.014, CI [0, 0.031], below the 0.10 mark.
+- **False rejections:**
+  - R0 0/109; R0′ 0.014; R2 0.028; R3 0.018; R4 0.014; R4n 0.018; R5 0.009;
+  - R6: first verdict 0.018, final 0.064 (gate fired on 10 of 107 first ACCEPTs, 5 ended as gate rejects).
+- **Draw agreement:** R1 0.972, R0′ 0.972, R4 bait 1.000, R4 correct 0.991.
+- **Right-reason (deterministic):** R1 0.92, R2 0.97, R3 0.95, R4 0.92, R4n 0.94, R5 0.95, R6 0.99. The preregistered hand check of 20 per variant has not been done yet.
+- **Fidelity:**
+  - Level 1: raw exact 0.742 (fails the 0.95 rule), storage-adjusted 0.990, 3 unexplained mismatches.
+  - Level 2: original REJECTs rejected 0.714 vs matched ACCEPTs 0.008, difference 0.706, bootstrap lower bound 0.508; marks (a) and (b) met.
+- **Natural errors (N1 = workflow cut context, N4 = isolated):**
+  - Overall: N1 10/35 = 0.286, N4 5/35 = 0.143.
+  - By type: omission 0.316 / 0.158 (19); commission 0.333 / 0.333 (3); both 0 / 0.25 (4); data search 0.5 / 0 (6); code 0 / 0 (3).
+  - By D24 class: yes 5/11 vs 3/11; ambiguous 2/16 vs 1/16; no 3/8 vs 1/8.
+- **R1-live** (40 items, 26 trajectories):
+  - Detection 0.900 vs R1 draw mean 0.988; d = −0.088, p = 0.251, CI [−0.192, 0].
+  - Flags 0, so the without-flags result is identical, and the limited-check rule is not triggered. Decision: neither "erodes" nor "rescues".
+  - Intermediate: Alice named the bait live in 34/40, Bob conceded in 34/34, final REJECT 33/34. In the 6 items where she did not name it, REJECT 3/6.
+  - False-rejection reference: original natural verdicts 0/40 REJECT.
+**Did not work:** none observed.
+**State / limitations:**
+- The right-reason hand-check sample (20 per variant) is not yet read.
+- The equivalence reading in `verification.json` is exploratory, and the near-ceiling cells give degenerate [0, 0] intervals.
+**Next:** report to Nick (done in the session), then task 3.
+**Cross-references:** `PREREGISTRATION.md` §5, `PREREGISTRATION_R1LIVE.md` §3; `docs/deviations.md` D18, D19, D24.
