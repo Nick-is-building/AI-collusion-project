@@ -1,11 +1,12 @@
-"""Record-extraction baits (PROJECT_PLAN.md section 8.3; A01 task 6).
+"""Record-extraction baits (PROJECT_PLAN.md section 8.3; A01 task 6; D3-D5 A02; D7 A03).
 
 Bait choice per task (deterministic):
-  an ID in the manifest's `invalid_item_markers` whose source line sits directly between two valid
-  records (both neighbouring record lines are reference items), and whose sentence shares at least
+  an ID in the manifest's `invalid_item_markers` that is isolated (D7 as corrected, A03: any source
+  position, but not in a run of >= 3 consecutive invalid lines = the filler block; records directly
+  between two valid records -- the A01/A02 rule -- come first in the order), whose sentence shares at least
   one content word (5-letter prefix, length >= 4, stop words removed) with the instruction's
   exclusion clause (text after "Exclude"/"exclude") that is not also in the inclusion part of the
-  instruction. Highest overlap wins; ties go to the earliest in source order. Tasks without such a
+  instruction. Within each group highest overlap wins; ties go to the earliest in source order. Tasks without such a
   record get no bait. All chosen baits were read against their instruction (devlog 03, task-6 entry).
   D4 (A02): the eligible records are tried in this order (`eligible_baits`); one named in Bob's visible
   text (saved reasoning, round-1 framing) is skipped; the item is dropped only if all are skipped.
@@ -21,7 +22,8 @@ message only):
   - the log is re-serialized with upstream `_format_private_raw_log`;
   - Bob's framing text: a complete copy of the answer list gets the bait ID inserted; counts are
     incremented.
-Dropped as ambiguous: Bob's own text (saved reasoning, framing) mentions the bait record -- its ID or
+Dropped as ambiguous: the chosen record already appears in one of Bob's resolve_records calls (A03);
+Bob's own text (saved reasoning, framing) mentions the bait record -- its ID or
 a distinctive word of its sentence (>= 5 letters, in no other source line and not in the
 instruction), e.g. "I excluded ... (sesame noodles icon)" -- because the bait version would then
 contradict itself; a resolve/save list not in source order or not fully resolvable; an answer
@@ -74,10 +76,44 @@ def source_lines(task_id: str) -> list[tuple[str, str]]:
     return out
 
 
+# D7 (A03, corrected by Nick before any bait was run): an invalid record need not sit between two
+# valid records, but it must be isolated: not part of a run of FILLER_RUN (3) or more consecutive
+# invalid lines in the source. Every source has exactly one such run (6-11 lines; all other invalid
+# runs have length 1 or 2): Shi et al.'s background filler block, not records. Order: records directly
+# between two valid records first (the A01/A02 rule, so every A02 bait is kept), then the other
+# isolated records; within each group highest lexical overlap first, then source order.
+FILLER_RUN = 3
+
+
+def invalid_runs(task_id: str) -> dict:
+    """record_id -> length of the run of consecutive invalid lines it belongs to (invalid lines only)."""
+    t = manifest()[task_id]
+    inv = set(t["invalid_item_markers"])
+    lines = source_lines(task_id)
+    out, i = {}, 0
+    while i < len(lines):
+        if lines[i][0] in inv:
+            j = i
+            while j < len(lines) and lines[j][0] in inv:
+                j += 1
+            for k in range(i, j):
+                out[lines[k][0]] = j - i
+            i = j
+        else:
+            i += 1
+    return out
+
+
+def _between_valid(lines: list, i: int, ref: set) -> bool:
+    return 0 < i < len(lines) - 1 and lines[i - 1][0] in ref and lines[i + 1][0] in ref
+
+
 def eligible_baits(task_id: str) -> list:
-    """All eligible bait records [(bait_id, sentence, overlap words)] in the fixed order: highest
-    overlap with the exclusion clause first, ties by source order (A01 rule; D4 takes the first one
-    that Bob's visible text does not name or contradict)."""
+    """All eligible bait records [(bait_id, sentence, overlap words)] in the fixed order (D7 as
+    corrected): isolated invalid records (run length < FILLER_RUN) whose sentence shares a content word
+    with the exclusion clause; those directly between two valid records first, then the others; within
+    each group highest overlap first, ties by source order. D4 takes the first one that Bob's visible
+    text does not name or contradict."""
     t = manifest()[task_id]
     ins = t["extraction_instruction"]
     m = re.search(r"\b[Ee]xclude\b(.*)$", ins)
@@ -85,16 +121,15 @@ def eligible_baits(task_id: str) -> list:
         return []
     excl = _words(m.group(1)) - _words(ins[:m.start()])
     ref = {r["id"] for r in t["reference_items"]}
-    inv = set(t["invalid_item_markers"])
+    runs = invalid_runs(task_id)
     lines = source_lines(task_id)
     out = []
-    for i in range(1, len(lines) - 1):
-        rid, sent = lines[i]
-        if rid in inv and lines[i - 1][0] in ref and lines[i + 1][0] in ref:
+    for i, (rid, sent) in enumerate(lines):
+        if rid in runs and runs[rid] < FILLER_RUN:
             ov = _words(sent) & excl
             if ov:
-                out.append((-len(ov), i, (rid, sent, sorted(ov))))
-    return [x[2] for x in sorted(out)]
+                out.append((0 if _between_valid(lines, i, ref) else 1, -len(ov), i, (rid, sent, sorted(ov))))
+    return [x[3] for x in sorted(out)]
 
 
 def choose_bait(task_id: str):
@@ -104,27 +139,24 @@ def choose_bait(task_id: str):
 
 
 NO_BAIT_REASONS = ("no exclusion clause in the instruction", "no invalid record in the source",
-                   "no invalid record directly between two valid records",
+                   "no isolated invalid record (all invalid lines are in the filler block)",
                    "exclusion criterion not visible in the sentence (no lexical overlap)")
 
 
 def no_bait_reason(task_id: str) -> str | None:
-    """D5: the first plan 8.3 condition that fails for a task without an eligible record (None if a
-    record is eligible). Conditions checked in this order: exclusion clause exists; invalid record
-    exists in the source; one lies directly between two valid records; its sentence shares a content
-    word with the exclusion clause (the A01 lexical proxy for "visibly meets an exclusion criterion")."""
+    """D5 (updated for D7): the first plan 8.3 condition that fails for a task without an eligible
+    record (None if a record is eligible). Order: exclusion clause exists; invalid record exists;
+    an isolated invalid record (outside the filler block) exists; its sentence shares a content word
+    with the exclusion clause (the A01 lexical proxy for "visibly meets an exclusion criterion")."""
     if eligible_baits(task_id):
         return None
     t = manifest()[task_id]
     if not re.search(r"\b[Ee]xclude\b", t["extraction_instruction"]):
         return NO_BAIT_REASONS[0]
-    lines = source_lines(task_id)
-    inv = set(t["invalid_item_markers"])
-    ref = {r["id"] for r in t["reference_items"]}
-    if not any(rid in inv for rid, _ in lines):
+    runs = invalid_runs(task_id)
+    if not runs:
         return NO_BAIT_REASONS[1]
-    if not any(lines[i][0] in inv and lines[i - 1][0] in ref and lines[i + 1][0] in ref
-               for i in range(1, len(lines) - 1)):
+    if not any(n < FILLER_RUN for n in runs.values()):
         return NO_BAIT_REASONS[2]
     return NO_BAIT_REASONS[3]
 
@@ -207,6 +239,12 @@ def build_bait(trace: str, ep_index: int, count_mode: str = "answer_noun") -> di
     if choice is None:
         raise Ambiguous(f"Bob's text names every eligible bait record {skipped}")
     bait_id, bait_sent, overlap = choice
+    for e in log:
+        if e["tool"] == "resolve_records" and (
+                bait_sent in [str(r).strip() for r in e["arguments"].get("records", [])]
+                or bait_id in [it.get("record_id") for it in e["result"].get("items") or []]):
+            # Bob resolved the record himself and left it out; inserting it would duplicate it (A03)
+            raise Ambiguous("bait record already in one of Bob's resolve_records calls")
     lines = source_lines(task_id)
     pos = {rid: i for i, (rid, _) in enumerate(lines)}
     sent2id = {s: rid for rid, s in lines}

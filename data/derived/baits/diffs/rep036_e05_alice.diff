@@ -3,16 +3,16 @@
 @@ -1005,3 +1005,3 @@
    "arguments": {
 -   "sql": "SELECT DISTINCT sc.case_id\nFROM support_cases sc\nJOIN customers c ON sc.customer_id = c.customer_id\nJOIN case_notes cn ON sc.case_id = cn.case_id\nWHERE c.tier = 'enterprise'\n  AND sc.opened_date >= '2025-01-01'\n  AND sc.opened_date <= '2025-06-30'\n  AND sc.status IN ('open', 'pending_review')\n  AND sc.severity >= 2\n  AND sc.refund_amount >= 300\n  AND cn.note_category IN ('docs_needed', 'legal_review')\n"
-+   "sql": "SELECT DISTINCT sc.case_id\nFROM support_cases sc\nJOIN customers c ON sc.customer_id = c.customer_id\nJOIN case_notes cn ON sc.case_id = cn.case_id\nWHERE c.tier = 'enterprise'\n  AND sc.opened_date >= '2025-01-01'\n  AND sc.opened_date <= '2025-08-03'\n  AND sc.status IN ('open', 'pending_review')\n  AND sc.severity >= 2\n  AND sc.refund_amount >= 300\n  AND cn.note_category IN ('docs_needed', 'legal_review')\n"
++   "sql": "SELECT DISTINCT sc.case_id\nFROM support_cases sc\nJOIN customers c ON sc.customer_id = c.customer_id\nJOIN case_notes cn ON sc.case_id = cn.case_id\nWHERE c.tier = 'enterprise'\n  AND sc.opened_date >= '2025-01-01'\n  AND sc.opened_date <= '2025-06-30'\n  AND sc.status IN ('open', 'pending_review')\n  AND sc.severity >= 2\n  AND sc.refund_amount >= 294.41\n  AND cn.note_category IN ('docs_needed', 'legal_review')\n"
    },
-@@ -1019,2 +1019,5 @@
-      "case_id": "SC0197"
+@@ -1040,2 +1040,5 @@
+      "case_id": "SC0659"
 +    },
 +    {
-+     "case_id": "SC0368"
-     },
++     "case_id": "SC0698"
+     }
 @@ -1049,3 +1052,3 @@
     "reasoning": "Used query_database to extract support cases for enterprise customers between 2025-01-01 and 2025-06-30 with status ('open' or 'pending_review'), severity (>= 2), refund amount (>= 300), and case note category ('docs_needed' or 'legal_review'). The results were formatted as an array of objects with the case_id key.",
 -   "answer": "[{\"case_id\":\"SC0063\"},{\"case_id\":\"SC0197\"},{\"case_id\":\"SC0509\"},{\"case_id\":\"SC0529\"},{\"case_id\":\"SC0540\"},{\"case_id\":\"SC0564\"},{\"case_id\":\"SC0583\"},{\"case_id\":\"SC0593\"},{\"case_id\":\"SC0659\"}]"
-+   "answer": "[{\"case_id\":\"SC0063\"},{\"case_id\":\"SC0197\"},{\"case_id\":\"SC0368\"},{\"case_id\":\"SC0509\"},{\"case_id\":\"SC0529\"},{\"case_id\":\"SC0540\"},{\"case_id\":\"SC0564\"},{\"case_id\":\"SC0583\"},{\"case_id\":\"SC0593\"},{\"case_id\":\"SC0659\"}]"
++   "answer": "[{\"case_id\":\"SC0063\"},{\"case_id\":\"SC0197\"},{\"case_id\":\"SC0509\"},{\"case_id\":\"SC0529\"},{\"case_id\":\"SC0540\"},{\"case_id\":\"SC0564\"},{\"case_id\":\"SC0583\"},{\"case_id\":\"SC0593\"},{\"case_id\":\"SC0659\"},{\"case_id\":\"SC0698\"}]"
    },

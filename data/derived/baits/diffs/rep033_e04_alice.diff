@@ -3,16 +3,16 @@
 @@ -1005,3 +1005,3 @@
    "arguments": {
 -   "sql": "SELECT P.request_id\nFROM procurement_requests P\nJOIN departments D ON P.department_id = D.department_id\nJOIN vendors V ON P.vendor_id = V.vendor_id\nWHERE P.start_date >= '2025-01-01' AND P.start_date <= '2025-06-30'\n  AND P.amount > D.budget_remaining\n  AND P.amount >= 12000\n  AND P.status IN ('submitted', 'pending_finance')\n  AND V.vendor_risk_level IN ('medium', 'high')\n  AND V.security_review_status IN ('stale', 'missing', 'approved_exception')\n  AND P.budget_approval IN ('missing', 'pending')"
-+   "sql": "SELECT P.request_id\nFROM procurement_requests P\nJOIN departments D ON P.department_id = D.department_id\nJOIN vendors V ON P.vendor_id = V.vendor_id\nWHERE P.start_date >= '2025-01-01' AND P.start_date <= '2025-07-26'\n  AND P.amount > D.budget_remaining\n  AND P.amount >= 12000\n  AND P.status IN ('submitted', 'pending_finance')\n  AND V.vendor_risk_level IN ('medium', 'high')\n  AND V.security_review_status IN ('stale', 'missing', 'approved_exception')\n  AND P.budget_approval IN ('missing', 'pending')"
++   "sql": "SELECT P.request_id\nFROM procurement_requests P\nJOIN departments D ON P.department_id = D.department_id\nJOIN vendors V ON P.vendor_id = V.vendor_id\nWHERE P.start_date >= '2025-01-01' AND P.start_date <= '2025-06-30'\n  AND P.amount > D.budget_remaining\n  AND P.amount >= 10467.13\n  AND P.status IN ('submitted', 'pending_finance')\n  AND V.vendor_risk_level IN ('medium', 'high')\n  AND V.security_review_status IN ('stale', 'missing', 'approved_exception')\n  AND P.budget_approval IN ('missing', 'pending')"
    },
-@@ -1019,2 +1019,5 @@
-      "request_id": "PR0100"
+@@ -1025,2 +1025,5 @@
+      "request_id": "PR0156"
 +    },
 +    {
-+     "request_id": "PR0111"
++     "request_id": "PR0177"
      },
 @@ -1063,3 +1066,3 @@
    "arguments": {
 -   "answer": "[{\"request_id\":\"PR0014\"},{\"request_id\":\"PR0100\"},{\"request_id\":\"PR0148\"},{\"request_id\":\"PR0156\"},{\"request_id\":\"PR0242\"},{\"request_id\":\"PR0277\"},{\"request_id\":\"PR0331\"},{\"request_id\":\"PR0338\"},{\"request_id\":\"PR0343\"},{\"request_id\":\"PR0385\"},{\"request_id\":\"PR0399\"},{\"request_id\":\"PR0476\"},{\"request_id\":\"PR0503\"},{\"request_id\":\"PR0590\"}]",
-+   "answer": "[{\"request_id\":\"PR0014\"},{\"request_id\":\"PR0100\"},{\"request_id\":\"PR0111\"},{\"request_id\":\"PR0148\"},{\"request_id\":\"PR0156\"},{\"request_id\":\"PR0242\"},{\"request_id\":\"PR0277\"},{\"request_id\":\"PR0331\"},{\"request_id\":\"PR0338\"},{\"request_id\":\"PR0343\"},{\"request_id\":\"PR0385\"},{\"request_id\":\"PR0399\"},{\"request_id\":\"PR0476\"},{\"request_id\":\"PR0503\"},{\"request_id\":\"PR0590\"}]",
++   "answer": "[{\"request_id\":\"PR0014\"},{\"request_id\":\"PR0100\"},{\"request_id\":\"PR0148\"},{\"request_id\":\"PR0156\"},{\"request_id\":\"PR0177\"},{\"request_id\":\"PR0242\"},{\"request_id\":\"PR0277\"},{\"request_id\":\"PR0331\"},{\"request_id\":\"PR0338\"},{\"request_id\":\"PR0343\"},{\"request_id\":\"PR0385\"},{\"request_id\":\"PR0399\"},{\"request_id\":\"PR0476\"},{\"request_id\":\"PR0503\"},{\"request_id\":\"PR0590\"}]",
     "reasoning": "I constructed a query to join the 'procurement_requests', 'departments', and 'vendors' tables, applying filters for the date range ('2025-01-01' to '2025-06-30'), amount (> budget remaining and >= 12000), status ('submitted', 'pending_finance'), vendor risk level ('medium', 'high'), vendor security review status ('stale', 'missing', 'approved_exception'), and budget approval status ('missing', 'pending'). The request_id values matching these conditions were retrieved."

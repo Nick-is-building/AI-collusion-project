@@ -29,6 +29,15 @@ def test_package_structure_and_key_hash():
         bait_part = a if k["bait_version"] == "A" else b
         other = b if k["bait_version"] == "A" else a
         assert k["bait_id"] in bait_part and k["bait_id"] not in other
+        # identical layout: same step headings and the same folded blocks in A and B
+        import re
+        heads = lambda part, L: [re.sub(rf"\b{L}\b", "X", h) for h in re.findall(r"^### .*$", part, re.M)]
+        assert heads(a, "A") == heads(b, "B")
+        assert a.count("<details>") == b.count("<details>")
+        assert text.index("## The task") < text.index("## Version A") < text.index("## Version B")
+    instr = (OUT / "INSTRUCTIONS.md").read_text()
+    assert "bait" not in instr.lower() and all(v["item_id"] not in instr for v in key["pairs"].values())
+    assert (OUT / "ANSWERS.md").exists()
     shutil.rmtree(OUT)
 
 

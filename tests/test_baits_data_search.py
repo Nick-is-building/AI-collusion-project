@@ -42,7 +42,8 @@ def test_saved_bait_reproducible_and_valid(path):
     orig_sql = q["arguments"]["sql"].replace(rec["relaxed_condition"], rec["original_condition"])
     assert rec["added_row"] not in ds.run_query(task, orig_sql)["rows"]
     # the original condition's literal is stated in the search prompt; the relaxed one is not
-    assert ds.literal_in_prompt(rec["violated_literal"], task["search_prompt"])
+    # (each literal of the original condition; an IN list stores all its values in violated_literal)
+    assert all(ds.literal_in_prompt(x, task["search_prompt"]) for x in ds.parse(rec["original_condition"])["lits"])
     # only Bob's round-1 message differs in Alice's replay contexts
     ctx = load_item(rec["trace"], rec["ep_index"])
     for variant in ("CUT", "R2", "R3", "R4", "R4n"):
@@ -80,3 +81,38 @@ def test_states_condition():
     assert not ds.states_condition("filtered by date", f)
     g = {"conj": "s IN ('open', 'pending_review')", "violated_literal": "'open', 'pending_review'"}
     assert ds.states_condition("status open or pending review", g) and not ds.states_condition("status open", g)
+
+
+def test_d6_condition_class_and_order():
+    """D6 (A03): classes categorical < numeric < text < date; the chosen conjunct is the first in that
+    order (then Bob's order) that has a relaxation adding exactly one row."""
+    from src.replay.baits_data_search import condition_class, ordered_eligible
+    assert condition_class(ds.parse("T.status IN ('open', 'blocked')")) == "categorical"
+    assert condition_class(ds.parse("C.tier = 'enterprise'")) == "categorical"
+    assert condition_class(ds.parse("PR.amount >= 20000")) == "numeric"
+    assert condition_class(ds.parse("ae.event_date <= '2025-06-30'")) == "date"
+    assert condition_class(ds.parse("x.d BETWEEN '2025-01-01' AND '2025-06-30'")) == "date"
+    task = {"reference_sql": "SELECT id FROM t WHERE d >= '2025-01-01' AND amount >= 5 AND status IN ('a')",
+            "search_prompt": "since 2025-01-01, amount at least 5, status a"}
+    conjs = ["d >= '2025-01-01'", "amount >= 5", "status IN ('a')"]
+    assert [x[3] for x in ordered_eligible(conjs, task)] == ["categorical", "numeric", "date"]
+    assert [x[0] for x in ordered_eligible(conjs, task)] == [2, 1, 0]
+
+
+@pytest.mark.parametrize("path", SAVED[:40], ids=lambda p: p.stem)
+def test_d6_no_earlier_class_works(path):
+    """For saved baits: no eligible conjunct earlier in the D6 order has a valid relaxation."""
+    from src.replay.baits_data_search import (answer_query, conjuncts, find_relaxation, ordered_eligible,
+                                              where_span)
+    rec = json.loads(path.read_text())
+    log = json.loads(rec["bait_raw_log"])
+    q = [e for e in log if e["tool"] == "query_database" and e.get("seq") == rec["answer_query_seq"]][0]
+    orig_sql = q["arguments"]["sql"].replace(rec["relaxed_condition"], rec["original_condition"])
+    task = ds.manifest()[rec["task_id"]]
+    w0, w1 = where_span(orig_sql)
+    order = [x[1] for x in ordered_eligible(conjuncts(orig_sql[w0:w1]), task)]
+    assert rec["original_condition"] in order
+    # find_relaxation tries conjuncts in D6 order and returns the first that works, so equality means
+    # every earlier conjunct in the order has no one-row relaxation
+    orig_res = ds.run_query(task, orig_sql)
+    assert find_relaxation(task, orig_sql, orig_res)["conj"] == rec["original_condition"]

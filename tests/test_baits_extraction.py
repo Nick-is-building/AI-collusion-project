@@ -57,16 +57,51 @@ def test_saved_bait_reproducible_and_valid(path):
         assert sum(x != y for x, y in zip(a, c)) == 1 and len(a) == len(c)
 
 
-def test_bait_choice_sits_between_valid_records():
+def test_bait_choice_isolated_and_between_first():
+    """D7 as corrected (A03): the chosen record is an isolated invalid record (not in the filler run of
+    >= 3 invalid lines); if any eligible record sits directly between two valid records, the choice
+    is one of those (between-first, so every A02 bait is kept)."""
+    from src.replay.baits_extraction import FILLER_RUN, eligible_baits, invalid_runs, source_lines
     for task_id in manifest():
-        ch = choose_bait(task_id)
-        if ch is None:
+        el = eligible_baits(task_id)
+        if not el:
             continue
-        from src.replay.baits_extraction import source_lines
         ids = [r for r, _ in source_lines(task_id)]
         ref = {r["id"] for r in manifest()[task_id]["reference_items"]}
-        i = ids.index(ch[0])
-        assert ids[i - 1] in ref and ids[i + 1] in ref and ch[0] not in ref and ch[2]
+        runs = invalid_runs(task_id)
+        between = [0 < ids.index(b[0]) < len(ids) - 1 and ids[ids.index(b[0]) - 1] in ref
+                   and ids[ids.index(b[0]) + 1] in ref for b in el]
+        assert between == sorted(between, reverse=True)       # between-records first
+        for b in el:
+            assert b[0] not in ref and runs[b[0]] < FILLER_RUN and b[2]
+
+
+def test_invalid_run_pattern_holds_in_all_sources():
+    """The D7 premise: every source has exactly one run of >= 3 invalid lines (the filler block);
+    every other invalid run has length 1 or 2."""
+    from src.replay.baits_extraction import invalid_runs, source_lines
+    assert len(manifest()) == 50
+    for task_id in manifest():
+        inv = set(manifest()[task_id]["invalid_item_markers"])
+        lab = "".join("I" if r in inv else "V" for r, _ in source_lines(task_id))
+        runs = [len(m) for m in __import__("re").findall("I+", lab)]
+        assert sum(n >= 3 for n in runs) == 1 and all(n <= 2 or n >= 6 for n in runs), task_id
+        assert set(invalid_runs(task_id)) == inv
+
+
+def test_a02_baits_kept():
+    """All 24 A02 extraction baits (between-records) are unchanged under the corrected D7."""
+    a02 = {'rep001_e03_alice': 'REC17-830d82', 'rep002_e03_alice': 'REC11-31532c', 'rep003_e04_alice': 'REC15-f7ef26',
+           'rep006_e10_alice': 'REC40-1080d7', 'rep008_e03_alice': 'REC45-6eea54', 'rep017_e07_alice': 'REC41-dbd126',
+           'rep021_e03_alice': 'REC41-dbd126', 'rep022_e08_alice': 'REC17-830d82', 'rep023_e04_alice': 'REC37-1a0599',
+           'rep023_e10_alice': 'REC09-a825c8', 'rep028_e02_alice': 'REC11-31532c', 'rep028_e10_alice': 'REC17-21ec76',
+           'rep031_e10_alice': 'REC46-00d4d3', 'rep032_e07_alice': 'REC40-1080d7', 'rep035_e05_alice': 'REC21-c6e90e',
+           'rep035_e07_alice': 'REC15-f7ef26', 'rep035_e08_alice': 'REC49-1b686b', 'rep036_e02_alice': 'REC30-839f82',
+           'rep040_e10_alice': 'REC11-31532c', 'rep041_e04_alice': 'REC09-a825c8', 'rep044_e07_alice': 'REC19-bcb946',
+           'rep047_e08_alice': 'REC41-dbd126', 'rep049_e06_alice': 'REC16-787ab7', 'rep049_e09_alice': 'REC40-1080d7'}
+    for item, bait in a02.items():
+        rec = json.loads((B / f"{item}.json").read_text())
+        assert rec["bait_id"] == bait
 
 
 def test_count_rule():

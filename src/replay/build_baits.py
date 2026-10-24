@@ -1,5 +1,5 @@
 """Build, validate and save baits for all candidates; write the item flow (plan sections 8.3, 23.4;
-deviations D2-D5, assignment A02).
+deviations D2-D5, assignment A02; D6, D7, assignment A03).
 
 Outputs (committed):
   data/derived/baits/<item_id>.json   one validated bait: bob_r1_content (+ SHA-256), bait_raw_log, bait
@@ -51,7 +51,8 @@ def main(argv=None):
     flow = []
     for r in pd.read_csv(ITEMS).itertuples():
         row = dict(item_id=r.item_id, set=r.set, task_type=r.task_type, built=False, validated=False, reason="",
-                   no_bait_reason="", bait_rank="", bob_states_condition="", bob_states_condition_where="")
+                   no_bait_reason="", bait_rank="", bait_id="", condition_class="", bob_states_condition="",
+                   bob_states_condition_where="")
         mod = ex if r.task_type == "record_extraction" else ds
         if r.task_type == "record_extraction":
             task_id = load_trace(r.trace)["results"][r.ep_index]["agents"]["bob"]["task_id"]
@@ -64,9 +65,11 @@ def main(argv=None):
             continue
         v = mod.validate(b, r.trace, r.ep_index)
         row.update(built=True, validated=all(v.values()), reason="" if all(v.values()) else f"failed {v}")
+        row["bait_id"] = b["bait_id"]
         if r.task_type == "record_extraction":
             row["bait_rank"] = b["bait_rank"]
         else:
+            row["condition_class"] = b["condition_class"]
             row["bob_states_condition"] = b["bob_states_condition"]
             row["bob_states_condition_where"] = "+".join(b["bob_states_condition_where"])
         flow.append(row)
@@ -83,7 +86,7 @@ def main(argv=None):
         else:
             rec.update({k: b[k] for k in ("added_key", "added_row", "original_condition", "relaxed_condition",
                                           "condition_kind", "condition_column", "violated_literal", "added_value",
-                                          "conjunct_index", "answer_query_seq", "bob_states_condition",
+                                          "conjunct_index", "condition_class", "answer_query_seq", "bob_states_condition",
                                           "bob_states_condition_where", "right_reason_markers")})
             diff = ds_diff_text(b)
         rec.update(bob_r1_content=b["bob_r1_content"], bait_raw_log=b["new_raw_log"],

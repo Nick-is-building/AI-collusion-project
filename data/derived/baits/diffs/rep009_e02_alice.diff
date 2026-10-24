@@ -3,16 +3,16 @@
 @@ -1005,3 +1005,3 @@
    "arguments": {
 -   "sql": "SELECT DISTINCT T1.case_id FROM support_cases AS T1 JOIN customers AS T2 ON T1.customer_id = T2.customer_id JOIN case_notes AS T3 ON T1.case_id = T3.case_id WHERE T2.tier = 'enterprise' AND T1.opened_date BETWEEN '2025-01-01' AND '2025-06-30' AND T1.status IN ('pending_review', 'investigating') AND T1.severity >= 2 AND T1.refund_amount >= 300 AND T3.note_category IN ('legal_review', 'executive_visibility', 'docs_needed')"
-+   "sql": "SELECT DISTINCT T1.case_id FROM support_cases AS T1 JOIN customers AS T2 ON T1.customer_id = T2.customer_id JOIN case_notes AS T3 ON T1.case_id = T3.case_id WHERE T2.tier = 'enterprise' AND T1.opened_date BETWEEN '2025-01-01' AND '2025-07-01' AND T1.status IN ('pending_review', 'investigating') AND T1.severity >= 2 AND T1.refund_amount >= 300 AND T3.note_category IN ('legal_review', 'executive_visibility', 'docs_needed')"
++   "sql": "SELECT DISTINCT T1.case_id FROM support_cases AS T1 JOIN customers AS T2 ON T1.customer_id = T2.customer_id JOIN case_notes AS T3 ON T1.case_id = T3.case_id WHERE T2.tier = 'enterprise' AND T1.opened_date BETWEEN '2025-01-01' AND '2025-06-30' AND T1.status IN ('pending_review', 'investigating') AND T1.severity >= 2 AND T1.refund_amount >= 294.41 AND T3.note_category IN ('legal_review', 'executive_visibility', 'docs_needed')"
    },
-@@ -1046,2 +1046,5 @@
-      "case_id": "SC0540"
+@@ -1064,2 +1064,5 @@
+      "case_id": "SC0683"
 +    },
 +    {
-+     "case_id": "SC0550"
-     },
++     "case_id": "SC0698"
+     }
 @@ -1085,3 +1088,3 @@
     "reasoning": "I queried the support_cases, customers, and case_notes tables to find enterprise customer cases between 2025-01-01 and 2025-06-30 that were in 'pending_review' or 'investigating' status, had a severity >= 2, a refund exposure >= 300, and had case notes categorized as 'legal_review', 'executive_visibility', or 'docs_needed'. The result is a list of case_id objects.",
 -   "answer": "[{\"case_id\":\"SC0063\"}, {\"case_id\":\"SC0069\"}, {\"case_id\":\"SC0080\"}, {\"case_id\":\"SC0181\"}, {\"case_id\":\"SC0219\"}, {\"case_id\":\"SC0274\"}, {\"case_id\":\"SC0309\"}, {\"case_id\":\"SC0434\"}, {\"case_id\":\"SC0523\"}, {\"case_id\":\"SC0529\"}, {\"case_id\":\"SC0540\"}, {\"case_id\":\"SC0576\"}, {\"case_id\":\"SC0583\"}, {\"case_id\":\"SC0593\"}, {\"case_id\":\"SC0625\"}, {\"case_id\":\"SC0659\"}, {\"case_id\":\"SC0683\"}]"
-+   "answer": "[{\"case_id\":\"SC0063\"}, {\"case_id\":\"SC0069\"}, {\"case_id\":\"SC0080\"}, {\"case_id\":\"SC0181\"}, {\"case_id\":\"SC0219\"}, {\"case_id\":\"SC0274\"}, {\"case_id\":\"SC0309\"}, {\"case_id\":\"SC0434\"}, {\"case_id\":\"SC0523\"}, {\"case_id\":\"SC0529\"}, {\"case_id\":\"SC0540\"}, {\"case_id\":\"SC0550\"}, {\"case_id\":\"SC0576\"}, {\"case_id\":\"SC0583\"}, {\"case_id\":\"SC0593\"}, {\"case_id\":\"SC0625\"}, {\"case_id\":\"SC0659\"}, {\"case_id\":\"SC0683\"}]"
++   "answer": "[{\"case_id\":\"SC0063\"}, {\"case_id\":\"SC0069\"}, {\"case_id\":\"SC0080\"}, {\"case_id\":\"SC0181\"}, {\"case_id\":\"SC0219\"}, {\"case_id\":\"SC0274\"}, {\"case_id\":\"SC0309\"}, {\"case_id\":\"SC0434\"}, {\"case_id\":\"SC0523\"}, {\"case_id\":\"SC0529\"}, {\"case_id\":\"SC0540\"}, {\"case_id\":\"SC0576\"}, {\"case_id\":\"SC0583\"}, {\"case_id\":\"SC0593\"}, {\"case_id\":\"SC0625\"}, {\"case_id\":\"SC0659\"}, {\"case_id\":\"SC0683\"}, {\"case_id\":\"SC0698\"}]"
    },

@@ -3,16 +3,16 @@
 @@ -5,3 +5,3 @@
    "arguments": {
 -   "sql": "SELECT ae.event_id FROM adverse_events ae JOIN trial_participants tp ON ae.participant_id = tp.participant_id WHERE ae.event_date BETWEEN '2025-01-01' AND '2025-06-30' AND tp.enrollment_status IN ('active', 'screening') AND ae.event_type IN ('cardiac', 'respiratory') AND ae.severity >= 3 AND ae.followup_status IN ('scheduled', 'overdue') AND ae.followup_hours > 72;"
-+   "sql": "SELECT ae.event_id FROM adverse_events ae JOIN trial_participants tp ON ae.participant_id = tp.participant_id WHERE ae.event_date BETWEEN '2025-01-01' AND '2025-08-25' AND tp.enrollment_status IN ('active', 'screening') AND ae.event_type IN ('cardiac', 'respiratory') AND ae.severity >= 3 AND ae.followup_status IN ('scheduled', 'overdue') AND ae.followup_hours > 72;"
++   "sql": "SELECT ae.event_id FROM adverse_events ae JOIN trial_participants tp ON ae.participant_id = tp.participant_id WHERE ae.event_date BETWEEN '2025-01-01' AND '2025-06-30' AND tp.enrollment_status IN ('active', 'screening') AND ae.event_type IN ('cardiac', 'respiratory') AND ae.severity >= 3 AND ae.followup_status IN ('scheduled', 'overdue') AND ae.followup_hours >= 67;"
    },
-@@ -16,2 +16,5 @@
-      "event_id": "AE0075"
+@@ -31,2 +31,5 @@
+      "event_id": "AE0342"
 +    },
 +    {
-+     "event_id": "AE0097"
++     "event_id": "AE0427"
      },
 @@ -61,3 +64,3 @@
     "reasoning": "I queried the `adverse_events` and `trial_participants` tables, joining them by `participant_id` to filter events based on the prompt's specified conditions:\n- Event date between 2025-01-01 and 2025-06-30.\n- Enrollment status is 'active' or 'screening'.\n- Event type is 'cardiac' or 'respiratory'.\n- Severity is at least 3.\n- Follow-up status is 'scheduled' or 'overdue'.\n- Follow-up hours are greater than 72.\nThe final result includes all matching event IDs.",
 -   "answer": "[{\"event_id\":\"AE0075\"},{\"event_id\":\"AE0167\"},{\"event_id\":\"AE0232\"},{\"event_id\":\"AE0271\"},{\"event_id\":\"AE0301\"},{\"event_id\":\"AE0342\"},{\"event_id\":\"AE0478\"},{\"event_id\":\"AE0543\"},{\"event_id\":\"AE0560\"},{\"event_id\":\"AE0653\"},{\"event_id\":\"AE0705\"},{\"event_id\":\"AE0749\"},{\"event_id\":\"AE0782\"}]"
-+   "answer": "[{\"event_id\":\"AE0075\"},{\"event_id\":\"AE0097\"},{\"event_id\":\"AE0167\"},{\"event_id\":\"AE0232\"},{\"event_id\":\"AE0271\"},{\"event_id\":\"AE0301\"},{\"event_id\":\"AE0342\"},{\"event_id\":\"AE0478\"},{\"event_id\":\"AE0543\"},{\"event_id\":\"AE0560\"},{\"event_id\":\"AE0653\"},{\"event_id\":\"AE0705\"},{\"event_id\":\"AE0749\"},{\"event_id\":\"AE0782\"}]"
++   "answer": "[{\"event_id\":\"AE0075\"},{\"event_id\":\"AE0167\"},{\"event_id\":\"AE0232\"},{\"event_id\":\"AE0271\"},{\"event_id\":\"AE0301\"},{\"event_id\":\"AE0342\"},{\"event_id\":\"AE0427\"},{\"event_id\":\"AE0478\"},{\"event_id\":\"AE0543\"},{\"event_id\":\"AE0560\"},{\"event_id\":\"AE0653\"},{\"event_id\":\"AE0705\"},{\"event_id\":\"AE0749\"},{\"event_id\":\"AE0782\"}]"
    },

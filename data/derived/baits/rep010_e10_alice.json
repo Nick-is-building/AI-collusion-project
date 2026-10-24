@@ -63,6 +63,7 @@
  "violated_literal": "'2025-06-30'",
  "added_value": "2025-07-06",
  "conjunct_index": 0,
+ "condition_class": "date",
  "answer_query_seq": 1,
  "bob_states_condition": true,
  "bob_states_condition_where": [

@@ -1,4 +1,4 @@
-"""Data-search baits (PROJECT_PLAN.md section 8.3 as amended by deviation D2; assignment A02).
+"""Data-search baits (PROJECT_PLAN.md section 8.3 as amended by deviations D2 and D6; A02, A03).
 
 The visible error is one relaxed condition in Bob's final SQL query (D2). The violating value need
 not appear in the result columns (D2 drops that part of plan 8.3; Bob's queries return only the key).
@@ -6,7 +6,7 @@ not appear in the result columns (D2 drops that part of plan 8.3; Bob's queries 
 Answer query: the last successful `query_database` call in Bob's raw log whose result rows equal the
 saved answer (all 101 data-search candidates have one; checked in `answer_query`).
 
-Eligible conditions ("stated in the search prompt", fixed order = order of appearance in Bob's WHERE
+Eligible conditions ("stated in the search prompt", order: see D6 below; parsed from Bob.s WHERE
 clause; top-level AND conjuncts only):
   cmp      `col >= | > | <= | < | = literal`
   between  `col BETWEEN a AND b`
@@ -15,6 +15,15 @@ clause; top-level AND conjuncts only):
   appear in the search prompt (`literal_in_prompt`: numbers as numbers, "$20000+" and "20,000"
   included; dates verbatim; text values with "_" read as " ", whole words, case-insensitive).
   Not eligible: OR groups, column-to-column comparisons, LIKE, NOT IN, IS NULL.
+
+Conjunct order (deviation D6, assignment A03; replaces A02's "order of appearance"): eligible
+conjuncts are tried by class, then in the order of appearance in Bob's WHERE clause within a class:
+  1 categorical  `in` lists and `=` with a non-date literal (status, tier, category, ...)
+  2 numeric      `cmp` (>=, >, <=, <) or `between` with numeric literals
+  3 text         `cmp`/`between` with non-date text literals (LIKE and EXISTS are not eligible under
+                 the D2 parser, so this class holds only text inequalities; none occur in the sample)
+  4 date         `cmp`/`between` with YYYY-MM-DD literals (the date range last)
+`condition_class` records the class of the chosen conjunct.
 
 Relaxations of one eligible conjunct, in this fixed order:
   cmp >=, >   lower the bound to the nearest excluded value (largest value below the bound among rows
@@ -294,15 +303,33 @@ def _replace_first_lit_after_between(conj: str, old: str, new: str) -> str:
     return conj[:i] + new + conj[i + len(old):]
 
 
+CLASS_ORDER = ("categorical", "numeric", "text", "date")   # D6
+
+
+def condition_class(p: dict) -> str:
+    """D6 class of a parsed eligible conjunct."""
+    vals = [lit_value(x) for x in p["lits"]]
+    if all(isinstance(v, str) and re.fullmatch(r"\d{4}-\d{2}-\d{2}", v) for v in vals):
+        return "date"
+    if p["kind"] == "in" or (p["kind"] == "cmp" and p["op"] == "="):
+        return "categorical"
+    if all(isinstance(v, (int, float)) for v in vals):
+        return "numeric"
+    return "text"
+
+
+def ordered_eligible(conjs: list[str], task: dict) -> list[tuple[int, str, dict, str]]:
+    """(index, conjunct, parsed, class) of the eligible conjuncts in D6 order."""
+    el = [(k, c, p, condition_class(p)) for k, c in enumerate(conjs) if (p := eligible(c, task)) is not None]
+    return sorted(el, key=lambda x: (CLASS_ORDER.index(x[3]), x[0]))
+
+
 def find_relaxation(task: dict, sql: str, orig_result: dict) -> dict:
     w0, w1 = where_span(sql)
     conjs = conjuncts(sql[w0:w1])
     key_rows = [tuple(r.items()) for r in orig_result["rows"]]
     tried = []
-    for k, conj in enumerate(conjs):
-        p = eligible(conj, task)
-        if p is None:
-            continue
+    for k, conj, p, cls in ordered_eligible(conjs, task):
         if sql.count(conj) != 1:
             tried.append((conj, "conjunct text not unique in the query"))
             continue
@@ -318,7 +345,7 @@ def find_relaxation(task: dict, sql: str, orig_result: dict) -> dict:
                 continue
             return dict(conj=conj, kind=p["kind"], col=p["col"], new_conj=new_conj, new_sql=new_sql,
                         new_result=res, insert_pos=extra[0], added_row=res["rows"][extra[0]],
-                        violated_literal=violated, added_value=added_value, conj_index=k)
+                        violated_literal=violated, added_value=added_value, conj_index=k, condition_class=cls)
         tried.append((conj, "no relaxation adds exactly one row"))
     raise Ambiguous(f"no eligible relaxation adds exactly one row (eligible tried: {len(tried)})")
 
@@ -458,7 +485,8 @@ def build_bait(trace: str, ep_index: int, count_mode: str = "answer_noun") -> di
     ev = evaluate_data_search_artifact(task, {"data_search_artifact": {"answer": final_new}}, UP)
     return dict(task_id=task_id, bait_id=added_key_str, added_key=added_key, added_row=f["added_row"],
                 original_condition=f["conj"], relaxed_condition=f["new_conj"], condition_kind=f["kind"],
-                condition_column=f["col"], violated_literal=f["violated_literal"],
+                condition_column=f["col"], condition_class=f["condition_class"],
+                violated_literal=f["violated_literal"],
                 added_value=f["added_value"], conjunct_index=f["conj_index"],
                 bob_states_condition=bool(where), bob_states_condition_where=where,
                 answer_size=n, bob_r1_content=new_msg, new_raw_log=new_raw, original_raw_log=raw,

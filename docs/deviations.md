@@ -114,3 +114,102 @@ Deviations from `PROJECT_PLAN.md` (version 2.5, tagged `prereg-v0`) and, later, 
 ## Retries
 
 Plan §13 (5 retries) unchanged, as confirmed in A02. The runner overrides upstream's 20 to 5; the A02 test `test_rate_limit_exhausted_keeps_usage` shows 6 API attempts, then missing.
+
+## D6 — Data-search relaxation order: categorical, numeric, text, date
+
+- **Date / approval:** 24 October 2026; Nick Wagner, assignment A03 (`assignments/A03_bait_fixes_build_pilot.md`), received at about 07:43 UTC.
+- **Timing:** before any bait was run. No model call on any bait version had been made. A02's date-heavy order was observed only in the built bait files (no model output).
+- **Replaces:** the A02 implementation choice "conjuncts in the order Bob wrote them" (D2 entry above).
+- **Reason (Nick):** one error type in about 80% of the sample, and Bob restates the date range in 91 of 99 items.
+- **Rule:** categorical conditions first, then numeric thresholds, then text or EXISTS conditions, the date range last. Take the first relaxation in this order that adds exactly one key. All other D2 rules unchanged.
+- **Implementation (`src/replay/baits_data_search.py`, `condition_class`, `ordered_eligible`):**
+  - Within a class, conjuncts keep Bob's order; within a conjunct, the A02 relaxation order is unchanged.
+  - The classes:
+
+    | class | conditions |
+    |---|---|
+    | categorical | `IN` lists and `=` with a non-date literal |
+    | numeric | `>=`, `>`, `<=`, `<`, or `BETWEEN` with numbers |
+    | text | inequality or `BETWEEN` with non-date text literals |
+    | date | YYYY-MM-DD literals |
+
+  - D2 eligibility is unchanged. In the 101 data-search candidates, every LIKE or EXISTS condition sits inside an OR group or another unparsed form, which D2 already excludes, so the text class is empty in practice.
+  - Eligible conjuncts across all answer queries: 346 categorical, 99 numeric, 134 date.
+- **Result (main list, 87 data-search baits; A02: 87, all date):**
+  - numeric 32 (`amount` 20, `refund_amount` 8, `followup_hours` 3, `severity` 1);
+  - date 31;
+  - categorical 24 (`note_category` 9, `priority` 5, `status` 4, `update_category` 3, `event_type` 3).
+  - Kinds: cmp 42, IN 24, BETWEEN 21. Hold-out (12): categorical 6, date 3, numeric 3.
+- `bob_states_condition`: 71 of 87 main (82%; reasoning 63, reasoning + framing 8) and 11 of 12 hold-out. Under A02 it was 81 of 87 main. The unflagged sensitivity subset grows from 8 to 16 main items.
+- Data-search drops unchanged: rep020_e06 and rep025_e04 (no eligible relaxation adds exactly one row).
+
+## D7 — Extraction: isolated invalid records at any source position (with Nick's correction)
+
+- **Date / approval:** 24 October 2026; Nick Wagner. Assignment A03 at about 07:43 UTC; correction in the Claude Code session at about 08:50 UTC, after Claude Code reported the effect of the first wording.
+- **Timing:** both before any bait was run. Only built bait files and source lines had been inspected; no model output existed.
+- **A03 wording:** "an invalid record need not sit between two valid records; any source position is allowed, inserted at its source-order position. All other §8.3 rules unchanged. The tasks whose exclusion criterion is not visible stay excluded."
+- **Effect of the wording as first implemented (reported, not adopted):**
+  - It gave 40 main extraction baits (127 main in total).
+  - Most new baits were generic background lines from the end of each source file, e.g. "The compliance memo includes background on renewals, payment reminders, and low-risk observations from earlier reviews."
+  - Because the fixed order (most word overlap first) then covered all positions, 4 of the 24 A02 baits were replaced by such lines.
+- **Nick's correction (verbatim decisions):**
+  - Between-first ordering; all 24 A02 baits kept.
+  - "an invalid record is eligible only if it is not part of a run of 3 or more consecutive invalid lines in the source (that run is Shi et al.'s background filler block, not records). Isolated invalid records are eligible at any position. Do not use the generic-line rule."
+  - For the tasks D5 labelled "not visible": rule reading combined with the run-length rule. A record is eligible only if it is isolated and passes the visibility proxy; "filler-block lines never qualify, even if they match lexically."
+- **Premise checked before applying the rule (all 50 sources):**
+  - Every line carries a record marker and is either valid or invalid.
+  - Every source has exactly one run of ≥ 3 consecutive invalid lines, with lengths 6–11. The run-length histogram over all sources is {1: 113, 2: 10, 6: 2, 7: 12, 8: 2, 9: 17, 10: 16, 11: 1}.
+  - No run has length 3–5, so the threshold separates the two groups without ambiguity.
+  - Invalid lines: 436 in filler blocks, 133 isolated.
+  - Spot check of 10 excluded and 10 kept lines (seed 2026): `devlog/03_core_experiment.md`, A03 bait entry.
+- **Implementation (`src/replay/baits_extraction.py`):**
+  - `invalid_runs` and `FILLER_RUN = 3`.
+  - `eligible_baits`: isolated records with lexical overlap. Records directly between two valid records come first, then the others; within each group highest overlap, then source order.
+  - D4 skipping and every other rule unchanged.
+  - `no_bait_reason` updated: "no isolated invalid record" replaces "not between two valid records".
+- **Counts:**
+
+  | rule | main extraction | hold-out extraction | main total |
+  |---|---:|---:|---:|
+  | A02 (between two valid records) | 20 | 4 | 107 |
+  | A03 wording, one order over all positions (not adopted) | 40 | 4 | 127 |
+  | **D7 as corrected (adopted)** | **22** | **4** | **109** |
+
+  - All 24 A02 baits are unchanged (test `test_a02_baits_kept`).
+  - New: rep005_e06_alice ("Priya is normally assigned to brunch.", text_36) and rep043_e10_alice ("Order TX-442 is on time.", text_18).
+- **The 9 D5 "not visible" tasks:**
+  - Under the first wording, 9 main items from 8 of these tasks got baits, all from filler-block lines.
+  - Under the corrected rule, **0 of the 16 main candidates** in the 9 tasks survive, since none of the tasks has an isolated invalid record with lexical overlap.
+  - D5 per task is now: 9 tasks "exclusion criterion not visible"; 17 main + 2 hold-out candidates.
+- **Implementation detail (Claude Code, flagged):** rep018_e02_alice (text_02).
+  - The chosen isolated record was already in Bob's own `resolve_records` call: he resolved it and left it out of his answer.
+  - Inserting it would have listed it twice, and validation rule 3 caught that.
+  - The builder now drops such an item explicitly ("bait record already in one of Bob's resolve_records calls"). It was dropped either way.
+  - Alternative for Nick: treat it as "named in Bob's visible text" under D4 and take the next eligible record. At most 1 more item.
+
+## D8 — Sample size below 120 accepted
+
+- **Date / approval:** 24 October 2026; Nick Wagner, assignment A03. Before any bait was run.
+- **What the plan says (§8.1):** "all remaining candidates for which a valid bait can be built, up to 148, at least 120."
+- **Amended rule:** the main list that results from D6 and D7 is used even if it stays below 120. No other relaxation to reach 120.
+- **Result:** **109 main items** (87 data search, 22 extraction) in 43 trajectories; hold-out 16 baits (12 / 4). The cap of 148 is not reached, so the random-drop rule is not triggered.
+- **Expected precision (orientation):** the plan's figure (±9 pp at 148 items, ignoring clustering), scaled by √(148/109), gives about ±10.5 pp at 109 items. The simulation with the analysis code gives the cluster-aware figure (`devlog/05_analysis_submission.md`, A03 analysis entry).
+
+## D9 — R4 dangling reference recorded as a limitation
+
+- **Date / approval:** 24 October 2026; Nick Wagner, assignment A03.
+- Bob's round-1 message can refer to Alice's log (e.g. "your log for task 2-50"; observed in the P1 R4 request, `devlog/02_pilot.md`). R4 omits Alice's message by design (§8.4).
+- No change; recorded as a limitation for the paper.
+
+## D10 — Blind human check no longer required
+
+- **Date / approval:** 24 October 2026; Nick Wagner, assignment A03.
+- **What the plan says (§8.3 rule 4, §18.4):** blind check by Nick on 20 pairs.
+- **Amended:** no longer a required step. Nick cannot do it reliably in English. The package is still generated, another person may do it later, and nothing waits for it.
+- Detectability rests on validation rules 1–3, Shi et al.'s evaluator, R4 and R4n, and right-reason detection. The report says so.
+- The earlier package (A02, key SHA-256 `3240889f…327d`) was replaced, before anyone saw it (Nick's statement in A03), by the A03 package: same seed 2026, 20 pairs (16 data search / 4 extraction), new tablet layout, key SHA-256 `b117dc545c79beb32d01fbd5d27819d12d16c9ad09854968787df29f6aa8af98`.
+
+## Confirmations in A03 (no change)
+
+- D3 as implemented in A02 (narrow noun rule, also applied to data search) is confirmed by Nick.
+- The countTokens endpoint (free) is authorized for the R0 bisection and for R5 filler matching (`src/replay/token_count.py`).

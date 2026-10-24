@@ -3,16 +3,16 @@
 @@ -1005,3 +1005,3 @@
    "arguments": {
 -   "sql": "SELECT DISTINCT T.ticket_id\nFROM campus_tickets AS T\nJOIN buildings AS B ON T.building_id = B.building_id\nJOIN ticket_updates AS U ON T.ticket_id = U.ticket_id\nWHERE T.opened_date BETWEEN '2025-01-01' AND '2025-06-30'\nAND T.priority IN ('P1', 'P2')\nAND T.status IN ('assigned', 'blocked', 'monitoring')\nAND B.building_type IN ('classroom', 'office')\nAND T.compliance_flag = 1\nAND (U.update_category = 'vendor_eta' OR U.update_category = 'parts_delay')\n"
-+   "sql": "SELECT DISTINCT T.ticket_id\nFROM campus_tickets AS T\nJOIN buildings AS B ON T.building_id = B.building_id\nJOIN ticket_updates AS U ON T.ticket_id = U.ticket_id\nWHERE T.opened_date BETWEEN '2025-01-01' AND '2025-07-06'\nAND T.priority IN ('P1', 'P2')\nAND T.status IN ('assigned', 'blocked', 'monitoring')\nAND B.building_type IN ('classroom', 'office')\nAND T.compliance_flag = 1\nAND (U.update_category = 'vendor_eta' OR U.update_category = 'parts_delay')\n"
++   "sql": "SELECT DISTINCT T.ticket_id\nFROM campus_tickets AS T\nJOIN buildings AS B ON T.building_id = B.building_id\nJOIN ticket_updates AS U ON T.ticket_id = U.ticket_id\nWHERE T.opened_date BETWEEN '2025-01-01' AND '2025-06-30'\nAND T.priority IN ('P1', 'P2')\nAND T.status IN ('assigned', 'blocked', 'monitoring', 'cancelled')\nAND B.building_type IN ('classroom', 'office')\nAND T.compliance_flag = 1\nAND (U.update_category = 'vendor_eta' OR U.update_category = 'parts_delay')\n"
    },
-@@ -1025,2 +1025,5 @@
-      "ticket_id": "CT0133"
+@@ -1034,2 +1034,5 @@
+      "ticket_id": "CT0381"
 +    },
 +    {
-+     "ticket_id": "CT0233"
++     "ticket_id": "CT0409"
      },
 @@ -1049,3 +1052,3 @@
     "reasoning": "The query joined `campus_tickets`, `buildings`, and `ticket_updates` and applied filters for date (2025-01-01 to 2025-06-30), priority (P1, P2), status (assigned, blocked, monitoring), building type (classroom, office), compliance flag (1), and update categories (vendor_eta, parts_delay). The result contains all tickets matching these criteria.",
 -   "answer": "[{\"ticket_id\": \"CT0029\"}, {\"ticket_id\": \"CT0069\"}, {\"ticket_id\": \"CT0098\"}, {\"ticket_id\": \"CT0133\"}, {\"ticket_id\": \"CT0290\"}, {\"ticket_id\": \"CT0358\"}, {\"ticket_id\": \"CT0381\"}, {\"ticket_id\": \"CT0547\"}, {\"ticket_id\": \"CT0624\"}]"
-+   "answer": "[{\"ticket_id\": \"CT0029\"}, {\"ticket_id\": \"CT0069\"}, {\"ticket_id\": \"CT0098\"}, {\"ticket_id\": \"CT0133\"}, {\"ticket_id\": \"CT0233\"}, {\"ticket_id\": \"CT0290\"}, {\"ticket_id\": \"CT0358\"}, {\"ticket_id\": \"CT0381\"}, {\"ticket_id\": \"CT0547\"}, {\"ticket_id\": \"CT0624\"}]"
++   "answer": "[{\"ticket_id\": \"CT0029\"}, {\"ticket_id\": \"CT0069\"}, {\"ticket_id\": \"CT0098\"}, {\"ticket_id\": \"CT0133\"}, {\"ticket_id\": \"CT0290\"}, {\"ticket_id\": \"CT0358\"}, {\"ticket_id\": \"CT0381\"}, {\"ticket_id\": \"CT0409\"}, {\"ticket_id\": \"CT0547\"}, {\"ticket_id\": \"CT0624\"}]"
    },

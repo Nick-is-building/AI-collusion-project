@@ -292,3 +292,90 @@ No Study 1 implementation or experimental result is attested by this DEVLOG. Pla
 4. Blind check (package ready).
 5. R0 identity mismatch (see `devlog/02_pilot.md`).
 **Cross-references:** `docs/deviations.md` D2–D5; plan §§8.1, 8.3, 8.6 (right-reason), 23.4; `devlog/02_pilot.md` (A02 pilot entry).
+
+## 2026-10-24 07:55–09:20 UTC — Claude Code (Opus 5.5), session A03 — Task 2: baits rebuilt with D6 and D7 (corrected), item flow, blind-check package
+
+**Assignment / authorization:** `assignments/A03_bait_fixes_build_pilot.md`, task 2, and Nick's in-session correction of D7 (about 08:50 UTC). Deviations D6–D10 are recorded in `docs/deviations.md`. No model call was made; all of this happened before any bait was run.
+**Built or changed:**
+- `src/replay/baits_data_search.py`: D6 class order (`condition_class`, `ordered_eligible`, `CLASS_ORDER`); `condition_class` saved per bait.
+- `src/replay/baits_extraction.py`:
+  - D7 as corrected: `invalid_runs`, `FILLER_RUN = 3`, between-first `eligible_baits`, updated `no_bait_reason`;
+  - an explicit drop when the chosen record is already in one of Bob's `resolve_records` calls.
+- `src/replay/build_baits.py`: item flow gains `bait_id` and `condition_class`.
+- `src/blind_check/make_package.py`: tablet layout.
+  - `blind_check/INSTRUCTIONS.md` has two worked examples, made up and labelled as such.
+  - `blind_check/ANSWERS.md` replaces `answers_nick.md`.
+  - Each pair file shows the task (instruction, exclusion rule on its own line), then Version A, then Version B, as numbered steps.
+  - `inspect_database` and `read_source` results are folded by tool name only; source text is shown line by line.
+- Tests:
+  - `tests/test_baits_extraction.py`: `test_bait_choice_isolated_and_between_first` replaces the A02 position test (the rule changed by D7); new `test_invalid_run_pattern_holds_in_all_sources` and `test_a02_baits_kept` (24 ids).
+  - `tests/test_baits_data_search.py`: D6 unit test; saved-bait D6 order check on 40 baits.
+  - `tests/test_blind_check.py`: identical A/B layout, no leak in INSTRUCTIONS.
+- Regenerated:
+  - `data/derived/baits/`: 125 JSON + diffs; `item_flow.csv` SHA-256 `ff00737c…d26f`.
+  - `data/derived/dryrun_request_hashes.csv`: 1,726 mock requests, 125 baits × 5 variants; SHA-256 `659b2c3c…ab51`.
+  - `blind_check/`.
+**Decisions:**
+- First implementation of D7 as worded:
+  - the result was read item by item, and most new baits were generic filler lines;
+  - escalated to Nick with yields for 3 alternatives (AskUserQuestion);
+  - Nick decided between-first plus the run-length rule (`docs/deviations.md` D7).
+- D6: LIKE and EXISTS stay ineligible (D2 parser unchanged, "all other D2 rules unchanged"), so the text class is empty.
+- Test defect fixed: `test_saved_bait_reproducible_and_valid` (data search) checked `violated_literal` as one string. For IN-list baits (new under D6) that field holds the joined list, so 30 items failed. The test now checks each literal of the original condition, as validation rule 2 does. The builder was not changed.
+**Item flow (plan §23.4):**
+
+| | candidates | baits built | validated (rules 1–3) |
+|---|---:|---:|---:|
+| extraction, main | 64 | 22 | 22 |
+| extraction, hold-out | 8 | 4 | 4 |
+| data search, main | 89 | 87 | 87 |
+| data search, hold-out | 12 | 12 | 12 |
+| **main total** | **153** | **109** | **109** (43 trajectories) |
+
+- Extraction main drops (42):
+  - Bob's text names every eligible record: 14;
+  - no eligible record (D5, "not visible"): 17 (text_08 4, text_12 3, text_35 3, text_14 3, text_48, text_20, text_32);
+  - text_05 (only filler-block matches): 1;
+  - structured-object answer: 5;
+  - count rule: 3;
+  - reasoning lists answer IDs: 2;
+  - record already in Bob's resolve_records: 1 (rep018_e02).
+- Hold-out extraction drops (4): named 1, no eligible record 2 (text_25, text_05), reasoning lists IDs 1.
+- Data search: error types and `bob_states_condition` in `docs/deviations.md` D6. Main: numeric 32 / date 31 / categorical 24; flag 71/87.
+**Spot check (Nick's request), seed 2026:**
+- 10 filler-block lines (excluded), all generic filler. Examples:
+  - "No one treats those side notes as new household obligations…" (text_02, run 6)
+  - "Some paragraphs discuss seasonal demand, hiring plans…" (text_06)
+  - "The result is a dense notebook entry with anomalous checks surrounded by ordinary experimental housekeeping." (text_11)
+  - two text_21 lines; text_22; "The close of the note mentions dashboards…" (text_26); two text_34 digest lines; "Some claimants ask questions that the adjuster has not answered yet." (text_43)
+- 10 isolated lines (kept), all concrete records:
+  - "In the word problem, a garden has length L and width W." (text_08)
+  - "The vacuum gauge stayed at its normal baseline." (text_10)
+  - "Order TX-442 is on time." (text_18)
+  - "The 2020 flood record is historical." (text_33)
+  - "Source R22 showed an infrared flare…" (text_33)
+  - "The coastal model projects Bay Marsh salinity…" (text_35)
+  - "Tomato soup is vegan as labeled." (text_37)
+  - "The sculpture shipment arrived yesterday." (text_45)
+  - "A minor label wrinkle on batch L-77…" (text_47)
+  - "The lease requires the tenant to replace lost mailbox keys…" (text_49)
+- Observation: some isolated invalid records are off-topic records from another task domain (an astronomy record in the climate file, a climate record in the astronomy file, a lease record in the showings file). They are concrete, and eligible only if they overlap lexically with the exclusion clause. None is among the chosen baits.
+- Full output: `scratch/a03/d7_spotcheck.txt` (local).
+**The 9 D5 "not visible" tasks (Nick's request):** under D7 as worded, 9 main items got baits, all filler-block lines:
+- text_08 "It also includes small narrative flourishes about gardens…" ×3;
+- text_12 "Some athletes are described as available despite minor knocks…" ×2;
+- text_14 "The clinical note includes routine recovery advice…";
+- text_20 "The planning notes also wander through restaurant tips…";
+- text_35 "The research digest includes historical background, known artifacts…" ×2.
+
+Under the corrected rule, **0 of 9 survive** (0 of all 16 main candidates of these tasks). No bait sentences to list.
+
+**Blind-check package:** regenerated with seed 2026: 20 pairs, 16 data search / 4 extraction (largest remainder of 99 : 26). Key SHA-256 `b117dc545c79beb32d01fbd5d27819d12d16c9ad09854968787df29f6aa8af98` in `blind_check/key_sha256.txt`; the key is local (`blind_check/key.local.json`, git-ignored). It replaces the A02 package (key `3240889f…327d`), which per Nick nobody had seen. Leak check: no "bait" string and no item ID in any package file. I did not read the pair contents beyond the layout of pair_06's first lines.
+**Checks performed:** `pytest` full suite: 283 passed (43 s). `python -m src.replay.build_baits`: table above. `python -m src.blind_check.make_package`: key hash above. `python -m src.replay.dry_run`: 1,726 requests.
+**Did not work:** D7 as worded (see Decisions). The first D7 test edit referenced an undefined name, fixed before the run. The 30-item test defect is described above.
+**State / limitations:**
+- Detectability now rests on rules 1–3, the evaluator, R4/R4n and right-reason detection (D10).
+- Only the chosen extraction baits new in A03 (2) and the spot-check lines were read by eye. The 24 A02 extraction baits were read in A01/A02.
+- The data-search baits were not read individually beyond the automated rules.
+**Next:** task 3 (build steps 3–5).
+**Cross-references:** `docs/deviations.md` D6–D10; plan §§8.1, 8.3, 23.4; A02 bait entry above.

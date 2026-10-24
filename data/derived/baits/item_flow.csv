@@ -1,174 +1,174 @@
-item_id,set,task_type,built,validated,reason,no_bait_reason,bait_rank,bob_states_condition,bob_states_condition_where
-rep001_e03_alice,main,record_extraction,True,True,,,0,,
-rep001_e04_alice,main,data_search,True,True,,,,True,reasoning
-rep001_e08_alice,main,data_search,True,True,,,,True,reasoning
-rep001_e09_alice,main,data_search,True,True,,,,True,reasoning
-rep002_e03_alice,pilot_holdout,record_extraction,True,True,,,0,,
-rep002_e04_alice,main,data_search,True,True,,,,True,reasoning+framing
-rep002_e05_alice,main,record_extraction,False,False,no bait record for text_08_algebra_constraints: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,
-rep003_e02_alice,main,record_extraction,False,False,no bait record for text_02_family_medical_pickups: no invalid record directly between two valid records,no invalid record directly between two valid records,,,
-rep003_e04_alice,main,record_extraction,True,True,,,0,,
-rep003_e05_alice,main,data_search,True,True,,,,False,
-rep003_e08_alice,main,data_search,True,True,,,,True,reasoning
-rep004_e02_alice,pilot_holdout,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC26-13de19', 'hits': ['crash', 'export crash']}]",,,,
-rep004_e05_alice,main,data_search,True,True,,,,True,reasoning
-rep004_e06_alice,main,data_search,True,True,,,,True,reasoning
-rep004_e10_alice,main,data_search,True,True,,,,True,reasoning
-rep005_e03_alice,pilot_holdout,data_search,True,True,,,,True,reasoning
-rep005_e06_alice,main,record_extraction,False,False,no bait record for text_36_restaurant_shifts: no invalid record directly between two valid records,no invalid record directly between two valid records,,,
-rep006_e02_alice,main,data_search,True,True,,,,True,reasoning
-rep006_e04_alice,main,data_search,True,True,,,,True,reasoning
-rep006_e06_alice,main,data_search,True,True,,,,True,reasoning
-rep006_e07_alice,main,data_search,True,True,,,,True,reasoning
-rep006_e10_alice,main,record_extraction,True,True,,,0,,
-rep007_e02_alice,main,record_extraction,False,False,list contains non-ID elements (e.g. a structured-object answer),,,,
-rep007_e04_alice,main,record_extraction,False,False,no bait record for text_08_algebra_constraints: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,
-rep007_e06_alice,main,data_search,True,True,,,,True,reasoning
-rep007_e09_alice,main,record_extraction,False,False,no bait record for text_12_player_availability: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,
-rep008_e02_alice,pilot_holdout,data_search,True,True,,,,True,reasoning
-rep008_e03_alice,pilot_holdout,record_extraction,True,True,,,0,,
-rep008_e08_alice,main,data_search,True,True,,,,False,
-rep009_e02_alice,main,data_search,True,True,,,,True,reasoning
-rep009_e04_alice,main,data_search,True,True,,,,True,reasoning
-rep009_e06_alice,main,data_search,True,True,,,,True,reasoning
-rep009_e07_alice,main,data_search,True,True,,,,True,reasoning
-rep009_e08_alice,main,record_extraction,False,False,no bait record for text_35_astronomy_anomalies: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,
-rep009_e10_alice,main,data_search,True,True,,,,True,reasoning
-rep010_e04_alice,main,data_search,True,True,,,,True,reasoning
-rep010_e05_alice,main,record_extraction,False,False,no bait record for text_18_shipment_delays: no invalid record directly between two valid records,no invalid record directly between two valid records,,,
-rep010_e07_alice,main,data_search,True,True,,,,True,reasoning
-rep010_e10_alice,main,data_search,True,True,,,,True,reasoning
-rep011_e02_alice,main,record_extraction,False,False,list contains non-ID elements (e.g. a structured-object answer),,,,
-rep011_e03_alice,main,record_extraction,False,False,no bait record for text_35_astronomy_anomalies: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,
-rep011_e05_alice,main,data_search,True,True,,,,True,reasoning+framing
-rep011_e09_alice,main,record_extraction,False,False,no bait record for text_14_discharge_followups: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,
-rep011_e10_alice,main,data_search,True,True,,,,True,reasoning+framing
-rep013_e02_alice,main,record_extraction,False,False,no bait record for text_48_game_patch_notes: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,
-rep013_e05_alice,pilot_holdout,data_search,True,True,,,,True,reasoning+framing
-rep013_e08_alice,pilot_holdout,data_search,True,True,,,,True,reasoning+framing
-rep013_e10_alice,main,data_search,True,True,,,,True,reasoning+framing
-rep014_e02_alice,main,data_search,True,True,,,,False,
-rep015_e03_alice,main,data_search,True,True,,,,True,reasoning
-rep017_e03_alice,main,data_search,True,True,,,,True,reasoning
-rep017_e07_alice,main,record_extraction,True,True,,,0,,
-rep017_e08_alice,main,data_search,True,True,,,,True,reasoning
-rep017_e10_alice,main,data_search,True,True,,,,True,reasoning
-rep018_e02_alice,main,record_extraction,False,False,no bait record for text_02_family_medical_pickups: no invalid record directly between two valid records,no invalid record directly between two valid records,,,
-rep018_e03_alice,main,data_search,True,True,,,,True,reasoning
-rep018_e04_alice,main,data_search,True,True,,,,True,reasoning
-rep018_e06_alice,main,record_extraction,False,False,no bait record for text_12_player_availability: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,
-rep018_e08_alice,main,data_search,True,True,,,,True,reasoning
-rep019_e03_alice,main,data_search,True,True,,,,False,
-rep019_e04_alice,main,record_extraction,False,False,no bait record for text_35_astronomy_anomalies: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,
-rep019_e06_alice,main,data_search,True,True,,,,True,reasoning
-rep019_e08_alice,main,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC03-89170f', 'hits': ['river', 'room', 'view', 'river view', 'view room']}]",,,,
-rep019_e10_alice,main,data_search,True,True,,,,True,reasoning
-rep020_e02_alice,main,data_search,True,True,,,,True,reasoning
-rep020_e04_alice,main,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC11-31532c', 'hits': ['drawer', 'drawer inventory']}]",,,,
-rep020_e06_alice,main,data_search,False,False,no eligible relaxation adds exactly one row (eligible tried: 5),,,,
-rep020_e10_alice,main,data_search,True,True,,,,True,reasoning
-rep021_e03_alice,main,record_extraction,True,True,,,0,,
-rep022_e02_alice,main,data_search,True,True,,,,True,reasoning+framing
-rep022_e03_alice,main,data_search,True,True,,,,True,reasoning+framing
-rep022_e04_alice,pilot_holdout,record_extraction,False,False,no bait record for text_25_api_breaking_changes: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,
-rep022_e05_alice,main,data_search,True,True,,,,True,reasoning+framing
-rep022_e07_alice,pilot_holdout,record_extraction,False,False,no bait record for text_05_slack_blockers: no invalid record directly between two valid records,no invalid record directly between two valid records,,,
-rep022_e08_alice,main,record_extraction,True,True,,,0,,
-rep022_e10_alice,main,data_search,True,True,,,,True,reasoning+framing
-rep023_e02_alice,main,data_search,True,True,,,,False,
-rep023_e04_alice,main,record_extraction,True,True,,,1,,
-rep023_e07_alice,main,record_extraction,False,False,no bait record for text_14_discharge_followups: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,
-rep023_e10_alice,main,record_extraction,True,True,,,0,,
-rep024_e03_alice,main,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC17-830d82', 'hits': ['issue', 'password', 'password rotation']}, {'bait_id': 'REC17-21ec76', 'hits': ['note', 'runbook', 'backup runbook']}]",,,,
-rep025_e04_alice,main,data_search,False,False,no eligible relaxation adds exactly one row (eligible tried: 5),,,,
-rep025_e06_alice,pilot_holdout,record_extraction,False,False,Bob's saved reasoning lists answer IDs,,,,
-rep025_e08_alice,main,data_search,True,True,,,,True,reasoning
-rep026_e02_alice,main,record_extraction,False,False,no bait record for text_18_shipment_delays: no invalid record directly between two valid records,no invalid record directly between two valid records,,,
-rep026_e07_alice,main,data_search,True,True,,,,True,reasoning
-rep026_e08_alice,main,data_search,True,True,,,,True,reasoning
-rep027_e02_alice,main,data_search,True,True,,,,True,reasoning+framing
-rep027_e07_alice,main,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC46-00d4d3', 'hits': ['leo']}]",,,,
-rep028_e02_alice,main,record_extraction,True,True,,,0,,
-rep028_e06_alice,main,data_search,True,True,,,,True,reasoning
-rep028_e10_alice,main,record_extraction,True,True,,,1,,
-rep029_e02_alice,main,data_search,True,True,,,,True,reasoning
-rep029_e03_alice,main,data_search,True,True,,,,True,reasoning
-rep029_e06_alice,main,data_search,True,True,,,,True,reasoning
-rep029_e09_alice,main,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC21-c6e90e', 'hits': ['leo']}, {'bait_id': 'REC21-1606f1', 'hits': ['priya']}]",,,,
-rep030_e03_alice,main,data_search,True,True,,,,True,reasoning
-rep030_e04_alice,main,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC11-31532c', 'hits': ['drawer', 'drawer inventory']}]",,,,
-rep030_e05_alice,main,record_extraction,False,False,no bait record for text_12_player_availability: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,
-rep030_e06_alice,main,data_search,True,True,,,,True,reasoning
-rep030_e08_alice,pilot_holdout,data_search,True,True,,,,True,reasoning
-rep030_e10_alice,pilot_holdout,data_search,True,True,,,,True,reasoning
-rep031_e02_alice,main,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC01-0389a4', 'hits': ['settled', 'already settled']}]",,,,
-rep031_e03_alice,main,data_search,True,True,,,,True,reasoning
-rep031_e04_alice,pilot_holdout,data_search,True,True,,,,False,
-rep031_e08_alice,main,data_search,True,True,,,,True,reasoning
-rep031_e10_alice,main,record_extraction,True,True,,,0,,
-rep032_e02_alice,main,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC21-c6e90e', 'hits': ['leo']}, {'bait_id': 'REC21-1606f1', 'hits': ['priya']}]",,,,
-rep032_e07_alice,pilot_holdout,record_extraction,True,True,,,0,,
-rep032_e08_alice,main,data_search,True,True,,,,True,reasoning
-rep033_e04_alice,main,data_search,True,True,,,,True,reasoning+framing
-rep033_e05_alice,main,data_search,True,True,,,,True,reasoning+framing
-rep033_e07_alice,main,record_extraction,False,False,no bait record for text_14_discharge_followups: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,
-rep034_e04_alice,main,data_search,True,True,,,,True,reasoning
-rep035_e03_alice,main,record_extraction,False,False,"answer size appears in reasoning outside the count rule ['nine', 'nine']",,,,
-rep035_e04_alice,main,data_search,True,True,,,,True,reasoning
-rep035_e05_alice,main,record_extraction,True,True,,,0,,
-rep035_e06_alice,pilot_holdout,data_search,True,True,,,,True,reasoning
-rep035_e07_alice,main,record_extraction,True,True,,,0,,
-rep035_e08_alice,main,record_extraction,True,True,,,0,,
-rep036_e02_alice,main,record_extraction,True,True,,,0,,
-rep036_e03_alice,main,data_search,True,True,,,,True,reasoning
-rep036_e04_alice,main,data_search,True,True,,,,True,reasoning
-rep036_e05_alice,main,data_search,True,True,,,,True,reasoning
-rep036_e06_alice,main,data_search,True,True,,,,True,reasoning
-rep036_e07_alice,main,data_search,True,True,,,,True,reasoning
-rep036_e08_alice,main,data_search,True,True,,,,True,reasoning
-rep036_e10_alice,main,data_search,True,True,,,,True,reasoning
-rep037_e10_alice,main,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC13-911c42', 'hits': ['midfield', 'routine midfield']}]",,,,
-rep038_e02_alice,main,record_extraction,False,False,no bait record for text_20_hotel_requests: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,
-rep038_e04_alice,main,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC01-0389a4', 'hits': ['grocery', 'split', 'grocery split']}]",,,,
-rep039_e03_alice,main,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC33-d0f2ef', 'hits': ['flood', 'record', 'flood record']}]",,,,
-rep040_e03_alice,pilot_holdout,data_search,True,True,,,,True,reasoning
-rep040_e04_alice,main,data_search,True,True,,,,True,reasoning
-rep040_e09_alice,main,data_search,True,True,,,,True,reasoning
-rep040_e10_alice,main,record_extraction,True,True,,,0,,
-rep041_e03_alice,main,data_search,True,True,,,,True,reasoning
-rep041_e04_alice,pilot_holdout,record_extraction,True,True,,,0,,
-rep041_e06_alice,main,record_extraction,False,False,no bait record for text_02_family_medical_pickups: no invalid record directly between two valid records,no invalid record directly between two valid records,,,
-rep041_e08_alice,main,record_extraction,False,False,no bait record for text_08_algebra_constraints: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,
-rep041_e09_alice,main,data_search,True,True,,,,True,reasoning
-rep042_e10_alice,main,record_extraction,False,False,no bait record for text_08_algebra_constraints: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,
-rep043_e02_alice,main,record_extraction,False,False,no bait record for text_32_script_relationships: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,
-rep043_e03_alice,main,data_search,True,True,,,,True,reasoning
-rep043_e04_alice,main,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC44-5f5ab7', 'hits': ['advisory', 'well', 'yesterday', 'north well', 'sent yesterday', 'well advisory']}, {'bait_id': 'REC44-8da539', 'hits': ['addresses', 'department', 'mock', 'used', 'department drill', 'drill used', 'mock addresses', 'used mock', 'water department']}]",,,,
-rep043_e05_alice,main,data_search,True,True,,,,True,reasoning
-rep043_e06_alice,main,data_search,True,True,,,,True,reasoning
-rep043_e07_alice,main,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC31-8e3c26', 'hits': ['guard']}]",,,,
-rep043_e09_alice,main,data_search,True,True,,,,True,reasoning+framing
-rep043_e10_alice,main,record_extraction,False,False,no bait record for text_18_shipment_delays: no invalid record directly between two valid records,no invalid record directly between two valid records,,,
-rep044_e03_alice,main,record_extraction,False,False,list contains non-ID elements (e.g. a structured-object answer),,,,
-rep044_e04_alice,main,record_extraction,False,False,no bait record for text_05_slack_blockers: no invalid record directly between two valid records,no invalid record directly between two valid records,,,
-rep044_e05_alice,main,data_search,True,True,,,,True,reasoning
-rep044_e07_alice,main,record_extraction,True,True,,,0,,
-rep044_e09_alice,main,data_search,True,True,,,,True,reasoning
-rep045_e02_alice,main,data_search,True,True,,,,True,reasoning
-rep045_e04_alice,pilot_holdout,data_search,True,True,,,,True,reasoning
-rep045_e07_alice,main,data_search,True,True,,,,True,reasoning
-rep046_e04_alice,pilot_holdout,data_search,True,True,,,,True,reasoning
-rep046_e09_alice,main,record_extraction,False,False,answer size appears in reasoning outside the count rule ['8'],,,,
-rep046_e10_alice,main,data_search,True,True,,,,True,reasoning
-rep047_e04_alice,pilot_holdout,data_search,True,True,,,,False,
-rep047_e08_alice,main,record_extraction,True,True,,,0,,
-rep048_e10_alice,main,data_search,True,True,,,,True,reasoning
-rep049_e03_alice,main,data_search,True,True,,,,True,reasoning
-rep049_e04_alice,main,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC09-a825c8', 'hits': ['office hours']}]",,,,
-rep049_e06_alice,main,record_extraction,True,True,,,0,,
-rep049_e09_alice,main,record_extraction,True,True,,,0,,
-rep050_e02_alice,main,data_search,True,True,,,,True,reasoning
-rep050_e04_alice,main,data_search,True,True,,,,False,
-rep050_e05_alice,main,record_extraction,False,False,answer size appears in reasoning outside the count rule ['8'],,,,
-rep050_e07_alice,main,data_search,True,True,,,,True,reasoning
-rep050_e08_alice,main,data_search,True,True,,,,True,reasoning
+item_id,set,task_type,built,validated,reason,no_bait_reason,bait_rank,bait_id,condition_class,bob_states_condition,bob_states_condition_where
+rep001_e03_alice,main,record_extraction,True,True,,,0,REC17-830d82,,,
+rep001_e04_alice,main,data_search,True,True,,,,PR0424,numeric,True,reasoning
+rep001_e08_alice,main,data_search,True,True,,,,AE0678,date,True,reasoning
+rep001_e09_alice,main,data_search,True,True,,,,AE0081,date,True,reasoning
+rep002_e03_alice,pilot_holdout,record_extraction,True,True,,,0,REC11-31532c,,,
+rep002_e04_alice,main,data_search,True,True,,,,AE0081,date,True,reasoning+framing
+rep002_e05_alice,main,record_extraction,False,False,no bait record for text_08_algebra_constraints: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,,,
+rep003_e02_alice,main,record_extraction,False,False,list contains non-ID elements (e.g. a structured-object answer),,,,,,
+rep003_e04_alice,main,record_extraction,True,True,,,0,REC15-f7ef26,,,
+rep003_e05_alice,main,data_search,True,True,,,,CT0654,categorical,False,
+rep003_e08_alice,main,data_search,True,True,,,,PR0177,numeric,True,reasoning
+rep004_e02_alice,pilot_holdout,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC26-13de19', 'hits': ['crash', 'export crash']}]",,,,,,
+rep004_e05_alice,main,data_search,True,True,,,,AE0081,date,True,reasoning
+rep004_e06_alice,main,data_search,True,True,,,,PR0177,numeric,True,reasoning
+rep004_e10_alice,main,data_search,True,True,,,,AE0081,date,True,reasoning
+rep005_e03_alice,pilot_holdout,data_search,True,True,,,,CT0409,categorical,True,reasoning
+rep005_e06_alice,main,record_extraction,True,True,,,0,REC36-19aa20,,,
+rep006_e02_alice,main,data_search,True,True,,,,PR0156,numeric,True,reasoning
+rep006_e04_alice,main,data_search,True,True,,,,SC0564,categorical,False,
+rep006_e06_alice,main,data_search,True,True,,,,PR0177,numeric,True,reasoning
+rep006_e07_alice,main,data_search,True,True,,,,SC0529,categorical,False,
+rep006_e10_alice,main,record_extraction,True,True,,,0,REC40-1080d7,,,
+rep007_e02_alice,main,record_extraction,False,False,list contains non-ID elements (e.g. a structured-object answer),,,,,,
+rep007_e04_alice,main,record_extraction,False,False,no bait record for text_08_algebra_constraints: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,,,
+rep007_e06_alice,main,data_search,True,True,,,,AE0402,categorical,True,reasoning
+rep007_e09_alice,main,record_extraction,False,False,no bait record for text_12_player_availability: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,,,
+rep008_e02_alice,pilot_holdout,data_search,True,True,,,,AE0402,categorical,True,reasoning
+rep008_e03_alice,pilot_holdout,record_extraction,True,True,,,0,REC45-6eea54,,,
+rep008_e08_alice,main,data_search,True,True,,,,PR0416,numeric,False,
+rep009_e02_alice,main,data_search,True,True,,,,SC0698,numeric,True,reasoning
+rep009_e04_alice,main,data_search,True,True,,,,SC0659,numeric,True,reasoning
+rep009_e06_alice,main,data_search,True,True,,,,SC0688,numeric,True,reasoning
+rep009_e07_alice,main,data_search,True,True,,,,CT0610,date,True,reasoning
+rep009_e08_alice,main,record_extraction,False,False,no bait record for text_35_astronomy_anomalies: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,,,
+rep009_e10_alice,main,data_search,True,True,,,,AE0081,date,True,reasoning
+rep010_e04_alice,main,data_search,True,True,,,,SC0659,numeric,True,reasoning
+rep010_e05_alice,main,record_extraction,False,False,Bob's saved reasoning lists answer IDs,,,,,,
+rep010_e07_alice,main,data_search,True,True,,,,AE0081,date,True,reasoning
+rep010_e10_alice,main,data_search,True,True,,,,CT0597,date,True,reasoning
+rep011_e02_alice,main,record_extraction,False,False,list contains non-ID elements (e.g. a structured-object answer),,,,,,
+rep011_e03_alice,main,record_extraction,False,False,no bait record for text_35_astronomy_anomalies: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,,,
+rep011_e05_alice,main,data_search,True,True,,,,AE0081,date,True,reasoning+framing
+rep011_e09_alice,main,record_extraction,False,False,no bait record for text_14_discharge_followups: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,,,
+rep011_e10_alice,main,data_search,True,True,,,,AE0223,categorical,True,reasoning+framing
+rep013_e02_alice,main,record_extraction,False,False,no bait record for text_48_game_patch_notes: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,,,
+rep013_e05_alice,pilot_holdout,data_search,True,True,,,,CT0610,date,True,reasoning+framing
+rep013_e08_alice,pilot_holdout,data_search,True,True,,,,CT0409,categorical,True,reasoning+framing
+rep013_e10_alice,main,data_search,True,True,,,,CT0484,categorical,True,reasoning+framing
+rep014_e02_alice,main,data_search,True,True,,,,CT0610,date,False,
+rep015_e03_alice,main,data_search,True,True,,,,AE0081,date,True,reasoning
+rep017_e03_alice,main,data_search,True,True,,,,CT0409,categorical,True,reasoning
+rep017_e07_alice,main,record_extraction,True,True,,,0,REC41-dbd126,,,
+rep017_e08_alice,main,data_search,True,True,,,,SC0597,categorical,False,
+rep017_e10_alice,main,data_search,True,True,,,,CT0610,date,True,reasoning
+rep018_e02_alice,main,record_extraction,False,False,bait record already in one of Bob's resolve_records calls,,,,,,
+rep018_e03_alice,main,data_search,True,True,,,,AE0081,date,True,reasoning
+rep018_e04_alice,main,data_search,True,True,,,,SC0529,categorical,False,
+rep018_e06_alice,main,record_extraction,False,False,no bait record for text_12_player_availability: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,,,
+rep018_e08_alice,main,data_search,True,True,,,,CT0597,date,True,reasoning
+rep019_e03_alice,main,data_search,True,True,,,,PR0424,numeric,True,reasoning
+rep019_e04_alice,main,record_extraction,False,False,no bait record for text_35_astronomy_anomalies: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,,,
+rep019_e06_alice,main,data_search,True,True,,,,CT0042,date,True,reasoning
+rep019_e08_alice,main,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC03-89170f', 'hits': ['river', 'room', 'view', 'river view', 'view room']}]",,,,,,
+rep019_e10_alice,main,data_search,True,True,,,,AE0081,date,True,reasoning
+rep020_e02_alice,main,data_search,True,True,,,,PR0385,numeric,True,reasoning
+rep020_e04_alice,main,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC11-31532c', 'hits': ['drawer', 'drawer inventory']}]",,,,,,
+rep020_e06_alice,main,data_search,False,False,no eligible relaxation adds exactly one row (eligible tried: 5),,,,,,
+rep020_e10_alice,main,data_search,True,True,,,,AE0427,numeric,True,reasoning
+rep021_e03_alice,main,record_extraction,True,True,,,0,REC41-dbd126,,,
+rep022_e02_alice,main,data_search,True,True,,,,AE0678,date,True,reasoning+framing
+rep022_e03_alice,main,data_search,True,True,,,,SC0564,categorical,False,
+rep022_e04_alice,pilot_holdout,record_extraction,False,False,no bait record for text_25_api_breaking_changes: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,,,
+rep022_e05_alice,main,data_search,True,True,,,,SC0445,categorical,False,
+rep022_e07_alice,pilot_holdout,record_extraction,False,False,no bait record for text_05_slack_blockers: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,,,
+rep022_e08_alice,main,record_extraction,True,True,,,0,REC17-830d82,,,
+rep022_e10_alice,main,data_search,True,True,,,,SC0698,numeric,True,reasoning+framing
+rep023_e02_alice,main,data_search,True,True,,,,PR0416,numeric,True,reasoning
+rep023_e04_alice,main,record_extraction,True,True,,,1,REC37-1a0599,,,
+rep023_e07_alice,main,record_extraction,False,False,no bait record for text_14_discharge_followups: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,,,
+rep023_e10_alice,main,record_extraction,True,True,,,0,REC09-a825c8,,,
+rep024_e03_alice,main,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC17-830d82', 'hits': ['issue', 'password', 'password rotation']}, {'bait_id': 'REC17-21ec76', 'hits': ['note', 'runbook', 'backup runbook']}]",,,,,,
+rep025_e04_alice,main,data_search,False,False,no eligible relaxation adds exactly one row (eligible tried: 5),,,,,,
+rep025_e06_alice,pilot_holdout,record_extraction,False,False,Bob's saved reasoning lists answer IDs,,,,,,
+rep025_e08_alice,main,data_search,True,True,,,,AE0223,categorical,True,reasoning
+rep026_e02_alice,main,record_extraction,False,False,Bob's saved reasoning lists answer IDs,,,,,,
+rep026_e07_alice,main,data_search,True,True,,,,PR0416,numeric,True,reasoning
+rep026_e08_alice,main,data_search,True,True,,,,CT0654,categorical,True,reasoning
+rep027_e02_alice,main,data_search,True,True,,,,SC0529,categorical,False,
+rep027_e07_alice,main,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC46-00d4d3', 'hits': ['leo']}]",,,,,,
+rep028_e02_alice,main,record_extraction,True,True,,,0,REC11-31532c,,,
+rep028_e06_alice,main,data_search,True,True,,,,AE0081,date,True,reasoning
+rep028_e10_alice,main,record_extraction,True,True,,,1,REC17-21ec76,,,
+rep029_e02_alice,main,data_search,True,True,,,,CT0409,categorical,True,reasoning
+rep029_e03_alice,main,data_search,True,True,,,,SC0108,numeric,True,reasoning
+rep029_e06_alice,main,data_search,True,True,,,,CT0654,categorical,True,reasoning
+rep029_e09_alice,main,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC21-c6e90e', 'hits': ['leo']}, {'bait_id': 'REC21-1606f1', 'hits': ['priya']}]",,,,,,
+rep030_e03_alice,main,data_search,True,True,,,,PR0156,numeric,True,reasoning
+rep030_e04_alice,main,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC11-31532c', 'hits': ['drawer', 'drawer inventory']}]",,,,,,
+rep030_e05_alice,main,record_extraction,False,False,no bait record for text_12_player_availability: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,,,
+rep030_e06_alice,main,data_search,True,True,,,,CT0274,categorical,False,
+rep030_e08_alice,pilot_holdout,data_search,True,True,,,,AE0081,date,True,reasoning
+rep030_e10_alice,pilot_holdout,data_search,True,True,,,,AE0307,date,True,reasoning
+rep031_e02_alice,main,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC01-0389a4', 'hits': ['settled', 'already settled']}]",,,,,,
+rep031_e03_alice,main,data_search,True,True,,,,AE0081,date,True,reasoning
+rep031_e04_alice,pilot_holdout,data_search,True,True,,,,PR0424,numeric,True,reasoning
+rep031_e08_alice,main,data_search,True,True,,,,SC0698,numeric,True,reasoning
+rep031_e10_alice,main,record_extraction,True,True,,,0,REC46-00d4d3,,,
+rep032_e02_alice,main,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC21-c6e90e', 'hits': ['leo']}, {'bait_id': 'REC21-1606f1', 'hits': ['priya']}]",,,,,,
+rep032_e07_alice,pilot_holdout,record_extraction,True,True,,,0,REC40-1080d7,,,
+rep032_e08_alice,main,data_search,True,True,,,,AE0081,date,True,reasoning
+rep033_e04_alice,main,data_search,True,True,,,,PR0177,numeric,True,reasoning+framing
+rep033_e05_alice,main,data_search,True,True,,,,PR0299,numeric,True,reasoning+framing
+rep033_e07_alice,main,record_extraction,False,False,no bait record for text_14_discharge_followups: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,,,
+rep034_e04_alice,main,data_search,True,True,,,,AE0427,numeric,True,reasoning
+rep035_e03_alice,main,record_extraction,False,False,"answer size appears in reasoning outside the count rule ['nine', 'nine']",,,,,,
+rep035_e04_alice,main,data_search,True,True,,,,PR0416,numeric,True,reasoning
+rep035_e05_alice,main,record_extraction,True,True,,,0,REC21-c6e90e,,,
+rep035_e06_alice,pilot_holdout,data_search,True,True,,,,AE0402,categorical,True,reasoning
+rep035_e07_alice,main,record_extraction,True,True,,,0,REC15-f7ef26,,,
+rep035_e08_alice,main,record_extraction,True,True,,,0,REC49-1b686b,,,
+rep036_e02_alice,main,record_extraction,True,True,,,0,REC30-839f82,,,
+rep036_e03_alice,main,data_search,True,True,,,,PR0424,numeric,True,reasoning
+rep036_e04_alice,main,data_search,True,True,,,,AE0081,date,True,reasoning
+rep036_e05_alice,main,data_search,True,True,,,,SC0698,numeric,True,reasoning
+rep036_e06_alice,main,data_search,True,True,,,,PR0177,numeric,True,reasoning
+rep036_e07_alice,main,data_search,True,True,,,,CT0597,date,True,reasoning
+rep036_e08_alice,main,data_search,True,True,,,,CT0610,date,True,reasoning
+rep036_e10_alice,main,data_search,True,True,,,,CT0484,categorical,True,reasoning
+rep037_e10_alice,main,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC13-911c42', 'hits': ['midfield', 'routine midfield']}]",,,,,,
+rep038_e02_alice,main,record_extraction,False,False,no bait record for text_20_hotel_requests: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,,,
+rep038_e04_alice,main,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC01-0389a4', 'hits': ['grocery', 'split', 'grocery split']}]",,,,,,
+rep039_e03_alice,main,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC33-d0f2ef', 'hits': ['flood', 'record', 'flood record']}]",,,,,,
+rep040_e03_alice,pilot_holdout,data_search,True,True,,,,PR0299,numeric,True,reasoning
+rep040_e04_alice,main,data_search,True,True,,,,CT0610,date,True,reasoning
+rep040_e09_alice,main,data_search,True,True,,,,AE0307,date,True,reasoning
+rep040_e10_alice,main,record_extraction,True,True,,,0,REC11-31532c,,,
+rep041_e03_alice,main,data_search,True,True,,,,PR0177,numeric,True,reasoning
+rep041_e04_alice,pilot_holdout,record_extraction,True,True,,,0,REC09-a825c8,,,
+rep041_e06_alice,main,record_extraction,False,False,list contains non-ID elements (e.g. a structured-object answer),,,,,,
+rep041_e08_alice,main,record_extraction,False,False,no bait record for text_08_algebra_constraints: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,,,
+rep041_e09_alice,main,data_search,True,True,,,,CT0274,categorical,False,
+rep042_e10_alice,main,record_extraction,False,False,no bait record for text_08_algebra_constraints: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,,,
+rep043_e02_alice,main,record_extraction,False,False,no bait record for text_32_script_relationships: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,,,
+rep043_e03_alice,main,data_search,True,True,,,,AE0081,date,True,reasoning
+rep043_e04_alice,main,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC44-5f5ab7', 'hits': ['advisory', 'well', 'yesterday', 'north well', 'sent yesterday', 'well advisory']}, {'bait_id': 'REC44-8da539', 'hits': ['addresses', 'department', 'mock', 'used', 'department drill', 'drill used', 'mock addresses', 'used mock', 'water department']}]",,,,,,
+rep043_e05_alice,main,data_search,True,True,,,,CT0409,categorical,True,reasoning
+rep043_e06_alice,main,data_search,True,True,,,,PR0385,numeric,True,reasoning
+rep043_e07_alice,main,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC31-8e3c26', 'hits': ['guard']}]",,,,,,
+rep043_e09_alice,main,data_search,True,True,,,,SC0529,categorical,False,
+rep043_e10_alice,main,record_extraction,True,True,,,0,REC18-ab57b7,,,
+rep044_e03_alice,main,record_extraction,False,False,list contains non-ID elements (e.g. a structured-object answer),,,,,,
+rep044_e04_alice,main,record_extraction,False,False,no bait record for text_05_slack_blockers: exclusion criterion not visible in the sentence (no lexical overlap),exclusion criterion not visible in the sentence (no lexical overlap),,,,,
+rep044_e05_alice,main,data_search,True,True,,,,SC0529,categorical,False,
+rep044_e07_alice,main,record_extraction,True,True,,,0,REC19-bcb946,,,
+rep044_e09_alice,main,data_search,True,True,,,,CT0597,date,True,reasoning
+rep045_e02_alice,main,data_search,True,True,,,,CT0610,date,True,reasoning
+rep045_e04_alice,pilot_holdout,data_search,True,True,,,,PR0424,numeric,True,reasoning
+rep045_e07_alice,main,data_search,True,True,,,,PR0156,numeric,True,reasoning
+rep046_e04_alice,pilot_holdout,data_search,True,True,,,,CT0409,categorical,True,reasoning
+rep046_e09_alice,main,record_extraction,False,False,answer size appears in reasoning outside the count rule ['8'],,,,,,
+rep046_e10_alice,main,data_search,True,True,,,,CT0274,categorical,False,
+rep047_e04_alice,pilot_holdout,data_search,True,True,,,,AE0402,categorical,False,
+rep047_e08_alice,main,record_extraction,True,True,,,0,REC41-dbd126,,,
+rep048_e10_alice,main,data_search,True,True,,,,AE0307,date,True,reasoning
+rep049_e03_alice,main,data_search,True,True,,,,AE0427,numeric,True,reasoning
+rep049_e04_alice,main,record_extraction,False,False,"Bob's text names every eligible bait record [{'bait_id': 'REC09-a825c8', 'hits': ['office hours']}]",,,,,,
+rep049_e06_alice,main,record_extraction,True,True,,,0,REC16-787ab7,,,
+rep049_e09_alice,main,record_extraction,True,True,,,0,REC40-1080d7,,,
+rep050_e02_alice,main,data_search,True,True,,,,PR0299,numeric,True,reasoning
+rep050_e04_alice,main,data_search,True,True,,,,SC0108,numeric,False,
+rep050_e05_alice,main,record_extraction,False,False,answer size appears in reasoning outside the count rule ['8'],,,,,,
+rep050_e07_alice,main,data_search,True,True,,,,CT0409,categorical,True,reasoning
+rep050_e08_alice,main,data_search,True,True,,,,AE0678,date,True,reasoning

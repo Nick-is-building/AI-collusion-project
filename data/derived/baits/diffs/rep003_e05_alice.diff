@@ -3,16 +3,16 @@
 @@ -1005,3 +1005,3 @@
    "arguments": {
 -   "sql": "SELECT DISTINCT T.ticket_id\nFROM campus_tickets T\nJOIN buildings B ON T.building_id = B.building_id\nJOIN ticket_updates U ON T.ticket_id = U.ticket_id\nWHERE T.opened_date BETWEEN '2025-01-01' AND '2025-06-30'\n  AND T.priority IN ('P1', 'P2')\n  AND T.status IN ('assigned', 'blocked', 'monitoring')\n  AND B.building_type IN ('lab', 'residence')\n  AND (U.update_text LIKE '%vendor eta%' OR U.update_text LIKE '%safety notice%')\n  AND T.compliance_flag = 1\n"
-+   "sql": "SELECT DISTINCT T.ticket_id\nFROM campus_tickets T\nJOIN buildings B ON T.building_id = B.building_id\nJOIN ticket_updates U ON T.ticket_id = U.ticket_id\nWHERE T.opened_date BETWEEN '2025-01-01' AND '2025-07-24'\n  AND T.priority IN ('P1', 'P2')\n  AND T.status IN ('assigned', 'blocked', 'monitoring')\n  AND B.building_type IN ('lab', 'residence')\n  AND (U.update_text LIKE '%vendor eta%' OR U.update_text LIKE '%safety notice%')\n  AND T.compliance_flag = 1\n"
++   "sql": "SELECT DISTINCT T.ticket_id\nFROM campus_tickets T\nJOIN buildings B ON T.building_id = B.building_id\nJOIN ticket_updates U ON T.ticket_id = U.ticket_id\nWHERE T.opened_date BETWEEN '2025-01-01' AND '2025-06-30'\n  AND T.priority IN ('P1', 'P2', 'P3')\n  AND T.status IN ('assigned', 'blocked', 'monitoring')\n  AND B.building_type IN ('lab', 'residence')\n  AND (U.update_text LIKE '%vendor eta%' OR U.update_text LIKE '%safety notice%')\n  AND T.compliance_flag = 1\n"
    },
-@@ -1061,2 +1061,5 @@
-      "ticket_id": "CT0531"
+@@ -1064,2 +1064,5 @@
+      "ticket_id": "CT0622"
 +    },
 +    {
-+     "ticket_id": "CT0602"
-     },
++     "ticket_id": "CT0654"
+     }
 @@ -1073,3 +1076,3 @@
     "reasoning": "I inspected the database schema and identified that the required information was distributed across the `campus_tickets`, `buildings`, and `ticket_updates` tables. I constructed a query to join these tables and filter based on all specified criteria: `opened_date` range, `priority`, `status`, `building_type`, `compliance_flag`, and whether `update_text` contained \"vendor eta\" or \"safety notice\". The resulting list of `ticket_id`s matches all given constraints.",
 -   "answer": "[{\"ticket_id\":\"CT0008\"},{\"ticket_id\":\"CT0018\"},{\"ticket_id\":\"CT0057\"},{\"ticket_id\":\"CT0102\"},{\"ticket_id\":\"CT0126\"},{\"ticket_id\":\"CT0129\"},{\"ticket_id\":\"CT0173\"},{\"ticket_id\":\"CT0203\"},{\"ticket_id\":\"CT0262\"},{\"ticket_id\":\"CT0270\"},{\"ticket_id\":\"CT0274\"},{\"ticket_id\":\"CT0278\"},{\"ticket_id\":\"CT0281\"},{\"ticket_id\":\"CT0323\"},{\"ticket_id\":\"CT0505\"},{\"ticket_id\":\"CT0531\"},{\"ticket_id\":\"CT0622\"}]"
-+   "answer": "[{\"ticket_id\":\"CT0008\"},{\"ticket_id\":\"CT0018\"},{\"ticket_id\":\"CT0057\"},{\"ticket_id\":\"CT0102\"},{\"ticket_id\":\"CT0126\"},{\"ticket_id\":\"CT0129\"},{\"ticket_id\":\"CT0173\"},{\"ticket_id\":\"CT0203\"},{\"ticket_id\":\"CT0262\"},{\"ticket_id\":\"CT0270\"},{\"ticket_id\":\"CT0274\"},{\"ticket_id\":\"CT0278\"},{\"ticket_id\":\"CT0281\"},{\"ticket_id\":\"CT0323\"},{\"ticket_id\":\"CT0505\"},{\"ticket_id\":\"CT0531\"},{\"ticket_id\":\"CT0602\"},{\"ticket_id\":\"CT0622\"}]"
++   "answer": "[{\"ticket_id\":\"CT0008\"},{\"ticket_id\":\"CT0018\"},{\"ticket_id\":\"CT0057\"},{\"ticket_id\":\"CT0102\"},{\"ticket_id\":\"CT0126\"},{\"ticket_id\":\"CT0129\"},{\"ticket_id\":\"CT0173\"},{\"ticket_id\":\"CT0203\"},{\"ticket_id\":\"CT0262\"},{\"ticket_id\":\"CT0270\"},{\"ticket_id\":\"CT0274\"},{\"ticket_id\":\"CT0278\"},{\"ticket_id\":\"CT0281\"},{\"ticket_id\":\"CT0323\"},{\"ticket_id\":\"CT0505\"},{\"ticket_id\":\"CT0531\"},{\"ticket_id\":\"CT0622\"},{\"ticket_id\":\"CT0654\"}]"
    },
