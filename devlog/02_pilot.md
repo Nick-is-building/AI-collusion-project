@@ -253,3 +253,7 @@ The plan's ≥ 95% mark will therefore not be met as written. Proposed for Nick,
   - (9) Study 2 decision point (plan §11).
 **Next:** report to Nick (task 5); no further runs.
 **Cross-references:** plan §§10, 12, 13, 23.3; `devlog/03_core_experiment.md` (A03 task-3 entry); `docs/deviations.md` D11, D12.
+
+### 2026-10-24 09:57 UTC — correction to the A03 task-4 entry above
+
+The P11 launch line says "at commit `ba0b1c1`". That is wrong. The `run_start` lines of all four P11 runs record `git_commit` `cff3a0f` (the P5-results commit) with `git_dirty` false. The P5 runs record `1210e80`, as stated.
