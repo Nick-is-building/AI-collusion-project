@@ -456,3 +456,48 @@ Under the corrected rule, **0 of 9 survive** (0 of all 16 main candidates of the
 **State / limitations:** stage 1's items run about one launch-gap earlier than the rest of the list. Within an item, all calls stay adjacent.
 **Next:** commit, tag prereg-v1, launch stage 1.
 **Cross-references:** `docs/deviations.md` D15, D16, D18; plan §§8.5, 12, 23.3.
+
+## 2026-10-24 11:00–11:25 UTC — Claude Code (Opus 5.5), session A04 — Task 3: main run launched (two stages); Task 4: R1-live driver, screen, analysis, addendum (not tagged)
+
+**Assignment / authorization:** A04 task 3 (main run, stage cap 40 USD, 4 workers, two launch stages with a hand reading in between) and task 4 (driver, P7, flags, prepare the addendum, no tag, no R1-live launch); D18, D19.
+**Main run, stage 1 (observed):**
+- Launched at `21f4a0f` (tag prereg-v1), clean tree: `set -a; . ./.env; set +a; PYTHONPATH=. nohup .venv/bin/python -m scripts.main.launch_main --first --live --approved-stage main --workers 4 > logs/main_stage1.log 2>&1 &`
+- Runs `main-20261024T110125Z-{3cac61,557ebe,896cba,fb26b2}`.
+- 111/111 complete, 0 missing, 0 API errors, 0 429s; `response_model` constant; 0.619 USD; about 3.5 min.
+**Hand reading of the first 5 complete calls per variant (plan §23.3; `scripts/main/read_first.py`, output `scratch/a04_first5.txt`, local):**
+- 60 calls, 12 variants × 5.
+- Automated check of every request against the variant definition (0 problems):
+  - bait message present in every bait call, the original in every correct call;
+  - the verdict prompt is the last message; the D13 sentence and the `itemization` field appear in R6 only;
+  - filler in R5 only; the neutral system prompt in R4n only;
+  - 4 messages in R4, R4n, N4 and 5 in R5;
+  - Bob's round-1 message directly before the verdict prompt in all cut variants;
+  - temperature 1.0, max_tokens 64,000, reasoning high, forced `submit_verdict`, 1 API request per call.
+- Reasoning read for all 60: every verdict engages with Bob's actual query or extraction. Bait REJECTs cite the relaxed condition (e.g. "used '2025-07-09' as the upper bound"; "PR.amount >= 42016.73"). ACCEPTs list the conditions checked.
+- No abnormal call. Following D18, no rate is computed here.
+**Main run, full (observed so far):**
+- Launched at `4f83f8d` (clean tree): `… -m scripts.main.launch_main --live --approved-stage main --workers 4 > logs/main_full.log 2>&1 &` at 11:06 UTC.
+- Runs `main-20261024T110644Z-{115733,4abbfb,803d1e,d1a416}`.
+- Resume skipped the 111 stage-1 call IDs (2,219 to run).
+- About 39 calls/min. Monitoring (`scripts/main/monitor.py`, operational only) is recorded in the completion entry.
+**R1-live build (implemented, tested with mock models, run live only in P7):**
+- `src/replay/live_driver.py`: the driver (docstring = authoritative procedure).
+  - Bob's history is made consistent with the bait from the log entries, with per-item read-back checks.
+  - The round-1 channel header is built from Bob's own `message_type`. The first version assumed `[type=other]`, and 6 of 40 items failed the check until this was fixed.
+  - JSON is re-serialized with the round-tripping serializer, `ensure_ascii` True or False (2 items contain non-ASCII text).
+  - The D19.5 fallback is implemented.
+- `src/replay/r1live_screen.py`: flags A and B, (a), (b); keyword lists fixed after P7.
+- `src/analysis/r1live.py`: D19 analysis (primary, without flags, decision rule, intermediate cells, false-rejection reference, composition).
+- `src/runner/jobs.py`: `make_r1live_job` (messages = R1 context; estimate 12 × CUT).
+- `scripts/main/launch_r1live.py`: prepared; stage `r1live` has no cap, so it refuses (fail closed).
+- `PREREGISTRATION_R1LIVE.md`: prepared addendum with file hashes. **Not tagged.**
+- Tests:
+  - `tests/test_live_driver.py` (43: all 40 subset items consistent, scope and order of calls, Alice untouched, fallback on Bob's 400, an Alice error is not a fallback);
+  - `tests/test_r1live_analysis.py` (3, synthetic).
+**Did not work:** see the header fix above. Nothing else observed.
+**State / limitations:**
+- The driver has been live on 4 hold-out items only.
+- The fallback is tested with mocks only.
+- The "persists" rule (D19.4) and the relaxed-literal marker are Claude Code's proposals, pending Nick's approval with the tag.
+**Next:** main-run completion check; report.
+**Cross-references:** `devlog/02_pilot.md` A04 P7 entry; `docs/deviations.md` D16, D18, D19; plan §§8.4, 8.8, 23.3.

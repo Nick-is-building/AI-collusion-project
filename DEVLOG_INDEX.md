@@ -11,7 +11,7 @@
 | [`devlog/01_foundation.md`](devlog/01_foundation.md) | Repository setup, dependencies, upstream pinning, pre-sprint artifact intake and provenance, baseline verification, shared infrastructure | A01 tasks 0–2 done (prereg-v0, env, data provenance, Study 0 reproduced); A02 LICENSE check |
 | [`devlog/02_pilot.md`](devlog/02_pilot.md) | Technical pilots, cost/timing measurements, feasibility checks, problems, go/no-go recommendations | A02: live P1, P2, P3, P9 (0.57 USD). A03: R0 mismatch cause found (task 1); P5, P11, P10 (task 4). A04: R6 rerun after D13 (task 1) |
 | [`devlog/03_core_experiment.md`](devlog/03_core_experiment.md) | Study 1: context reconstruction, bait generation, replay, controls, fidelity, R1-live, model comparison | A01 tasks 3–7; A02 D2–D4; A03: D6/D7 baits (109 main), blind-check package (tablet), R5, R6, N1/N4, job lists, parallel runner |
-| [`devlog/04_hysteresis.md`](devlog/04_hysteresis.md) | Study 2: branching trajectories, channel changes, partner intervention, run validity, persistence analyses | Not built (D17, A04): preregistered future study |
+| [`devlog/04_hysteresis.md`](devlog/04_hysteresis.md) | Study 2: branching trajectories, channel changes, partner intervention, run validity, persistence analyses | A04 task 5: implementation plan only (`docs/study2_implementation_plan.md`); D17 withdrawn, build follows A04 |
 | [`devlog/05_analysis_submission.md`](devlog/05_analysis_submission.md) | Statistical implementation, result validation, figures, paper, reproducibility and submission checks | A03: analysis code + simulation tests, PREREGISTRATION.md draft. A04: D14, prereg-v1 tagged; no outcome analysis before the natural-error rubric (D18) |
 
 ## Reading and linking rules
@@ -24,12 +24,13 @@
 
 ## Active work and cross-references
 
-- **Assigned work:** A04 (`assignments/A04_prereg_launch_r1live.md` + `assignments/A04_addendum_D17_D19.md`): task 1 done (R6 rerun); task 2 done (prereg-v1); task 3 main run (in progress); task 4 R1-live driver + P7 (4 items) + addendum `PREREGISTRATION_R1LIVE.md` (not tagged); task 5 skipped (D17); task 6 report. A01–A03 done.
+- **Assigned work:** A04 (`assignments/A04_prereg_launch_r1live.md` + `assignments/A04_addendum_D17_D19.md`): task 1 done (R6 rerun); task 2 done (prereg-v1); task 3 main run (in progress); task 4 R1-live driver + P7 (4 items) + addendum `PREREGISTRATION_R1LIVE.md` (not tagged); task 5 Study 2 implementation plan (D17 withdrawn by Nick); task 6 report. A01–A03 done.
 - **Active blocks:**
   - `devlog/02_pilot.md`: A04 task-1 entry (R6 rerun); P7 entry;
   - `devlog/03_core_experiment.md`: A04 entries (D15, launcher, main run, R1-live driver);
-  - `devlog/05_analysis_submission.md`: A04 task-2 entry (D14, prereg-v1).
-- **Deviations:** `docs/deviations.md` D1–D19 (D13–D16 from A04; D17–D19 from the A04 addendum). D1–D19 were all decided before any main-run call.
+  - `devlog/05_analysis_submission.md`: A04 task-2 entry (D14, prereg-v1);
+  - `devlog/04_hysteresis.md`: A04 task-5 plan entry.
+- **Deviations:** `docs/deviations.md` D1–D19 (D13–D16 from A04; D17–D19 from the A04 addendum; **D17 withdrawn** by Nick's correction, entry at the end of the file). All were decided before any main-run call.
 - **Preregistration:** `PREREGISTRATION.md`, tag `prereg-v1`; materials in `data/derived/prereg/` (`make_prereg_files.py`). The R1-live addendum (`PREREGISTRATION_R1LIVE.md`) gets tag `prereg-v1-r1live` only on Nick's authorization (D16).
 - **Analysis order (D18):** no analysis script on main-run outcomes until the natural-error rubric is committed; only `scripts/main/monitor.py` (operational).
 - **Raw run evidence:** `results/raw/*.jsonl` (committed; main run `main-*.jsonl`); countTokens log `results/token_counts/counts.jsonl` (committed); request payloads in `results/requests/` (local, hashed); launch logs in `logs/` (local).
