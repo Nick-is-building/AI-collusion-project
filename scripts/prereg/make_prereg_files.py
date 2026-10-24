@@ -22,8 +22,8 @@ ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "data" / "derived" / "prereg"
 HASHED = ["PROJECT_PLAN.md", "docs/deviations.md", "configs/*.yaml", "data/derived/items/*.csv",
           "data/derived/baits/*.json", "data/derived/baits/item_flow.csv", "data/derived/r5_fillers.csv",
-          "data/derived/r0_unmatched_records.csv", "data/checksums.txt", "src/*.py", "src/replay/*.py",
-          "src/runner/*.py", "src/analysis/*.py", "scripts/analysis/*.py", "requirements.lock.txt",
+          "data/derived/r0_unmatched_records.csv", "data/checksums.txt", "PREREGISTRATION.md", "src/*.py", "src/replay/*.py",
+          "src/runner/*.py", "src/analysis/*.py", "scripts/analysis/*.py", "scripts/main/*.py", "requirements.lock.txt",
           "data/derived/prereg/main_items.csv", "data/derived/prereg/r1live_subset.csv",
           "data/derived/prereg/main_run_call_ids.txt"]
 

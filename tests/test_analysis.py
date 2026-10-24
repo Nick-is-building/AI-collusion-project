@@ -103,3 +103,17 @@ def test_analyze_runs_end_to_end(meta):
     assert set(res["secondary"]) == {"R2-R1", "R3-R1", "R4-R2", "R5-R4", "R6first-R1", "R4n-R4"}
     assert "inside_margin" in res["r5_equivalence"] and "above_mark" in res["cut_artifact"]
     assert res["n_main_items"] == len(meta)
+
+
+def test_fidelity_level1_raw_and_storage_adjusted():
+    """D14: raw exact share and storage-adjusted share side by side (synthetic records, labelled as such)."""
+    import pandas as pd
+    from src.analysis.fidelity import level1
+    rec = lambda item, got: {"variant": "R0", "item_id": item, "verdict_status": "ok",   # noqa: E731
+                             "usage": [{"response_status": "accepted", "input_tokens": got}]}
+    recs = [rec("a", 100), rec("b", 95), rec("c", 90), rec("d", 99)]          # synthetic
+    ref = {"a": 100, "b": 100, "c": 100, "d": 100}
+    un = pd.DataFrame({"item_id": ["a", "b", "c", "d"], "n_unmatched": [0, 1, 1, 0]})
+    r = level1(recs, ref, un)
+    assert r["raw_exact_share"] == 0.25 and not r["passes_plan_rule"]
+    assert r["storage_adjusted_exact_share"] == 0.5 and r["unexplained_mismatches"] == 2

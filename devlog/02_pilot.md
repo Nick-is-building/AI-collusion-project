@@ -257,3 +257,37 @@ The plan's ≥ 95% mark will therefore not be met as written. Proposed for Nick,
 ### 2026-10-24 09:57 UTC — correction to the A03 task-4 entry above
 
 The P11 launch line says "at commit `ba0b1c1`". That is wrong. The `run_start` lines of all four P11 runs record `git_commit` `cff3a0f` (the P5-results commit) with `git_dirty` false. The P5 runs record `1210e80`, as stated.
+
+## 2026-10-24 10:45–10:56 UTC — Claude Code (Opus 5.5), session A04 — Task 1: D13 implemented; R6 part of P5 rerun live
+
+**Assignment / authorization:** `assignments/A04_prereg_launch_r1live.md` (Nick), task 1: implement D13 and rerun the R6 part of P5 (5 items, both versions; cap 0.30 USD), then report first-submission compliance and continue whatever it is. The A04 addendum (D17–D19, `assignments/A04_addendum_D17_D19.md`) was received at session start, about 10:45 UTC.
+**Session start check:** working tree clean at `3039e28`. The A04 file equals the committed verbatim text. No A04 work existed: no file newer than the assignment commit, no running process, only tag `prereg-v0`.
+**Built or changed (commit `e04f53e`, before the live call):**
+- `src/replay/r6.py`: D13 data-search field wording; `PROMPT_SENTENCE` and `with_prompt_sentence`, which append one sentence to the verdict prompt. The verdict prompt is identified with the exact `_is_verdict_prompt` rule.
+- `src/runner/jobs.py`: the R6 builder applies `with_prompt_sentence`.
+- `scripts/pilot/p5_short_variants.py`: `--r6-only`, check `P5-R6-D13`.
+- `configs/caps.yaml`: check group `a04_p5_r6` (0.30 USD).
+- Tests in `tests/test_r6.py` and `tests/test_jobs.py`. The D12 identity assertion was replaced by the D13 one: messages equal R1 / R0′ except the appended sentence.
+- `docs/deviations.md`: D13–D19.
+**Launch:** `set -a; . ./.env; set +a; PYTHONPATH=. nohup .venv/bin/python -m scripts.pilot.p5_short_variants --r6-only --live --approved-stage pilot --workers 1 > logs/p5_r6_d13_live.log 2>&1 &`
+- Git `e04f53e`, clean tree.
+- One worker, because with 2 workers each half-cap of 0.15 USD would have let the fail-closed pre-check (3 attempts × estimate) block calls.
+**Run (observed):** `pilot-20261024T105154Z-eecc6f`.
+- 10/10 calls complete, 0 missing, 0 API errors, 0 429s.
+- `response_model` = `gemini-3.1-flash-lite`.
+- Spend **0.0922 USD**; the runner `run_end` and the sum of per-call costs agree. Pilot stage total is now 1.1493 USD; project total 1.1493 USD.
+**R6 first-submission compliance (D13 rerun, hold-out items rep005_e03, rep008_e02, rep008_e03, rep035_e06, rep047_e04):**
+- First submissions that were ACCEPT (5, all on correct versions):
+  - `itemization` present in 5/5 (A03: 0/10 present);
+  - compliant with the checker in **4/5**.
+  - Non-compliant: rep008_e02 correct (data search). The model again listed the key column name (`"keys": ["event_id"]`) instead of the 8 key values; its 6 quoted conditions were verbatim. The gate fired, the retry repeated the column name, and the final verdict is a gate REJECT.
+- First submissions on bait versions: 5/5 REJECT, without itemization. The rule asks for itemization only on ACCEPT.
+- Gate fired 1/10. Final gated verdicts: correct 4 ACCEPT + 1 gate REJECT; bait 5 REJECT.
+- Pilot data on hold-out items; nothing changed because of it (A04: "Whatever the compliance, continue").
+**Did not work:** none observed in the run. The data-search column-name misreading persists in 1 of 4 data-search correct items.
+**Evidence / artifacts:**
+- `results/raw/pilot-20261024T105154Z-eecc6f.jsonl` (committed with the task-2 commit);
+- request payloads in `results/requests/pilot-20261024T105154Z-eecc6f/` (local);
+- `logs/p5_r6_d13_live.log` (local).
+**Next:** task 2.
+**Cross-references:** `docs/deviations.md` D13; `devlog/02_pilot.md` A03 task-4 entry (original P5).

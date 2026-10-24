@@ -150,3 +150,12 @@ def test_count_rule_d3_answer_noun():
         increment_counts("1 case", 1, "answer_noun", n)
     with pytest.raises(ValueError):
         increment_counts("8 cases", 8, "answer_noun")
+
+
+def test_d15_resolved_record_is_skipped_not_dropped():
+    """D15 (A04): rep018_e02's only eligible record is in Bob's resolve_records call -> skipped like D4."""
+    import pandas as pd
+    from src.replay.baits_extraction import Ambiguous, build_bait
+    c = pd.read_csv("data/derived/items/candidates.csv").set_index("item_id").loc["rep018_e02_alice"]
+    with pytest.raises(Ambiguous, match="resolve_records calls \\(D4, D15\\).*in Bob's resolve_records call"):
+        build_bait(c.trace, int(c.ep_index))

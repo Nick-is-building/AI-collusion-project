@@ -428,3 +428,31 @@ Under the corrected rule, **0 of 9 survive** (0 of all 16 main candidates of the
 - R1-live (step 6), Haiku and 3.7 Flash were not built.
 **Next:** analysis entry in `devlog/05_analysis_submission.md`; then P5, P11, P10 live (task 4).
 **Cross-references:** `docs/deviations.md` D11, D12; plan §§8.4, 8.5, 10, 11 (build order steps 3–4).
+
+## 2026-10-24 10:56–11:05 UTC — Claude Code (Opus 5.5), session A04 — Task 2 (part): D15 rep018_e02; main launcher, monitor, cap; prereg-v1 materials
+
+**Assignment / authorization:** A04 task 2 (D14, D15, regenerate prereg files, tests, tag prereg-v1) and the build part of task 3 (stage cap 40 USD, launcher). No model call was made for this work.
+**Built or changed:**
+- `src/replay/baits_extraction.py`: D15. A bait record already in one of Bob's `resolve_records` calls is now skipped like a named record (D4; `_in_resolve_records`), instead of dropping the item. The drop reason now reads "every eligible bait record is named in Bob's text or in his resolve_records calls (D4, D15)".
+- `data/derived/baits/item_flow.csv`: regenerated. Only the drop-reason texts changed; the bait files are unchanged (`git status` shows no change under `data/derived/baits/*.json`).
+- `tests/test_baits_extraction.py`: `test_d15_resolved_record_is_skipped_not_dropped`.
+- `scripts/main/launch_main.py` (new): stage `main`, factory `main_run_jobs`, 4 workers, `--first` stage 1, and `--plan` / mock / `--live --approved-stage main`.
+- `scripts/main/monitor.py` (new): operational figures only. It prints no verdicts (D18; tested).
+- `tests/test_launch_main.py` (new).
+- `configs/caps.yaml`: `stages.main: 40.0`.
+- `scripts/prereg/make_prereg_files.py`: also hashes `PREREGISTRATION.md` and `scripts/main/*.py`.
+- `PREREGISTRATION.md`: final for prereg-v1 (scope D16, D13 R6 row, D14 level 1, D17, D18, A04 deviations, frozen R1-live flag rules, launch staging).
+**D15 result (observed):** rep018_e02_alice (text_02) has exactly one eligible record (`REC02-567bcf`), and it is in Bob's `resolve_records` call. Under D15 it is skipped, nothing remains, and the item is still dropped. **Main list unchanged: 109 (22 extraction / 87 data search), 43 trajectories.**
+**Stage 1 design (implementation choice, within A04's "first 5 complete calls per variant"):**
+- Stage 1 takes complete item blocks at the head of each part of the frozen order: 5 main items (95 calls), 5 natural-error items (10), and 2 fidelity cases (6). That is 111 calls, at least 5 per variant, projected 1.02 USD.
+- Item blocks stay together (plan §8.5). The full run then skips these call IDs, so both stages form one dataset under one call-ID list.
+**Checks performed:**
+- `make_prereg_files`: main items 109, R1-live 40, 175 files hashed. `main_run_call_ids.txt` SHA-256 `9fc39f00…950d`, identical to the A03 draft.
+- `launch_main --plan`: 2,330 calls, projected 29.89 USD (no cache savings); stage 1: 111 calls, 1.02 USD.
+- Mock stage 1 with 4 workers: 111 calls, 0 missing, 4 run files under `logs/mock_runs/raw/`.
+- `pytest tests/test_launch_main.py`: 2 passed.
+- Full suite: 312 passed (115 s).
+**Did not work:** none observed.
+**State / limitations:** stage 1's items run about one launch-gap earlier than the rest of the list. Within an item, all calls stay adjacent.
+**Next:** commit, tag prereg-v1, launch stage 1.
+**Cross-references:** `docs/deviations.md` D15, D16, D18; plan §§8.5, 12, 23.3.

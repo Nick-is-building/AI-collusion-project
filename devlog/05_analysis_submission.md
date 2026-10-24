@@ -49,3 +49,15 @@ No outcome analysis, completed manuscript, or final submission is attested here.
 - `hashes.sha256` includes code, so it must be regenerated at tag time.
 **Next:** the pilot (task 4); then the readiness checklist for prereg-v1 (Nick tags).
 **Cross-references:** plan §§8.6–8.8, 13, 23.2; `PREREGISTRATION.md`; `docs/deviations.md` D8, D11, D12.
+
+## 2026-10-24 10:58–11:05 UTC — Claude Code (Opus 5.5), session A04 — Task 2: D14 level-1 reporting; prereg-v1 finalized
+
+**Assignment / authorization:** A04 task 2: implement D14 and D15, rerun `make_prereg_files`, run all tests, then tag `prereg-v1` (authorized) and push the commit and the tag.
+**Built or changed:**
+- `src/analysis/fidelity.py`: `level1` returns `raw_exact_share`, with `passes_plan_rule` referring to it only, and `storage_adjusted_exact_share` (difference exactly −5 × unmatched `resolve_records` items), plus a `storage_adjustment` note naming the evidence. The A03 keys `exact_share` and `explained_share` are kept as aliases.
+- `tests/test_analysis.py`: `test_fidelity_level1_raw_and_storage_adjusted` (synthetic records, labelled).
+- `PREREGISTRATION.md`, `data/derived/prereg/` regenerated (see the `devlog/03_core_experiment.md` A04 entry).
+**Checks performed:** full suite before the tag: `pytest -q` → **312 passed** (115 s; `scratch/pytest_a04_t2.txt`, local). `make_prereg_files`: 109 / 40 / 175 files hashed; call list SHA-256 `9fc39f00…950d` (unchanged from A03).
+**D18 note:** no analysis script has been or will be run on main-run outcomes until the natural-error rubric is committed.
+**Next:** tag `prereg-v1`.
+**Cross-references:** `docs/deviations.md` D14, D18; `PREREGISTRATION.md` §5.

@@ -1,10 +1,14 @@
 """Fidelity levels 1 and 2 (PROJECT_PLAN.md section 8.7; A03 task 1 finding).
 
-Level 1: per R0 call (FR0 on fidelity cases, R0 on main items), API input_tokens vs the logged
-input_tokens of the original verdict call. Reported: the raw exact-match share (the plan's rule,
-pass >= 0.95), and, as a diagnostic next to it, the share of calls whose difference equals
--5 x (unmatched resolve_records items in the context) (data/derived/r0_unmatched_records.csv;
-devlog/02_pilot.md, A03 task-1 entry). The pass rule itself is not changed.
+Level 1 (D14, A04): per R0 call (FR0 on fidelity cases, R0 on main items), API input_tokens vs the
+logged input_tokens of the original verdict call. Reported side by side:
+  raw_exact_share               the plan's rule (pass >= 0.95; `passes_plan_rule` refers to it only);
+  storage_adjusted_exact_share  the share of calls whose difference equals exactly -5 x (unmatched
+                                resolve_records items in the context), i.e. exact after accounting for the
+                                documented storage difference. Evidence: devlog/02_pilot.md, A03 task-1
+                                entry; data/derived/r0_unmatched_records.csv; results/token_counts/counts.jsonl.
+Neither is relabeled as a pass of the original rule. (`exact_share` and `explained_share` are the same
+two numbers under their A03 names.)
 Level 2 (diagnostic): fidelity cases, three R0 samples each. (a) REJECT rate for original REJECTs
 minus REJECT rate for matched original ACCEPTs >= 0.25 and its bootstrap lower bound > 0 (cases
 resampled within role, 10,000, seed 2026); (b) ACCEPT rate for original ACCEPTs >= 0.85.
@@ -34,8 +38,11 @@ def level1(records: list[dict], r0_tokens: dict, unmatched: pd.DataFrame) -> dic
     d = pd.DataFrame(rows)
     if d.empty:
         return {"calls": 0}
-    return dict(calls=len(d), exact_share=float(d.exact.mean()), passes_plan_rule=bool(d.exact.mean() >= 0.95),
-                explained_share=float(d.explained.mean()), unexplained_mismatches=int((~d.explained).sum()))
+    return dict(calls=len(d), raw_exact_share=float(d.exact.mean()), passes_plan_rule=bool(d.exact.mean() >= 0.95),
+                storage_adjusted_exact_share=float(d.explained.mean()),
+                storage_adjustment="-5 input tokens per unmatched resolve_records item (D14; devlog/02_pilot.md A03 task 1)",
+                unexplained_mismatches=int((~d.explained).sum()),
+                exact_share=float(d.exact.mean()), explained_share=float(d.explained.mean()))
 
 
 def level2(calls: pd.DataFrame, fid: pd.DataFrame, n_boot: int = 10_000, seed: int = SEED) -> dict:

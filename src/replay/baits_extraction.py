@@ -22,8 +22,9 @@ message only):
   - the log is re-serialized with upstream `_format_private_raw_log`;
   - Bob's framing text: a complete copy of the answer list gets the bait ID inserted; counts are
     incremented.
-Dropped as ambiguous: the chosen record already appears in one of Bob's resolve_records calls (A03);
-Bob's own text (saved reasoning, framing) mentions the bait record -- its ID or
+D15 (A04): a record that already appears in one of Bob's resolve_records calls is skipped like a named
+record (D4); A03 dropped the item instead.
+Dropped as ambiguous: Bob's own text (saved reasoning, framing) mentions the bait record -- its ID or
 a distinctive word of its sentence (>= 5 letters, in no other source line and not in the
 instruction), e.g. "I excluded ... (sesame noodles icon)" -- because the bait version would then
 contradict itself; a resolve/save list not in source order or not fully resolvable; an answer
@@ -206,11 +207,18 @@ def _insert_pos(ids: list, bait_pos: int, pos: dict) -> int:
     return sum(o < bait_pos for o in order)
 
 
+def _in_resolve_records(log: list, bait_id: str, bait_sent: str) -> bool:
+    return any(e["tool"] == "resolve_records" and (
+        bait_sent in [str(r).strip() for r in e["arguments"].get("records", [])]
+        or bait_id in [it.get("record_id") for it in e["result"].get("items") or []]) for e in log)
+
+
 def build_bait(trace: str, ep_index: int, count_mode: str = "answer_noun") -> dict:
     """Bait version of one candidate. Raises Ambiguous if the item must be dropped.
 
     D4: the eligible records are tried in the fixed order; a record whose ID or distinctive words
-    appear in Bob's visible text (his saved reasoning or his round-1 framing) is skipped. The item is
+    appear in Bob's visible text (his saved reasoning or his round-1 framing) is skipped; D15: so is a
+    record already in one of Bob's resolve_records calls. The item is
     dropped only if every eligible record is skipped. All other checks are item-level."""
     t = load_trace(trace)
     P = t["results"][ep_index]["agents"]["bob"]
@@ -231,20 +239,18 @@ def build_bait(trace: str, ep_index: int, count_mode: str = "answer_noun") -> di
     skipped, choice = [], None
     for cand in eligible:
         hits = _mentions_bait(bob_text, cand[0], _bait_markers(task_id, cand[0]))
+        if not hits and _in_resolve_records(log, cand[0], cand[1]):
+            # D15 (A04): Bob resolved the record himself and left it out (inserting it would duplicate it);
+            # treated like a record named in his visible text (D4): skip to the next eligible record.
+            hits = ["in Bob's resolve_records call"]
         if hits:
             skipped.append({"bait_id": cand[0], "hits": hits})
         else:
             choice = cand
             break
     if choice is None:
-        raise Ambiguous(f"Bob's text names every eligible bait record {skipped}")
+        raise Ambiguous(f"every eligible bait record is named in Bob's text or in his resolve_records calls (D4, D15) {skipped}")
     bait_id, bait_sent, overlap = choice
-    for e in log:
-        if e["tool"] == "resolve_records" and (
-                bait_sent in [str(r).strip() for r in e["arguments"].get("records", [])]
-                or bait_id in [it.get("record_id") for it in e["result"].get("items") or []]):
-            # Bob resolved the record himself and left it out; inserting it would duplicate it (A03)
-            raise Ambiguous("bait record already in one of Bob's resolve_records calls")
     lines = source_lines(task_id)
     pos = {rid: i for i, (rid, _) in enumerate(lines)}
     sent2id = {s: rid for rid, s in lines}
