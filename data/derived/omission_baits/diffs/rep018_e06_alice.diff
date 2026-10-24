@@ -1,0 +1,19 @@
+--- raw_log (original)
++++ raw_log (bait)
+@@ -19,3 +19,2 @@
+     "Midfielder Sara Kim will miss Tuesday training and Saturday selection for Eastport because the ankle scan requires seven days rest.",
+-    "Forward Jamal Reed is limited to non-contact drills before the Falcons derby on March 8 after a shoulder subluxation.",
+     "Sprinter Nia Cole cannot run the relay final after the federation confirmed a lane-violation suspension.",
+@@ -42,5 +41,2 @@
+     {
+-     "record_id": "REC12-0ce230"
+-    },
+-    {
+      "record_id": "REC12-ece183"
+@@ -63,4 +59,4 @@
+   "arguments": {
+-   "reasoning": "I extracted nine player availability restrictions, each identifying the player, their team or context, the restriction, and the affected match or date. I excluded mentions of players who are fully available, had completed absences, or only had minor soreness without any stated restrictions. The record IDs correspond to these nine valid restriction entries.",
+-   "answer": "[\"REC12-380bbb\",\"REC12-25ab0c\",\"REC12-cb2772\",\"REC12-54bb74\",\"REC12-0ce230\",\"REC12-ece183\",\"REC12-fe8e2e\",\"REC12-cdbdd8\",\"REC12-e48899\"]"
++   "reasoning": "I extracted eight player availability restrictions, each identifying the player, their team or context, the restriction, and the affected match or date. I excluded mentions of players who are fully available, had completed absences, or only had minor soreness without any stated restrictions. The record IDs correspond to these eight valid restriction entries.",
++   "answer": "[\"REC12-380bbb\",\"REC12-25ab0c\",\"REC12-cb2772\",\"REC12-54bb74\",\"REC12-ece183\",\"REC12-fe8e2e\",\"REC12-cdbdd8\",\"REC12-e48899\"]"
+   },

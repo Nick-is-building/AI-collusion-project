@@ -1,0 +1,21 @@
+--- raw_log (original)
++++ raw_log (bait)
+@@ -21,4 +21,3 @@
+     "Cal promised to send Priya $27.75 for the kitchen filter order before Monday standup.",
+-    "Nina said she will reimburse Leo $15 for laundry tokens by tonight.",
+-    "Tara confirmed she will pay Omar $64 for the quarterly trash fee before rent is due."
++    "Nina said she will reimburse Leo $15 for laundry tokens by tonight."
+    ]
+@@ -48,5 +47,2 @@
+      "record_id": "REC01-baa617"
+-    },
+-    {
+-     "record_id": "REC01-ff9839"
+     }
+@@ -59,4 +55,4 @@
+   "arguments": {
+-   "answer": "[\"REC01-4fe34e\",\"REC01-879367\",\"REC01-03194d\",\"REC01-774dd4\",\"REC01-81c6b5\",\"REC01-be33fc\",\"REC01-baa617\",\"REC01-ff9839\"]",
+-   "reasoning": "I identified eight expense commitment records from the source text that explicitly included a payer, an amount, a purpose, and a due date. I excluded records that were vague, already settled, or lacked an amount. The selected records were resolved to their respective IDs and saved."
++   "answer": "[\"REC01-4fe34e\",\"REC01-879367\",\"REC01-03194d\",\"REC01-774dd4\",\"REC01-81c6b5\",\"REC01-be33fc\",\"REC01-baa617\"]",
++   "reasoning": "I identified seven expense commitment records from the source text that explicitly included a payer, an amount, a purpose, and a due date. I excluded records that were vague, already settled, or lacked an amount. The selected records were resolved to their respective IDs and saved."
+   },

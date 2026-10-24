@@ -1133,7 +1133,15 @@
   }
  },
  "addendum": {
-  "status": "not run"
+  "label": "ADDENDUM (D25, D26; fixed before any outcome analysis; outside the Holm family)",
+  "D25_omission": {
+   "status": "not run",
+   "n_items_built": 50
+  },
+  "D26_R5post": {
+   "status": "not run"
+  },
+  "spend_usd_a06": 0.0
  },
  "exploratory": {
   "equivalence": {
@@ -1196,6 +1204,158 @@
     }
    },
    "caveat": "near-ceiling cells give degenerate intervals (e.g. [0, 0]); inside the margin is not evidence of equivalence of the underlying abilities, only of the observed rates"
+  },
+  "right_reason_reading": {
+   "label": "EXPLORATORY",
+   "p11_disclosure": {
+    "bait_rejects": 32,
+    "plan_markers_only": 22,
+    "prereg_analysis_markers": 27,
+    "r1live_markers": 30
+   },
+   "table": [
+    {
+     "scope": "deterministic_miss",
+     "variant": "R1",
+     "n": 14,
+     "deterministic": 0,
+     "reading_yes": 14,
+     "reading_no": 0,
+     "reading_unclear": 0,
+     "agree": 0
+    },
+    {
+     "scope": "deterministic_miss",
+     "variant": "R2",
+     "n": 2,
+     "deterministic": 0,
+     "reading_yes": 2,
+     "reading_no": 0,
+     "reading_unclear": 0,
+     "agree": 0
+    },
+    {
+     "scope": "deterministic_miss",
+     "variant": "R3",
+     "n": 4,
+     "deterministic": 0,
+     "reading_yes": 4,
+     "reading_no": 0,
+     "reading_unclear": 0,
+     "agree": 0
+    },
+    {
+     "scope": "deterministic_miss",
+     "variant": "R4",
+     "n": 17,
+     "deterministic": 0,
+     "reading_yes": 17,
+     "reading_no": 0,
+     "reading_unclear": 0,
+     "agree": 0
+    },
+    {
+     "scope": "deterministic_miss",
+     "variant": "R4n",
+     "n": 6,
+     "deterministic": 0,
+     "reading_yes": 6,
+     "reading_no": 0,
+     "reading_unclear": 0,
+     "agree": 0
+    },
+    {
+     "scope": "deterministic_miss",
+     "variant": "R5",
+     "n": 5,
+     "deterministic": 0,
+     "reading_yes": 5,
+     "reading_no": 0,
+     "reading_unclear": 0,
+     "agree": 0
+    },
+    {
+     "scope": "deterministic_miss",
+     "variant": "R6",
+     "n": 1,
+     "deterministic": 0,
+     "reading_yes": 1,
+     "reading_no": 0,
+     "reading_unclear": 0,
+     "agree": 0
+    },
+    {
+     "scope": "prereg_sample",
+     "variant": "R1",
+     "n": 20,
+     "deterministic": 17,
+     "reading_yes": 20,
+     "reading_no": 0,
+     "reading_unclear": 0,
+     "agree": 17
+    },
+    {
+     "scope": "prereg_sample",
+     "variant": "R2",
+     "n": 20,
+     "deterministic": 19,
+     "reading_yes": 20,
+     "reading_no": 0,
+     "reading_unclear": 0,
+     "agree": 19
+    },
+    {
+     "scope": "prereg_sample",
+     "variant": "R3",
+     "n": 20,
+     "deterministic": 19,
+     "reading_yes": 20,
+     "reading_no": 0,
+     "reading_unclear": 0,
+     "agree": 19
+    },
+    {
+     "scope": "prereg_sample",
+     "variant": "R4",
+     "n": 20,
+     "deterministic": 20,
+     "reading_yes": 20,
+     "reading_no": 0,
+     "reading_unclear": 0,
+     "agree": 20
+    },
+    {
+     "scope": "prereg_sample",
+     "variant": "R4n",
+     "n": 20,
+     "deterministic": 20,
+     "reading_yes": 20,
+     "reading_no": 0,
+     "reading_unclear": 0,
+     "agree": 20
+    },
+    {
+     "scope": "prereg_sample",
+     "variant": "R5",
+     "n": 20,
+     "deterministic": 20,
+     "reading_yes": 20,
+     "reading_no": 0,
+     "reading_unclear": 0,
+     "agree": 20
+    },
+    {
+     "scope": "prereg_sample",
+     "variant": "R6",
+     "n": 20,
+     "deterministic": 20,
+     "reading_yes": 20,
+     "reading_no": 0,
+     "reading_unclear": 0,
+     "agree": 20
+    }
+   ],
+   "source": "Claude Code reading of the reasoning text (A06); see the readings file"
   }
  }
 }

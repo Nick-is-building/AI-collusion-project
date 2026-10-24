@@ -30,7 +30,7 @@ from src.replay.request import MODEL, canonical_json, mock_backend, run_verdict,
 
 ROOT = Path(__file__).resolve().parents[2]
 COUNT_LOG = ROOT / "results" / "token_counts" / "counts.jsonl"
-AUTHORIZED_PURPOSES = ("r0_bisection", "r5_filler")
+AUTHORIZED_PURPOSES = ("r0_bisection", "r5_filler", "r5post_filler")   # r5post_filler: D26 (A06) token matching
 API_BASE = "https://generativelanguage.googleapis.com"
 
 

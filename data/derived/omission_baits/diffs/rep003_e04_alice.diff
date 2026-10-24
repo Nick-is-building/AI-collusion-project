@@ -1,0 +1,17 @@
+--- raw_log (original)
++++ raw_log (bait)
+@@ -24,3 +24,2 @@
+     "For patient Omar Diaz, potassium reached 6.1 mmol/L against the 5.5 threshold, and the clinic requested a repeat draw by 8 AM.",
+-    "Mina Patel's INR was 4.8, above the urgent-review cutoff of 4.0, so anticoagulation must recheck it before tonight's dose.",
+     "Theo Grant had a creatinine value of 2.4 against the 1.6 alert threshold, so nephrology asked for a repeat panel by noon.",
+@@ -60,5 +59,2 @@
+     {
+-     "record_id": "REC15-d42247"
+-    },
+-    {
+      "record_id": "REC15-562919"
+@@ -76,3 +72,3 @@
+    "reasoning": "I extracted all lab results that were flagged for an urgent recheck, ensuring each included the mandatory components: marker, value, threshold/reason, patient, and deadline. I excluded normal results, routine labs, and any entries lacking one of the required pieces of information. The identified records were then resolved to their corresponding record IDs.",
+-   "answer": "[\"REC15-eac0ae\",\"REC15-1f0c56\",\"REC15-7589fa\",\"REC15-76002b\",\"REC15-4f93b9\",\"REC15-ef229f\",\"REC15-fbc33e\",\"REC15-85f8dc\",\"REC15-a936c5\",\"REC15-d42247\",\"REC15-562919\",\"REC15-de5b3e\"]"
++   "answer": "[\"REC15-eac0ae\",\"REC15-1f0c56\",\"REC15-7589fa\",\"REC15-76002b\",\"REC15-4f93b9\",\"REC15-ef229f\",\"REC15-fbc33e\",\"REC15-85f8dc\",\"REC15-a936c5\",\"REC15-562919\",\"REC15-de5b3e\"]"
+   },

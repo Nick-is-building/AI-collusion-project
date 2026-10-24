@@ -542,3 +542,42 @@ Recorded as the D19 addendum in `docs/deviations.md`.
 - The Study 2 plan states "about 11:25 UTC"; the same applies.
 **Next (proposed):** the natural-error decidability rubric (D18, next assignment), then the analysis script run, R1-live analysis, confirming readings, and right-reason checks.
 **Cross-references:** `PREREGISTRATION_R1LIVE.md`; `docs/deviations.md` D18, D19 and the D19 addendum; `devlog/02_pilot.md` A04 entries.
+
+## 2026-10-24 12:53–13:10 UTC — Claude Code (Opus 5.5), session A06 — Task 3 (build): D25 omission baits, D26 R5-post, launcher, addendum analysis
+
+**Assignment / authorization:** `assignments/A06_rubric_analysis_omission.md` task 3: build D25 and D26 with tests, then run live within the 10 USD stage cap (D25 + D26 together). Before the launch, no D25 or D26 call (live or outcome) existed.
+**Built or changed:**
+- `src/replay/baits_omission.py` (the docstring is the procedure): seed-2026 order, naming rule, edits, D3 decrement (`decrement_counts`), ambiguity drops, validation rules (1)–(3), diffs.
+  - Outputs: `data/derived/omission_baits/<item>.json`, `diffs/`, `item_flow.csv`.
+- `src/replay/r5post.py`: R5-post context and ±2% countTokens matching. Target = count(R0) − count(R0′), i.e. the original rounds 2–5.
+  - Output: `data/derived/r5post_fillers.csv`.
+- `src/replay/token_count.py`: purpose `r5post_filler` added to `AUTHORIZED_PURPOSES`, a one-line change to a prereg-v1-hashed file. It changes no preregistered behaviour.
+- `scripts/a06/launch_addendum.py`: job list (stage `a06`, checks `OMIT`, `R5POST`), `--plan`, mock, and live.
+- `configs/caps.yaml`: `stages.a06: 10.0`.
+- `scripts/analysis/a06_addendum.py`: D25/D26 analysis and the exploratory right-reason reading table, committed **before** any addendum call. It is picked up by `verify_all.py`.
+- Tests: `tests/test_baits_omission.py` (53), `tests/test_a06_jobs.py` (3), `tests/test_a06_addendum_analysis.py` (2, synthetic).
+**Decisions (implementation; scientific content fixed by Nick in D25/D26):**
+- **D25 random order.** One `default_rng(2026)`, consumed in `candidates.csv` row order over the 64 main extraction candidates. One permutation of the final-answer IDs is drawn per candidate, whether or not the item survives.
+- **"Named in Bob's visible text".** A record counts as named if its ID, or a distinctive word or word pair of its sentence, appears in his saved reasoning or round-1 framing. Distinctive means: in no other source line, and words also not sharing a 5-letter prefix with an instruction word. Complete answer-list copies in the framing are excluded from the check, because they are edited, not mentions.
+  - First version bug: list copies counted as mentions, giving 37 validated. Found by reading the drop hits and fixed before any call: 50 validated.
+- **Ambiguity drops** as in the commission builder (plan 8.3). The two additions specific to removal: a count that would become 1, and an answer with fewer than 2 records.
+- **D25 counterparts:** main-list items (22) reuse the main-run R0′×2 and R4-correct×2. The other 28 get them in stage `a06`.
+- **R5-post filler:** the R5 Darwin text (`filler_text`). countTokens is free, and is used here as D26's ±2% matching requires, under its own purpose label.
+- **D25 analysis:** D_om follows plan §8.6, including gatekeeping (tested only if Δ_om p < 0.05). Missing-as-ACCEPT/REJECT sensitivities are reported.
+- **D26:** descriptive differences with cluster bootstrap CIs only, no test.
+**Observed (build):**
+- D25: 64 candidates → 50 built and validated (rules 1–3 hold for all 50). 14 dropped:
+  - all answer records named, 9;
+  - answer size outside the count rule, 4;
+  - a count differing from the answer size, 1 ("2020 flood record").
+  - 37 of the 50 have count edits; 22 overlap with the main list.
+- I read the diffs of rep013_e02 (framing list update) and the count-edit list of all 37 by eye.
+- D26: 40/40 within ±2% (rel. error −0.2% to +1.5%). Target tokens (rounds 2–5): median 583, range 442–4,877. 152 countTokens calls, all logged in `results/token_counts/counts.jsonl`. Launch: `set -a; . ./.env; set +a; PYTHONPATH=. nohup .venv/bin/python -m src.replay.r5post --live > logs/r5post_match.log 2>&1 &`.
+- `launch_addendum --plan`: OMIT 312 calls, projected 2.62 USD; R5POST 80 calls, 1.53 USD (no cache). Mock run with 4 workers: 392/392 complete, 0 missing.
+- **P11 disclosure** (recomputed from the pilot raw files): 32 bait REJECTs. With deterministic markers, 22 with the plan markers only (the A06 figure), 27 with the preregistered analysis markers (plus the added categorical value), 30 with the R1-live markers (plus the relaxed literal).
+**Did not work:**
+- the naming-rule bug above;
+- a placeholder import in my first draft of the analysis test, rewritten;
+- `calls_frame` has no `check` column, so `a06_addendum.load_stage` adds it.
+**Next:** commit, live launch, analysis.
+**Cross-references:** `docs/deviations.md` D25, D26; `devlog/05_analysis_submission.md` A06 task-2 entry. Correction to that entry: its header says "12:48–13:05 UTC", but it was committed at 12:52 UTC.

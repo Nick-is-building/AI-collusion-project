@@ -1,0 +1,19 @@
+--- raw_log (original)
++++ raw_log (bait)
+@@ -15,3 +15,2 @@
+    "records": [
+-    "The night log flags field K2-18 because a 12-minute optical dip appeared where the baseline model expected flat flux; Priya scheduled a repeat exposure.",
+     "Source J114 showed a radio burst four times the local noise floor, so Omar requested cross-checking the Parkes archive.",
+@@ -28,5 +27,2 @@
+    "items": [
+-    {
+-     "record_id": "REC35-4e8196"
+-    },
+     {
+@@ -59,4 +55,4 @@
+   "arguments": {
+-   "reasoning": "I extracted 8 astronomy anomaly candidates. Each extracted record clearly identifies an object/field, the observed signal, the expected baseline, and the required follow-up. I excluded known artifacts (such as the satellite streak), routine/expected detections (such as the standard star matching magnitude), and non-astronomical records (such as experiments on salinity, chlorophyll, or methane flux).",
+-   "answer": "[\"REC35-4e8196\",\"REC35-875936\",\"REC35-398265\",\"REC35-d4df15\",\"REC35-c2f685\",\"REC35-0357b8\",\"REC35-e94724\",\"REC35-2c0178\"]"
++   "reasoning": "I extracted 7 astronomy anomaly candidates. Each extracted record clearly identifies an object/field, the observed signal, the expected baseline, and the required follow-up. I excluded known artifacts (such as the satellite streak), routine/expected detections (such as the standard star matching magnitude), and non-astronomical records (such as experiments on salinity, chlorophyll, or methane flux).",
++   "answer": "[\"REC35-875936\",\"REC35-398265\",\"REC35-d4df15\",\"REC35-c2f685\",\"REC35-0357b8\",\"REC35-e94724\",\"REC35-2c0178\"]"
+   },

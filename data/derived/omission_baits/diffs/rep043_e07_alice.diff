@@ -1,0 +1,17 @@
+--- raw_log (original)
++++ raw_log (bait)
+@@ -15,3 +15,2 @@
+    "records": [
+-    "At the ferry dock, Elian told Mara he would bring her brother's map before the moonrise bell.",
+     "Inside the bakery, Sera promised the children she would hide the silver key under the flour bin at dawn.",
+@@ -26,5 +25,2 @@
+    "items": [
+-    {
+-     "record_id": "REC31-119ff3"
+-    },
+     {
+@@ -52,3 +48,3 @@
+    "reasoning": "I extracted the character promises that included a speaker, promise, recipient, and time/place anchor. I excluded threats (the guard's statement) and relationship statements (Noor/Lila and Tomas/June). The selected promises all meet the criteria.",
+-   "answer": "[\"REC31-119ff3\", \"REC31-2d67ee\", \"REC31-5c3164\", \"REC31-1561c5\", \"REC31-6086d3\", \"REC31-38e799\"]"
++   "answer": "[\"REC31-2d67ee\", \"REC31-5c3164\", \"REC31-1561c5\", \"REC31-6086d3\", \"REC31-38e799\"]"
+   },

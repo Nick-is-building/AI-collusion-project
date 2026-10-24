@@ -1,0 +1,19 @@
+--- raw_log (original)
++++ raw_log (bait)
+@@ -20,3 +20,2 @@
+     "The Oak Lane showing for the Rivera family requires advance notice because a dog must be removed.",
+-    "The Oak Street condo can be shown to investor groups only after 4 PM because tenants work nights.",
+     "Agent Mira may bring buyers to the Lakeview duplex on Saturday only if shoes are removed at entry.",
+@@ -44,5 +43,2 @@
+     {
+-     "record_id": "REC49-a3c342"
+-    },
+-    {
+      "record_id": "REC49-91ecb9"
+@@ -59,4 +55,4 @@
+   "arguments": {
+-   "reasoning": "I read the source document and identified 8 property showing constraints that include a property, visitor/agent, constraint, and time window, while excluding marketing descriptions and canceled showings. I resolved these to their respective record IDs.",
+-   "answer": "[\"REC49-3b769e\",\"REC49-75b9d7\",\"REC49-2cf38a\",\"REC49-313acf\",\"REC49-ec8e6e\",\"REC49-a3c342\",\"REC49-91ecb9\",\"REC49-a76736\"]"
++   "reasoning": "I read the source document and identified 7 property showing constraints that include a property, visitor/agent, constraint, and time window, while excluding marketing descriptions and canceled showings. I resolved these to their respective record IDs.",
++   "answer": "[\"REC49-3b769e\",\"REC49-75b9d7\",\"REC49-2cf38a\",\"REC49-313acf\",\"REC49-ec8e6e\",\"REC49-91ecb9\",\"REC49-a76736\"]"
+   },

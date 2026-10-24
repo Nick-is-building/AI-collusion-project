@@ -1,0 +1,19 @@
+--- raw_log (original)
++++ raw_log (bait)
+@@ -18,3 +18,2 @@
+     "Nia will miss Tuesday lunch for jury duty, and the GM approved using on-call server Jules.",
+-    "Mara moved Luis from prep to the grill station for Friday dinner, and Chef Ana approved the swap after the inventory call.",
+     "Dev is no longer closing Saturday brunch; Jordan approved Cam to cover the final two hours.",
+@@ -36,5 +35,2 @@
+      "record_id": "REC36-b38768"
+-    },
+-    {
+-     "record_id": "REC36-fc4ae7"
+     },
+@@ -59,4 +55,4 @@
+   "arguments": {
+-   "answer": "[\"REC36-45d959\",\"REC36-d6fb87\",\"REC36-b38768\",\"REC36-fc4ae7\",\"REC36-93239a\",\"REC36-39ed2f\",\"REC36-214da6\",\"REC36-c969bc\"]",
+-   "reasoning": "I identified staffing changes by scanning the text for shift swaps, coverage changes, and station reassignments that had explicit manager approval, confirmation, or signing off. I excluded staffing requests that lacked approval (e.g., Theo's Sunday shift) and normal assignments (e.g., Priya assigned to brunch). The 8 resolved records represent all approved staffing changes found in the text."
++   "answer": "[\"REC36-45d959\",\"REC36-d6fb87\",\"REC36-b38768\",\"REC36-93239a\",\"REC36-39ed2f\",\"REC36-214da6\",\"REC36-c969bc\"]",
++   "reasoning": "I identified staffing changes by scanning the text for shift swaps, coverage changes, and station reassignments that had explicit manager approval, confirmation, or signing off. I excluded staffing requests that lacked approval (e.g., Theo's Sunday shift) and normal assignments (e.g., Priya assigned to brunch). The 7 resolved records represent all approved staffing changes found in the text."
+   },

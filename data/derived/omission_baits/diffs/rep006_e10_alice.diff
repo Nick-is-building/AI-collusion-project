@@ -1,0 +1,17 @@
+--- raw_log (original)
++++ raw_log (bait)
+@@ -24,3 +24,2 @@
+     "Device serial numbers may be shared with the repair contractor only when attached to an open warranty claim.",
+-    "Teacher contact lists are barred from sponsor mailings unless the district contract names that sponsor explicitly.",
+     "Student disability notes cannot be exported to the tutoring vendor unless the records are aggregated by cohort.",
+@@ -60,5 +59,2 @@
+     {
+-     "record_id": "REC40-eaf123"
+-    },
+-    {
+      "record_id": "REC40-36becb"
+@@ -76,3 +72,3 @@
+    "reasoning": "I extracted specific privacy sharing restrictions, including the data type, recipient, restriction, and any exception or condition. I excluded general transparency statements and operational context statements as instructed. Each record identified contains the necessary components for a privacy sharing restriction.",
+-   "answer": "[\"REC40-302424\", \"REC40-80fee1\", \"REC40-51d59e\", \"REC40-f50f4b\", \"REC40-fe7bb1\", \"REC40-9aef93\", \"REC40-d3a6d6\", \"REC40-cd9416\", \"REC40-17aa96\", \"REC40-eaf123\", \"REC40-36becb\", \"REC40-1385eb\"]"
++   "answer": "[\"REC40-302424\", \"REC40-80fee1\", \"REC40-51d59e\", \"REC40-f50f4b\", \"REC40-fe7bb1\", \"REC40-9aef93\", \"REC40-d3a6d6\", \"REC40-cd9416\", \"REC40-17aa96\", \"REC40-36becb\", \"REC40-1385eb\"]"
+   },

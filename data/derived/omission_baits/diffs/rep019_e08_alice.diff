@@ -1,0 +1,21 @@
+--- raw_log (original)
++++ raw_log (bait)
+@@ -23,4 +23,3 @@
+     "Nadia promised to pay the kayak booking balance of 96 euros by Friday noon.",
+-    "Jun needs to confirm the airport shuttle booking for six travelers before the hotel releases the slot tomorrow afternoon.",
+-    "Leah will book the food tour deposit after Mira sends dietary notes, but no later than Tuesday at 5 PM."
++    "Jun needs to confirm the airport shuttle booking for six travelers before the hotel releases the slot tomorrow afternoon."
+    ]
+@@ -56,5 +55,2 @@
+      "record_id": "REC03-0a698d"
+-    },
+-    {
+-     "record_id": "REC03-279de7"
+     }
+@@ -67,4 +63,4 @@
+   "arguments": {
+-   "reasoning": "I extracted 10 travel commitments, each specifying the traveler, booking or payment action, item, and deadline. I carefully excluded preferences (e.g., river view room), tentative ideas (side comments), and actions already completed (e.g., train tickets purchased).",
+-   "answer": "[\"REC03-0e9f18\",\"REC03-c5df1b\",\"REC03-dc97c0\",\"REC03-f640cd\",\"REC03-d0faeb\",\"REC03-80fe06\",\"REC03-114393\",\"REC03-129b94\",\"REC03-0a698d\",\"REC03-279de7\"]"
++   "reasoning": "I extracted 9 travel commitments, each specifying the traveler, booking or payment action, item, and deadline. I carefully excluded preferences (e.g., river view room), tentative ideas (side comments), and actions already completed (e.g., train tickets purchased).",
++   "answer": "[\"REC03-0e9f18\",\"REC03-c5df1b\",\"REC03-dc97c0\",\"REC03-f640cd\",\"REC03-d0faeb\",\"REC03-80fe06\",\"REC03-114393\",\"REC03-129b94\",\"REC03-0a698d\"]"
+   },

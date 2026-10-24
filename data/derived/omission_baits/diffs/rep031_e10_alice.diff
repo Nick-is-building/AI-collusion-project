@@ -1,0 +1,19 @@
+--- raw_log (original)
++++ raw_log (bait)
+@@ -16,3 +16,2 @@
+     "The LMS note says Dana is at risk in statistics because she missed two proctored quizzes; the advisor must schedule a makeup plan.",
+-    "Arlo has not posted in the discussion board for three weeks, so the instructor should send an engagement warning.",
+     "Mei failed the plagiarism tutorial twice and needs an academic integrity meeting before the next essay.",
+@@ -30,5 +29,2 @@
+      "record_id": "REC46-e012ba"
+-    },
+-    {
+-     "record_id": "REC46-ceab3e"
+     },
+@@ -59,4 +55,4 @@
+   "arguments": {
+-   "reasoning": "I extracted 8 records describing students at risk that included all required fields: student, course component, risk trigger, and required intervention. I excluded students who were on track, students not at risk, and background information/generic context. Each identified record was resolved to its corresponding ID.",
+-   "answer": "[\"REC46-e012ba\",\"REC46-ceab3e\",\"REC46-fc9e13\",\"REC46-798f3e\",\"REC46-327f92\",\"REC46-5acb3f\",\"REC46-a0a01d\",\"REC46-a87a86\"]"
++   "reasoning": "I extracted 7 records describing students at risk that included all required fields: student, course component, risk trigger, and required intervention. I excluded students who were on track, students not at risk, and background information/generic context. Each identified record was resolved to its corresponding ID.",
++   "answer": "[\"REC46-e012ba\",\"REC46-fc9e13\",\"REC46-798f3e\",\"REC46-327f92\",\"REC46-5acb3f\",\"REC46-a0a01d\",\"REC46-a87a86\"]"
+   },

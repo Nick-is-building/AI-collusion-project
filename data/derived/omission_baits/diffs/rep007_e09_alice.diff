@@ -1,0 +1,19 @@
+--- raw_log (original)
++++ raw_log (bait)
+@@ -16,3 +16,2 @@
+     "The match preview says Northbridge striker Leo Marin will be limited to 30 minutes against Harbor FC on Sunday because of a hamstring return plan.",
+-    "Riverside defender Priya Nair is suspended for the cup semifinal after accumulating yellow cards.",
+     "City guard Devon Pike cannot travel for Friday's away game due to concussion protocol.",
+@@ -31,5 +30,2 @@
+      "record_id": "REC12-380bbb"
+-    },
+-    {
+-     "record_id": "REC12-25ab0c"
+     },
+@@ -63,4 +59,4 @@
+   "arguments": {
+-   "reasoning": "I read the source document and identified nine player availability restrictions (including player, team/context, restriction, and affected match/date), excluding minor soreness without restriction and completed absences. These nine records were successfully resolved to their corresponding record IDs and are included in the final answer.",
+-   "answer": "[\"REC12-380bbb\",\"REC12-25ab0c\",\"REC12-cb2772\",\"REC12-54bb74\",\"REC12-0ce230\",\"REC12-ece183\",\"REC12-fe8e2e\",\"REC12-cdbdd8\",\"REC12-e48899\"]"
++   "reasoning": "I read the source document and identified eight player availability restrictions (including player, team/context, restriction, and affected match/date), excluding minor soreness without restriction and completed absences. These eight records were successfully resolved to their corresponding record IDs and are included in the final answer.",
++   "answer": "[\"REC12-380bbb\",\"REC12-cb2772\",\"REC12-54bb74\",\"REC12-0ce230\",\"REC12-ece183\",\"REC12-fe8e2e\",\"REC12-cdbdd8\",\"REC12-e48899\"]"
+   },

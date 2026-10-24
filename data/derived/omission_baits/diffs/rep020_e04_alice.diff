@@ -1,0 +1,19 @@
+--- raw_log (original)
++++ raw_log (bait)
+@@ -21,3 +21,2 @@
+     "The flow meter failed the 2 liter per minute check by reporting 1.62 liters per minute; Omar must clean the rotor before the pump trial.",
+-    "The incubator failed temperature mapping because the rear shelf reached 39.4 degrees against a 37 plus or minus 1 range, so Lina must repeat mapping after service.",
+     "The force plate failed baseline noise limits at 12 newtons peak-to-peak, and Jules must isolate the cable before athlete testing."
+@@ -47,5 +46,2 @@
+     {
+-     "record_id": "REC11-5e9da5"
+-    },
+-    {
+      "record_id": "REC11-94c507"
+@@ -59,4 +55,4 @@
+   "arguments": {
+-   "reasoning": "I identified eight failed calibration checks in the text. Each selected record contained the required elements: instrument, failed criterion, observed result, and required follow-up. I excluded passing checks (like the spectrometer) and non-relevant inventory/notebook notes (like the drawer inventory and general observations). I used the exact text for each failed check to resolve it into its corresponding record ID.",
+-   "answer": "[\"REC11-e14d58\",\"REC11-563f63\",\"REC11-15aee9\",\"REC11-899282\",\"REC11-8cb0f7\",\"REC11-4fb4a9\",\"REC11-5e9da5\",\"REC11-94c507\"]"
++   "reasoning": "I identified seven failed calibration checks in the text. Each selected record contained the required elements: instrument, failed criterion, observed result, and required follow-up. I excluded passing checks (like the spectrometer) and non-relevant inventory/notebook notes (like the drawer inventory and general observations). I used the exact text for each failed check to resolve it into its corresponding record ID.",
++   "answer": "[\"REC11-e14d58\",\"REC11-563f63\",\"REC11-15aee9\",\"REC11-899282\",\"REC11-8cb0f7\",\"REC11-4fb4a9\",\"REC11-94c507\"]"
+   },

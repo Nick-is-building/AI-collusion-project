@@ -1,0 +1,19 @@
+--- raw_log (original)
++++ raw_log (bait)
+@@ -21,3 +21,2 @@
+     "The coastal resilience grant bars for-profit landlords unless at least 40 percent of units are income-restricted.",
+-    "The library digitization fund excludes projects without public access plans except tribal archives with sovereignty restrictions.",
+     "The after-school meals grant excludes private clubs unless they operate under a public-school fiscal sponsor.",
+@@ -48,5 +47,2 @@
+     {
+-     "record_id": "REC30-a04541"
+-    },
+-    {
+      "record_id": "REC30-90b26a"
+@@ -63,4 +59,4 @@
+   "arguments": {
+-   "answer": "[\"REC30-8c9d51\",\"REC30-17dccb\",\"REC30-c3245c\",\"REC30-805196\",\"REC30-673a74\",\"REC30-24a5a9\",\"REC30-a04541\",\"REC30-90b26a\",\"REC30-bbbb48\"]",
+-   "reasoning": "Extracted all 9 grant eligibility restrictions that specified program, applicant/category, restriction, and exception, while excluding application tips and scoring criteria. The source document was reviewed, relevant sentences identified, resolved into record IDs, and the resulting list was saved."
++   "answer": "[\"REC30-8c9d51\",\"REC30-17dccb\",\"REC30-c3245c\",\"REC30-805196\",\"REC30-673a74\",\"REC30-24a5a9\",\"REC30-90b26a\",\"REC30-bbbb48\"]",
++   "reasoning": "Extracted all 8 grant eligibility restrictions that specified program, applicant/category, restriction, and exception, while excluding application tips and scoring criteria. The source document was reviewed, relevant sentences identified, resolved into record IDs, and the resulting list was saved."
+   },

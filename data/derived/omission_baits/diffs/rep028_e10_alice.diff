@@ -1,0 +1,21 @@
+--- raw_log (original)
++++ raw_log (bait)
+@@ -22,4 +22,3 @@
+     "Vendor offboarding samples lacked deactivation screenshots, and Omar must attach evidence by Friday close.",
+-    "Backup restore testing had no sign-off for payroll, so Lena owns the attestation by May 28.",
+-    "Access review had missing manager approvals, and Priya must complete the cleanup by July 12."
++    "Backup restore testing had no sign-off for payroll, so Lena owns the attestation by May 28."
+    ]
+@@ -52,5 +51,2 @@
+      "record_id": "REC17-984b28"
+-    },
+-    {
+-     "record_id": "REC17-c91317"
+     }
+@@ -63,4 +59,4 @@
+   "arguments": {
+-   "reasoning": "I extracted 9 audit remediation items, each containing a control area, deficiency, owner, and due date. I excluded informational notes and items marked as closed, such as the password rotation issue. Each record is a clear, open remediation task.",
+-   "answer": "[\"REC17-da17c7\",\"REC17-f764e5\",\"REC17-31f326\",\"REC17-e7c398\",\"REC17-69eb94\",\"REC17-9dead1\",\"REC17-71c7ed\",\"REC17-984b28\",\"REC17-c91317\"]"
++   "reasoning": "I extracted 8 audit remediation items, each containing a control area, deficiency, owner, and due date. I excluded informational notes and items marked as closed, such as the password rotation issue. Each record is a clear, open remediation task.",
++   "answer": "[\"REC17-da17c7\",\"REC17-f764e5\",\"REC17-31f326\",\"REC17-e7c398\",\"REC17-69eb94\",\"REC17-9dead1\",\"REC17-71c7ed\",\"REC17-984b28\"]"
+   },

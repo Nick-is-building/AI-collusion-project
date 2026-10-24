@@ -5,6 +5,7 @@ stages:
   main: 40.0                 # assignment A04 task 3: main run (2,330 calls; P10 projection 28.8 USD)
   r1live: 10.0               # Nick, 24 Oct 2026 (prereg-v1-r1live): R1-live on the 40 items
   study2: 250.0              # D20 (A05): Study 2 stage cap including P8; read by src/hysteresis/guard.py
+  a06: 10.0                  # Nick, A06 (24 Oct 2026): D25 omission baits + D26 R5-post together
 # Sub-caps on groups of checks within a stage (fail closed, same ledger).
 check_groups:
   a02_pilot_checks:          # assignment A02: P1 (incl. 3.7-Flash call), P2, P3, P9; pilot cap stays 10

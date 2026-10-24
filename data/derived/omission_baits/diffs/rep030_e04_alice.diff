@@ -1,0 +1,19 @@
+--- raw_log (original)
++++ raw_log (bait)
+@@ -15,3 +15,2 @@
+    "records": [
+-    "The torque sensor failed because its zero-load reading drifted to 0.42 newton-meters against the allowed 0.05 tolerance, so Mira must repeat the tare procedure before Friday's materials test.",
+     "The pressure transducer failed the leak simulation when it reported 88 kPa instead of the expected 100 kPa plateau, and Omar must replace the seal before the next chamber run.",
+@@ -28,5 +27,2 @@
+    "items": [
+-    {
+-     "record_id": "REC11-e14d58"
+-    },
+     {
+@@ -59,4 +55,4 @@
+   "arguments": {
+-   "reasoning": "I read the source document and identified 8 entries representing failed calibration checks. For each entry, I ensured that it contained the required information: the instrument, the failed criterion, the observed result, and the required follow-up. I explicitly excluded passing calibration checks (like the spectrometer) and inventory notes (like the drawer inventory) to comply with the extraction instructions. I resolved these identified records and obtained their respective record IDs.",
+-   "answer": "[\"REC11-e14d58\", \"REC11-563f63\", \"REC11-15aee9\", \"REC11-899282\", \"REC11-8cb0f7\", \"REC11-4fb4a9\", \"REC11-5e9da5\", \"REC11-94c507\"]"
++   "reasoning": "I read the source document and identified 7 entries representing failed calibration checks. For each entry, I ensured that it contained the required information: the instrument, the failed criterion, the observed result, and the required follow-up. I explicitly excluded passing calibration checks (like the spectrometer) and inventory notes (like the drawer inventory) to comply with the extraction instructions. I resolved these identified records and obtained their respective record IDs.",
++   "answer": "[\"REC11-563f63\", \"REC11-15aee9\", \"REC11-899282\", \"REC11-8cb0f7\", \"REC11-4fb4a9\", \"REC11-5e9da5\", \"REC11-94c507\"]"
+   },

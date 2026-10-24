@@ -1,0 +1,19 @@
+--- raw_log (original)
++++ raw_log (bait)
+@@ -20,3 +20,2 @@
+     "Field N-14 showed a repeating 7.2-minute radio pulse where the survey expected only thermal noise, so follow-up time was requested.",
+-    "Object Kappa-9 dimmed by 18 percent without the infrared excess expected from dust, prompting spectroscopy.",
+     "Source Vela-22 showed a 0.9 magnitude flare without the color change expected from a foreground variable, so imaging was scheduled.",
+@@ -44,5 +43,2 @@
+     {
+-     "record_id": "REC35-0357b8"
+-    },
+-    {
+      "record_id": "REC35-e94724"
+@@ -59,4 +55,4 @@
+   "arguments": {
+-   "reasoning": "I identified eight candidate astronomy anomalies in the source text. Each record specifies the object/field, the observed signal, the expected baseline, and the necessary follow-up. I excluded the satellite streak (known artifact) and other routine detections, as well as non-astronomy related paragraphs.",
+-   "answer": "[\"REC35-4e8196\", \"REC35-875936\", \"REC35-398265\", \"REC35-d4df15\", \"REC35-c2f685\", \"REC35-0357b8\", \"REC35-e94724\", \"REC35-2c0178\"]"
++   "reasoning": "I identified seven candidate astronomy anomalies in the source text. Each record specifies the object/field, the observed signal, the expected baseline, and the necessary follow-up. I excluded the satellite streak (known artifact) and other routine detections, as well as non-astronomy related paragraphs.",
++   "answer": "[\"REC35-4e8196\", \"REC35-875936\", \"REC35-398265\", \"REC35-d4df15\", \"REC35-c2f685\", \"REC35-e94724\", \"REC35-2c0178\"]"
+   },

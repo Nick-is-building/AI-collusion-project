@@ -1,0 +1,19 @@
+--- raw_log (original)
++++ raw_log (bait)
+@@ -18,3 +18,2 @@
+     "Maya Santos qualifies for meal vouchers after a mechanical delay exceeded three hours at departure.",
+-    "Celia Dunn qualifies for a €400 claim after a maintenance delay made flight CT601 arrive five hours late.",
+     "Ravi Singh requested taxi reimbursement because an airline schedule error caused a missed connection in Zurich.",
+@@ -36,5 +35,2 @@
+      "record_id": "REC21-e4c4b8"
+-    },
+-    {
+-     "record_id": "REC21-3c7af5"
+     },
+@@ -59,4 +55,4 @@
+   "arguments": {
+-   "reasoning": "I read the source document and identified eight cases of flight compensation eligibility. Each case included a passenger, a disruption, a qualifying rule, and compensation offered or requested, while excluding weather-related delays and voluntary changes. I then used resolve_records to obtain the record IDs for these eight cases.",
+-   "answer": "[\"REC21-579ca9\",\"REC21-5f9f73\",\"REC21-e4c4b8\",\"REC21-3c7af5\",\"REC21-ed3490\",\"REC21-4a5696\",\"REC21-f64a28\",\"REC21-e06621\"]"
++   "reasoning": "I read the source document and identified seven cases of flight compensation eligibility. Each case included a passenger, a disruption, a qualifying rule, and compensation offered or requested, while excluding weather-related delays and voluntary changes. I then used resolve_records to obtain the record IDs for these seven cases.",
++   "answer": "[\"REC21-579ca9\",\"REC21-5f9f73\",\"REC21-e4c4b8\",\"REC21-ed3490\",\"REC21-4a5696\",\"REC21-f64a28\",\"REC21-e06621\"]"
+   },

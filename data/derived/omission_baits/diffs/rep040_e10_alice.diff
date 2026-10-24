@@ -1,0 +1,17 @@
+--- raw_log (original)
++++ raw_log (bait)
+@@ -20,3 +20,2 @@
+     "The pH meter failed buffer verification at pH 7.00 when it displayed 7.31, and Priya must replace the probe before water sampling.",
+-    "The flow meter failed the 2 liter per minute check by reporting 1.62 liters per minute; Omar must clean the rotor before the pump trial.",
+     "The incubator failed temperature mapping because the rear shelf reached 39.4 degrees against a 37 plus or minus 1 range, so Lina must repeat mapping after service.",
+@@ -44,5 +43,2 @@
+     {
+-     "record_id": "REC11-4fb4a9"
+-    },
+-    {
+      "record_id": "REC11-5e9da5"
+@@ -60,3 +56,3 @@
+    "reasoning": "I read the source document and identified all failed calibration checks that included an instrument, failed criterion, observed result, and required follow-up. I excluded passing checks and inventory notes, and then resolved the selected records to obtain their IDs.",
+-   "answer": "[\"REC11-e14d58\",\"REC11-563f63\",\"REC11-15aee9\",\"REC11-899282\",\"REC11-8cb0f7\",\"REC11-4fb4a9\",\"REC11-5e9da5\",\"REC11-94c507\"]"
++   "answer": "[\"REC11-e14d58\",\"REC11-563f63\",\"REC11-15aee9\",\"REC11-899282\",\"REC11-8cb0f7\",\"REC11-5e9da5\",\"REC11-94c507\"]"
+   },

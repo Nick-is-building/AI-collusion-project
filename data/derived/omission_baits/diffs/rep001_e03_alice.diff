@@ -1,0 +1,19 @@
+--- raw_log (original)
++++ raw_log (bait)
+@@ -15,3 +15,2 @@
+    "records": [
+-    "The audit draft says access reviews lack manager evidence for finance systems; Omar owns remediation by June 14.",
+     "The vendor-risk control has no documented exception approval for two high-risk suppliers, and Lena must update the file before May 31.",
+@@ -29,5 +28,2 @@
+    "items": [
+-    {
+-     "record_id": "REC17-da17c7"
+-    },
+     {
+@@ -63,4 +59,4 @@
+   "arguments": {
+-   "reasoning": "I read the provided audit remediation text and filtered for actionable items, excluding those that were explicitly closed or labeled as informational. The nine extracted records each contained the required control area, deficiency, owner, and due date. I then used the resolve_records tool to retrieve the corresponding record IDs.",
+-   "answer": "[\"REC17-da17c7\",\"REC17-f764e5\",\"REC17-31f326\",\"REC17-e7c398\",\"REC17-69eb94\",\"REC17-9dead1\",\"REC17-71c7ed\",\"REC17-984b28\",\"REC17-c91317\"]"
++   "reasoning": "I read the provided audit remediation text and filtered for actionable items, excluding those that were explicitly closed or labeled as informational. The eight extracted records each contained the required control area, deficiency, owner, and due date. I then used the resolve_records tool to retrieve the corresponding record IDs.",
++   "answer": "[\"REC17-f764e5\",\"REC17-31f326\",\"REC17-e7c398\",\"REC17-69eb94\",\"REC17-9dead1\",\"REC17-71c7ed\",\"REC17-984b28\",\"REC17-c91317\"]"
+   },

@@ -1,0 +1,19 @@
+--- raw_log (original)
++++ raw_log (bait)
+@@ -17,3 +17,2 @@
+     "The area A is defined as L times W and must be maximized.",
+-    "A second problem defines x as the number of adult tickets and y as child tickets, with x plus y equal to 120.",
+     "The same ticket problem says adult tickets cost 14 dollars and child tickets cost 8 dollars, with total revenue fixed at 1,320 dollars.",
+@@ -34,5 +33,2 @@
+      "record_id": "REC08-cb5eb2"
+-    },
+-    {
+-     "record_id": "REC08-0b31df"
+     },
+@@ -63,4 +59,4 @@
+   "arguments": {
+-   "answer": "[\"REC08-1ffc4a\",\"REC08-cb5eb2\",\"REC08-0b31df\",\"REC08-b2c7b3\",\"REC08-def6ed\",\"REC08-10010d\",\"REC08-985485\",\"REC08-701ccc\",\"REC08-83b0e7\"]",
+-   "reasoning": "I read the source document and identified 9 mathematical constraints, each involving variables, relations, and contexts. I excluded narrative facts that were not constraints. All 9 records were resolved to their IDs."
++   "answer": "[\"REC08-1ffc4a\",\"REC08-cb5eb2\",\"REC08-b2c7b3\",\"REC08-def6ed\",\"REC08-10010d\",\"REC08-985485\",\"REC08-701ccc\",\"REC08-83b0e7\"]",
++   "reasoning": "I read the source document and identified 8 mathematical constraints, each involving variables, relations, and contexts. I excluded narrative facts that were not constraints. All 8 records were resolved to their IDs."
+   },
