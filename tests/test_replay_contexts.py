@@ -1,6 +1,6 @@
 """Replay-context unit tests (PROJECT_PLAN.md section 23.2; A01 task 4).
 
-Run on all 168 candidates and the 63-case fidelity set. Requires data/raw/ (data/download.py).
+Run on all 173 candidates (exact-rule frame, docs/deviations.md D1) and the 63-case fidelity set. Requires data/raw/ (data/download.py).
 """
 from pathlib import Path
 
@@ -49,7 +49,7 @@ def test_stored_lists_are_cumulative():
 
 def test_r0_byte_identical_with_signatures(candidates):
     fid = [load_item(r.trace, r.ep_index, r.judge) for r in FID.itertuples()]
-    assert len(candidates) == 168 and len(fid) == 63
+    assert len(candidates) == 173 and len(fid) == 63
     n_sig = 0
     for c in candidates + fid:
         stored = c.messages[:c.verdict_prompt_idx + 1]
@@ -76,14 +76,16 @@ def test_cut_prefix_identical_and_no_round_instruction(candidates):
 
 
 def test_bob_message_then_verdict_prompt_pattern(candidates):
-    """Bob's (round-5) message directly before the true verdict prompt: 168 of 168 originals.
+    """Bob's (round-5) message directly before the true verdict prompt: 173 of 173 originals.
 
-    The plan's "13 of 168" (sections 8.2, 23.2) comes from the pre-sprint substring rule, which in
-    155 contexts takes a later channel message mentioning "verdict phase" for the verdict prompt.
+    The plan's "13 of 168" (sections 8.2, 23.2) comes from the legacy substring rule, which takes a
+    channel message mentioning "verdict phase" for the verdict prompt (docs/deviations.md D1).
+    Under that rule the count is still 13 on the 173 (for the 5 added items the substring hit is
+    Bob's round-1 message, preceded by Alice's tool result).
     """
     orig = sum(c.messages[c.verdict_prompt_idx - 1]["role"] == "user"
                and "[from=bob]" in c.messages[c.verdict_prompt_idx - 1]["content"] for c in candidates)
-    assert orig == 168
+    assert orig == 173
     sub = 0
     for c in candidates:
         first = next(i for i in range(c.ep_start, len(c.messages)) if c.messages[i]["role"] == "user"

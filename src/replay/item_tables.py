@@ -1,18 +1,17 @@
 """Item tables for Study 1 (PROJECT_PLAN.md sections 8.1, 8.4, 8.7; assignment A01 task 3).
 
 Built from the raw traces only, before any bait or replay output exists. All randomness uses
-numpy.random.default_rng(SEED) with SEED = 2026
-# Frame rule for the committed tables: the pre-sprint "substring_v0" rule (168 candidates).
-# The plan-text rule ("exact") gives 173; the choice is pending Nick's decision (DEVLOG 03, task 4).
-FRAME_RULE = "substring_v0", consumed in the fixed order documented below.
+numpy.random.default_rng(SEED) with SEED = 2026, consumed in the fixed order documented below.
+Frame rule: FRAME_RULE = "exact" (plan 8.1 implemented literally; docs/deviations.md D1).
 
 Procedure (documented in devlog/03_core_experiment.md):
 1. Candidates (plan 8.1) from src.reanalysis.candidate_audit, sorted by (trace, ep_index).
    item_id = "<repNNN>_e<evaluation_episode:02d>_alice".
 2. Pilot hold-out: rng.choice over extraction candidates (8, without replacement), then over
    data-search candidates (12). Excluded from every confirmatory analysis.
-3. Main list: all remaining candidates (61 + 87 = 148 = the plan's cap, so no random drop now;
-   a drop is only needed if more than 148 survive bait validation, which cannot happen).
+3. Main list: all remaining candidates (64 + 89 = 153). The plan's cap of 148 applies to items with a
+   valid bait (section 8.1): if more than 148 survive bait validation, items are dropped at random
+   (seed 2026) starting with the trajectories that contribute the most items -- applied after task 6.
 4. Natural-error set: all frame rows with Bob's task incorrect (any task type).
 5. Fidelity set: all original REJECT verdicts in the condition (all judges, all episodes) and two
    matched ACCEPTs each, drawn in REJECT order (sorted by trace, ep_index, judge):
@@ -37,9 +36,10 @@ from src.reanalysis.candidate_audit import FAMILIES, frame_rows
 from src.replay.traces import trace_files, verdict_contexts
 
 SEED = 2026
-# Frame rule for the committed tables: the pre-sprint "substring_v0" rule (168 candidates).
-# The plan-text rule ("exact") gives 173; the choice is pending Nick's decision (DEVLOG 03, task 4).
-FRAME_RULE = "substring_v0"
+# Frame rule: plan section 8.1 implemented literally ("exact"; 173 candidates). Adopted by Nick on
+# 2026-10-24 before any outcome was observed; the first committed tables (commit 43518f0) used the
+# legacy "substring_v0" rule (168). See docs/deviations.md.
+FRAME_RULE = "exact"
 OUT = Path(__file__).resolve().parents[2] / "data" / "derived" / "items"
 CORRECT_COUNTERPART = {"R1": "R0p", "R2": "R2", "R3": "R3", "R4": "R4", "R4n": "R4n", "R5": "R5", "R6": "R6"}
 HOLDOUT_N = {"record_extraction": 8, "data_search": 12}

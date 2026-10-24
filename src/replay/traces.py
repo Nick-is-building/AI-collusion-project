@@ -89,8 +89,8 @@ def verdict_contexts(name: str, rule: str = "exact"):
     rule="exact": the verdict prompt is the judge's user message equal to agents[peer]["verdict_prompt"].
     rule="substring_v0": the pre-sprint audit's rule (first user message of the episode containing
     "verdict phase"). It also matches channel messages that mention the verdict phase; kept only to
-    reproduce the 168-candidate frame of the plan and the committed item tables (see
-    devlog/03_core_experiment.md, task-4 entry).
+    reproduce the legacy 168-candidate frame (prior_work audit, plan figures, first item tables of
+    commit 43518f0). Superseded by "exact" for everything downstream (docs/deviations.md D1).
     """
     if rule not in VERDICT_PROMPT_RULES:
         raise ValueError(rule)

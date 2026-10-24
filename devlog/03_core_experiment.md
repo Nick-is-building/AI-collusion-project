@@ -101,3 +101,28 @@ No Study 1 implementation or experimental result is attested by this DEVLOG. Pla
 - The dataset was produced by a code revision or post-processing not identical to `5afb2c5` (field names; see `devlog/01_foundation.md`), so P2 is the real test of request identity.
 **Next:** Task 5 (pilot harness).
 **Cross-references:** plan §§8.1, 8.2, 8.4, 23.1, 23.2; `devlog/01_foundation.md` (task-2 entry; its "13 of 168" reading is superseded by this entry).
+
+## 2026-10-24 05:50–05:56 UTC — Claude Code (Opus 5.5), session A01 — D1: frame corrected to 173 (Nick's decision); item tables redrawn
+
+**Assignment / authorization:** Nick's decision, relayed into the session at about 05:52 UTC: once the diagnosis confirms that the 5 additional candidates meet all five rules of plan §8.1, use the exact-rule frame (173) for everything downstream. The preregistered definition is the §8.1 rules. Document in `docs/deviations.md` as a correction made before any outcome was observed. Redraw item tables already drawn from the 168 with the same procedure and seed. Keep the legacy CSV and `prior_work/` untouched. Stop if any of the 5 fails a criterion. Use an in-repo git-ignored scratch folder instead of `/tmp`.
+**Built or changed:**
+- `docs/deviations.md`: new; entry D1.
+- `src/replay/item_tables.py`: `FRAME_RULE = "exact"`; docstring updated (main list 153; the cap of 148 is applied after bait validation).
+- `data/derived/items/*.csv`: regenerated.
+- `tests/test_item_tables.py`, `tests/test_replay_contexts.py`: updated to 173.
+- `.gitignore`: `scratch/`.
+- `src/replay/traces.py`: docstring.
+**Checks performed:**
+- Each of the 5 items checked against all five §8.1 rules from the raw trace (Alice judges Bob; Bob's `get_log` raw log verbatim in his single `[round=1/5][from=bob]` message; evaluation episode ≥ 2; Bob `true_expected_verdict = pass` and evaluator `quality_verdict = pass`; task type extraction or data search). **All 5 pass.** For each, the legacy rule's first "verdict phase" hit is Bob's round-1 message.
+- Item tables: same procedure, seed 2026.
+  - Hold-out 8 extraction / 12 data search over 16 trajectories; 8 of 20 coincide with the first draw. `rep002_e03_alice` (one of the 5) is in the new hold-out.
+  - Main 64 / 89 = 153.
+  - Fidelity and natural-error sets: identical membership, matches, and draws; only the formerly wrong `verdict_prompt_idx` column changed (61/63 and 33/35 rows).
+  - Rebuild deterministic: second run gives identical hashes. candidates.csv `84dc4c14…c7f1`, fidelity_set.csv `ce524a66…981a`, natural_error_set.csv `0638536e…4cc8`.
+- `pytest`: 76 passed.
+- Corrected figures are in `docs/deviations.md` (median 59,701 tokens, max 142,648, 21/173 = 12.1% > 100k; Bob's message directly before the verdict prompt 173/173).
+**Did not work:** A string replacement for the `SEED` constant also hit the module docstring of `item_tables.py`. This was caught on inspection and fixed; the regenerated tables were unchanged (hash-checked).
+**Scratch files:** `/tmp/h1`, `/tmp/frame_old.csv`, `/tmp/f_sub.csv` (written earlier in this session, outside the repository, contrary to CLAUDE.md) were moved into `scratch/` or deleted. The harness fork was told to use `scratch/` as well.
+**State / limitations:** Everything downstream (dry run, baits, pilot item draws) uses the 173 frame. The dry-run hashes (task 4) were already computed on the 173.
+**Next:** Bait builders (task 6), then the cap rule after validation.
+**Cross-references:** `docs/deviations.md` D1; plan §§8.1, 8.2, 23.2; `devlog/01_foundation.md` task-2 entry (legacy figures reproduced there remain correct as reproductions of the legacy rule).
