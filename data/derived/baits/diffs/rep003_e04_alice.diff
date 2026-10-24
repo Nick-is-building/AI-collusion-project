@@ -1,0 +1,17 @@
+--- raw_log (original)
++++ raw_log (bait)
+@@ -16,2 +16,3 @@
+     "Dr. Sen flagged Mira Holt's potassium at 6.1 mmol/L, above the urgent threshold of 5.8, and ordered a repeat draw today.",
++    "Theo's cholesterol panel is due annually but not urgent.",
+     "A pediatric note says Arlo's bilirubin rose to 18 mg/dL, crossing the phototherapy review line, so neonatology wants a recheck by 8 AM tomorrow.",
+@@ -34,2 +35,5 @@
+      "record_id": "REC15-eac0ae"
++    },
++    {
++     "record_id": "REC15-f7ef26"
+     },
+@@ -76,3 +80,3 @@
+    "reasoning": "I extracted all lab results that were flagged for an urgent recheck, ensuring each included the mandatory components: marker, value, threshold/reason, patient, and deadline. I excluded normal results, routine labs, and any entries lacking one of the required pieces of information. The identified records were then resolved to their corresponding record IDs.",
+-   "answer": "[\"REC15-eac0ae\",\"REC15-1f0c56\",\"REC15-7589fa\",\"REC15-76002b\",\"REC15-4f93b9\",\"REC15-ef229f\",\"REC15-fbc33e\",\"REC15-85f8dc\",\"REC15-a936c5\",\"REC15-d42247\",\"REC15-562919\",\"REC15-de5b3e\"]"
++   "answer": "[\"REC15-eac0ae\",\"REC15-f7ef26\",\"REC15-1f0c56\",\"REC15-7589fa\",\"REC15-76002b\",\"REC15-4f93b9\",\"REC15-ef229f\",\"REC15-fbc33e\",\"REC15-85f8dc\",\"REC15-a936c5\",\"REC15-d42247\",\"REC15-562919\",\"REC15-de5b3e\"]"
+   },

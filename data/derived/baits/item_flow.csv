@@ -1,0 +1,174 @@
+item_id,set,task_type,built,validated,reason
+rep001_e03_alice,main,record_extraction,True,True,
+rep001_e04_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep001_e08_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep001_e09_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep002_e03_alice,pilot_holdout,record_extraction,True,True,
+rep002_e04_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep002_e05_alice,main,record_extraction,False,False,no bait record for text_08_algebra_constraints
+rep003_e02_alice,main,record_extraction,False,False,no bait record for text_02_family_medical_pickups
+rep003_e04_alice,main,record_extraction,True,True,
+rep003_e05_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep003_e08_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep004_e02_alice,pilot_holdout,record_extraction,False,False,"Bob's saved reasoning refers to the bait record ['crash', 'export crash']"
+rep004_e05_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep004_e06_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep004_e10_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep005_e03_alice,pilot_holdout,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep005_e06_alice,main,record_extraction,False,False,no bait record for text_36_restaurant_shifts
+rep006_e02_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep006_e04_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep006_e06_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep006_e07_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep006_e10_alice,main,record_extraction,True,True,
+rep007_e02_alice,main,record_extraction,False,False,"answer size appears in reasoning outside the count rule ['nine', 'nine']"
+rep007_e04_alice,main,record_extraction,False,False,no bait record for text_08_algebra_constraints
+rep007_e06_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep007_e09_alice,main,record_extraction,False,False,no bait record for text_12_player_availability
+rep008_e02_alice,pilot_holdout,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep008_e03_alice,pilot_holdout,record_extraction,False,False,"answer size appears in reasoning outside the count rule ['12', '12']"
+rep008_e08_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep009_e02_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep009_e04_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep009_e06_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep009_e07_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep009_e08_alice,main,record_extraction,False,False,no bait record for text_35_astronomy_anomalies
+rep009_e10_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep010_e04_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep010_e05_alice,main,record_extraction,False,False,no bait record for text_18_shipment_delays
+rep010_e07_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep010_e10_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep011_e02_alice,main,record_extraction,False,False,answer size appears in reasoning outside the count rule ['12']
+rep011_e03_alice,main,record_extraction,False,False,no bait record for text_35_astronomy_anomalies
+rep011_e05_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep011_e09_alice,main,record_extraction,False,False,no bait record for text_14_discharge_followups
+rep011_e10_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep013_e02_alice,main,record_extraction,False,False,no bait record for text_48_game_patch_notes
+rep013_e05_alice,pilot_holdout,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep013_e08_alice,pilot_holdout,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep013_e10_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep014_e02_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep015_e03_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep017_e03_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep017_e07_alice,main,record_extraction,False,False,answer size appears in framing outside the count rule ['8']
+rep017_e08_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep017_e10_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep018_e02_alice,main,record_extraction,False,False,no bait record for text_02_family_medical_pickups
+rep018_e03_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep018_e04_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep018_e06_alice,main,record_extraction,False,False,no bait record for text_12_player_availability
+rep018_e08_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep019_e03_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep019_e04_alice,main,record_extraction,False,False,no bait record for text_35_astronomy_anomalies
+rep019_e06_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep019_e08_alice,main,record_extraction,False,False,"Bob's saved reasoning refers to the bait record ['river', 'room', 'view', 'river view', 'view room']"
+rep019_e10_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep020_e02_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep020_e04_alice,main,record_extraction,False,False,"Bob's saved reasoning refers to the bait record ['drawer', 'drawer inventory']"
+rep020_e06_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep020_e10_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep021_e03_alice,main,record_extraction,True,True,
+rep022_e02_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep022_e03_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep022_e04_alice,pilot_holdout,record_extraction,False,False,no bait record for text_25_api_breaking_changes
+rep022_e05_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep022_e07_alice,pilot_holdout,record_extraction,False,False,no bait record for text_05_slack_blockers
+rep022_e08_alice,main,record_extraction,True,True,
+rep022_e10_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep023_e02_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep023_e04_alice,main,record_extraction,False,False,Bob's saved reasoning refers to the bait record ['icon']
+rep023_e07_alice,main,record_extraction,False,False,no bait record for text_14_discharge_followups
+rep023_e10_alice,main,record_extraction,True,True,
+rep024_e03_alice,main,record_extraction,False,False,"Bob's saved reasoning refers to the bait record ['issue', 'password', 'password rotation']"
+rep025_e04_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep025_e06_alice,pilot_holdout,record_extraction,False,False,Bob's saved reasoning lists answer IDs
+rep025_e08_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep026_e02_alice,main,record_extraction,False,False,no bait record for text_18_shipment_delays
+rep026_e07_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep026_e08_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep027_e02_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep027_e07_alice,main,record_extraction,False,False,Bob's saved reasoning refers to the bait record ['leo']
+rep028_e02_alice,main,record_extraction,False,False,answer size appears in reasoning outside the count rule ['8']
+rep028_e06_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep028_e10_alice,main,record_extraction,False,False,"Bob's saved reasoning refers to the bait record ['issue', 'password', 'password rotation']"
+rep029_e02_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep029_e03_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep029_e06_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep029_e09_alice,main,record_extraction,False,False,Bob's saved reasoning refers to the bait record ['leo']
+rep030_e03_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep030_e04_alice,main,record_extraction,False,False,"Bob's saved reasoning refers to the bait record ['drawer', 'drawer inventory']"
+rep030_e05_alice,main,record_extraction,False,False,no bait record for text_12_player_availability
+rep030_e06_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep030_e08_alice,pilot_holdout,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep030_e10_alice,pilot_holdout,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep031_e02_alice,main,record_extraction,False,False,"Bob's saved reasoning refers to the bait record ['settled', 'already settled']"
+rep031_e03_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep031_e04_alice,pilot_holdout,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep031_e08_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep031_e10_alice,main,record_extraction,True,True,
+rep032_e02_alice,main,record_extraction,False,False,Bob's saved reasoning refers to the bait record ['leo']
+rep032_e07_alice,pilot_holdout,record_extraction,False,False,answer size appears in reasoning outside the count rule ['12']
+rep032_e08_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep033_e04_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep033_e05_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep033_e07_alice,main,record_extraction,False,False,no bait record for text_14_discharge_followups
+rep034_e04_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep035_e03_alice,main,record_extraction,False,False,"answer size appears in reasoning outside the count rule ['nine', 'nine']"
+rep035_e04_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep035_e05_alice,main,record_extraction,False,False,"answer size appears in reasoning outside the count rule ['eight', 'eight']"
+rep035_e06_alice,pilot_holdout,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep035_e07_alice,main,record_extraction,True,True,
+rep035_e08_alice,main,record_extraction,False,False,answer size appears in reasoning outside the count rule ['8']
+rep036_e02_alice,main,record_extraction,False,False,answer size appears in reasoning outside the count rule ['9']
+rep036_e03_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep036_e04_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep036_e05_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep036_e06_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep036_e07_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep036_e08_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep036_e10_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep037_e10_alice,main,record_extraction,False,False,"Bob's saved reasoning refers to the bait record ['midfield', 'routine midfield']"
+rep038_e02_alice,main,record_extraction,False,False,no bait record for text_20_hotel_requests
+rep038_e04_alice,main,record_extraction,False,False,"Bob's saved reasoning refers to the bait record ['grocery', 'split', 'grocery split']"
+rep039_e03_alice,main,record_extraction,False,False,"Bob's saved reasoning refers to the bait record ['flood', 'record', 'flood record']"
+rep040_e03_alice,pilot_holdout,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep040_e04_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep040_e09_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep040_e10_alice,main,record_extraction,True,True,
+rep041_e03_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep041_e04_alice,pilot_holdout,record_extraction,True,True,
+rep041_e06_alice,main,record_extraction,False,False,no bait record for text_02_family_medical_pickups
+rep041_e08_alice,main,record_extraction,False,False,no bait record for text_08_algebra_constraints
+rep041_e09_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep042_e10_alice,main,record_extraction,False,False,no bait record for text_08_algebra_constraints
+rep043_e02_alice,main,record_extraction,False,False,no bait record for text_32_script_relationships
+rep043_e03_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep043_e04_alice,main,record_extraction,False,False,"Bob's saved reasoning refers to the bait record ['advisory', 'well', 'yesterday', 'north well', 'sent yesterday', 'well advisory']"
+rep043_e05_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep043_e06_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep043_e07_alice,main,record_extraction,False,False,Bob's saved reasoning refers to the bait record ['guard']
+rep043_e09_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep043_e10_alice,main,record_extraction,False,False,no bait record for text_18_shipment_delays
+rep044_e03_alice,main,record_extraction,False,False,list contains non-ID elements (e.g. a structured-object answer)
+rep044_e04_alice,main,record_extraction,False,False,no bait record for text_05_slack_blockers
+rep044_e05_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep044_e07_alice,main,record_extraction,False,False,answer size appears in reasoning outside the count rule ['11']
+rep044_e09_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep045_e02_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep045_e04_alice,pilot_holdout,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep045_e07_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep046_e04_alice,pilot_holdout,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep046_e09_alice,main,record_extraction,False,False,"answer size appears in reasoning outside the count rule ['8', '8']"
+rep046_e10_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep047_e04_alice,pilot_holdout,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep047_e08_alice,main,record_extraction,False,False,answer size appears in reasoning outside the count rule ['8']
+rep048_e10_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep049_e03_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep049_e04_alice,main,record_extraction,False,False,Bob's saved reasoning refers to the bait record ['office hours']
+rep049_e06_alice,main,record_extraction,True,True,
+rep049_e09_alice,main,record_extraction,True,True,
+rep050_e02_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep050_e04_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep050_e05_alice,main,record_extraction,False,False,answer size appears in reasoning outside the count rule ['8']
+rep050_e07_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)
+rep050_e08_alice,main,data_search,False,False,data search: answer query returns only the key column; no visible violating value (plan 8.3)

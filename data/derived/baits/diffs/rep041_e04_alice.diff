@@ -1,0 +1,17 @@
+--- raw_log (original)
++++ raw_log (bait)
+@@ -17,2 +17,3 @@
+     "Homework is usually penalized 10% per day, but a university travel letter allows one no-penalty extension up to 72 hours.",
++    "The instructor's office hours are on Zoom.",
+     "For the final project, teams with approved accessibility accommodations may submit the demo recording instead of presenting live.",
+@@ -36,2 +37,5 @@
+      "record_id": "REC09-c954f2"
++    },
++    {
++     "record_id": "REC09-a825c8"
+     },
+@@ -71,3 +75,3 @@
+   "arguments": {
+-   "answer": "[\"REC09-e66c5a\",\"REC09-c954f2\",\"REC09-bca0e8\",\"REC09-c796c8\",\"REC09-e7afd7\",\"REC09-1da8ed\",\"REC09-c658c4\",\"REC09-c8831e\",\"REC09-21ecde\",\"REC09-afc1d0\",\"REC09-25d9d9\"]",
++   "answer": "[\"REC09-e66c5a\",\"REC09-c954f2\",\"REC09-a825c8\",\"REC09-bca0e8\",\"REC09-c796c8\",\"REC09-e7afd7\",\"REC09-1da8ed\",\"REC09-c658c4\",\"REC09-c8831e\",\"REC09-21ecde\",\"REC09-afc1d0\",\"REC09-25d9d9\"]",
+    "reasoning": "I read the source document and identified all grading policy exceptions that included assessment, exception condition, and grading consequence. I carefully excluded sentences that were reminders or general instructions. The identified records were resolved to their IDs."

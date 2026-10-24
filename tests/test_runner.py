@@ -134,8 +134,10 @@ def test_missing_verdicts(sdir):
 
     def auth_error(**kw):
         raise litellm.exceptions.AuthenticationError("no key", llm_provider="gemini", model=kw["model"])
-    st = runner(sdir, auth_error).run([j for j in jobs(2)][1:])
-    c = [r for r in lines(sdir) if r["type"] == "call"][-1]
+    second = [j for j in jobs(2)][1:]
+    st = runner(sdir, auth_error).run(second)
+    # select by call_id: run files from the same second can sort in either order
+    c = [r for r in lines(sdir) if r["type"] == "call" and r["call_id"] == second[0].call_id("pilot")][0]
     assert st["missing"] == 1 and c["status"] == "missing" and c["verdict_status"] == "missing_error"
     assert "AuthenticationError" in c["error"]
 

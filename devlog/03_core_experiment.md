@@ -126,3 +126,78 @@ No Study 1 implementation or experimental result is attested by this DEVLOG. Pla
 **State / limitations:** Everything downstream (dry run, baits, pilot item draws) uses the 173 frame. The dry-run hashes (task 4) were already computed on the 173.
 **Next:** Bait builders (task 6), then the cap rule after validation.
 **Cross-references:** `docs/deviations.md` D1; plan §§8.1, 8.2, 23.2; `devlog/01_foundation.md` task-2 entry (legacy figures reproduced there remain correct as reproductions of the legacy rule).
+
+## 2026-10-24 06:05–06:15 UTC — Claude Code (Opus 5.5), session A01 — Tasks 6–7: baits (build-order step 2), blind-check generator; BLOCKED on bait yield
+
+**Assignment / authorization:** A01 tasks 6 and 7. No API calls.
+**Correction:** the task-5 entry in `devlog/02_pilot.md` gives its end time as "06:12"; the commit was at 06:04 UTC.
+**Built or changed:**
+- `src/replay/bait_common.py`: count rule (plan §8.3), `stray_counts`, diffs.
+- `src/replay/baits_extraction.py`: extraction bait choice, edits, and validation rules 1–3 (docstring = authoritative procedure).
+- `src/replay/build_baits.py`, which writes:
+  - `data/derived/baits/<item_id>.json` (`bob_r1_content`, `bait_raw_log`, hashes, edits, evaluator result, validation);
+  - `data/derived/baits/diffs/<item_id>.diff`;
+  - `data/derived/baits/item_flow.csv` (every candidate with its drop reason; SHA-256 `0eb21e4b…faf6`).
+- `src/replay/dry_run.py`: now also covers bait versions (R1, R2, R3, R4, R4n). 1,166 requests; CSV SHA-256 `cf1cfecf…92cf`.
+- `src/blind_check/make_package.py`: task-7 generator. Seed 2026; per-pair Markdown with the task information and both raw logs as A/B; the answer form; key in the git-ignored `blind_check/key.local.json`, with only its SHA-256 committed. It refuses to run with fewer than N validated baits.
+- Tests: `tests/test_baits_extraction.py` (16), `tests/test_blind_check.py` (2).
+- `tests/test_runner.py`: fixed a test defect (see "Did not work").
+**Extraction bait procedure and its decisions (implementation of §8.3; not decided by the plan, flagged for Nick):**
+1. *Bait choice per task.* The bait is an invalid record lying directly between two valid records in source order (the plan's "sits between valid records"). It must share at least one content word (5-letter prefix) with the instruction's "Exclude …" clause that is not in the inclusion part. Highest overlap wins, then the earliest.
+   - Without the direct-neighbour condition, generic background prose was chosen in 10 tasks; I rejected that variant after reading.
+   - **I read all 37 chosen baits against their instructions; every one visibly meets an exclusion clause.** 13 tasks have no qualifying record.
+2. *Edits.* Every `resolve_records` call (arguments and result) and every `save_final_answer` call get the bait inserted at its source-order position. The log is re-serialized with upstream `_format_private_raw_log`, and the answer keeps its original separator style. A complete answer list in Bob's framing gets the bait ID; counts are incremented.
+3. *Drops as "ambiguous" (plan: "Ambiguous cases are dropped"), added after reading Bob's texts:*
+   - **(a)** Bob's own reasoning or framing refers to the bait record, e.g. "I excluded … (sesame noodles icon)", "Export crash (fixed)", "excluded Leo (voluntary change)". The bait version would then contradict itself, so I treated it as an occurrence the plan's consistency rule must cover. Detection: bait ID, distinctive words or names of the bait sentence (absent from valid records and from the instruction's word prefixes), or distinctive word pairs. I read all remaining built baits: 13 survive, with no residual references.
+   - **(b)** Bob's reasoning lists the answer IDs or enumerates the answer.
+   - **(c)** The answer size appears outside the plan's count pattern, e.g. "identified 12 lines", "8 access removal cases", "eight cases". The plan's literal noun list (records/items/rows/results) would leave a visible count of n next to n + 1 IDs.
+   - **(d)** An earlier save with an object-list answer.
+4. *Count mode switch.* `plan_nouns` (default, the plan's literal rule) or `any_noun`, which also increments "n <noun>". **`any_noun` is not adopted; it is offered to Nick as an option.**
+**Data-search baits: not buildable under §8.3.**
+- In 100 of 101 data-search candidates, Bob's only, or final, answer query selects only the key column (e.g. `SELECT T.ticket_id …`).
+- In the remaining one (rep013_e05, hold-out), the multi-column query is a single-ticket check, not the answer query.
+- So no relaxation can add a row "whose violating value is visible in the result columns". Under the rule, all 101 are dropped.
+- The plan's contingency for P4 failing is "use the remaining extraction items" (§§8.1, 10).
+- Not built: an SQL relaxation builder, because it would produce zero items under the rule. The visible error could only live in the SQL text (the relaxed WHERE condition). That would be a different bait design and is Nick's decision.
+**Item flow (plan §23.4; count mode `plan_nouns`):**
+
+| | candidates | baits built | baits validated (rules 1–3) |
+|---|---:|---:|---:|
+| extraction, main | 64 | 11 | 11 |
+| extraction, hold-out | 8 | 2 | 2 |
+| data search, main | 89 | 0 | 0 |
+| data search, hold-out | 12 | 0 | 0 |
+
+- Extraction drop reasons (72 → 13):
+  - no qualifying bait record: 26 (13 tasks)
+  - Bob's reasoning refers to the bait record: 14 (plus 2 more caught after the name rule was fixed)
+  - answer size outside the count rule: 14 in reasoning, 1 in framing
+  - reasoning lists answer IDs: 1
+  - object-list answer: 1
+  - The exact counts per reason are in `item_flow.csv`.
+- With `any_noun` (not adopted; measured before the name-rule fix): 25 validated (21 main / 4 hold-out). After the fix it would be slightly lower; not recomputed.
+- **Consequences:**
+  - The plan's target (§8.1: at least 120, up to 148) is unreachable. Even the extraction-only fallback assumed 61 items.
+  - P11 has baits for 2 of its 20 hold-out items (`p11_effect_check --plan`: "baits missing for 18 of 20").
+  - The blind check needs 20 pairs and only 13 validated baits exist, so task 7 is blocked. The generator ran and refused: "blocked: 13 validated baits, 20 pairs required". No package was produced, and no key exists.
+**Checks performed:**
+- `pytest`: 114 passed, including: every saved bait rebuilds byte-identically; rules 1–3 hold; Shi et al.'s evaluator scores the bait answer as `fail` with `extra_references == [bait_id]` and the original as `pass`; in every replay variant exactly one message differs; the bait choice sits between valid records; count-rule units; blind-check structure, label-leak check, and key hash in `scratch/`.
+- One diff read by eye (rep023_e04, before it was dropped by rule 3a): the edits were in the right places.
+**Did not work (all fixed, nothing left in an unknown state):**
+- First bait choice (keyword overlap only) picked background prose.
+- The separator style of the answer was not preserved; 5 items were wrongly dropped until fixed.
+- My shell filter `grep -v warn` hid output lines that contained the word "warn"; stderr now goes to `scratch/stderr.txt`.
+- The `any_noun` mode first double-counted "12 lab results"; fixed with a plan-rule precedence.
+- The name rule skipped the sentence-initial word, so "Leo is on track…" was not caught (rep027_e07 was wrongly built); fixed, and re-verified by reading.
+- The blind-check extraction sliced the log by framing offsets, which change under framing edits; fixed by saving `bait_raw_log`.
+- `tests/test_runner.py::test_missing_verdicts` was flaky (about 1 in 3): it took the last "call" line across run files whose names can sort in either order within the same second. Fixed by selecting the line by `call_id` (`call_id("pilot")`); the assertions are unchanged. 8/8 consecutive passes afterwards.
+**State / limitations:**
+- The rules 3a–3c drops are my operationalization of "every occurrence … ambiguous cases are dropped". They are conservative and documented, but scientifically consequential; Nick decides.
+- The bait choice relies on a lexical rule plus my reading; the blind check by Nick is still to come.
+**Next (decisions for Nick, not started):**
+1. Data-search bait design (SQL-visible relaxation or drop data search).
+2. Extraction count mode (`plan_nouns` vs `any_noun`).
+3. Whether to accept manually chosen baits for the 13 tasks without a lexical match.
+4. How to proceed given the reduced sample (the plan's minimum is 120).
+5. Blind check: with fewer than 20 baits, use all available, or wait.
+**Cross-references:** plan §§8.1, 8.3, 10 (P4, P11), 11 (milestone 1), 23.2, 23.4; `devlog/02_pilot.md`.
