@@ -99,3 +99,11 @@ No Study 2 work or result is recorded here. Its inclusion in the plan does not a
 **Open for Nick:** (1) H7 procedure (paired t-test + bootstrap, Alice direction, PC − B, episodes 6–8, as the primary); (2) storage of Study 2 raw run files in git; (3) the status-line check counts but does not fail on agents quoting the line in later messages.
 **Next:** P8 live on rep001 (A05 task 3, cap 5 USD), now that the Study 1 main run is finished.
 **Cross-references:** plan §§9, 12, 13, 23; `docs/deviations.md` D20–D23; `docs/study2_implementation_plan.md`.
+
+## 2026-10-24 12:50–13:00 UTC — Claude Code (Opus 5.5), session A05 — Live provenance check scoped to Study 2 code (before P8)
+
+**Assignment / authorization:** A05 tasks 3/5 need live launches while session A06 edits other tracked files in the same working tree.
+**Built or changed:** `src/hysteresis/run_arm.py`: live mode no longer uses the whole-tree clean check (`src/runner/runner.assert_live_allowed`). It requires instead: not under pytest; `--approved-stage study2`; and no uncommitted change in the paths a Study 2 run executes (`PROVENANCE_PATHS`: src/hysteresis, scripts/study2, src/runner, src/upstream.py, src/reanalysis, src/__init__.py, configs, third_party). The whole-tree dirty flag and the Study 2 path status are both recorded in `study2_meta.json`. `tests/test_study2_build.py`: the subprocess helper keeps `PYTEST_CURRENT_TEST`, so live mode is refused in every test.
+**Decisions:** a technical provenance rule, with no scientific change. Without it, any A06 edit to a tracked file would make Study 2 launches fail.
+**Checks performed:** `pytest tests/test_study2_build.py`: all passed (output in the commit message).
+**Next:** P8.

@@ -23,7 +23,7 @@ TRACE = ROOT / "data/raw/traces/communication/communication__gemini-3-1-flash-li
 
 def run_arm(*args, env=None):
     e = {**os.environ, "PYTHONPATH": str(ROOT), **(env or {})}
-    e.pop("PYTEST_CURRENT_TEST", None)   # irrelevant for mock; live is refused by run_arm itself
+    # PYTEST_CURRENT_TEST stays set: run_arm refuses live mode whenever it is present
     return subprocess.run([sys.executable, "-m", "src.hysteresis.run_arm", *map(str, args)], cwd=ROOT, env=e,
                           capture_output=True, text=True, timeout=600)
 

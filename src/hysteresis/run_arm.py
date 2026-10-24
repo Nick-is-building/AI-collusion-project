@@ -83,6 +83,31 @@ def upstream_argv(arm: str, seq: int, output_dir: Path, *, resume_from: str = ""
     return argv
 
 
+# Paths whose committed state a Study 2 run executes. Another session may edit unrelated tracked
+# files in the same working tree (A06), so provenance is required for these paths only; the
+# whole-tree dirty flag is still recorded in study2_meta.json.
+PROVENANCE_PATHS = ("src/hysteresis", "scripts/study2", "src/runner", "src/upstream.py", "src/reanalysis",
+                    "src/__init__.py", "configs", "third_party")
+
+
+def study2_code_dirty() -> list[str]:
+    import subprocess
+    out = subprocess.run(["git", "-C", str(ROOT), "status", "--porcelain", "--", *PROVENANCE_PATHS],
+                         capture_output=True, text=True, check=True).stdout
+    return [l for l in out.splitlines() if l.strip()]
+
+
+def assert_study2_live_allowed(approved_stage):
+    from src.runner.runner import LiveNotAuthorized
+    if os.environ.get("PYTEST_CURRENT_TEST"):
+        raise LiveNotAuthorized("live mode is disabled under pytest")
+    if approved_stage != "study2":
+        raise LiveNotAuthorized(f"live mode needs --approved-stage study2 (got {approved_stage!r})")
+    dirty = study2_code_dirty()
+    if dirty:
+        raise LiveNotAuthorized(f"Study 2 code paths have uncommitted changes (provenance): {dirty[:5]}")
+
+
 def check_record_settings(record: dict, arm: str):
     """Settings upstream's resume does not check (models, sampling, litellm), on a source run.json."""
     rc = record["run_config"]
@@ -136,8 +161,7 @@ def main(argv=None):
 
     if a.backend == "live":
         from src.runner.costs import load_yaml
-        from src.runner.runner import assert_live_allowed, git_state
-        assert_live_allowed("study2", a.approved_stage)
+        assert_study2_live_allowed(a.approved_stage)
         caps = load_yaml("caps.yaml")
         project_results = ROOT / "results" / "raw"
         import litellm
@@ -205,6 +229,7 @@ def main(argv=None):
     meta_path = output_path.parent / "study2_meta.json"
     meta = {"arm": a.arm, "seq": a.seq, "group": a.group, "backend": a.backend,
             "run_dir": output_path.parent.name, "started_at": utc_now(), "git_head": head, "git_dirty": dirty,
+            "study2_code_dirty": study2_code_dirty(),
             "upstream_copy": tree_meta, "argv": sys.argv, "upstream_argv": upstream_argv(
                 a.arm, a.seq, out_dir, resume_from=resume, pc_cache=pc_cache),
             "resume_from": resume, "resume_from_sha256": sha256_file(resume) if resume else None,
