@@ -501,3 +501,44 @@ Under the corrected rule, **0 of 9 survive** (0 of all 16 main candidates of the
 - The "persists" rule (D19.4) and the relaxed-literal marker are Claude Code's proposals, pending Nick's approval with the tag.
 **Next:** main-run completion check; report.
 **Cross-references:** `devlog/02_pilot.md` A04 P7 entry; `docs/deviations.md` D16, D18, D19; plan §§8.4, 8.8, 23.3.
+
+## 2026-10-24 12:05–12:25 UTC — Claude Code (Opus 5.5), session A04 — Main run complete; prereg-v1-r1live; R1-live run complete (operational checks only, D18)
+
+**Assignment / authorization:** A04 task 3 (main run). Nick's decisions in the session at about 11:20 UTC:
+- relaxed-value marker, the "persists" rule, and the 10 USD cap;
+- freeze and tag `prereg-v1-r1live`;
+- launch R1-live on the 40 items after the main run, not in parallel;
+- finish A04; no Study 2 build in this session.
+
+Recorded as the D19 addendum in `docs/deviations.md`.
+**Main run (observed):**
+- 2,330 / 2,330 calls in 8 run files: stage 1 = 4 runs, 111 calls; full = 4 runs, 2,219 calls.
+- All `verdict_status` ok, 0 missing, 0 API errors, 0 429s.
+- `response_model` `gemini-3.1-flash-lite` in all calls.
+- Every variant at its expected count: R0 109, R0p 218, R1 218, R2 218, R3 218, R4 436, R4n 218, R5 218, R6 218, N1 35, N4 35, FR0 189.
+- **Spend 12.9647 USD** of the 40 USD cap (P10 projection without cache: 28.8). Wall time 11:01–12:05 UTC; full stage about 39 calls/min at 4 workers.
+- Monitor snapshot `scratch/a04_main_monitor_final.json` (local). Raw results committed in `b0e546c` and earlier.
+- **No outcome analysis was run (D18)**: no detection, rejection, or contrast figure exists yet.
+**prereg-v1-r1live (implemented):**
+- `PREREGISTRATION_R1LIVE.md` frozen with Nick's three decisions; `configs/caps.yaml` stage `r1live: 10.0`. The file-hash list was checked against the files at the tagged commit (7/7).
+- Tag `prereg-v1-r1live` → `74b6277`, pushed.
+**R1-live run (observed):**
+- Launched at 12:06 UTC at `b0e546c`, after the main run had ended and no launcher process remained: `set -a; . ./.env; set +a; PYTHONPATH=. nohup .venv/bin/python -m scripts.main.launch_r1live --live --approved-stage r1live --workers 4 > logs/r1live.log 2>&1 &`
+- Runs `r1live-20261024T12070{7Z-413738,8Z-3f63fd,8Z-b50807,9Z-51a97b}`.
+- 40/40 complete, 0 missing, 0 API errors, 10 API requests per item, `response_model` constant.
+- Signature mode `keep` in 40/40, so the D19.5 fallback was never triggered.
+- **Spend 3.2030 USD** of 10. Ended 12:15 UTC.
+**Artifact screen (plan §8.4; operational, not an outcome):**
+- Flag A 0/40; flag B keyword candidates 0/40, so no flag B confirmation was needed and 0 items are flagged. The "more than a quarter flagged" rule is not triggered.
+- Not done, because blocked by D18: the R1-live analysis (`src/analysis/r1live.py` needs the main-run R1 draws), the (a)/(b) intermediate outcomes, and the confirming readings of Bob's reaction type. They run after the natural-error rubric is committed.
+**Project spend (independent sum over all live call lines):** pilot 1.5320 + main 12.9647 + r1live 3.2030 = **17.6997 USD** (hard cap 250).
+**Observation (not my work):**
+- Untracked files appeared in the working tree between 11:51 and 12:01 UTC: `src/hysteresis/` (analysis, guard, mock_model, run_arm, status_line, upstream_tree), `scripts/study2/`, `tests/test_study2_analysis.py`.
+- Their docstrings refer to Study 2 and to a "D20", which does not exist in `docs/deviations.md`. They were not created by this session.
+- I did not read them beyond their first lines, and did not modify, commit, or delete them. They did not affect any run: runners check only tracked files, and nothing imports them.
+- Flagged for Nick (presumably a parallel session).
+**Correction to my earlier A04 entries:**
+- The header times "11:00–11:25 UTC" (this block) and "11:06–11:30 UTC" (`devlog/04_hysteresis.md`) are ranges I wrote before the commit. The commit `e41388b` is at about 11:18 UTC.
+- The Study 2 plan states "about 11:25 UTC"; the same applies.
+**Next (proposed):** the natural-error decidability rubric (D18, next assignment), then the analysis script run, R1-live analysis, confirming readings, and right-reason checks.
+**Cross-references:** `PREREGISTRATION_R1LIVE.md`; `docs/deviations.md` D18, D19 and the D19 addendum; `devlog/02_pilot.md` A04 entries.

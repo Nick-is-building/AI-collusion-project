@@ -24,16 +24,16 @@
 
 ## Active work and cross-references
 
-- **Assigned work:** A04 (`assignments/A04_prereg_launch_r1live.md` + `assignments/A04_addendum_D17_D19.md`): task 1 done (R6 rerun); task 2 done (prereg-v1); task 3 main run (in progress); task 4 R1-live driver + P7 (4 items) + addendum `PREREGISTRATION_R1LIVE.md` (not tagged); task 5 Study 2 implementation plan (D17 withdrawn by Nick); task 6 report. A01–A03 done.
+- **Assigned work:** A04 done (`assignments/A04_prereg_launch_r1live.md` + `assignments/A04_addendum_D17_D19.md`, incl. Nick's correction): prereg-v1 and prereg-v1-r1live tagged; main run complete (2,330/2,330); R1-live complete (40/40); Study 2 implementation plan written (not built). A01–A04 done. Next: natural-error rubric (D18), then analysis; Study 2 build (Nick).
 - **Active blocks:**
   - `devlog/02_pilot.md`: A04 task-1 entry (R6 rerun); P7 entry;
   - `devlog/03_core_experiment.md`: A04 entries (D15, launcher, main run, R1-live driver);
   - `devlog/05_analysis_submission.md`: A04 task-2 entry (D14, prereg-v1);
   - `devlog/04_hysteresis.md`: A04 task-5 plan entry.
 - **Deviations:** `docs/deviations.md` D1–D19 (D13–D16 from A04; D17–D19 from the A04 addendum; **D17 withdrawn** by Nick's correction, entry at the end of the file). All were decided before any main-run call.
-- **Preregistration:** `PREREGISTRATION.md`, tag `prereg-v1`; materials in `data/derived/prereg/` (`make_prereg_files.py`). The R1-live addendum (`PREREGISTRATION_R1LIVE.md`) gets tag `prereg-v1-r1live` only on Nick's authorization (D16).
+- **Preregistration:** `PREREGISTRATION.md`, tag `prereg-v1` (`21f4a0f`); materials in `data/derived/prereg/`. R1-live addendum `PREREGISTRATION_R1LIVE.md`, tag `prereg-v1-r1live` (`74b6277`).
 - **Analysis order (D18):** no analysis script on main-run outcomes until the natural-error rubric is committed; only `scripts/main/monitor.py` (operational).
-- **Raw run evidence:** `results/raw/*.jsonl` (committed; main run `main-*.jsonl`); countTokens log `results/token_counts/counts.jsonl` (committed); request payloads in `results/requests/` (local, hashed); launch logs in `logs/` (local).
+- **Raw run evidence:** `results/raw/*.jsonl` (committed; main run `main-*.jsonl`, R1-live `r1live-*.jsonl`, P7 `pilot-20261024T110912Z-4101d5.jsonl`); countTokens log `results/token_counts/counts.jsonl` (committed); request payloads in `results/requests/` (local, hashed); launch logs in `logs/` (local).
 - **Blind check:** `blind_check/` (INSTRUCTIONS.md, ANSWERS.md, 20 pair files, key hash); key `blind_check/key.local.json` local only. Optional per D10.
 - **Code map:**
   - `src/replay/`: traces, variants (R0, CUT, R2, R3, R4, R4n), r5, r6, request, token_count, item_tables, dry_run, bait_common, baits_extraction, baits_data_search, build_baits, live_driver (R1-live).
@@ -43,8 +43,9 @@
   - Derived tables in `data/derived/`; local scratch in `scratch/` (git-ignored).
 - **Relevant dependencies:** `PROJECT_PLAN.md` (complete approved design as supplied; do not silently modify); initial technical setup and all claims of reproduced prior work belong in `01_foundation.md` once actually checked.
 - **Pending decisions for Nick:**
-  - tag `prereg-v1-r1live` and the R1-live run (after the P7 report);
-  - the natural-error decidability rubric (next assignment, D18).
+  - the natural-error decidability rubric (next assignment, D18); until then no outcome analysis;
+  - Study 2: budget conflict with plan §12, RAW LOG PART mapping, project rate limits (AI Studio), Study 2 preregistration (`docs/study2_implementation_plan.md`);
+  - untracked Study 2 files from another session (`src/hysteresis/`, `scripts/study2/`, `tests/test_study2_analysis.py`); not touched by A04.
 
   These are not actions Claude Code may take on its own.
 - **Decisions already made by the researcher:** repository `Nick-is-building/AI-collusion-project`, private until submission, must be public at submission (plan §11, milestone 6); blind check no longer required (D10); Claude Code may commit and push (see `CLAUDE.md`, Git rules).
