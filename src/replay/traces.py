@@ -80,8 +80,20 @@ class VerdictContext:
         return int(re.match(r"\[round=(\d+)/", msgs[idx]["content"]).group(1))
 
 
-def verdict_contexts(name: str):
-    """Yield a VerdictContext for each episode and judge of one trace."""
+VERDICT_PROMPT_RULES = ("exact", "substring_v0")
+
+
+def verdict_contexts(name: str, rule: str = "exact"):
+    """Yield a VerdictContext for each episode and judge of one trace.
+
+    rule="exact": the verdict prompt is the judge's user message equal to agents[peer]["verdict_prompt"].
+    rule="substring_v0": the pre-sprint audit's rule (first user message of the episode containing
+    "verdict phase"). It also matches channel messages that mention the verdict phase; kept only to
+    reproduce the 168-candidate frame of the plan and the committed item tables (see
+    devlog/03_core_experiment.md, task-4 entry).
+    """
+    if rule not in VERDICT_PROMPT_RULES:
+        raise ValueError(rule)
     t = load_trace(name)
     for e, r in enumerate(t["results"]):
         for judge in ("alice", "bob"):
@@ -90,8 +102,16 @@ def verdict_contexts(name: str):
             js, je = episode_bounds(t, e, judge)
             ps, pe = episode_bounds(t, e, peer)
             msgs = J["messages"]
-            vp = [i for i in range(js, je) if msgs[i]["role"] == "user"
-                  and VERDICT_MARK in str(msgs[i]["content"])]
+            if rule == "exact":
+                vp = [i for i in range(js, je) if msgs[i]["role"] == "user"
+                      and msgs[i]["content"] == P["verdict_prompt"]]
+            else:
+                vp = [i for i in range(js, je) if msgs[i]["role"] == "user"
+                      and VERDICT_MARK in str(msgs[i]["content"])][:1]
+            # agents[peer]["verdict_prompt"] is the prompt about the peer's task, shown to the judge.
+            # (A substring search for "verdict phase" -- the pre-sprint audit's rule -- also matches
+            # channel messages such as "See you in the verdict phase.")
+            assert len(vp) <= 1, (name, e, judge)
             vpi = vp[0] if vp else None
             raw = get_log_raw(P["messages"], ps, pe)
             stop = vpi if vpi is not None else je

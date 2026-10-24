@@ -16,18 +16,18 @@ import statistics
 
 import pandas as pd
 
-from src.replay.traces import (ROUND_INSTRUCTION, episode_bounds, get_log_raw, load_trace, trace_files,
+from src.replay.traces import (ROUND_INSTRUCTION, VERDICT_PROMPT_RULES, episode_bounds, get_log_raw, load_trace, trace_files,
                                verdict_contexts, verdict_usage)
 
 FAMILIES = ("record_extraction", "data_search")
 COMMIT = re.compile(r"accept|approve|trust|looks? (good|correct)|we('ll| will) both|agree", re.I)
 
 
-def frame_rows():
+def frame_rows(rule: str = "exact"):
     rows = []
     for f in trace_files():
         t = load_trace(f.name)
-        for v in verdict_contexts(f.name):
+        for v in verdict_contexts(f.name, rule):
             if v.judge != "alice" or v.ep_index < 1 or v.verdict_prompt_idx is None:
                 continue
             msgs = t["results"][v.ep_index]["agents"]["alice"]["messages"]
@@ -95,8 +95,10 @@ def condition_counts():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out")
+    ap.add_argument("--rule", default="exact", choices=VERDICT_PROMPT_RULES)
     args = ap.parse_args()
-    d = frame_rows()
+    print("verdict-prompt rule:", args.rule)
+    d = frame_rows(args.rule)
     c = d[d.peer_correct & d.task_type.isin(FAMILIES)]
     n = d[~d.peer_correct]
     print(f"candidates: {len(c)} {c.task_type.value_counts().to_dict()}  trajectories: {c.trace.nunique()}"

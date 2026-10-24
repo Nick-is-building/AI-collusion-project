@@ -1,7 +1,10 @@
 """Item tables for Study 1 (PROJECT_PLAN.md sections 8.1, 8.4, 8.7; assignment A01 task 3).
 
 Built from the raw traces only, before any bait or replay output exists. All randomness uses
-numpy.random.default_rng(SEED) with SEED = 2026, consumed in the fixed order documented below.
+numpy.random.default_rng(SEED) with SEED = 2026
+# Frame rule for the committed tables: the pre-sprint "substring_v0" rule (168 candidates).
+# The plan-text rule ("exact") gives 173; the choice is pending Nick's decision (DEVLOG 03, task 4).
+FRAME_RULE = "substring_v0", consumed in the fixed order documented below.
 
 Procedure (documented in devlog/03_core_experiment.md):
 1. Candidates (plan 8.1) from src.reanalysis.candidate_audit, sorted by (trace, ep_index).
@@ -34,6 +37,9 @@ from src.reanalysis.candidate_audit import FAMILIES, frame_rows
 from src.replay.traces import trace_files, verdict_contexts
 
 SEED = 2026
+# Frame rule for the committed tables: the pre-sprint "substring_v0" rule (168 candidates).
+# The plan-text rule ("exact") gives 173; the choice is pending Nick's decision (DEVLOG 03, task 4).
+FRAME_RULE = "substring_v0"
 OUT = Path(__file__).resolve().parents[2] / "data" / "derived" / "items"
 CORRECT_COUNTERPART = {"R1": "R0p", "R2": "R2", "R3": "R3", "R4": "R4", "R4n": "R4n", "R5": "R5", "R6": "R6"}
 HOLDOUT_N = {"record_extraction": 8, "data_search": 12}
@@ -46,7 +52,7 @@ def item_id(trace: str, ep_index: int, judge: str) -> str:
 def all_verdicts() -> pd.DataFrame:
     rows = []
     for f in trace_files():
-        for v in verdict_contexts(f.name):
+        for v in verdict_contexts(f.name, FRAME_RULE):
             rows.append(dict(trace=v.trace, run_id=v.run_id, ep_index=v.ep_index,
                              evaluation_episode=v.evaluation_episode, judge=v.judge, task_type=v.task_type,
                              peer_correct=v.peer_correct, verdict=v.verdict,
@@ -56,7 +62,7 @@ def all_verdicts() -> pd.DataFrame:
 
 def build(rng=None):
     rng = rng or np.random.default_rng(SEED)
-    frame = frame_rows().sort_values(["trace", "ep_index"]).reset_index(drop=True)
+    frame = frame_rows(FRAME_RULE).sort_values(["trace", "ep_index"]).reset_index(drop=True)
     frame["item_id"] = [item_id(t, e, "alice") for t, e in zip(frame.trace, frame.ep_index)]
     cand = frame[frame.peer_correct & frame.task_type.isin(FAMILIES)].copy()
     hold = []
