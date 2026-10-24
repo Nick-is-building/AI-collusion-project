@@ -316,3 +316,11 @@ Plan §13 (5 retries) unchanged, as confirmed in A02. The runner overrides upstr
   8. the flag-B and reaction-type keyword lists are fixed after P7, and confirming readings are done by Claude Code and described as such;
   9. the subset composition is reported without change.
 - **Relation to the plan:** points 1–2 make plan §8.8's "R1-live − R1" test concrete (two-sided, against the R1 draw mean). Points 3–4 and 6 add pre-specified secondary readings; the plan's primary analysis on all 40 items and the without-flags sensitivity analysis (§8.4) stay.
+
+## Correction to D17 (24 October 2026, about 11:06 UTC): D17 withdrawn
+
+- **Approval:** Nick Wagner, in the Claude Code session ("do not record D17"; verbatim in `assignments/A04_addendum_D17_D19.md`, section "Correction from Nick").
+- **What happened:** Claude Code had already recorded D17 (above) before the correction arrived. It is in commit `e04f53e` and in the commit tagged `prereg-v1` (`21f4a0f`), both in this file and in `PREREGISTRATION.md` §§2 and 8. Pushed history and the tag are not rewritten (CLAUDE.md, Git rules). This entry withdraws it.
+- **Status now:** D17 does not apply. Study 2 is **not** decided as "not built". It will be built right after A04, with priority over the omission-bait addendum because it has the longest run time. A04 task 5 is done as an implementation plan (build steps, wall time and cost, rate limits, earliest launch), with no building and no calls.
+- **Preregistration consequence:** Study 2 was never part of prereg-v1. Its statement there that Study 2 "is not built (D17)" is superseded by this entry. Study 2 needs its own preregistration record before its launch; that is Nick's decision.
+- D18 and D19 stand unchanged. The D-number 17 stays used, and is not reassigned.

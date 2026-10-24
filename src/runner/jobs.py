@@ -17,7 +17,7 @@ Main-run list (`main_run_jobs`), all Gemini 3.1 Flash-Lite:
   order (plan 8.5: calls for all variants of an item run close in time, variant order shuffled).
   Seed: numpy default_rng(2026) consumed as: permutation of main items, then one permutation per item
   in that order, then permutation of natural-error items, then of fidelity cases.
-Not in the list: R1-live (no driver yet, build step 6), Haiku (P6 not run), Gemini 3.7 Flash.
+Not in the list: R1-live (separate addendum, D16; `make_r1live_job`), Haiku (P6 not run), Gemini 3.7 Flash.
 """
 from __future__ import annotations
 
@@ -121,3 +121,20 @@ def main_run_jobs(check: str = "MAIN") -> list[Job]:
         row = fid.iloc[i]
         jobs += [make_job(check, row, "FR0", "correct", d, judge=row.judge) for d in (1, 2, 3)]
     return jobs
+
+
+R1LIVE_EST_FACTOR = 12   # Alice 4 + Bob 4 communication turns + 2 verdicts, each about one cut context
+
+
+def make_r1live_job(check: str, row, draw: int = 1, model: str = MODEL) -> Job:
+    """R1-live (plan 8.4; src.replay.live_driver). Bait version; messages = the R1 context (hash-identical)."""
+    from src.replay.live_driver import r1live_verdict_fn
+    trace, ep, item = row.trace, int(row.ep_index), row.item_id
+    bait = load_bait(item)
+
+    def builder():
+        return build(load_item(trace, ep), "CUT", bob_r1_content=bait["bob_r1_content"])
+    return Job(check=check, item_id=item, variant="R1live", version="bait", draw=draw, judge="alice",
+               task_type=row.task_type, build_messages=builder,
+               est_input_tokens=R1LIVE_EST_FACTOR * input_tokens(item, "CUT"), model=model,
+               verdict_fn=r1live_verdict_fn(trace, ep, bait))

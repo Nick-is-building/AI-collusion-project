@@ -13,3 +13,7 @@ Issued by Nick, 24 October 2026, after an independent review; received in the Cl
   7. Driver scope: rounds 2–5, the close of the communication phase, and the verdict phase of both agents; no feedback, no reflection.
   8. The flag B and reaction-type keyword lists are fixed after P7; confirming readings are done by Claude Code and described as such.
   9. Report the subset composition (task types, flagged items, trajectories, episodes) without changing it.
+
+## Correction from Nick (verbatim), received in the Claude Code session at about 11:06 UTC, 24 October 2026
+
+Correction from Nick: do not record D17. Study 2 will be built right after A04; it has priority over the omission-bait addendum because it has the longest run time. Do A04 task 5 as an implementation plan, not only an estimate: build steps and time for status line, branching and partner control; wall time and cost for P8 and for 40 and 50 pairs (all 50 of Shi et al.'s sequences) at 4, 8, 16 and 32 parallel workers, with all sequences and independent arms in parallel and only the required order inside a sequence (prefix, then branches; B before partner control); the Gemini rate limits that apply to this key, if they can be read without a paid call; the earliest realistic launch. No building and no calls yet. D18 and D19 stand.

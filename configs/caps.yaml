@@ -13,3 +13,7 @@ check_groups:
     stage: pilot
     checks: [P5-R6-D13]
     cap_usd: 0.30
+  a04_p7:                    # assignment A04 task 4 / D19: P7 R1-live on 4 hold-out items
+    stage: pilot
+    checks: [P7]
+    cap_usd: 2.0
