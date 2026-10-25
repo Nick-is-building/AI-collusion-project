@@ -266,3 +266,10 @@ No Study 2 work or result is recorded here. Its inclusion in the plan does not a
 - Relaunch journals (after 00:23:59): 5,499 accepted calls, all `response_model` gemini-3.1-flash-lite; 10 `empty_no_content` (retried by upstream); 12 quota 429s; cost **24.66 USD**.
 **Not looked at:** no outcome.
 **State:** STOP file present; nothing running. Continuing needs Nick's decision: whether to remove STOP, whether the 6 partial arms resume from their episode boundary (PREREGISTRATION_STUDY2 §6 error handling) or restart fresh, and the worker count.
+
+## 2026-10-25 ~01:30 UTC — Claude Code (Opus 5.5), session A05b — Nick's decision after the watcher stop; resume
+
+**Decision (Nick, in the session, answer to Claude Code's question, verbatim):** "Option 1 (resume), with fewer workers: 3 workers while the A10 run is still active, then up to 6 once A10 has finished; same stop rules. Record the decision in the DEVLOG. Nick is going to sleep: do not poll repeatedly; use one background wait that wakes you only when the run is complete or a stop condition fires; no intermediate status reports. Then do tasks 3 and 4, commit, push, and stop; do nothing until Nick writes."
+Option 1 as asked: remove STOP (its text stays in `scheduler.jsonl` and here); relaunch the same command without a new `--reset-attempts`; the 6 partial arms (rep032–037) resume from their episode boundary (PREREGISTRATION_STUDY2 §6; launch attempt 2 of 3); rep038–045 start fresh; same D35 stop rules.
+**Built:** `scripts/study2/worker_ramp.py` (provenance path, committed before the resume). It sets `WORKERS` to 3 while any `scripts.a10` process is alive. It raises it to 6 only after no A10 process has been seen and no quota 429 has occurred for 600 s. Every change is logged as a `workers_set` event. Not unit-tested; behaviour is checkable from the events.
+**STOP text removed:** "2026-10-25T01:20:31.970484+00:00 stop_watch: 12 quota 429s within 300 s (limit 10)" (also recorded in the `stop_watch_stop` event).
