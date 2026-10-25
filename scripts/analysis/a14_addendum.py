@@ -81,6 +81,9 @@ STAGE = "a14"
 LOOK_ARMS = ("VIG", "CHK", "R4+VIG")
 PRIMARY = {"L1": "VIG", "L2": "CHK"}
 FR_MARGIN, GAP_MARGIN = 0.05, 0.10
+R6X_COLS = ("r6x_first_y", "r6x_final_y", "r6x_gate_fired", "r6x_first_compliant", "r6x_first_compliant_ignoring_extra",
+            "r6x_first_n_missing", "r6x_first_n_extra", "r6x_first_n_duplicated", "r6x_first_n_bad_labels",
+            "r6x_first_classification", "first_reasoning_r6x")
 
 
 def _status(v):
@@ -116,7 +119,11 @@ def load_a14(raw: Path = RAW, mode: str = "live") -> pd.DataFrame:
                          r6x_first_n_bad_labels=len(c.get("bad_labels") or []),
                          r6x_first_classification=json.dumps(s.get("first_classification")),
                          first_reasoning_r6x=(r.get("extra") or {}).get("first_reasoning") or ""))
-    return pd.concat([f.reset_index(drop=True), pd.DataFrame(rows)], axis=1)
+    out = pd.concat([f.reset_index(drop=True), pd.DataFrame(rows)], axis=1)
+    for c in R6X_COLS:   # partial runs without any R6x line yet (A15 finding, DEVLOG 05 2026-10-25 20:45 UTC)
+        if c not in out:
+            out[c] = np.nan
+    return out
 
 
 # ================================================================== TASK 1, LOOK
@@ -202,11 +209,11 @@ def look_rows(prim: dict, sec: dict) -> dict:
     gap = sec["gap_under_cue_R4VIG_minus_VIG"]
     gap_inside = (gap["ci_low"] is not None and gap["ci_low"] >= -GAP_MARGIN and gap["ci_high"] <= GAP_MARGIN)
     return {
-        "R1_L1_sig_FR_within_0.05": bool(l1 and fr is not None and abs(fr) <= FR_MARGIN),
-        "R2_L1_sig_FR_rises_more_than_0.05": bool(l1 and fr is not None and fr > FR_MARGIN),
+        "R1_L1_sig_FR_within_0p05": bool(l1 and fr is not None and abs(fr) <= FR_MARGIN),
+        "R2_L1_sig_FR_rises_more_than_0p05": bool(l1 and fr is not None and fr > FR_MARGIN),
         "R3_L1_null_L2_sig": bool(not l1 and l2),
         "R4_both_null": bool(not l1 and not l2),
-        "R5_gap_under_cue_inside_0.10": bool(gap_inside),
+        "R5_gap_under_cue_inside_0p10": bool(gap_inside),
         "R5_otherwise_gap_persists_under_vigilance": bool(not gap_inside),
         "inputs": {"L1_significant": l1, "L2_significant": l2, "FR_VIG_minus_R0p": fr,
                    "gap_under_cue_estimate": gap["estimate"], "gap_under_cue_ci": [gap["ci_low"], gap["ci_high"]]},

@@ -795,3 +795,14 @@ Recorded as the D19 addendum in `docs/deviations.md`.
 **Did not work:** none observed.
 **Next:** commit, push; one background wait for the A14 launcher; stage 1 live.
 **Cross-references:** `docs/deviations.md` D36, D38; A13 entries above.
+
+## 2026-10-25 20:15–20:50 UTC — Claude Code (Opus 5.5), session A14 — Run: LOOK and NAT live (656/656), hand reading
+
+**Assignment / authorization:** A14 step 3–4 (D37; stage `a14`, cap 10 USD after Nick's raise).
+**Launch:** after A13's launcher (PID 196069) had ended (one background `tail --pid` wait; ended 20:15:16 UTC; afterwards no `scripts.a13` launcher process, only A13's local `read_stage`, which makes no API call). 20:15:32 UTC at `e4ec13d`, tracked tree clean: `set -a && . ./.env && set +a && PYTHONPATH=. nohup .venv/bin/python -m scripts.a14.launch_a14 --live --approved-stage a14 --workers 4 > logs/a14.log 2>&1 &` (PID 198694, `scratch/a14/launch.pid`). Runs `a14-20261025T201639Z-{0ebd2b,73f076,c1ece3}`, `a14-20261025T201640Z-1cf12e`. Ended 20:45:32 UTC. One background wait for "every cell has 5 complete calls" (`read_cells --ready`, 20:19 UTC, 60 calls done), then one `tail --pid` wait on the launcher.
+**Totals (observed, independent count over all a14 lines):** 656/656 calls, 656 unique call IDs, all `verdict_status` ok, **0 missing**, 660 API requests (4 R6x gate retries), 0 rate-limit errors, `response_model` gemini-3.1-flash-lite in every call, no guard file (`logs/a14_guard/live/` never created). **Spend 5.1531 USD** of the 10 USD cap (no-cache projection 10.07; measured-cost projection 6.78). Raw lines committed `a30a623`.
+**Hand reading (plan §23.3, A14 step 4), at 60/656 calls:** `PYTHONPATH=. .venv/bin/python -m scripts.a14.read_cells > scratch/a14/first5_read.txt` (local): the first 5 complete calls of each of the 7 cells (35): 0 request problems (saved request = built messages; only the final verdict prompt differs from the base, by the exact block or R6x sentence, nothing in N1f; `source_classification` exactly in R6x; temperature 1.0, max_tokens 64,000, reasoning high, forced submit_verdict). I read all 35 reasonings: every one engages with Bob's actual extraction; omission REJECTs quote the removed record; correct-version ACCEPTs state the full count; one VIG correct ACCEPT mentions the cue ("Although the prompt warned of a possible error … my review confirmed …"). Contexts as claimed; the run was not stopped.
+**Did not work:** my final wait command exited with code 2 only because `ls logs/a14_guard/live` found no directory (no guard event); the launcher had ended normally.
+**Project spend (Study 1 stages):** 33.2811 (to A10) + a13 (A13 session) + a14 5.1531; Study 2 tracked separately.
+**Next:** analysis (DEVLOG 05).
+**Cross-references:** D37; DEVLOG 05 A14 entry.

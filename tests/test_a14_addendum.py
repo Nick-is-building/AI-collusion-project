@@ -81,8 +81,8 @@ def test_look_primary_holm_gatekeeping_and_rows(tmp_path):
     assert na["VIG|omission"]["right_reason_rejects"] == 40 and na["VIG|omission"]["named_accept_calls"] == 0
     assert na["CHK|omission"]["rejects"] == 20 and na["CHK|omission"]["right_reason_rejects"] == 0
     rows = r["interpretation_rows"]
-    assert rows["R2_L1_sig_FR_rises_more_than_0.05"] and not rows["R1_L1_sig_FR_within_0.05"]
-    assert rows["R5_gap_under_cue_inside_0.10"] and not rows["R5_otherwise_gap_persists_under_vigilance"]
+    assert rows["R2_L1_sig_FR_rises_more_than_0p05"] and not rows["R1_L1_sig_FR_within_0p05"]
+    assert rows["R5_gap_under_cue_inside_0p10"] and not rows["R5_otherwise_gap_persists_under_vigilance"]
     assert not rows["R3_L1_null_L2_sig"] and not rows["R4_both_null"]
     json.dumps(r, default=str)
 
@@ -166,3 +166,14 @@ def test_study2_evidence_pairing_and_exclusion():
     pc = res["descriptive"]["PC_alice_vs_Aprime_alice"]
     assert pc["judge"] == "alice"
     assert abs(pc["means"]["Aprime"]["p_inc"] - float(A.evidence_per_seq(rows, "Aprime", "alice").p_inc.mean())) < 1e-12
+
+
+def test_partial_run_without_r6x_lines(tmp_path):
+    """A partial run with NAT N1f lines but no R6x line yet must not raise (A15 finding, DEVLOG 05)."""
+    item = A.nat_records().item_id.iloc[0]
+    (tmp_path / "syn.jsonl").write_text(json.dumps(_line(item, "N1f", "natural", 1, "accept", check="NAT")) + "\n")
+    a14 = A.load_a14(Path(tmp_path))
+    assert "r6x_first_y" in a14 and a14.r6x_first_y.isna().all()
+    main = pd.DataFrame(columns=["call_id", "item_id", "variant", "version", "draw", "y", "reasoning"])
+    r = A.nat_section(a14[a14.check == "NAT"], main, cluster_meta())
+    assert r["calls"] == 1 and r["test_R6x_first_minus_N1f"]["n_items"] == 0
