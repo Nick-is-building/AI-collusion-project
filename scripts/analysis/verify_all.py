@@ -12,6 +12,8 @@ results/summaries/verification.json. Sections are kept apart by status:
                 D28 R6s source enumeration (A07; fixed before its own run; outside Holm), key "D28_R6s".
                 D30 R6x exhaustive source classification and D31 R6 on the correct versions of the omission
                 items (A08; fixed before their own run; outside Holm), key "D30_D31_R6x".
+                A10 incentive-rule and peer-signal arms (D32-D34), key "a10"; A13 omission-version ladder
+                R2, R3, R4n, R5 (D36; own Holm family of five), key "a13".
                 Reported as "not run" until their call lines exist.
   exploratory   equivalence reading (margin +-0.10) of the preregistered contrasts; right-reason detection
                 by Claude Code reading next to the deterministic markers. Labelled exploratory.
@@ -119,6 +121,9 @@ def main(argv=None):
     if (ROOT / "scripts" / "analysis" / "a10_addendum.py").exists():   # A10: D32-D34 incentive and peer-signal arms
         from scripts.analysis import a10_addendum
         res["addendum"]["a10"] = a10_addendum.analyze(calls, meta)
+    if (ROOT / "scripts" / "analysis" / "a13_addendum.py").exists():   # A13: D36 omission-version ladder
+        from scripts.analysis import a13_addendum
+        res["addendum"]["a13"] = a13_addendum.analyze(calls, meta)
     if (ROOT / "scripts" / "analysis" / "recognise_approve.py").exists():   # A10 task 6 (exploratory, zero cost)
         from scripts.analysis import recognise_approve
         res["exploratory"]["recognise_and_approve"] = recognise_approve.build(calls, meta)

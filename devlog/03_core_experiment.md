@@ -721,3 +721,25 @@ Recorded as the D19 addendum in `docs/deviations.md`.
 **Project spend (Study 1 stages):** 26.6299 (to A08) + a10 6.6512 = 33.2811 USD. Study 2 is tracked by A05/A05b.
 **Did not work:** none observed after the fix.
 **Next:** analysis (DEVLOG 05, A10 results entry).
+
+## 2026-10-25 19:30–19:50 UTC — Claude Code (Opus 5.5), session A13 — Build: omission-version ladder R2, R3, R4n, R5 (D36); R5 filler matching; mock run
+
+**Assignment / authorization:** `assignments/A13_omission_ladder.md` (Nick, 25 October 2026; saved verbatim and committed with this entry, the D36 deviation entry and the analysis script, before any A13 call). Stage `a13`, cap 8 USD. At session start the tracked tree was clean and level with `origin/main`; no unexplained files. The A14 session builds in the same tree at the same time: A06 coordination rules (explicit paths only, `pull --rebase` own unpushed commits, appends to shared files); its files (`assignments/A14_*`, `data/derived/a14/`, `scripts/a14/`, `scripts/analysis/a14_addendum.py`, `src/replay/a14.py`) were not opened or staged.
+**Built or changed:**
+- `docs/deviations.md`: **D36** (next free number verified; last was D35), with Nick's timing statement verbatim and five implementation choices.
+- `configs/caps.yaml`: `stages.a13: 8.0` (one line, inside `stages`).
+- `src/replay/r5_a13.py`: thin wrapper around the unchanged `src.replay.r5.match_item` (prereg-v1 `r5.py` not edited); writes `data/derived/r5_fillers_a13.csv` (50 omission rows, 28 correct rows for the non-main items); `lookup()` merges these with the 22 reused prereg-v1 correct rows.
+- `scripts/a13/launch_ladder.py`: 800 jobs (R2, R3, R4n, R5 × omission/correct × 2 draws × 50 items), check `LADDER`, seeded order 2026 (item permutation, then each item's 16 cells), item blocks adjacent; `--first` (first 3 items = 48 calls, 6 per cell), `--plan`, mock, `--live --approved-stage a13`; refuses before any call if a filler is missing; stop rules via the A10 guard with its own directory `logs/a13_guard/<mode>/` plus the runner's response_model check (`297c244`).
+- `scripts/analysis/a13_addendum.py` → `verification.json` `addendum.a13` (hook in `scripts/analysis/verify_all.py`); `scripts/analysis/results_tables.py` section 3.7.
+- `tests/test_a13.py` (8 tests).
+**Decisions:** listed in D36 (R0′ as R1's correct counterpart in D; wrapper instead of editing `r5.py`; guard reuse; episode = ep_index + 1; D25 markers). Stage 1 (`--first`, 3 items) before the full list, so the plan §23.3 reading happens before scaling; each launch gets one background wait.
+**Checks performed:**
+- R5 matching (countTokens, free), launched 19:34:41 UTC: `set -a && . ./.env && set +a && PYTHONPATH=. nohup .venv/bin/python -m src.replay.r5_a13 --live > logs/a13_r5_match.log 2>&1 &`. **78/78 rows within ±2%** (rel. error −0.12% to +1.96%); targets: omission median 55,269 tokens, range 8,550–115,776 (50); correct median 35,521, range 9,377–95,242 (28). 314 countTokens calls appended to `results/token_counts/counts.jsonl` (purpose `r5_filler`), 0 errors. Matched cells: 100/100 item-versions.
+- `launch_ladder --plan`: R2 0.65, R3 1.87, R4n 0.39, R5 3.09; **total 5.99 USD projected** (no cache, p95 output), below the 8 USD cap.
+- Tests: `tests/test_a13.py` 8 passed (job list 800 / 16 per item / adjacency / seed reproduction; 100 filler cells; builder sanity on 5 items: R2 = system prompt + current episode only, R3 without any earlier communication phase, R4n's fixed system prompt, R5 = R4 + one filler user message; omission content in every omission cell of all 50 items and absent from correct cells; synthetic Holm-of-five, gatekeeping, equivalence flags, missing sensitivities). Related subset (`test_a13`, `test_a10`, `test_a10_addendum`, `test_a06_jobs`, `test_jobs`, `test_runner`, `test_parallel`, `test_results_tables`, `test_verify_all`, `test_replay_contexts`): **70 passed**.
+- Mock run, 4 workers: **800/800 complete, 0 missing** (`logs/mock_runs/raw/a13-20261025T19384*`).
+- `verify_all` into `scratch/a13/verification_pre.json` and `results_tables` into scratch: run without error; section 3.7 reads "Not run".
+**Did not work:** my first job-list test compared `Job` objects (their builder lambdas differ per call), a test defect; it now compares call IDs.
+**State / limitations:** not yet run live. Full test suite not run (subset above).
+**Next:** commit and push; stage 1 live, hand reading, full run.
+**Cross-references:** `docs/deviations.md` D25, D36; DEVLOG 05 (analysis entry to follow).

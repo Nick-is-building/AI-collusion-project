@@ -3,7 +3,7 @@
 Every number in the output is read from verification.json (written by scripts/analysis/verify_all.py) and
 printed next to its key; nothing is computed here except rounding and joining a key's estimate with its
 interval. A key that does not exist raises KeyError, so the tables cannot silently show a stale number.
-Groups: confirmatory (prereg-v1, prereg-v1-r1live), addendum (D25, D26, D28, D30, D31, A10 D32-D34), exploratory, and the
+Groups: confirmatory (prereg-v1, prereg-v1-r1live), addendum (D25, D26, D28, D30, D31, A10 D32-D34, A13 D36), exploratory, and the
 descriptive figure data. No interpretation.
 
   PYTHONPATH=. .venv/bin/python -m scripts.analysis.verify_all
@@ -354,6 +354,56 @@ def a10(t: Tables):
               ("Calls", f"{X}.calls"), ("Missing verdicts", f"{X}.missing"), ("Spend stage a10 (USD)", f"{X}.spend_usd_a10")])
 
 
+def a13(t: Tables):
+    X = "addendum.a13"
+    t.h(3, "3.7 A13 omission-version context ladder R2, R3, R4n, R5 (D36) (50 omission items)")
+    if "a13" not in t.get("addendum") or t.get(X).get("status") == "not run":
+        t.note("Not run.")
+        return
+    P = f"{X}.primary"
+    keys = ("R2_minus_R1", "R3_minus_R1", "R4_minus_R2", "R5_minus_R4", "R4n_minus_R4")
+    t.h(4, "Primary family (Holm over the five contrasts; omission versions)")
+    rows = []
+    for k in keys:
+        r = t.stat_row(f"{t.get(f'{P}.{k}.contrast')} ({t.get(f'{P}.{k}.label')})", f"{P}.{k}")
+        rows.append(r[:4] + [t.num(t.get(f"{P}.{k}.p_holm"), 4), t.num(t.get(f"{P}.{k}.significant"))] + r[4:])
+    t.table(["Contrast", "Estimate", "95% CI", "p", "p (Holm)", "Significant", "Items / clusters", "Key"], rows)
+    t.stats([(f"D for {k} ({'tested' if t.get(f'{P}.D_{k}.tested') else 'not tested, descriptive'})", f"{P}.D_{k}")
+             for k in keys])
+    t.h(4, "Pre-specified equivalence readings (margin ±0.10)")
+    E = f"{X}.equivalence"
+    t.values([(f"{k}: CI inside the margin, so '{t.get(f'{E}.{k}.explanation')}' is rejected",
+               f"{E}.{k}.explanation_rejected") for k in t.get(E)])
+    t.h(4, "Sensitivities of the primary family")
+    for sens, lab in (("primary_missing_as_accept", "missing coded ACCEPT"),
+                      ("primary_missing_as_reject", "missing coded REJECT")):
+        t.stats([(f"{k}, {lab}", f"{X}.{sens}.{k}") for k in keys])
+    V = f"{X}.per_variant"
+    t.h(4, "Per variant (descriptive, 95% cluster bootstrap CIs)")
+    rows = [("R0′: false rejection (correct)", f"{V}.R0p.false_rejection")]
+    for v in ("R1", "R2", "R3", "R4", "R4n", "R5"):
+        rows.append((f"{v}: detection (omission)", f"{V}.{v}.detection"))
+        if "false_rejection" in t.get(f"{V}.{v}"):
+            rows += [(f"{v}: false rejection (correct)", f"{V}.{v}.false_rejection"),
+                     (f"{v} − R0′ false rejection", f"{V}.{v}.false_rejection_minus_R0p")]
+    t.stats(rows)
+    vals = []
+    for v in ("R1", "R2", "R3", "R4", "R4n", "R5"):
+        vals += [(f"{v}: discrimination {t.get(f'{V}.{v}.discrimination_note')}", f"{V}.{v}.discrimination"),
+                 (f"{v}: omission REJECTs", f"{V}.{v}.right_reason_deterministic.rejects"),
+                 (f"{v}: deterministic right-reason (D25 markers)", f"{V}.{v}.right_reason_deterministic.right_reason"),
+                 (f"{v}: right-reason share", f"{V}.{v}.right_reason_deterministic.share")]
+    t.values(vals)
+    t.h(4, "Detection by evaluation episode (omission; descriptive)")
+    for v in ("R1", "R2", "R3", "R4", "R4n", "R5"):
+        t.records(f"{V}.{v}.by_episode", ["episode", "items", "detection"])
+    t.h(4, "Draw agreement (share of items whose two draws agree)")
+    t.values([(f"{k}: agreement", f"{X}.draw_agreement.{k}.agreement") for k in t.get(f"{X}.draw_agreement")])
+    t.values([("Calls (stage a13)", f"{X}.calls"), ("Missing verdicts (stage a13)", f"{X}.missing"),
+              ("Missing verdicts (reused baselines)", f"{X}.baseline_missing"),
+              ("Spend stage a13 (USD)", f"{X}.spend_usd_a13")])
+
+
 def recognise_approve(t: Tables):
     E = "exploratory.recognise_and_approve"
     if "recognise_and_approve" not in t.get("exploratory"):
@@ -434,6 +484,7 @@ def build(v: dict, source_sha256: str) -> str:
     confirmatory(t)
     addendum(t)
     a10(t)
+    a13(t)
     exploratory(t)
     figure_data(t)
     return "\n".join(t.lines).rstrip() + "\n"
