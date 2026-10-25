@@ -79,3 +79,22 @@ def test_items_table():
     info = A.items()
     assert len(info) == 50 and info.bob_states_intent.sum() == 2
     assert info.alice_correct.dtype == bool
+
+
+def test_recognise_approve_consistent_with_a07_a08():
+    """Real raw data (no synthetic): the list channel agrees with the A07/A08 analyses' own counts."""
+    from pathlib import Path as _P
+    from scripts.analysis import recognise_approve as R
+    from scripts.analysis.a07_addendum import load_a07
+    from scripts.analysis.a08_addendum import load_a08
+    lst = {r["source"]: r for r in R.list_channel()}
+    a07 = load_a07()
+    s = a07[(a07.variant == "R6s") & (a07.version == "omission")]
+    assert lst["a07"]["calls"] == len(s) and lst["a07"]["accepts"] == int((s.r6s_first_y == 0).sum())
+    a08 = load_a08()
+    s = a08[(a08.variant == "R6x") & (a08.version == "omission")]
+    assert lst["a08"]["accepts"] == int((s.r6x_first_y == 0).sum())
+    assert lst["a08"]["named_accepts"] + lst["a08"]["not_named_accepts"] == lst["a08"]["accepts"]
+    live = R.live_channel()[0]
+    assert live["calls"] == 40 and live["accepts"] + live["rejects"] + live["missing"] == 40
+    assert _P(R.__file__).exists()

@@ -3,7 +3,7 @@
 Every number in the output is read from verification.json (written by scripts/analysis/verify_all.py) and
 printed next to its key; nothing is computed here except rounding and joining a key's estimate with its
 interval. A key that does not exist raises KeyError, so the tables cannot silently show a stale number.
-Groups: confirmatory (prereg-v1, prereg-v1-r1live), addendum (D25, D26, D28, D30, D31), exploratory, and the
+Groups: confirmatory (prereg-v1, prereg-v1-r1live), addendum (D25, D26, D28, D30, D31, A10 D32-D34), exploratory, and the
 descriptive figure data. No interpretation.
 
   PYTHONPATH=. .venv/bin/python -m scripts.analysis.verify_all
@@ -284,6 +284,92 @@ def addendum(t: Tables):
              + [("Spend stage a08 (USD)", f"{X}.spend_usd_a08")])
 
 
+def a10(t: Tables):
+    X = "addendum.a10"
+    t.h(3, "3.6 A10 incentive-rule (D32) and peer-signal (D33) arms; named_accept (D34) (50 omission items)")
+    if "a10" not in t.get("addendum") or t.get(X).get("status") == "not run":
+        t.note("Not run.")
+        return
+    P = f"{X}.primary"
+    t.h(4, "Primary family (Holm over T1–T3; omission versions)")
+    rows = []
+    for k in ("T1", "T2", "T3"):
+        r = t.stat_row(f"{k}: {t.get(f'{P}.{k}.contrast')}", f"{P}.{k}")
+        rows.append(r[:4] + [t.num(t.get(f"{P}.{k}.p_holm"), 4), t.num(t.get(f"{P}.{k}.significant"))] + r[4:])
+    t.table(["Test", "Estimate", "95% CI", "p", "p (Holm)", "Significant", "Items / clusters", "Key"], rows)
+    t.stats([(f"D for {k} ({'tested' if t.get(f'{P}.D_{k}.tested') else 'not tested, descriptive'})", f"{P}.D_{k}")
+             for k in ("T1", "T2")])
+    t.h(4, "Sensitivities of the primary family")
+    for sens, lab in (("primary_missing_as_accept", "missing coded ACCEPT"),
+                      ("primary_missing_as_reject", "missing coded REJECT"),
+                      ("primary_without_bob_states_intent", "without bob_states_intent items")):
+        t.stats([(f"{k}, {lab}", f"{X}.{sens}.{k}") for k in ("T1", "T2", "T3")])
+    A = f"{X}.per_arm"
+    t.h(4, "Per arm (descriptive, 95% cluster bootstrap CIs)")
+    arms = [a for a in t.get(A) if a not in ("R1", "R0p", "secondary_contrasts")]
+    rows = [("Detection R1 (omission; a06)", f"{A}.R1.detection"), ("False rejection R0′", f"{A}.R0p.false_rejection")]
+    for a in arms:
+        rows += [(f"{a}: detection (omission)", f"{A}.{a}.detection"), (f"{a} − R1 (omission)", f"{A}.{a}.minus_R1_omission"),
+                 (f"{a}: named_accept (omission)", f"{A}.{a}.named_accept")]
+        if "false_rejection" in t.get(f"{A}.{a}"):
+            rows += [(f"{a}: false rejection (correct)", f"{A}.{a}.false_rejection"),
+                     (f"{a} − R0′ false rejection", f"{A}.{a}.false_rejection_minus_R0p")]
+    rows += [(f"Secondary contrast {k} (omission)", f"{A}.secondary_contrasts.{k}") for k in t.get(f"{A}.secondary_contrasts")]
+    t.stats(rows)
+    vals = []
+    for a in arms:
+        o = t.get(f"{A}.{a}")
+        if "discrimination" in o:
+            vals.append((f"{a}: discrimination", f"{A}.{a}.discrimination"))
+        vals += [(f"{a}: calls", f"{A}.{a}.calls"), (f"{a}: missing", f"{A}.{a}.missing"),
+                 (f"{a}: named_accept calls (omission)", f"{A}.{a}.named_accept_calls_omission"),
+                 (f"{a}: marker-positive calls (omission)", f"{A}.{a}.marker_positive_calls_omission")]
+        vals += [(f"{a}: 'reward' mentions, {v}", f"{A}.{a}.reward_mention.{v}") for v in o["reward_mention"]]
+        vals += [(f"{a}: reciprocity mentions, {v}", f"{A}.{a}.reciprocity_mention.{v}") for v in o["reciprocity_mention"]]
+    if "discrimination_R1_R0p" in t.get(f"{A}.R1"):
+        vals.append(("R1/R0′: discrimination", f"{A}.R1.discrimination_R1_R0p"))
+    t.values(vals)
+    t.h(4, "Per arm by Alice's own task correctness (descriptive)")
+    for flag in t.get(f"{X}.per_arm_by_alice_correct"):
+        B = f"{X}.per_arm_by_alice_correct.{flag}"
+        t.values([(f"Alice correct = {flag}: items", f"{B}.n_items")])
+        rows = []
+        for a in [a for a in t.get(B) if a not in ("R1", "R0p", "secondary_contrasts", "n_items")]:
+            rows += [(f"Alice correct = {flag}, {a}: detection", f"{B}.{a}.detection"),
+                     (f"Alice correct = {flag}, {a}: named_accept", f"{B}.{a}.named_accept")]
+            if "false_rejection" in t.get(f"{B}.{a}"):
+                rows.append((f"Alice correct = {flag}, {a}: false rejection", f"{B}.{a}.false_rejection"))
+        rows.append((f"Alice correct = {flag}, R1: detection", f"{B}.R1.detection"))
+        t.stats(rows)
+    t.h(4, "Mentions in the comparison cells (reference)")
+    base = t.get(f"{X}.baseline_mentions_comparison_cells")
+    t.values([(f"{k}: {m}", f"{X}.baseline_mentions_comparison_cells.{k}.{m}") for k in base for m in base[k]])
+    R = f"{X}.named_accept_reading"
+    t.h(4, "named_accept reading by Claude Code (D34)")
+    t.values([("Marker-positive ACCEPTs", f"{R}.n_marker_positive_accepts")]
+             + [(f"Reading {k}: {c}", f"{R}.by_variant_version.{k}.{c}")
+                for k in (t.get(R).get("by_variant_version") or {}) for c in t.get(f"{R}.by_variant_version.{k}")])
+    t.values([("Items with bob_states_intent (dropped in the sensitivity)", f"{X}.primary_without_bob_states_intent.n_items_dropped"),
+              ("Items where Alice's own task is correct", f"{X}.items.alice_correct"),
+              ("Calls", f"{X}.calls"), ("Missing verdicts", f"{X}.missing"), ("Spend stage a10 (USD)", f"{X}.spend_usd_a10")])
+
+
+def recognise_approve(t: Tables):
+    E = "exploratory.recognise_and_approve"
+    if "recognise_and_approve" not in t.get("exploratory"):
+        return
+    t.h(3, "4.3 Recognise-and-approve, three separate channels (A10 task 6; exploratory)")
+    t.note("Named = a deterministic marker of the planted error (channel 1, reasoning text), the removed sentence in the "
+           "verifier's own list (channel 2), or Alice naming the bait in her live messages (channel 3). Caveats in "
+           f"`{E}.caveats`.")
+    cols = ["source", "variant", "error", "calls", "missing", "accepts", "named_accepts", "not_named_accepts",
+            "rejects", "named_rejects"]
+    for ch, lab in (("reasoning_text", "Channel 1: reasoning text"), ("verifier_list", "Channel 2: the verifier's own list"),
+                    ("r1live_messages", "Channel 3: Alice's live messages (R1-live)")):
+        t.h(4, lab)
+        t.records(f"{E}.{ch}", cols)
+
+
 def exploratory(t: Tables):
     E = "exploratory"
     t.h(2, "4. Exploratory (labelled as such)")
@@ -301,6 +387,7 @@ def exploratory(t: Tables):
               for k in t.get(f"{E}.right_reason_reading.p11_disclosure")])
     t.note("D29 (natural-error tension) has no numbers in verification.json; its tables are "
            "`data/derived/rubric/natural_tension_{features,discordant}.csv` and `docs/natural_error_tension.md`.")
+    recognise_approve(t)
 
 
 def figure_data(t: Tables):
@@ -346,6 +433,7 @@ def build(v: dict, source_sha256: str) -> str:
                 "No interpretation."]
     confirmatory(t)
     addendum(t)
+    a10(t)
     exploratory(t)
     figure_data(t)
     return "\n".join(t.lines).rstrip() + "\n"
