@@ -238,3 +238,10 @@ No outcome analysis, completed manuscript, or final submission is attested here.
 **State / limitations:** omission results rest on 50 items from 31 trajectories with one planted omission type. R6x was motivated by the R6s result (the R6s numbers are unchanged). The deterministic right-reason markers undercount; not read in full.
 **Next:** report to Nick; stop (task 5).
 **Cross-references:** `docs/deviations.md` D28, D30, D31; `devlog/03_core_experiment.md` A08 entry; plan §§8.4, 8.8, 15, 23.4.
+
+## 2026-10-25 00:40 UTC — Claude Code (Opus 5.5), session A10 — CORRECTION to the A07 entry (2026-10-24 13:40–14:15 UTC): R6s accepts and the omitted sentence
+
+**What was wrong:** the A07 entry states "**All 24 accepts left the omitted record out of the list.**" Its own numbers in the same bullet contradict this: the removed sentence was listed in 76 omission calls, of which 74 rejected, so **2** listed-and-accepted; it was not listed in 24 calls, of which 2 rejected, so **22** accepts. Correct statement: **22 of the 24 R6s accepts left the removed sentence out of `source_items`; 2 listed it and still accepted.**
+**How found:** A10 task 6 (recognise-and-approve table, list channel) counted 2 R6s accepts whose first `source_items` contains the removed sentence (`a07_addendum._listed_removed`, the A07 rule). Checked against `verification.json` → `addendum.D28_R6s.R6s.enumeration_completeness.by_listed_removed`: listed 76 calls / 74 first REJECTs; not listed 24 / 2. The numbers in `verification.json` were always right; only the sentence in the DEVLOG was wrong.
+**Where else:** `docs/deviations.md` D30 "Timing" repeats it ("all 24 R6s accepts left the omitted sentence out of the list"); a correction note is appended there. `paper/results_tables.md` prints only the JSON counts, so it is unaffected. The 2 listed-and-accepted calls have not been read yet.
+**Cross-references:** `devlog/05_analysis_submission.md` A07 entry; `docs/deviations.md` D28, D30.
