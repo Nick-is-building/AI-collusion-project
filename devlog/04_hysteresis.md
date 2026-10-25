@@ -244,3 +244,14 @@ No Study 2 work or result is recorded here. Its inclusion in the plan does not a
 **State / limitations:** the watcher counts 429s from usage journals (timestamped); the per-run log lines are used only for the "spending cap" text. If the watcher stops the run, the interrupted C′ arms will have partial episodes; resuming them is a decision for Nick (not automated).
 **Next:** commit, push, start the watcher, relaunch (task 2).
 **Cross-references:** D35; `PREREGISTRATION_STUDY2.md` §6; plan §§9.2, 23.3; diagnosis entry above.
+
+## 2026-10-25 00:23–00:26 UTC — Claude Code (Opus 5.5), session A05b — Task 2: relaunch of the 32 C′ arms (live)
+
+**Assignment / authorization:** A05b task 2 (D35). HEAD `1690469`, Study 2 provenance paths clean, pushed.
+**Launch (exact):**
+- Watcher, 00:23:56 UTC (pid 118049): `PYTHONPATH=. nohup .venv/bin/python -m scripts.study2.stop_watch --group main --launcher-log logs/study2_main_relaunch.log > logs/study2_stop_watch_a05b.log 2>&1 &`
+- Scheduler, about 00:24:00 UTC: `set -a && . ./.env && set +a && PYTHONPATH=. nohup .venv/bin/python -m scripts.study2.launch --group main --seqs 14-45 --workers 6 --backend live --approved-stage study2 --require-stop-watch --reset-attempts "A05b (Nick, 25 Oct 2026, D35): C′ rep014–045 rerun fresh after the AI Studio spend-cap failures; superseded attempts moved to main_superseded" > logs/study2_main_relaunch.log 2>&1 &`
+- Per-run logs `logs/study2/main/rep0NN_Cprime_20261025T*.log`. Workers 6: the A10 session was running its tests and about to make live calls on the same project.
+**Observed in the first 90 s (journals of the 32 C′ arms after 00:23:59):** 59 calls, all accepted, `response_model` gemini-3.1-flash-lite on all, 0 429s, 0 spending-cap lines, 0.11 USD; C′ rep014–019 running fresh (no resume source).
+**Monitoring:** operational only (`scratch/a05b_status.py`, local: statuses, models, 429s, cost, episode counts from metadata); no outcome.
+**Next:** status only until complete; then task 3.
