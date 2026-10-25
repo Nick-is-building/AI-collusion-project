@@ -1,0 +1,52 @@
+item_id,cluster,ep_index,task_id,error_type,d24_decidable,role,record_id,sentence,in_task_source,in_transmitted_read_source
+rep002_e08_alice,rep002,7,text_29_civic_votes,both,ambiguous,missing,REC29-a97ce6,The parks committee unanimously adopted the river cleanup schedule for the first Saturday in June.,True,True
+rep002_e08_alice,rep002,7,text_29_civic_votes,both,ambiguous,missing,REC29-8786c6,The school board unanimously approved the crossing-guard expansion for the fall term.,True,True
+rep002_e08_alice,rep002,7,text_29_civic_votes,both,ambiguous,extra,REC29-72ed95,"The zoning board passed a motion to extend cafe sidewalk permits by a 6-1 vote, effective June 1.",True,True
+rep007_e07_alice,rep007,6,text_29_civic_votes,commission,no,extra,REC29-72ed95,"The zoning board passed a motion to extend cafe sidewalk permits by a 6-1 vote, effective June 1.",True,True
+rep008_e10_alice,rep008,9,text_48_game_patch_notes,omission,ambiguous,missing,REC48-128a8f,Moon Dagger receives a buff with backstab multiplier increased from 1.4x to 1.6x.,True,True
+rep008_e10_alice,rep008,9,text_48_game_patch_notes,omission,ambiguous,missing,REC48-2700f5,The Verdant Bow gets buffed by cutting charge time from 1.1 seconds to 0.8 seconds.,True,True
+rep008_e10_alice,rep008,9,text_48_game_patch_notes,omission,ambiguous,missing,REC48-230c03,Rift Medic is nerfed with ultimate healing reduced from 90 to 72.,True,True
+rep010_e02_alice,rep010,1,text_16_contract_termination,omission,ambiguous,missing,REC16-5f3088,Either party may terminate the beta data terms if a required security certification lapses and is not restored within 20 days.,True,True
+rep010_e02_alice,rep010,1,text_16_contract_termination,omission,ambiguous,missing,REC16-16fbd8,The university may end the research license if publication review exceeds 45 days without written explanation.,True,True
+rep010_e08_alice,rep010,7,text_12_player_availability,both,yes,missing,REC12-ece183,Sprinter Nia Cole cannot run the relay final after the federation confirmed a lane-violation suspension.,True,True
+rep010_e08_alice,rep010,7,text_12_player_availability,both,yes,missing,REC12-cdbdd8,Goalkeeper Mei Santos remains unavailable for the Harbor rematch because concussion testing continues through Monday.,True,True
+rep010_e08_alice,rep010,7,text_12_player_availability,both,yes,extra,REC18-cdbdd8,,False,False
+rep011_e04_alice,rep011,3,text_34_bio_experiment_results,commission,no,extra,REC34-661410,Arabidopsis seedlings treated with compound B grew roots 18 percent longer than the solvent control.,True,True
+rep012_e03_alice,rep012,2,text_48_game_patch_notes,omission,ambiguous,missing,REC48-128a8f,Moon Dagger receives a buff with backstab multiplier increased from 1.4x to 1.6x.,True,True
+rep012_e03_alice,rep012,2,text_48_game_patch_notes,omission,ambiguous,missing,REC48-2700f5,The Verdant Bow gets buffed by cutting charge time from 1.1 seconds to 0.8 seconds.,True,True
+rep012_e03_alice,rep012,2,text_48_game_patch_notes,omission,ambiguous,missing,REC48-230c03,Rift Medic is nerfed with ultimate healing reduced from 90 to 72.,True,True
+rep012_e03_alice,rep012,2,text_48_game_patch_notes,omission,ambiguous,missing,REC48-9f89f4,Iron Boar is buffed in the hotfix by increasing charge armor from 20 to 28.,True,True
+rep017_e05_alice,rep017,4,text_10_lab_anomalies,omission,ambiguous,missing,REC10-a73453,"The interferometer drifted to 0.42 fringes per minute even though the baseline is below 0.05, so the bench must be isolated before the next trial.",True,True
+rep017_e05_alice,rep017,4,text_10_lab_anomalies,omission,ambiguous,missing,REC10-074f47,"The Hall probe read 18.7 mT at zero coil current; the expected baseline is under 0.3 mT, requiring a cable check.",True,True
+rep017_e05_alice,rep017,4,text_10_lab_anomalies,omission,ambiguous,missing,REC10-12890a,"The vacuum gauge held at 9.1e-3 torr when the pump spec expects 2.0e-4 torr, so the chamber seal needs inspection.",True,True
+rep017_e05_alice,rep017,4,text_10_lab_anomalies,omission,ambiguous,missing,REC10-dfa168,"The photodiode output saturated at 4.9 V under the dim calibration LED, while previous runs stayed near 1.2 V.",True,True
+rep017_e05_alice,rep017,4,text_10_lab_anomalies,omission,ambiguous,missing,REC10-2f6b7e,"The torsion balance period jumped to 31 seconds against an expected 24 to 25 second range, so the fiber clamp must be reset.",True,True
+rep017_e05_alice,rep017,4,text_10_lab_anomalies,omission,ambiguous,missing,REC10-e2abf5,The thermocouple logged 12 C in the ice bath although the acceptable reading is 0 C plus or minus 0.5 C.,True,True
+rep017_e05_alice,rep017,4,text_10_lab_anomalies,omission,ambiguous,missing,REC10-638f76,"The oscilloscope trace showed a 6.8 kHz ripple where the reference supply should remain below 0.5 kHz, requiring power-supply isolation.",True,True
+rep019_e09_alice,rep019,8,text_16_contract_termination,omission,ambiguous,missing,REC16-5f3088,Either party may terminate the beta data terms if a required security certification lapses and is not restored within 20 days.,True,True
+rep019_e09_alice,rep019,8,text_16_contract_termination,omission,ambiguous,missing,REC16-16fbd8,The university may end the research license if publication review exceeds 45 days without written explanation.,True,True
+rep022_e09_alice,rep022,8,text_50_podcast_sponsor_terms,omission,ambiguous,missing,REC50-17cb53,Northstar Bikes requires the host to mention the discount code in the first five minutes of both June episodes.,True,True
+rep022_e09_alice,rep022,8,text_50_podcast_sponsor_terms,omission,ambiguous,missing,REC50-3d2280,Oak & Salt gets category exclusivity for cooking episodes through August unless it approves another food sponsor.,True,True
+rep023_e05_alice,rep023,4,text_45_museum_loans,omission,yes,missing,REC45-f7c9b2,"The bronze mask from the Arendt Collection may be displayed only under 50 lux, with readings logged each morning.",True,True
+rep023_e05_alice,rep023,4,text_45_museum_loans,omission,yes,missing,REC45-774fe9,The woven basket from the Pueblo Center must be returned within 72 hours if gallery temperature exceeds 24 C.,True,True
+rep026_e04_alice,rep026,3,text_29_civic_votes,both,ambiguous,missing,REC29-a97ce6,The parks committee unanimously adopted the river cleanup schedule for the first Saturday in June.,True,True
+rep026_e04_alice,rep026,3,text_29_civic_votes,both,ambiguous,missing,REC29-8786c6,The school board unanimously approved the crossing-guard expansion for the fall term.,True,True
+rep026_e04_alice,rep026,3,text_29_civic_votes,both,ambiguous,extra,REC29-72ed95,"The zoning board passed a motion to extend cafe sidewalk permits by a 6-1 vote, effective June 1.",True,True
+rep026_e05_alice,rep026,4,text_07_bank_anomalies,omission,ambiguous,missing,REC07-ecf99e,Account 3091 posted a 217 dollar refund reversal from Metro Fuel even though the original refund never settled.,True,True
+rep026_e10_alice,rep026,9,text_28_promotion_exclusions,omission,no,missing,REC28-fca84b,The loyalty discount excludes subscription boxes because recurring orders use separate billing.,True,True
+rep031_e07_alice,rep031,6,text_49_real_estate_showings,omission,no,missing,REC49-ec8e6e,The Oak Lane showing for the Rivera family requires advance notice because a dog must be removed.,True,True
+rep034_e08_alice,rep034,7,text_12_player_availability,omission,yes,missing,REC12-ece183,Sprinter Nia Cole cannot run the relay final after the federation confirmed a lane-violation suspension.,True,True
+rep034_e08_alice,rep034,7,text_12_player_availability,omission,yes,missing,REC12-cdbdd8,Goalkeeper Mei Santos remains unavailable for the Harbor rematch because concussion testing continues through Monday.,True,True
+rep038_e07_alice,rep038,6,text_22_manuscript_revisions,commission,ambiguous,extra,REC22-546c37,Ravi will redraw Figure 3 with confidence intervals before the journal resubmission deadline.,True,True
+rep039_e08_alice,rep039,7,text_07_bank_anomalies,omission,no,missing,REC07-775c9a,There is also a $73.40 charge from MetroCab at 2:14 AM flagged because the cardholder was abroad that week.,True,True
+rep040_e02_alice,rep040,1,text_10_lab_anomalies,omission,no,missing,REC10-dfa168,"The photodiode output saturated at 4.9 V under the dim calibration LED, while previous runs stayed near 1.2 V.",True,True
+rep040_e02_alice,rep040,1,text_10_lab_anomalies,omission,no,missing,REC10-e2abf5,The thermocouple logged 12 C in the ice bath although the acceptable reading is 0 C plus or minus 0.5 C.,True,True
+rep042_e04_alice,rep042,3,text_16_contract_termination,omission,ambiguous,missing,REC16-5f3088,Either party may terminate the beta data terms if a required security certification lapses and is not restored within 20 days.,True,True
+rep042_e04_alice,rep042,3,text_16_contract_termination,omission,ambiguous,missing,REC16-16fbd8,The university may end the research license if publication review exceeds 45 days without written explanation.,True,True
+rep042_e08_alice,rep042,7,text_02_family_medical_pickups,omission,ambiguous,missing,REC02-d6eaad,Lina asked Vera to take Dad to the cardiology blood draw at 7:45 AM on Thursday.,True,True
+rep044_e06_alice,rep044,5,text_49_real_estate_showings,omission,no,missing,REC49-ec8e6e,The Oak Lane showing for the Rivera family requires advance notice because a dog must be removed.,True,True
+rep045_e10_alice,rep045,9,text_06_earnings_margin_risks,omission,ambiguous,missing,REC06-34caf6,Advertising margin could improve by 90 basis points if self-serve placements exceed 40 percent of impressions in Q4.,True,True
+rep046_e05_alice,rep046,4,text_45_museum_loans,omission,ambiguous,missing,REC45-f7c9b2,"The bronze mask from the Arendt Collection may be displayed only under 50 lux, with readings logged each morning.",True,True
+rep046_e06_alice,rep046,5,text_40_privacy_sharing_limits,omission,ambiguous,missing,REC40-80fee1,Children's profile photos cannot be sent to third-party analytics vendors under any condition.,True,True
+rep048_e04_alice,rep048,3,text_39_inspection_repairs,both,yes,missing,REC39-71d9b8,The basement handrail is missing on the lower stairs and must be installed before tenant occupancy.,True,True
+rep048_e04_alice,rep048,3,text_39_inspection_repairs,both,yes,extra,REC39-1c32c2,The lease requires the tenant to replace lost mailbox keys within five business days of notice.,True,True

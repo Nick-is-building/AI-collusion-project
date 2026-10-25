@@ -420,6 +420,98 @@ def recognise_approve(t: Tables):
         t.records(f"{E}.{ch}", cols)
 
 
+def a14(t: Tables):
+    X = "addendum.a14"
+    t.h(3, "3.8 A14 looking vs. seeing (VIG, CHK; D37) and R6x on the natural errors (NAT)")
+    if "a14" not in t.get("addendum") or t.get(X).get("status") == "not run":
+        t.note("Not run.")
+    else:
+        L = f"{X}.LOOK"
+        if t.get(L).get("status") != "not run":
+            P = f"{L}.primary"
+            t.h(4, "LOOK primary family (Holm over L1–L2; 50 omission items)")
+            rows = []
+            for k in ("L1", "L2"):
+                r = t.stat_row(f"{k}: {t.get(f'{P}.{k}.contrast')}", f"{P}.{k}")
+                rows.append(r[:4] + [t.num(t.get(f"{P}.{k}.p_holm"), 4), t.num(t.get(f"{P}.{k}.significant"))] + r[4:])
+            t.table(["Test", "Estimate", "95% CI", "p", "p (Holm)", "Significant", "Items / clusters", "Key"], rows)
+            t.stats([(f"D for {k} ({'tested' if t.get(f'{P}.D_{k}.tested') else 'not tested, descriptive'})",
+                      f"{P}.D_{k}") for k in ("L1", "L2")])
+            for miss in ("accept", "reject"):
+                t.stats([(f"{k}, missing coded {miss.upper()}", f"{L}.primary_missing_as_{miss}.{k}") for k in ("L1", "L2")])
+            S = f"{L}.secondary"
+            t.h(4, "LOOK secondary (descriptive)")
+            t.stats([(f"Detection {v}", f"{S}.detection.{v}") for v in ("R1-om", "VIG", "CHK", "R4+VIG", "R4-om", "R6x-first")]
+                    + [(f"False rejection {v}", f"{S}.false_rejection.{v}") for v in ("R0p", "VIG", "CHK")]
+                    + [("FR(VIG) − FR(R0′)", f"{S}.FR_VIG_minus_R0p"), ("FR(CHK) − FR(R0′)", f"{S}.FR_CHK_minus_R0p"),
+                       ("Detection(CHK) − Detection(R6x first)", f"{S}.CHK_minus_R6x_first"),
+                       ("Gap under the cue: R4+VIG − VIG", f"{S}.gap_under_cue_R4VIG_minus_VIG"),
+                       ("Δ_om: R4-om − R1-om", f"{S}.Delta_om_R4_minus_R1"),
+                       ("R4+VIG − R4-om", f"{S}.R4VIG_minus_R4om")])
+            t.values([(f"Discrimination {k}", f"{S}.discrimination.{k}") for k in ("VIG", "CHK", "R1_R0p")])
+            rows = []
+            for k, o in t.get(f"{S}.named_accept_and_right_reason").items():
+                key = f"{S}.named_accept_and_right_reason.{k}"
+                rows.append([k] + [t.num(o.get(c)) for c in ("calls", "missing", "accepts", "named_accept_calls",
+                                                             "rejects", "right_reason_rejects")] + [f"`{key}`"])
+            t.table(["Cell", "Calls", "Missing", "Accepts", "Named accepts", "Rejects", "Right-reason rejects", "Key"], rows)
+            t.values([(f"Row {k}", f"{L}.interpretation_rows.{k}") for k in t.get(f"{L}.interpretation_rows")
+                      if k.startswith("R")] + [("Calls", f"{L}.calls"), ("Missing verdicts", f"{L}.missing")])
+        N = f"{X}.NAT"
+        if t.get(N).get("status") != "not run":
+            t.h(4, "NAT pre-specified test (26 natural-error extraction items; outside the LOOK family)")
+            t.stats([("Detection(R6x first) − Detection(N1f)", f"{N}.test_R6x_first_minus_N1f"),
+                     ("Detection R6x first", f"{N}.detection_R6x_first"), ("Detection N1f", f"{N}.detection_N1f"),
+                     ("Missing as ACCEPT: R6x first − N1f", f"{N}.missing_as_accept.test_R6x_first_minus_N1f"),
+                     ("Missing as REJECT: R6x first − N1f", f"{N}.missing_as_reject.test_R6x_first_minus_N1f"),
+                     ("Gated detection R6x", f"{N}.gated_detection"), ("Gated R6x − N1f", f"{N}.gated_minus_N1f"),
+                     ("Drift: N1f − original N1", f"{N}.drift_N1f_minus_original_N1")])
+            t.values([("Significant", f"{N}.significant"), ("Calls", f"{N}.calls"),
+                      ("Missing N1f", f"{N}.missing_N1f"), ("Missing R6x first", f"{N}.missing_R6x_first")]
+                     + [(f"First-submission compliance: {k}", f"{N}.first_submission_compliance.{k}")
+                        for k in t.get(f"{N}.first_submission_compliance")]
+                     + [(f"Missing-record label (call × record): {k}", f"{N}.missing_record_labels.per_call_record.{k}")
+                        for k in t.get(f"{N}.missing_record_labels.per_call_record")]
+                     + [(f"Extra-record label (call × record): {k}", f"{N}.extra_record_labels.per_call_record.{k}")
+                        for k in t.get(f"{N}.extra_record_labels.per_call_record")])
+            rows = []
+            for k, o in t.get(f"{N}.detection_by_call_label_category").items():
+                rows.append([k, t.num(o["calls"]), t.num(o["rejects"]), t.num(o["detection"]), t.num(o["items"]),
+                             f"`{N}.detection_by_call_label_category.{k}`"])
+            t.table(["R6x call label category", "Calls", "First REJECTs", "Detection", "Items", "Key"], rows)
+            rows = []
+            for by in ("error_type", "d24"):
+                for k, o in t.get(f"{N}.detection_by.{by}").items():
+                    rows.append([f"{by}: {k}", t.num(o["n_items"]), t.num(o["N1f"]), t.num(o["R6x_first"]),
+                                 t.num(o["R6x_final"]), f"`{N}.detection_by.{by}.{k}`"])
+            t.table(["Group", "Items", "N1f", "R6x first", "R6x gated", "Key"], rows)
+            RA = f"{N}.recognise_and_approve"
+            t.values([(f"Reasoning names a missing/extra record among accepts, {v}: {k}", f"{RA}.{v}.{k}")
+                      for v in ("N1f", "R6x_first") for k in ("accepts", "names_missing_record", "names_extra_record")]
+                     + [(f"R6x first accepts with a missing record labeled include: {k}",
+                         f"{RA}.R6x_list_missing_labeled_include_among_first_accepts.{k}")
+                        for k in ("accepts", "accepts_with_a_missing_record_labeled_include")]
+                     + [(f"Row {k}", f"{N}.interpretation_rows.{k}") for k in t.get(f"{N}.interpretation_rows")
+                        if k.startswith("N")])
+        t.values([("Spend stage a14 (USD)", f"{X}.spend_usd_a14")])
+    E = "exploratory.a14_study2_evidence"
+    t.h(3, "4.x A14 task 3: Study 2 evidence value (EXPLORATORY)")
+    if "a14_study2_evidence" not in t.get("exploratory"):
+        t.note("Not run.")
+        return
+    t.note(t.get(f"{E}.label"))
+    rows = []
+    for name, key in (("B − A′", f"{E}.B_vs_Aprime"), ("C′ − A′ (descriptive)", f"{E}.descriptive.Cprime_vs_Aprime"),
+                      ("PC − A′, Alice only (descriptive)", f"{E}.descriptive.PC_alice_vs_Aprime_alice")):
+        for e in ("E1_p_inc", "E2_disc"):
+            o = t.get(f"{key}.{e}")
+            ci, bs = o.get("ci95_t") or [None, None], o.get("ci95_bootstrap") or {}
+            rows.append([f"{name}: {e}", t.num(o.get("mean_d")), f"[{t.num(ci[0])}, {t.num(ci[1])}]",
+                         f"[{t.num(bs.get('lo'))}, {t.num(bs.get('hi'))}]", t.num(o.get("p_two_sided"), 4),
+                         f"{o.get('n')} / {o.get('n_excluded')}", f"`{key}.{e}`"])
+    t.table(["Contrast", "Mean d", "95% t CI", "95% bootstrap CI", "p (paired t)", "Seqs / excluded", "Key"], rows)
+    t.values([("Statement", f"{E}.statement")])
+
 def exploratory(t: Tables):
     E = "exploratory"
     t.h(2, "4. Exploratory (labelled as such)")
@@ -485,6 +577,7 @@ def build(v: dict, source_sha256: str) -> str:
     addendum(t)
     a10(t)
     a13(t)
+    a14(t)
     exploratory(t)
     figure_data(t)
     return "\n".join(t.lines).rstrip() + "\n"

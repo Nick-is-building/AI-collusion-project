@@ -1,0 +1,432 @@
+{
+ "B_vs_Aprime": {
+  "E1_p_inc": {
+   "alpha": 0.05,
+   "ci95_bootstrap": {
+    "hi": 0.39655172413793105,
+    "lo": 0.08620689655172412,
+    "n_boot": 10000,
+    "seed": 2026
+   },
+   "ci95_t": [
+    0.06515980311508981,
+    0.40035743826422043
+   ],
+   "contrast": "B - Aprime",
+   "df": 28,
+   "excluded_seqs": [
+    8,
+    9,
+    15,
+    16,
+    25,
+    26,
+    28,
+    36,
+    42,
+    46,
+    47
+   ],
+   "label": "p_inc(B) - p_inc(Aprime)",
+   "mean_Aprime": 0.735632183908046,
+   "mean_B": 0.9683908045977011,
+   "mean_d": 0.23275862068965514,
+   "n": 29,
+   "n_excluded": 11,
+   "p_two_sided": 0.008215766301225265,
+   "sd_d": 0.4406093084253276,
+   "t": 2.844795851396607
+  },
+  "E2_disc": {
+   "alpha": 0.05,
+   "ci95_bootstrap": {
+    "hi": 0.08395080733442799,
+    "lo": -0.22147133278598793,
+    "n_boot": 10000,
+    "seed": 2026
+   },
+   "ci95_t": [
+    -0.22731773308989986,
+    0.09773371557484786
+   ],
+   "contrast": "B - Aprime",
+   "df": 28,
+   "excluded_seqs": [
+    8,
+    9,
+    15,
+    16,
+    25,
+    26,
+    28,
+    36,
+    42,
+    46,
+    47
+   ],
+   "label": "disc(B) - disc(Aprime)",
+   "mean_Aprime": 0.08333333333333333,
+   "mean_B": 0.018541324575807334,
+   "mean_d": -0.064792008757526,
+   "n": 29,
+   "n_excluded": 11,
+   "p_two_sided": 0.42104412226166016,
+   "sd_d": 0.42727238793049943,
+   "t": -0.8166117334063125
+  },
+  "judge": "both",
+  "means": {
+   "Aprime": {
+    "disc": 0.06095679012345678,
+    "p_cor": 0.8425555555555556,
+    "p_inc": 0.7592592592592592
+   },
+   "B": {
+    "disc": 0.016293891293891295,
+    "p_cor": 0.9924206349206349,
+    "p_inc": 0.9722222222222221
+   }
+  },
+  "n_seqs": {
+   "Aprime": 50,
+   "B": 50
+  },
+  "seqs_without_incorrect_peer_task": {
+   "Aprime": [
+    4,
+    6,
+    10,
+    13,
+    16,
+    17,
+    21,
+    24,
+    25,
+    26,
+    30,
+    34,
+    43,
+    46
+   ],
+   "B": [
+    4,
+    6,
+    8,
+    9,
+    10,
+    13,
+    15,
+    17,
+    21,
+    24,
+    28,
+    30,
+    34,
+    36,
+    42,
+    43,
+    47
+   ]
+  }
+ },
+ "E2_bootstrap_upper_bound": 0.08395080733442799,
+ "PC_note": "PC: only Alice's live verdicts (judge alice); Bob's PC verdicts are replayed from B. A' is restricted to the same direction for this comparison.",
+ "definition": "per sequence and arm, episodes 6-10, both judging directions: p_inc = P(ACCEPT | peer incorrect), p_cor = P(ACCEPT | peer correct), disc = p_cor - p_inc; E1 = mean p_inc(B) - p_inc(A'); E2 = mean disc(B) - disc(A'); paired by sequence (shared prefix); pairwise exclusion; paired t-test and sequence bootstrap (10,000, seed 2026)",
+ "descriptive": {
+  "Cprime_vs_Aprime": {
+   "E1_p_inc": {
+    "alpha": 0.05,
+    "ci95_bootstrap": {
+     "hi": 0.3793103448275862,
+     "lo": 0.08908045977011494,
+     "n_boot": 10000,
+     "seed": 2026
+    },
+    "ci95_t": [
+     0.07128450100657585,
+     0.38273848749917133
+    ],
+    "contrast": "Cprime - Aprime",
+    "df": 28,
+    "excluded_seqs": [
+     6,
+     8,
+     9,
+     15,
+     21,
+     27,
+     36,
+     43,
+     45,
+     50
+    ],
+    "label": "p_inc(Cprime) - p_inc(Aprime)",
+    "mean_Aprime": 0.735632183908046,
+    "mean_Cprime": 0.9626436781609196,
+    "mean_d": 0.2270114942528736,
+    "n": 29,
+    "n_excluded": 10,
+    "p_two_sided": 0.005814166613160512,
+    "sd_d": 0.40939884773876734,
+    "t": 2.9860716912560807
+   },
+   "E2_disc": {
+    "alpha": 0.05,
+    "ci95_bootstrap": {
+     "hi": 0.09825020525451558,
+     "lo": -0.20491242474001098,
+     "n_boot": 10000,
+     "seed": 2026
+    },
+    "ci95_t": [
+     -0.21053515854006216,
+     0.11420237255210376
+    ],
+    "contrast": "Cprime - Aprime",
+    "df": 28,
+    "excluded_seqs": [
+     6,
+     8,
+     9,
+     15,
+     21,
+     27,
+     36,
+     43,
+     45,
+     50
+    ],
+    "label": "disc(Cprime) - disc(Aprime)",
+    "mean_Aprime": 0.07183908045977011,
+    "mean_Cprime": 0.02367268746579091,
+    "mean_d": -0.04816639299397919,
+    "n": 29,
+    "n_excluded": 10,
+    "p_two_sided": 0.5483126911082912,
+    "sd_d": 0.42685975075751853,
+    "t": -0.6076561774153592
+   },
+   "judge": "both",
+   "means": {
+    "Aprime": {
+     "disc": 0.06095679012345678,
+     "p_cor": 0.8425555555555556,
+     "p_inc": 0.7592592592592592
+    },
+    "Cprime": {
+     "disc": 0.06832837301587302,
+     "p_cor": 0.9900634920634921,
+     "p_inc": 0.9192708333333333
+    }
+   },
+   "n_seqs": {
+    "Aprime": 50,
+    "Cprime": 50
+   },
+   "seqs_without_incorrect_peer_task": {
+    "Aprime": [
+     4,
+     6,
+     10,
+     13,
+     16,
+     17,
+     21,
+     24,
+     25,
+     26,
+     30,
+     34,
+     43,
+     46
+    ],
+    "Cprime": [
+     4,
+     8,
+     9,
+     10,
+     13,
+     15,
+     16,
+     17,
+     24,
+     25,
+     26,
+     27,
+     30,
+     34,
+     36,
+     45,
+     46,
+     50
+    ]
+   }
+  },
+  "PC_alice_vs_Aprime_alice": {
+   "E1_p_inc": {
+    "alpha": 0.05,
+    "ci95_bootstrap": {
+     "hi": 0.3333333333333333,
+     "lo": -0.07777777777777778,
+     "n_boot": 10000,
+     "seed": 2026
+    },
+    "ci95_t": [
+     -0.11941133854944566,
+     0.34163356077166784
+    ],
+    "contrast": "PC - Aprime",
+    "df": 14,
+    "excluded_seqs": [
+     8,
+     11,
+     15,
+     22,
+     25,
+     26,
+     31,
+     35,
+     36,
+     39,
+     42,
+     47
+    ],
+    "label": "p_inc(PC) - p_inc(Aprime)",
+    "mean_Aprime": 0.8333333333333334,
+    "mean_PC": 0.9444444444444444,
+    "mean_d": 0.1111111111111111,
+    "n": 15,
+    "n_excluded": 12,
+    "p_two_sided": 0.31876704750871354,
+    "sd_d": 0.4162696521251859,
+    "t": 1.0337805812048975
+   },
+   "E2_disc": {
+    "alpha": 0.05,
+    "ci95_bootstrap": {
+     "hi": 0.15,
+     "lo": -0.23333333333333334,
+     "n_boot": 10000,
+     "seed": 2026
+    },
+    "ci95_t": [
+     -0.2454013940724012,
+     0.18984583851684567
+    ],
+    "contrast": "PC - Aprime",
+    "df": 14,
+    "excluded_seqs": [
+     8,
+     11,
+     15,
+     22,
+     25,
+     26,
+     31,
+     35,
+     36,
+     39,
+     42,
+     47
+    ],
+    "label": "disc(PC) - disc(Aprime)",
+    "mean_Aprime": 0.08333333333333333,
+    "mean_PC": 0.05555555555555556,
+    "mean_d": -0.027777777777777776,
+    "n": 15,
+    "n_excluded": 12,
+    "p_two_sided": 0.788263927974998,
+    "sd_d": 0.39297737457927134,
+    "t": -0.2737635235187877
+   },
+   "judge": "alice",
+   "means": {
+    "Aprime": {
+     "disc": 0.06884057971014493,
+     "p_cor": 0.8636666666666667,
+     "p_inc": 0.8260869565217391
+    },
+    "PC": {
+     "disc": 0.04385964912280702,
+     "p_cor": 1.0,
+     "p_inc": 0.9561403508771928
+    }
+   },
+   "n_seqs": {
+    "Aprime": 50,
+    "PC": 50
+   },
+   "seqs_without_incorrect_peer_task": {
+    "Aprime": [
+     4,
+     5,
+     6,
+     9,
+     10,
+     12,
+     13,
+     16,
+     17,
+     20,
+     21,
+     22,
+     23,
+     24,
+     25,
+     26,
+     28,
+     29,
+     30,
+     32,
+     33,
+     34,
+     35,
+     41,
+     43,
+     46,
+     50
+    ],
+    "PC": [
+     4,
+     5,
+     6,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     15,
+     16,
+     17,
+     20,
+     21,
+     23,
+     24,
+     28,
+     29,
+     30,
+     31,
+     32,
+     33,
+     34,
+     36,
+     39,
+     41,
+     42,
+     43,
+     46,
+     47,
+     50
+    ]
+   }
+  }
+ },
+ "label": "EXPLORATORY (A14 task 3): the per-arm false-accept rates were already reported in the Study 2 analysis (results/summaries/study2_analysis.json) before this test was defined. In A' (200-character channel), an ACCEPT without the peer's complete log is a protocol violation, so p_inc in A' mixes non-compliance with judgment.",
+ "source": {
+  "n_runs": 200,
+  "n_verdict_rows": 4000,
+  "runs_csv": "results/study2/main/runs.csv"
+ },
+ "statement": "the complete log improves discrimination by at most 8.4 points (upper bound of the 95% sequence bootstrap interval of E2)"
+}

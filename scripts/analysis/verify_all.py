@@ -13,10 +13,13 @@ results/summaries/verification.json. Sections are kept apart by status:
                 D30 R6x exhaustive source classification and D31 R6 on the correct versions of the omission
                 items (A08; fixed before their own run; outside Holm), key "D30_D31_R6x".
                 A10 incentive-rule and peer-signal arms (D32-D34), key "a10"; A13 omission-version ladder
-                R2, R3, R4n, R5 (D36; own Holm family of five), key "a13".
+                R2, R3, R4n, R5 (D36; own Holm family of five), key "a13". A14 (D37): LOOK (VIG, CHK; Holm
+                over L1-L2) and NAT (R6x on the natural errors; one test outside), key "a14".
                 Reported as "not run" until their call lines exist.
   exploratory   equivalence reading (margin +-0.10) of the preregistered contrasts; right-reason detection
-                by Claude Code reading next to the deterministic markers. Labelled exploratory.
+                by Claude Code reading next to the deterministic markers. Labelled exploratory. A14 task 3
+                (Study 2 evidence value) is copied from results/summaries/a14_study2_evidence.json, key
+                "a14_study2_evidence".
 
   .venv/bin/python -m scripts.analysis.verify_all
 """
@@ -124,6 +127,12 @@ def main(argv=None):
     if (ROOT / "scripts" / "analysis" / "a13_addendum.py").exists():   # A13: D36 omission-version ladder
         from scripts.analysis import a13_addendum
         res["addendum"]["a13"] = a13_addendum.analyze(calls, meta)
+    if (ROOT / "scripts" / "analysis" / "a14_addendum.py").exists():   # A14: D37 LOOK (VIG, CHK) and NAT (R6x)
+        from scripts.analysis import a14_addendum
+        res["addendum"]["a14"] = a14_addendum.analyze(calls, meta)
+        if a14_addendum.STUDY2_OUT.exists():   # A14 task 3 (exploratory; written by a14_addendum --study2)
+            import json
+            res["exploratory"]["a14_study2_evidence"] = json.loads(a14_addendum.STUDY2_OUT.read_text())
     if (ROOT / "scripts" / "analysis" / "recognise_approve.py").exists():   # A10 task 6 (exploratory, zero cost)
         from scripts.analysis import recognise_approve
         res["exploratory"]["recognise_and_approve"] = recognise_approve.build(calls, meta)
