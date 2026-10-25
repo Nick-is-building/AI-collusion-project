@@ -13,7 +13,6 @@ from __future__ import annotations
 import argparse
 import json
 import os
-import subprocess
 import time
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -25,8 +24,18 @@ QUIET_S = 600
 
 
 def a10_alive() -> bool:
-    out = subprocess.run(["pgrep", "-f", "scripts.a10"], capture_output=True, text=True).stdout.split()
-    return any(int(p) != os.getpid() for p in out)
+    """A Python process whose argv has a module argument starting with `scripts.a10` (shells whose
+    command text merely mentions it, e.g. another session's wait loops, do not count)."""
+    for d in Path("/proc").iterdir():
+        if not d.name.isdigit() or int(d.name) == os.getpid():
+            continue
+        try:
+            argv = (d / "cmdline").read_bytes().decode("utf-8", "replace").split("\0")
+        except OSError:
+            continue
+        if argv and "python" in Path(argv[0]).name and any(x.startswith("scripts.a10") for x in argv[1:]):
+            return True
+    return False
 
 
 def main(argv=None):
