@@ -255,3 +255,14 @@ No Study 2 work or result is recorded here. Its inclusion in the plan does not a
 **Observed in the first 90 s (journals of the 32 C′ arms after 00:23:59):** 59 calls, all accepted, `response_model` gemini-3.1-flash-lite on all, 0 429s, 0 spending-cap lines, 0.11 USD; C′ rep014–019 running fresh (no resume source).
 **Monitoring:** operational only (`scratch/a05b_status.py`, local: statuses, models, 429s, cost, episode counts from metadata); no outcome.
 **Next:** status only until complete; then task 3.
+
+## 2026-10-25 01:18–01:25 UTC — Claude Code (Opus 5.5), session A05b — Relaunch stopped by the D35 watcher (quota 429s, input tokens per minute)
+
+**Observed:**
+- Two bursts of quota 429s on the 6 running C′ arms (rep032–037), one per arm: 01:18:36–01:18:43 and 01:20:28–01:20:30 UTC. Every one was on `api_attempt` 1, category `transient_rate_limit`. Message: "Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_paid_tier_2_input_token_count, limit: 10000000, model: gemini-3.1-flash-lite, description: Generate content input tokens per minute limit exceeded on Tier 2". **Not the spending cap**: 0 spending-cap lines.
+- At the 12th 429 within 300 s the watcher wrote `results/study2/STOP` (01:20:31.97 UTC: "12 quota 429s within 300 s (limit 10)") and appended `stop_watch_stop` to `scheduler.jsonl`, as specified. Every running C′ process stopped at its next call with `Study2Stop` (exits 01:21:11). The scheduler ended at 01:21:29 (`stopped: true`, done 146/160 of the arms in seqs 14–45, `failed` empty).
+- Inferred cause: the project's 10 M input tokens/min limit is shared with the concurrent A10 run (3 workers, `results/raw/a10-*`). The 6 C′ arms were all in their late, long-context episodes at the same time.
+- **State of the 32 C′ arms:** 18 complete (10 episodes, rep014–031); 6 partial, stopped at an episode boundary (rep032 9, rep033 9, rep034 9, rep035 8, rep036 7, rep037 4 episodes; attempt 1, status `failed: Study2Stop`); 8 not started (rep038–045).
+- Relaunch journals (after 00:23:59): 5,499 accepted calls, all `response_model` gemini-3.1-flash-lite; 10 `empty_no_content` (retried by upstream); 12 quota 429s; cost **24.66 USD**.
+**Not looked at:** no outcome.
+**State:** STOP file present; nothing running. Continuing needs Nick's decision: whether to remove STOP, whether the 6 partial arms resume from their episode boundary (PREREGISTRATION_STUDY2 §6 error handling) or restart fresh, and the worker count.
