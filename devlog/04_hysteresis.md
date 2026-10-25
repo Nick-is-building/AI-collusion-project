@@ -279,3 +279,10 @@ Option 1 as asked: remove STOP (its text stays in `scheduler.jsonl` and here); r
 - `PYTHONPATH=. nohup .venv/bin/python -m scripts.study2.worker_ramp --group main > logs/study2_worker_ramp_a05b.log 2>&1 &` (WORKERS = 3 at start)
 - `set -a && . ./.env && set +a && PYTHONPATH=. nohup .venv/bin/python -m scripts.study2.launch --group main --seqs 14-45 --workers 3 --backend live --approved-stage study2 --require-stop-watch > logs/study2_main_resume.log 2>&1 &`
 - Observed: C′ rep032, 033, 034 launched as attempt 2, each resuming from its own stopped attempt-1 run (9 episodes). No A10 process was running at launch: its runs had ended about 01:2x UTC, on A10's own model-change guard.
+
+## 2026-10-25 — Claude Code (Opus 5.5), session A10 — NOTE: `src/runner/runner.py` changed (stop rule only), shared Study 2 provenance path
+
+**Assignment / authorization:** Nick approved the fix (A10 session; `docs/deviations.md`, "Technical fix — response_model stop check counts accepted responses only").
+**What changed:** `src/runner/runner.py`, only the `response_model` stop check (`accepted_models`: failed attempts ignored, provider prefix normalised). Request content and every other behaviour are unchanged.
+**Effect on Study 2 (checked in the code, not changed):** Study 2 imports only `LiveNotAuthorized` and `git_state` from `runner.py` (`src/hysteresis/run_arm.py`). Its own `response_model` check is in `src/hysteresis/guard.py` and is untouched, so Study 2's stop behaviour does not change. `runner.py` is in Study 2's `PROVENANCE_PATHS`, so arms started after this commit record the new file in their provenance and run with the fixed `runner.py`. The change affects only the stop rule (and the A10 runner, not the Study 2 guard).
+**Cross-references:** DEVLOG 03, A10 entries of 2026-10-25.

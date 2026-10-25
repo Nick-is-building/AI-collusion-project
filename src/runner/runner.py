@@ -15,6 +15,9 @@
   price is refused unless `allow_undocumented_price` is set for that job.
 - `response_model`: the first value observed for a requested model (in earlier runs of this
   results dir, or in this run) is the reference; any change stops the run after logging the call.
+  Only accepted API responses count (usage records without `error_category`), with the provider prefix
+  stripped (`accepted_models`; fix of 2026-10-25, docs/deviations.md). The logged `response_models`
+  field is unchanged (all usage records).
 - Missing: an exception after upstream retries -> status "missing" (verdict_status
   "missing_error"); no verdict after the 3 verdict attempts -> upstream forced reject, logged with
   forced=True and verdict_status "missing_forced" (plan 13: recorded as missing).
@@ -147,7 +150,7 @@ class Runner:
                 continue
             if rec.get("stage") == stage:
                 self.done.add(rec["call_id"])
-            for m in rec.get("response_models") or []:
+            for m in accepted_models(rec.get("usage") or []):
                 self.ref_model.setdefault(rec["model"], m)
         self.ledger = Ledger(self.results_dir, mode)
         head, dirty = git_state()
@@ -228,11 +231,24 @@ class Runner:
         stats["cost_usd"] += cost
         stats["completed" if status == "complete" else "missing"] += 1
         ref = self.ref_model.get(job.model)
-        for m in models:
+        for m in accepted_models(usage):   # stop rule: accepted API responses only (fix of 2026-10-25)
             if ref is None:
                 self.ref_model[job.model] = ref = m
             elif m != ref:
                 raise ModelChanged(f"{job.model}: response_model {m!r} != first observed {ref!r} (call {cid})")
+
+
+def normalize_model(m: str) -> str:
+    """Strip a provider prefix ("gemini/gemini-3.1-flash-lite" -> "gemini-3.1-flash-lite")."""
+    return m.split("/", 1)[1] if "/" in m else m
+
+
+def accepted_models(usage: list) -> list[str]:
+    """Normalized response_model of the usage records of ACCEPTED API responses (no error_category).
+    A failed attempt has no response; upstream then fills response_model with the requested route, which
+    must not count as a model change (A10 stop of 2026-10-25 01:19 UTC; docs/deviations.md)."""
+    return sorted({normalize_model(u["response_model"]) for u in usage
+                   if u.get("response_model") and not u.get("error_category")})
 
 
 RATE_LIMIT_CATEGORIES = ("transient_rate_limit", "hard_quota")  # upstream _classify_llm_error (HTTP 429)

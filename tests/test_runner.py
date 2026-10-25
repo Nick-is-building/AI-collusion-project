@@ -210,3 +210,24 @@ def test_check_group_cap(sdir):
     assert runner(sdir, b, caps=caps).run(other)["completed"] == 1
     led = Ledger(sdir / "raw", "mock")
     assert led.group_spent({"stage": "pilot", "checks": ["U"]}) == pytest.approx(led.total)
+
+
+def test_failed_attempt_model_does_not_stop(sdir, monkeypatch):
+    """A 429 error record carries the requested route as response_model; it must not count as a change
+    (A10 stop of 2026-10-25). The pre-fix check stopped on the first such call."""
+    monkeypatch.setattr(up_agents.time, "sleep", lambda s: None)
+    st = runner(sdir, _rate_limited(1)).run(jobs(3))     # call 1: error record + accepted "mock-model"
+    c = [r for r in lines(sdir) if r["type"] == "call"][0]
+    assert any(u.get("error_category") for u in c["usage"]) and len(c["response_models"]) == 2
+    assert st["stopped"] is None and st["completed"] == 3
+    # a real change among accepted responses still stops, also across runs
+    st = runner(sdir, counting(mock_backend("accept"), models=["other-model"])).run(jobs(5))
+    assert st["stopped"].startswith("ModelChanged")
+
+
+def test_accepted_models_ignores_errors_and_prefix():
+    from src.runner.runner import accepted_models
+    usage = [{"response_model": "gemini/gemini-3.1-flash-lite", "error_category": "transient_rate_limit"},
+             {"response_model": "gemini-3.1-flash-lite"}, {"response_model": "gemini/gemini-3.1-flash-lite"}]
+    assert accepted_models(usage) == ["gemini-3.1-flash-lite"]
+    assert accepted_models([{"response_model": "x", "error_category": "hard_quota"}]) == []
