@@ -1,0 +1,18 @@
+{
+ "rules": {
+  "spending_cap_text": "spending cap",
+  "max_quota_429": 10,
+  "window_s": 300,
+  "rule": "STOP if any log line contains 'spending cap' or more than 10 quota 429s within 300 s; single transient 429s keep upstream's retry",
+  "source": "assignments/A05b_study2_relaunch.md"
+ },
+ "max_429": 10,
+ "window_s": 300,
+ "pid": 127976,
+ "group": "main",
+ "started_at": "2026-10-25T01:33:19.590766+00:00",
+ "heartbeat_at": "2026-10-25T02:22:37.956987+00:00",
+ "state": "ended",
+ "reason": "scheduler ended",
+ "quota_429_seen": 0
+}

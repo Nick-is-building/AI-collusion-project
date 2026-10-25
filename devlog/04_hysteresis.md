@@ -286,3 +286,26 @@ Option 1 as asked: remove STOP (its text stays in `scheduler.jsonl` and here); r
 **What changed:** `src/runner/runner.py`, only the `response_model` stop check (`accepted_models`: failed attempts ignored, provider prefix normalised). Request content and every other behaviour are unchanged.
 **Effect on Study 2 (checked in the code, not changed):** Study 2 imports only `LiveNotAuthorized` and `git_state` from `runner.py` (`src/hysteresis/run_arm.py`). Its own `response_model` check is in `src/hysteresis/guard.py` and is untouched, so Study 2's stop behaviour does not change. `runner.py` is in Study 2's `PROVENANCE_PATHS`, so arms started after this commit record the new file in their provenance and run with the fixed `runner.py`. The change affects only the stop rule (and the A10 runner, not the Study 2 guard).
 **Cross-references:** DEVLOG 03, A10 entries of 2026-10-25.
+
+## 2026-10-25 02:22–02:35 UTC — Claude Code (Opus 5.5), session A05b — Task 3: relaunch complete; checks; export of both groups
+
+**Completion:** scheduler_end at 02:22:34 UTC: 160/160 arms of seqs 14–45 done, `failed` empty, `stopped` false. The watcher ended with the scheduler and never fired after the resume. `worker_ramp` set 3 workers at 01:33:21 and 6 at 02:05:26 ("no A10 process and no quota 429 for 600 s").
+**Checks performed:**
+- `scan` over all 50 sequences × 5 arms: 0 incomplete. `scripts.study2.run_list --group main --seqs 1-50 --out results/study2/main/runs.csv`: 250 complete arms.
+- C′ rep014–045 counted runs:
+  - 26 single fresh runs;
+  - rep032–037 counted run = attempt 2, resumed from its own Study2Stop-interrupted attempt 1 (9/9/9/8/7/4 episodes; PREREGISTRATION_STUDY2 §6 resume rule, Nick's decision above);
+  - none resumes from a superseded run.
+- **Status-line grep check on the 32** (`scripts.study2.analyze --runs scratch/runs_a05b_cprime32.csv --status-line-only`; the list holds the 32 counted C′ rows of runs.csv): PASS, 640 rows, 0 failures, 0 rows with mentions beyond the opening.
+- **All 38 relaunch journals** (32 arms; the 6 stopped attempts included):
+  - 7,783 accepted calls, `response_model` gemini-3.1-flash-lite on all 7,783 (constant);
+  - 13 `empty_no_content` (retried by upstream);
+  - 12 `error_retryable`, all `transient_rate_limit` (the 12 input-TPM quota 429s of 01:18–01:20; none after the resume); 0 spending-cap errors; no content-policy errors;
+  - cost **35.90 USD** (cached share of input 0.806).
+- **Spend** (our ledger, list prices incl. cache): Study 2 main 140.26 + superseded 0.88 + P8 2.98 = **144.11 USD of the 250 cap**. Other stages (`results/raw`) 33.28 (incl. a10 6.65). **Project total 177.40 USD of the 330 hard cap.** Google's own billing figure is not visible here.
+- **Export (D27):**
+  - `scripts.study2.export --group main --seqs 1-50`: 265 runs (250 counted, plus 15 non-counted attempts: the 24 October failures outside rep014–045 and the 6 stopped attempts), 35,214 calls, 1,048 files hashed;
+  - `--group main_superseded --seqs 14-45`: 96 runs, 2,338 calls, 289 files hashed.
+**Evidence committed:** for both groups, `manifest.csv`, `files_sha256.txt`, `calls.csv.gz`, plus per-run `study2_meta.json`. Main group also: `scheduler.jsonl`, `runs.csv`, `stop_watch.json`, `WORKERS`. `main_superseded/README.md`. Full traces stay local (D27).
+**Not looked at:** no outcome yet.
+**Next:** task 4 (preregistered analysis + three D35 sensitivities).

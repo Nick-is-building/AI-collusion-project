@@ -1,0 +1,769 @@
+seq,arm,run_dir,status,episodes,started_at,finished_at,git_head,counted,resume_from_run_dir
+14,Cprime,run_s2_Cprime_rep014_20261024_154252_684083_dccf67,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",4,2026-10-24T15:42:52.706621+00:00,2026-10-24T16:07:13.503171+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+14,Cprime,run_s2_Cprime_rep014_20261024_160812_779064_9f3b8e,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",4,2026-10-24T16:08:12.805465+00:00,2026-10-24T16:26:01.958993+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,run_s2_Cprime_rep014_20261024_154252_684083_dccf67
+14,Cprime,run_s2_Cprime_rep014_20261024_162653_792478_d116ce,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",4,2026-10-24T16:26:53.811209+00:00,2026-10-24T16:44:51.019251+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,run_s2_Cprime_rep014_20261024_160812_779064_9f3b8e
+15,Cprime,run_s2_Cprime_rep015_20261024_154356_440344_d6778c,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",3,2026-10-24T15:43:56.444983+00:00,2026-10-24T16:07:17.565454+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+15,Cprime,run_s2_Cprime_rep015_20261024_160813_721440_6ac31b,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",3,2026-10-24T16:08:13.740562+00:00,2026-10-24T16:26:04.639599+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,run_s2_Cprime_rep015_20261024_154356_440344_d6778c
+15,Cprime,run_s2_Cprime_rep015_20261024_162653_361180_362728,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",3,2026-10-24T16:26:53.385223+00:00,2026-10-24T16:44:48.058490+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,run_s2_Cprime_rep015_20261024_160813_721440_6ac31b
+16,Cprime,run_s2_Cprime_rep016_20261024_154526_919922_b1a00b,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",2,2026-10-24T15:45:26.925064+00:00,2026-10-24T16:07:14.819807+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+16,Cprime,run_s2_Cprime_rep016_20261024_160813_814606_b59136,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",2,2026-10-24T16:08:13.826846+00:00,2026-10-24T16:26:02.812992+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,run_s2_Cprime_rep016_20261024_154526_919922_b1a00b
+16,Cprime,run_s2_Cprime_rep016_20261024_162653_007379_86b28a,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",2,2026-10-24T16:26:53.029812+00:00,2026-10-24T16:44:48.269559+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,run_s2_Cprime_rep016_20261024_160813_814606_b59136
+17,Cprime,run_s2_Cprime_rep017_20261024_154553_409135_e4e331,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",1,2026-10-24T15:45:53.414139+00:00,2026-10-24T16:07:17.403373+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+17,Cprime,run_s2_Cprime_rep017_20261024_160815_022947_74d572,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",1,2026-10-24T16:08:15.052696+00:00,2026-10-24T16:26:06.124826+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,run_s2_Cprime_rep017_20261024_154553_409135_e4e331
+17,Cprime,run_s2_Cprime_rep017_20261024_162653_159176_aeb736,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",1,2026-10-24T16:26:53.170271+00:00,2026-10-24T16:44:50.333121+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,run_s2_Cprime_rep017_20261024_160815_022947_74d572
+18,Cprime,run_s2_Cprime_rep018_20261024_154827_262841_d0feca,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T15:48:27.268035+00:00,2026-10-24T16:07:11.968439+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+18,Cprime,run_s2_Cprime_rep018_20261024_160814_076090_492f1f,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T16:08:14.095787+00:00,2026-10-24T16:26:01.619781+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+18,Cprime,run_s2_Cprime_rep018_20261024_162653_670456_d16a0c,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T16:26:53.688942+00:00,2026-10-24T16:44:50.408982+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+19,Cprime,run_s2_Cprime_rep019_20261024_154918_093651_aec477,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T15:49:18.099206+00:00,2026-10-24T16:07:15.578095+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+19,Cprime,run_s2_Cprime_rep019_20261024_160814_004632_909236,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T16:08:14.021361+00:00,2026-10-24T16:26:06.121222+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+19,Cprime,run_s2_Cprime_rep019_20261024_162653_633304_a9f9be,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T16:26:53.650242+00:00,2026-10-24T16:44:50.558309+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+20,Cprime,run_s2_Cprime_rep020_20261024_154917_658069_bbe27e,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T15:49:17.675020+00:00,2026-10-24T16:07:17.312489+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+20,Cprime,run_s2_Cprime_rep020_20261024_160814_596039_bcdc00,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T16:08:14.633401+00:00,2026-10-24T16:25:56.308647+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+20,Cprime,run_s2_Cprime_rep020_20261024_162653_561483_a65599,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T16:26:53.586085+00:00,2026-10-24T16:44:45.730695+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+21,Cprime,run_s2_Cprime_rep021_20261024_154944_135823_9f704c,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T15:49:44.141369+00:00,2026-10-24T16:07:26.772184+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+21,Cprime,run_s2_Cprime_rep021_20261024_160813_884012_109cf2,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T16:08:13.895170+00:00,2026-10-24T16:25:59.378088+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+21,Cprime,run_s2_Cprime_rep021_20261024_162652_969256_318332,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T16:26:52.977651+00:00,2026-10-24T16:44:41.148014+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+22,Cprime,run_s2_Cprime_rep022_20261024_164514_313351_79036f,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T16:45:14.321393+00:00,2026-10-24T17:02:56.648813+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+22,Cprime,run_s2_Cprime_rep022_20261024_170326_355903_0bdc86,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:03:26.361035+00:00,2026-10-24T17:21:09.586326+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+22,Cprime,run_s2_Cprime_rep022_20261024_172136_115409_dad4e7,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:21:36.123738+00:00,2026-10-24T17:39:19.707447+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+23,Cprime,run_s2_Cprime_rep023_20261024_164514_151026_307df8,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T16:45:14.155114+00:00,2026-10-24T17:02:58.578827+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+23,Cprime,run_s2_Cprime_rep023_20261024_170326_441702_6a716e,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:03:26.448517+00:00,2026-10-24T17:21:09.571328+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+23,Cprime,run_s2_Cprime_rep023_20261024_172136_333966_db1219,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:21:36.341305+00:00,2026-10-24T17:39:16.081715+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+24,Cprime,run_s2_Cprime_rep024_20261024_164554_318970_4d128c,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T16:45:54.347400+00:00,2026-10-24T17:03:40.269141+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+24,Cprime,run_s2_Cprime_rep024_20261024_170411_157249_a473e8,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:04:11.162967+00:00,2026-10-24T17:21:50.168230+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+24,Cprime,run_s2_Cprime_rep024_20261024_172217_974441_5a02f1,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:22:17.978806+00:00,2026-10-24T17:39:58.564560+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+25,Cprime,run_s2_Cprime_rep025_20261024_164557_241055_3cdc76,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T16:45:57.270116+00:00,2026-10-24T17:03:51.553819+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+25,Cprime,run_s2_Cprime_rep025_20261024_170442_716680_6869b9,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:04:42.732346+00:00,2026-10-24T17:22:29.281250+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+25,Cprime,run_s2_Cprime_rep025_20261024_172307_445647_281a9b,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:23:07.466242+00:00,2026-10-24T17:40:51.142964+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+26,Cprime,run_s2_Cprime_rep026_20261024_164558_441863_21205a,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T16:45:58.491387+00:00,2026-10-24T17:03:52.646575+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+26,Cprime,run_s2_Cprime_rep026_20261024_170444_144537_7c15a2,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:04:44.156667+00:00,2026-10-24T17:22:28.900823+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+26,Cprime,run_s2_Cprime_rep026_20261024_172306_345419_c1c793,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:23:06.356918+00:00,2026-10-24T17:40:47.272626+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+27,Cprime,run_s2_Cprime_rep027_20261024_164556_720376_3ddb43,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T16:45:56.737062+00:00,2026-10-24T17:03:49.696232+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+27,Cprime,run_s2_Cprime_rep027_20261024_170443_170059_0cd3ee,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:04:43.195866+00:00,2026-10-24T17:22:30.225524+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+27,Cprime,run_s2_Cprime_rep027_20261024_172307_039374_8c0625,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:23:07.050778+00:00,2026-10-24T17:40:49.052545+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+28,Cprime,run_s2_Cprime_rep028_20261024_164557_415197_1f18fc,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T16:45:57.434912+00:00,2026-10-24T17:03:53.330077+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+28,Cprime,run_s2_Cprime_rep028_20261024_170443_747391_6f317f,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:04:43.795296+00:00,2026-10-24T17:22:27.947308+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+28,Cprime,run_s2_Cprime_rep028_20261024_172307_647079_ebe809,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:23:07.653006+00:00,2026-10-24T17:40:52.385003+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+29,Cprime,run_s2_Cprime_rep029_20261024_164601_200120_5f80f7,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T16:46:01.248043+00:00,2026-10-24T17:03:46.893077+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+29,Cprime,run_s2_Cprime_rep029_20261024_170443_869546_d53883,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:04:43.890291+00:00,2026-10-24T17:22:29.281267+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+29,Cprime,run_s2_Cprime_rep029_20261024_172307_273810_8505be,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:23:07.284668+00:00,2026-10-24T17:40:48.525366+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+30,Cprime,run_s2_Cprime_rep030_20261024_173944_665574_9fd970,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:39:44.670748+00:00,2026-10-24T17:57:23.794599+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+30,Cprime,run_s2_Cprime_rep030_20261024_175755_342113_dd3065,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:57:55.347749+00:00,2026-10-24T18:15:40.063093+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+30,Cprime,run_s2_Cprime_rep030_20261024_181621_657060_22c55e,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T18:16:21.663164+00:00,2026-10-24T18:34:06.887837+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+31,Cprime,run_s2_Cprime_rep031_20261024_173945_251174_c0d639,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:39:45.269812+00:00,2026-10-24T17:57:25.292815+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+31,Cprime,run_s2_Cprime_rep031_20261024_175755_341282_9d7b8f,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:57:55.346431+00:00,2026-10-24T18:15:42.782474+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+31,Cprime,run_s2_Cprime_rep031_20261024_181622_846537_f57ac9,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T18:16:22.852291+00:00,2026-10-24T18:34:03.490265+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+32,Cprime,run_s2_Cprime_rep032_20261024_174027_809036_10e47e,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:40:27.813514+00:00,2026-10-24T17:58:05.649615+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+32,Cprime,run_s2_Cprime_rep032_20261024_175838_010153_9bf5c5,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:58:38.015556+00:00,2026-10-24T18:16:19.087543+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+32,Cprime,run_s2_Cprime_rep032_20261024_181645_291281_9db27c,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T18:16:45.296493+00:00,2026-10-24T18:34:27.496694+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+33,Cprime,run_s2_Cprime_rep033_20261024_174111_121923_ab271f,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:41:11.126418+00:00,2026-10-24T17:58:49.797829+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+33,Cprime,run_s2_Cprime_rep033_20261024_175919_950965_c5c242,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:59:19.956138+00:00,2026-10-24T18:17:01.529472+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+33,Cprime,run_s2_Cprime_rep033_20261024_181728_722484_8bc669,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T18:17:28.727320+00:00,2026-10-24T18:35:10.400746+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+34,Cprime,run_s2_Cprime_rep034_20261024_174136_099579_588403,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:41:36.108281+00:00,2026-10-24T17:59:22.193228+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+34,Cprime,run_s2_Cprime_rep034_20261024_180009_695668_a97aea,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T18:00:09.710113+00:00,2026-10-24T18:17:51.623401+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+34,Cprime,run_s2_Cprime_rep034_20261024_181837_497215_9e3d4e,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T18:18:37.504241+00:00,2026-10-24T18:36:20.771291+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+35,Cprime,run_s2_Cprime_rep035_20261024_174136_041694_cda4ad,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:41:36.062924+00:00,2026-10-24T17:59:20.089974+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+35,Cprime,run_s2_Cprime_rep035_20261024_180010_372630_d3f2d2,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T18:00:10.394601+00:00,2026-10-24T18:17:55.186932+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+35,Cprime,run_s2_Cprime_rep035_20261024_181834_897499_9a36c0,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T18:18:34.912792+00:00,2026-10-24T18:36:17.572386+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+36,Cprime,run_s2_Cprime_rep036_20261024_174135_850705_3f4c43,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:41:35.875044+00:00,2026-10-24T17:59:18.771438+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+36,Cprime,run_s2_Cprime_rep036_20261024_180010_567403_a0094e,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T18:00:10.581965+00:00,2026-10-24T18:17:55.669233+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+36,Cprime,run_s2_Cprime_rep036_20261024_181837_437603_a16354,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T18:18:37.451105+00:00,2026-10-24T18:36:20.287818+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+37,Cprime,run_s2_Cprime_rep037_20261024_174136_260845_427928,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:41:36.272285+00:00,2026-10-24T17:59:16.848114+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+37,Cprime,run_s2_Cprime_rep037_20261024_175942_475797_02f66d,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T17:59:42.482617+00:00,2026-10-24T18:17:26.249614+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+37,Cprime,run_s2_Cprime_rep037_20261024_181749_802116_1d7f25,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T18:17:49.806444+00:00,2026-10-24T18:35:31.620395+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+38,Cprime,run_s2_Cprime_rep038_20261024_183439_770113_210275,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T18:34:39.792374+00:00,2026-10-24T18:52:19.852018+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+38,Cprime,run_s2_Cprime_rep038_20261024_185301_597636_a7fb31,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T18:53:01.606673+00:00,2026-10-24T19:10:45.786761+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+38,Cprime,run_s2_Cprime_rep038_20261024_191125_759480_ad8798,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T19:11:25.766322+00:00,2026-10-24T19:29:09.215047+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+39,Cprime,run_s2_Cprime_rep039_20261024_183440_799457_0a9219,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T18:34:40.804796+00:00,2026-10-24T18:52:21.214139+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+39,Cprime,run_s2_Cprime_rep039_20261024_185301_859472_299ea6,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T18:53:01.865240+00:00,2026-10-24T19:10:44.475692+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+39,Cprime,run_s2_Cprime_rep039_20261024_191125_784623_1096a3,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T19:11:25.790209+00:00,2026-10-24T19:29:06.860664+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+40,Cprime,run_s2_Cprime_rep040_20261024_183500_356734_2f5b88,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T18:35:00.363455+00:00,2026-10-24T18:52:41.161007+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+40,Cprime,run_s2_Cprime_rep040_20261024_185324_023711_b21e02,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T18:53:24.028903+00:00,2026-10-24T19:11:08.664093+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+40,Cprime,run_s2_Cprime_rep040_20261024_191148_670737_c176c7,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T19:11:48.675433+00:00,2026-10-24T19:29:32.585914+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+41,Cprime,run_s2_Cprime_rep041_20261024_183544_468787_207019,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T18:35:44.475528+00:00,2026-10-24T18:53:24.406122+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+41,Cprime,run_s2_Cprime_rep041_20261024_185407_801750_38630a,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T18:54:07.808989+00:00,2026-10-24T19:11:51.106223+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+41,Cprime,run_s2_Cprime_rep041_20261024_191234_966039_ec7821,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T19:12:34.973333+00:00,2026-10-24T19:30:17.531316+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+42,Cprime,run_s2_Cprime_rep042_20261024_183610_308691_d9f179,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T18:36:10.313346+00:00,2026-10-24T18:53:49.253230+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+42,Cprime,run_s2_Cprime_rep042_20261024_185429_897020_d173af,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T18:54:29.902505+00:00,2026-10-24T19:12:14.086596+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+42,Cprime,run_s2_Cprime_rep042_20261024_191257_106048_38715e,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T19:12:57.111809+00:00,2026-10-24T19:30:39.591406+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+43,Cprime,run_s2_Cprime_rep043_20261024_183654_937713_75e276,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T18:36:54.943970+00:00,2026-10-24T18:54:39.689604+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+43,Cprime,run_s2_Cprime_rep043_20261024_185519_979100_ea5cb9,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T18:55:19.997615+00:00,2026-10-24T19:13:04.836686+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+43,Cprime,run_s2_Cprime_rep043_20261024_191350_172577_a13f96,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T19:13:50.188048+00:00,2026-10-24T19:31:35.171952+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+44,Cprime,run_s2_Cprime_rep044_20261024_183652_824341_8434ee,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T18:36:52.844914+00:00,2026-10-24T18:54:34.293179+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+44,Cprime,run_s2_Cprime_rep044_20261024_185520_234200_f08456,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T18:55:20.247022+00:00,2026-10-24T19:13:00.519515+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+44,Cprime,run_s2_Cprime_rep044_20261024_191347_262755_776e76,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T19:13:47.275167+00:00,2026-10-24T19:31:31.266803+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+45,Cprime,run_s2_Cprime_rep045_20261024_183654_998039_ed4549,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T18:36:55.003360+00:00,2026-10-24T18:54:36.889085+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+45,Cprime,run_s2_Cprime_rep045_20261024_185520_381642_c93319,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T18:55:20.389149+00:00,2026-10-24T19:13:03.263687+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
+45,Cprime,run_s2_Cprime_rep045_20261024_191349_534367_948a99,"failed: LLMRetryLimitExceededError: LLM retry limit exceeded after 21 API attempts (20 retries): litellm.RateLimitError: litellm.RateLimitError: GeminiException - {
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""Your project has exceeded its monthly spending cap. Please go to AI Studio at https://ai.studio/spend to manage your project spend cap. Learn more at https://ai.google.dev/gemini-api/docs/billing#project-spend-caps. "",
+    ""status"": ""RESOURCE_EXHAUSTED""
+  }
+}
+",0,2026-10-24T19:13:49.551660+00:00,2026-10-24T19:31:33.663965+00:00,86c47aa7088b982a324f008509c4c5707e77e5c5,False,
