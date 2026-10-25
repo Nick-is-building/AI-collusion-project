@@ -98,37 +98,66 @@ def flags(r: dict) -> dict:
     return f
 
 
-def table(full: dict, excl: dict) -> list[dict]:
+def genuine() -> list[str]:
+    """The flagged items read as genuine residue of the removed record (scan column `reading`)."""
+    t = pd.read_csv(SCAN, keep_default_na=False)
+    g = sorted(t.item_id[t.flagged.astype(bool) & t.reading.str.startswith("genuine residue")])
+    assert g == ["rep041_e06_alice", "rep044_e03_alice"], g   # Nick's set (D40 addendum)
+    return g
+
+
+def _cols(t: dict, sfx: str) -> dict:
+    return {f"estimate{sfx}": t.get("estimate"), f"ci{sfx}": [t.get("ci_low"), t.get("ci_high")],
+            f"p{sfx}": t.get("p"), f"p_holm{sfx}": t.get("p_holm"), f"significant{sfx}": _sig(t),
+            f"n_items{sfx}": t.get("n_items")}
+
+
+def table(full: dict, excl: dict, gen: dict | None = None) -> list[dict]:
+    """Per test: full (all 50), `_without` (4 flagged excluded), `_without_genuine` (2 genuine residues excluded)."""
     rows = []
     for name, (sec, path) in TESTS.items():
         a, b = _get(full[sec], path), _get(excl[sec], path)
-        sa, sb = _sig(a), _sig(b)
-        rows.append(dict(test=name, estimate=a.get("estimate"), ci=[a.get("ci_low"), a.get("ci_high")],
-                         p=a.get("p"), p_holm=a.get("p_holm"), significant=sa, n_items=a.get("n_items"),
-                         estimate_without=b.get("estimate"), ci_without=[b.get("ci_low"), b.get("ci_high")],
-                         p_without=b.get("p"), p_holm_without=b.get("p_holm"), significant_without=sb,
-                         n_items_without=b.get("n_items"), significance_changes=sa != sb))
+        r = dict(test=name, **_cols(a, ""), **_cols(b, "_without"))
+        r["significance_changes"] = r["significant"] != r["significant_without"]
+        if gen is not None:
+            r.update(_cols(_get(gen[sec], path), "_without_genuine"))
+            r["significance_changes_genuine"] = r["significant"] != r["significant_without_genuine"]
+        rows.append(r)
     fa, fb = flags(full), flags(excl)
+    fg = flags(gen) if gen is not None else {}
     for k in fa:
-        rows.append(dict(test=k, estimate=fa[k], estimate_without=fb.get(k), significance_changes=fa[k] != fb.get(k)))
+        r = dict(test=k, estimate=fa[k], estimate_without=fb.get(k), significance_changes=fa[k] != fb.get(k))
+        if gen is not None:
+            r.update(estimate_without_genuine=fg.get(k), significance_changes_genuine=fa[k] != fg.get(k))
+        rows.append(r)
     return rows
 
 
+STATUS = ("The primary results remain the pre-specified analyses on all 50 items. Both exclusion sets (the 4 items "
+          "flagged by the residue scan rule; the 2 items read as genuine residue) are post-hoc sensitivity analyses.")
+
+
 def main():
-    ex = flagged()
-    full, excl = run(set()), run(set(ex))
-    rows = table(full, excl)
+    ex, gn = flagged(), genuine()
+    full, excl, gen = run(set()), run(set(ex)), run(set(gn))
+    rows = table(full, excl, gen)
     res = {"label": "D40 sensitivity (0 USD): analyses on the D25 omission items rerun without the items flagged by "
-                    "the residue scan; same code and methods (cluster sign-flip 10,000 / bootstrap 10,000, seed 2026)",
-           "excluded_items": ex, "scan_sha256": (SCAN.with_suffix(".sha256")).read_text().split()[0],
+                    "the residue scan (4) and without the 2 genuine residues only; same code and methods (cluster "
+                    "sign-flip 10,000 / bootstrap 10,000, seed 2026)",
+           "status": STATUS,
+           "excluded_items": ex, "excluded_items_genuine": gn,
+           "scan_sha256": (SCAN.with_suffix(".sha256")).read_text().split()[0],
            "table": rows, "any_change": [r["test"] for r in rows if r["significance_changes"]],
-           "full": full, "without_flagged": excl}
+           "any_change_genuine": [r["test"] for r in rows if r["significance_changes_genuine"]],
+           "full": full, "without_flagged": excl, "without_genuine_residue": gen}
     from src.analysis.primary import to_json
     OUT.write_text(to_json(res))
     for r in rows:
-        print(f"{r['test']:<60} {r['estimate']!s:>8.8} -> {r['estimate_without']!s:>8.8}  "
-              f"sig {r.get('significant')} -> {r.get('significant_without')}  {'CHANGE' if r['significance_changes'] else ''}")
-    print("excluded", ex, "changes:", res["any_change"])
+        print(f"{r['test']:<58} {r['estimate']!s:>8.8} | 4: {r['estimate_without']!s:>8.8} {r.get('significant_without')!s:>5} "
+              f"| 2: {r['estimate_without_genuine']!s:>8.8} {r.get('significant_without_genuine')!s:>5} "
+              f"{'CHANGE4' if r['significance_changes'] else ''} {'CHANGE2' if r['significance_changes_genuine'] else ''}")
+    print("excluded 4", ex, "changes:", res["any_change"])
+    print("excluded 2", gn, "changes:", res["any_change_genuine"])
 
 
 if __name__ == "__main__":

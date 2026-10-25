@@ -18,7 +18,8 @@ def test_every_key_resolves_and_values_match():
         if key.startswith("sensitivity_residue.json:"):   # D40 section: keys refer to that file
             o = sens.get(key.split(":", 1)[1])
             cells = [c.strip() for c in row.strip("|").split("|")]
-            assert t.num(o["estimate"]) in cells and t.num(o["estimate_without"]) in cells, row
+            for k in ("estimate", "estimate_without", "estimate_without_genuine"):
+                assert any(c.startswith(t.num(o[k])) for c in cells), (k, row)
             continue
         o = t.get(key)   # raises if the key does not exist
         cells = [c.strip() for c in row.strip("|").split("|")]

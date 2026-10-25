@@ -566,26 +566,35 @@ SENSITIVITY = ROOT / "results" / "summaries" / "sensitivity_residue.json"
 
 def d40(t: Tables):
     """D40 residue sensitivity; numbers from results/summaries/sensitivity_residue.json (key `table[i]`)."""
-    t.h(2, "5. D40 sensitivity: D25 omission analyses without the residue-flagged items (post hoc)")
+    t.h(2, "5. D40 sensitivity: D25 omission analyses without residue items (post hoc)")
     if not SENSITIVITY.exists():
         t.note("Not run.")
         return
     raw = SENSITIVITY.read_bytes()
     v = json.loads(raw)
+    t.note(f"**{v['status']}**")
     t.note(f"Source `results/summaries/sensitivity_residue.json` (SHA-256 `{hashlib.sha256(raw).hexdigest()}`); keys "
-           f"refer to that file. Excluded items (residue scan, `data/derived/residue_scan_d25.csv`): "
-           f"{', '.join(v['excluded_items'])}. Same code and methods; significance as each analysis defines it "
-           "(Holm where a family exists; D only under gatekeeping).")
+           f"refer to that file. Set A, the 4 items flagged by the residue scan rule (`data/derived/residue_scan_d25.csv`): "
+           f"{', '.join(v['excluded_items'])}. Set B, the 2 genuine residues only: "
+           f"{', '.join(v.get('excluded_items_genuine', []))}. Same code and methods; significance as each analysis "
+           "defines it (Holm where a family exists; D only under gatekeeping). Each cell: estimate, 95% CI, p (Holm if "
+           "any), significant.")
+
+    def cell(r, sfx):
+        est = r.get(f"estimate{sfx}")
+        c = r.get(f"ci{sfx}")
+        ci = "" if not c or c[0] is None else f" [{t.num(c[0])}, {t.num(c[1])}]"
+        ph = r.get(f"p_holm{sfx}") if r.get(f"p_holm{sfx}") is not None else r.get(f"p{sfx}")
+        p = "" if ph is None else f", p {t.num(ph, 4)}"
+        sig = "" if f"significant{sfx}" not in r else f", sig. {t.num(r.get(f'significant{sfx}'))}"
+        return f"{t.num(est)}{ci}{p}{sig}"
     rows = []
     for i, r in enumerate(v["table"]):
-        ci = lambda c: "–" if not c or c[0] is None else f"[{t.num(c[0])}, {t.num(c[1])}]"
-        rows.append([r["test"], t.num(r.get("estimate")), ci(r.get("ci")), t.num(r.get("p_holm") if r.get("p_holm") is not None else r.get("p"), 4),
-                     t.num(r.get("significant")), t.num(r.get("estimate_without")), ci(r.get("ci_without")),
-                     t.num(r.get("p_holm_without") if r.get("p_holm_without") is not None else r.get("p_without"), 4),
-                     t.num(r.get("significant_without")), "CHANGE" if r["significance_changes"] else "",
+        rows.append([r["test"], cell(r, ""), cell(r, "_without"), "CHANGE" if r["significance_changes"] else "",
+                     cell(r, "_without_genuine"), "CHANGE" if r.get("significance_changes_genuine") else "",
                      f"`sensitivity_residue.json:table[{i}]`"])
-    t.table(["Test / row", "Estimate", "95% CI", "p (Holm if any)", "Significant", "Without flagged",
-             "95% CI", "p (Holm if any)", "Significant", "Change", "Key"], rows)
+    t.table(["Test / row", "All 50 items (primary)", "Without set A (4 items, n 46)", "Change A",
+             "Without set B (2 items, n 48)", "Change B", "Key"], rows)
 
 def exploratory(t: Tables):
     E = "exploratory"

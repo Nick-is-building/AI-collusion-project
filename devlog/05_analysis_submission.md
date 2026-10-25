@@ -423,3 +423,13 @@ No outcome analysis, completed manuscript, or final submission is attested here.
 **State / limitations:** post hoc (D40). The primary results stand as preregistered; the sensitivity shows A15's family is fragile around α (2 of the 4 excluded items are shared-phrase rule hits, not residue). Not done: a variant excluding only the 2 genuine residues (not asked).
 **Next:** report to Nick.
 **Cross-references:** D40; D25, D32–D34, D36–D38; A15's entry on rep041_e06.
+
+## 2026-10-25 22:38–22:50 UTC — Claude Code (Opus 5.5), session A14 — D40 addendum: sensitivity without the 2 genuine residues only (0 USD)
+
+**Assignment / authorization:** Nick, in the session: run the sensitivity excluding only rep041_e06 and rep044_e03, same analyses and methods; add it to D40, `sensitivity_residue.json` and `results_tables.md` §5 next to the 4-item version; state that the primary results remain the pre-specified analyses on all 50 items and both exclusion sets are post-hoc sensitivities.
+**Built or changed:** `scripts/d40/sensitivity.py`: `genuine()` (scan `reading` starts "genuine residue"; asserted equal to Nick's two IDs), table columns `*_without_genuine`, `status` text, `excluded_items_genuine`, `without_genuine_residue`; `scripts/analysis/results_tables.py` §5 rewritten as one row per test with three cells (all 50 / set A / set B) and the status line in bold; `tests/test_results_tables.py` checks all three estimates of each §5 row against the file. D40 addendum in `docs/deviations.md`.
+**Checks performed:** `PYTHONPATH=. .venv/bin/python -m scripts.d40.sensitivity` (rc 0, log `scratch/d40_sens2.log`, local): the set-A columns are identical to the committed version (`a698aba`); set B n_items 48 in every section. `results_tables` regenerated; `pytest tests/test_results_tables.py`: 2 passed.
+**Observed (set B, n 48):** A06 Δ_om 0.198 (p 0.007), D_om 0.188 (sig.); A10 T1 −0.083, T2 −0.090, T3 0 (all n.s., Holm 0.169); A13 R2−R1 0.30 (sig., D sig.), others n.s.; A14 L1 0.30, L2 0.29, D_L1 0.25, D_L2 0.29 (all sig.); A14 FR(VIG) − FR(R0′) 0.052 → row 2 instead of row 1; A15 H_out 0.146, Holm p 0.065 (n.s.; unchanged), H_work 0.146, p 0.022, Holm p 0.045 (**becomes significant**; D_H_work 0.167, p 0.017, sig.). Equivalence flags unchanged.
+**Did not work:** none observed.
+**State / limitations:** post hoc (D40). Primary = all 50 items.
+**Cross-references:** D40 and its addendum; previous entry.

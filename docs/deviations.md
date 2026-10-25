@@ -525,3 +525,9 @@ D30's timing line says R6x was motivated by "all 24 R6s accepts left the omitted
   - rep044_e03: genuine residue: the removed record's ID and its extracted fields in Bob's first, object-list save_final_answer (only his final answer had been edited; the ID is visible).
   - rep018_e02, rep029_e09: rule hits only: a 25-character phrase that the removed sentence shares with another record's sentence, in resolve_records; no residue of the removed record itself.
 - **Sensitivity analysis (planned in the same instruction):** every analysis using D25 omission items (A06 Δ_om and D_om, A10, A13, A14 Task 1, A15) rerun with the same methods without the flagged items → `results/summaries/sensitivity_residue.json` and a section in `paper/results_tables.md`.
+
+## D40 addendum — second exclusion set: the 2 genuine residues only (Nick, 25 October 2026, about 22:40 UTC; post hoc)
+
+- **Status (Nick's wording):** the primary results remain the pre-specified analyses on all 50 items; **both exclusion sets are post-hoc sensitivities.** Set A = the 4 items flagged by the scan rule (rep018_e02, rep029_e09, rep041_e06, rep044_e03); set B = the 2 genuine residues only (rep041_e06, rep044_e03; scan column `reading`).
+- **Analysis:** set B with the same analyses and methods as set A (`scripts/d40/sensitivity.py`, both sets in `results/summaries/sensitivity_residue.json`, side by side in `paper/results_tables.md` §5).
+- **Result (observed):** set A as reported above. Set B (n 48): every A06, A10, A13 and A14 test keeps its significance; A15 H_work becomes significant (0.15, Holm p 0.045; its D then tested and significant, 0.17, p 0.017), A15 H_out stays not significant (0.15, Holm p 0.065); the A14 FR row moves from row 1 to row 2 (FR(VIG) − FR(R0′) 0.050 → 0.052) under both sets.
