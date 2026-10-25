@@ -404,6 +404,55 @@ def a13(t: Tables):
               ("Spend stage a13 (USD)", f"{X}.spend_usd_a13")])
 
 
+def a15(t: Tables):
+    X = "addendum.a15"
+    t.h(3, "3.9 A15 history decomposition R3t, R3o (D38; exploratory follow-up of A13) (50 omission items)")
+    if "a15" not in t.get("addendum") or t.get(X).get("status") == "not run":
+        t.note("Not run.")
+        return
+    P = f"{X}.primary"
+    t.h(4, "Primary family (Holm over H_out and H_work; omission versions)")
+    rows = []
+    for k in ("H_out", "H_work"):
+        r = t.stat_row(f"{k}: {t.get(f'{P}.{k}.contrast')}", f"{P}.{k}")
+        rows.append(r[:4] + [t.num(t.get(f"{P}.{k}.p_holm"), 4), t.num(t.get(f"{P}.{k}.significant")),
+                             t.num(t.get(f"{P}.{k}.ci_inside_equivalence_margin"))] + r[4:])
+    t.table(["Test", "Estimate", "95% CI", "p", "p (Holm)", "Significant", "CI inside ±0.10", "Items / clusters", "Key"], rows)
+    t.stats([(f"D for {k} ({'tested' if t.get(f'{P}.D_{k}.tested') else 'not tested, descriptive'})", f"{P}.D_{k}")
+             for k in ("H_out", "H_work")])
+    t.h(4, "Sensitivities of the primary family")
+    for sens, lab in (("primary_missing_as_accept", "missing coded ACCEPT"),
+                      ("primary_missing_as_reject", "missing coded REJECT")):
+        t.stats([(f"{k}, {lab}", f"{X}.{sens}.{k}") for k in ("H_out", "H_work")])
+    S = f"{X}.secondary"
+    t.h(4, "Secondary (descriptive, 95% cluster bootstrap CIs)")
+    t.stats([(k.replace("_minus_", " − ") + " (omission)", f"{S}.contrasts.{k}") for k in t.get(f"{S}.contrasts")])
+    V = f"{S}.per_variant"
+    rows = [("R0′: false rejection (correct)", f"{V}.R0p.false_rejection")]
+    for v in ("R1", "R3", "R3t", "R3o", "R2"):
+        rows.append((f"{v}: detection (omission)", f"{V}.{v}.detection"))
+        if "false_rejection" in t.get(f"{V}.{v}"):
+            rows += [(f"{v}: false rejection (correct)", f"{V}.{v}.false_rejection"),
+                     (f"{v} − R0′ false rejection", f"{V}.{v}.false_rejection_minus_R0p")]
+    t.stats(rows)
+    t.h(4, "Tokens (API-reported input tokens, omission version) and detection")
+    vals = []
+    for v in ("R1", "R3", "R3t", "R3o", "R2"):
+        o = t.get(f"{V}.{v}")
+        if "tokens" in o:
+            vals += [(f"{v}: input tokens, median", f"{V}.{v}.tokens.median"),
+                     (f"{v}: input tokens, min", f"{V}.{v}.tokens.min"), (f"{v}: input tokens, max", f"{V}.{v}.tokens.max"),
+                     (f"{v}: removed tokens vs R1, median", f"{V}.{v}.removed_tokens_vs_R1.median")]
+        vals += [(f"{v}: omission REJECTs", f"{V}.{v}.right_reason_deterministic.rejects"),
+                 (f"{v}: deterministic right-reason", f"{V}.{v}.right_reason_deterministic.right_reason"),
+                 (f"{v}: omission ACCEPTs", f"{V}.{v}.named_accept.accepts"),
+                 (f"{v}: named_accept", f"{V}.{v}.named_accept.named_accept")]
+    t.values(vals)
+    t.records(f"{S}.scatter_detection_vs_removed_tokens.points", ["variant", "median_removed_tokens", "detection"])
+    t.values([("Calls (stage a15)", f"{X}.calls"), ("Missing verdicts (stage a15)", f"{X}.missing"),
+              ("Missing verdicts (reused baselines)", f"{X}.baseline_missing"), ("Spend stage a15 (USD)", f"{X}.spend_usd_a15")])
+
+
 def recognise_approve(t: Tables):
     E = "exploratory.recognise_and_approve"
     if "recognise_and_approve" not in t.get("exploratory"):
@@ -578,6 +627,7 @@ def build(v: dict, source_sha256: str) -> str:
     a10(t)
     a13(t)
     a14(t)
+    a15(t)
     exploratory(t)
     figure_data(t)
     return "\n".join(t.lines).rstrip() + "\n"

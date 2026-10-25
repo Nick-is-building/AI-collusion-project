@@ -133,6 +133,9 @@ def main(argv=None):
         if a14_addendum.STUDY2_OUT.exists():   # A14 task 3 (exploratory; written by a14_addendum --study2)
             import json
             res["exploratory"]["a14_study2_evidence"] = json.loads(a14_addendum.STUDY2_OUT.read_text())
+    if (ROOT / "scripts" / "analysis" / "a15_addendum.py").exists():   # A15: D38 history decomposition R3t, R3o
+        from scripts.analysis import a15_addendum
+        res["addendum"]["a15"] = a15_addendum.analyze(calls, meta)
     if (ROOT / "scripts" / "analysis" / "recognise_approve.py").exists():   # A10 task 6 (exploratory, zero cost)
         from scripts.analysis import recognise_approve
         res["exploratory"]["recognise_and_approve"] = recognise_approve.build(calls, meta)

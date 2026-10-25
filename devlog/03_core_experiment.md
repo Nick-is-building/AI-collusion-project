@@ -777,3 +777,21 @@ Recorded as the D19 addendum in `docs/deviations.md`.
 **Evidence / artifacts:** `results/raw/a13-*.jsonl` (8 files, committed); requests `results/requests/a13-*/` (local, hashed in the lines); logs `logs/a13_ladder_first.log`, `logs/a13_ladder.log`, `logs/a13_r5_match.log` (local).
 **Next:** analysis (DEVLOG 05, A13 entry).
 **Cross-references:** `docs/deviations.md` D36; plan §§8.4, 8.5, 23.3.
+
+## 2026-10-25 20:30–20:45 UTC — Claude Code (Opus 5.5), session A15 — Build: history decomposition R3t, R3o (D38); split check; context table; mock run
+
+**Assignment / authorization:** `assignments/A15_history_decomposition.md` (Nick, 25 October 2026; saved verbatim and committed with D38, the caps change and the analysis script, before any A15 call). Stage `a15`, cap 6 USD. Live calls only after the A14 launcher (PID 198694) has exited and no `scripts.a14` process remains. A14 files and results were not opened for editing or staged; the A06 coordination rules apply.
+**Split check (before building), all 50 items, 243 earlier episodes:** every earlier episode splits into [task phase: episode start → communication opening) / [communication → verdict prompt) / [outcome: verdict prompt → episode end); order holds, the task phase starts with "## Episode k: task phase", the outcome segment holds the "Episode k complete" feedback and ends with the reflection (assistant), and no tool call is separated from its result in any segment. **0 problems; no item excluded.**
+**Built or changed:**
+- `docs/deviations.md` **D38** (next free after D37), `configs/caps.yaml` `stages.a15: 6.0`.
+- `src/replay/r3_history.py`: `segments`, `split_problems` (asserted in `build`), `removed_indices`, `build(ctx, "R3t"|"R3o", bob_r1_content)`, plus `residual` and `context_table`. `src/replay/variants.py` is not edited.
+- `scripts/a15/launch_a15.py`: 400 jobs (check `HIST`), seeded order 2026, item blocks adjacent, `--first` (3 items, 24 calls), `--plan`, mock, `--live --approved-stage a15`; A10 stop guard with `logs/a15_guard/<mode>/`; runner response_model check.
+- `scripts/analysis/a15_addendum.py` → `verification.json` `addendum.a15` (hook in `verify_all.py`); `results_tables.py` section 3.9.
+- `data/derived/a15_contexts.csv` (`PYTHONPATH=. .venv/bin/python -m src.replay.r3_history`): 500 rows (50 items × R1, R2, R3, R3t, R3o × 2 versions) with message and character counts and the residual counts.
+- `tests/test_a15.py` (52 tests).
+**Observed (context table, omission version, medians over 50 items):** messages / characters (canonical JSON incl. signatures): R1 200 / 553,220; R3 95 / 313,273; **R3t 65 / 280,835; R3o 46 / 108,099**; R2 16 / 69,645. So R3 → R3t removes a short segment (about 32k characters median), R3 → R3o a long one (about 205k). Token counts per item and variant come from the live `input_tokens` (D38.2).
+**Residual information (deterministic, D38.3; over 243 earlier episodes):** R3o's kept outcome segments name a task ID in 243/243 (the feedback "Your task: … / Bob's task: …"), mention Bob in 243/243, a log in 131/243, task-content words in 243/243. R3t's kept task phases contain an outcome word in 30/243; I listed all 81 matches: all are task content ("accepted" 34, "rejected" 17, "acceptable" 16, "rejects" 11, "reject" 3, e.g. "Only plain digit strings are accepted"); "reward" and "verdict" never occur.
+**Checks performed:** `pytest tests/test_a15.py`: **52 passed** (all 50 items: kept messages byte-identical to R3 by per-message SHA-256 and in R3's order; exactly the variant's earlier segments removed; removed and communication tool calls absent; R3t has no earlier verdict/feedback, R3o no earlier task phase; system prompt kept; current episode byte-identical to R1; tool pairing; correct versions for the first items; job list 400 / 8 per item / adjacency / seed reproduction / stage 1 = first 24; synthetic Holm pair, gatekeeping D, missing sensitivities, tokens and scatter). `launch_a15 --plan`: **3.73 USD projected** (the estimate uses R3's input tokens for both variants, an upper bound). Mock run, 4 workers: **400/400, 0 missing** (`logs/mock_runs/raw/a15-20261025T20364*`).
+**Did not work:** none observed.
+**Next:** commit, push; one background wait for the A14 launcher; stage 1 live.
+**Cross-references:** `docs/deviations.md` D36, D38; A13 entries above.
