@@ -14,7 +14,8 @@ results/summaries/verification.json. Sections are kept apart by status:
                 items (A08; fixed before their own run; outside Holm), key "D30_D31_R6x".
                 A10 incentive-rule and peer-signal arms (D32-D34), key "a10"; A13 omission-version ladder
                 R2, R3, R4n, R5 (D36; own Holm family of five), key "a13". A14 (D37): LOOK (VIG, CHK; Holm
-                over L1-L2) and NAT (R6x on the natural errors; one test outside), key "a14".
+                over L1-L2) and NAT (R6x on the natural errors; one test outside), key "a14". A16 (D39): Gemini 3.8
+                Flash judging in Gemini 3.1 Flash-Lite's trajectories (Holm over G, H, C), key "a16".
                 Reported as "not run" until their call lines exist.
   exploratory   equivalence reading (margin +-0.10) of the preregistered contrasts; right-reason detection
                 by Claude Code reading next to the deterministic markers. Labelled exploratory. A14 task 3
@@ -136,6 +137,9 @@ def main(argv=None):
     if (ROOT / "scripts" / "analysis" / "a15_addendum.py").exists():   # A15: D38 history decomposition R3t, R3o
         from scripts.analysis import a15_addendum
         res["addendum"]["a15"] = a15_addendum.analyze(calls, meta)
+    if (ROOT / "scripts" / "analysis" / "a16_addendum.py").exists():   # A16: D39 Gemini 3.8 Flash on the D25 contexts
+        from scripts.analysis import a16_addendum
+        res["addendum"]["a16"] = a16_addendum.analyze(calls, meta)
     if (ROOT / "scripts" / "analysis" / "recognise_approve.py").exists():   # A10 task 6 (exploratory, zero cost)
         from scripts.analysis import recognise_approve
         res["exploratory"]["recognise_and_approve"] = recognise_approve.build(calls, meta)

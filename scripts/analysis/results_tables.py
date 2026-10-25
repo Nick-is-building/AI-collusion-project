@@ -453,6 +453,72 @@ def a15(t: Tables):
               ("Missing verdicts (reused baselines)", f"{X}.baseline_missing"), ("Spend stage a15 (USD)", f"{X}.spend_usd_a15")])
 
 
+def a16(t: Tables):
+    X = "addendum.a16"
+    t.h(3, "3.10 A16 Gemini 3.8 Flash judging in Gemini 3.1 Flash-Lite's trajectories (D39; exploratory transfer study)")
+    if "a16" not in t.get("addendum") or t.get(X).get("status") in ("not run", "awaiting exclusion freeze"):
+        t.note("Not run.")
+        return
+    t.values([("Calls (stage a16)", f"{X}.calls"), ("Missing verdicts (stage a16)", f"{X}.missing"),
+              ("Missing verdicts (Flash-Lite comparison cells)", f"{X}.flash_lite_missing"),
+              ("Spend stage a16 (USD)", f"{X}.spend_usd_a16"),
+              ("Served model: only gemini-3.8-flash", f"{X}.served_models.only_expected_model"),
+              ("Call lines checked for served model", f"{X}.served_models.call_lines")])
+    for blk, title in (("primary_item_set", "Primary item set (without rep041_e06, rep044_e03)"),
+                       ("all_50_sensitivity", "Sensitivity: all 50 items"),
+                       ("without_all_d40_flagged_sensitivity", "Sensitivity: without all 4 D40-flagged items")):
+        B = f"{X}.{blk}"
+        P = f"{B}.primary"
+        t.h(4, f"{title}: primary family (Holm over G, H, C; omission versions)")
+        rows = []
+        for k in ("G", "H", "C"):
+            r = t.stat_row(f"{k}: {t.get(f'{P}.{k}.contrast')}", f"{P}.{k}")
+            rows.append(r[:4] + [t.num(t.get(f"{P}.{k}.p_holm"), 4), t.num(t.get(f"{P}.{k}.significant")),
+                                 t.num(t.get(f"{P}.{k}.ci_inside_equivalence_margin"))] + r[4:])
+        t.table(["Test", "Estimate", "95% CI", "p", "p (Holm)", "Significant", "CI inside ±0.10", "Items / clusters",
+                 "Key"], rows)
+        t.stats([(f"D for {k} ({'tested' if t.get(f'{P}.D_{k}.tested') else 'not tested, descriptive'})", f"{P}.D_{k}")
+                 for k in ("G", "H", "C")])
+        if blk == "primary_item_set":
+            for sens, lab in (("primary_missing_as_accept", "missing coded ACCEPT"),
+                              ("primary_missing_as_reject", "missing coded REJECT")):
+                t.stats([(f"{k}, {lab}", f"{B}.{sens}.{k}") for k in ("G", "H", "C")])
+            I = f"{B}.interpretation"
+            t.values([(f"Interpretation {k}", f"{I}.rows.{k}") for k in t.get(f"{I}.rows")]
+                     + [("Detection(R1-om), point estimate", f"{I}.detection_R1_om"),
+                        ("FR(R1+CHK) − FR(R0′), point estimate", f"{I}.FR_R1CHK_minus_R0p_point")])
+        V = f"{B}.verifier_comparison"
+        t.h(4, f"{title}: verifier comparison, 3.8 Flash − Flash-Lite (paired by item; descriptive)")
+        rows = []
+        for c in t.get(f"{V}.cells"):
+            rows += [(f"{c}: 3.8 Flash", f"{V}.cells.{c}.flash_38"), (f"{c}: Flash-Lite", f"{V}.cells.{c}.flash_lite"),
+                     (f"{c}: difference", f"{V}.cells.{c}.difference")]
+        for k in ("G", "H", "C"):
+            rows += [(f"{k}: 3.8 Flash", f"{V}.contrasts.{k}.flash_38"), (f"{k}: Flash-Lite", f"{V}.contrasts.{k}.flash_lite"),
+                     (f"{k}: difference", f"{V}.contrasts.{k}.difference")]
+        t.stats(rows)
+        if blk == "primary_item_set":
+            S = f"{B}.secondary.per_cell"
+            t.h(4, f"{title}: secondary (descriptive)")
+            rows, vals = [], []
+            for c in t.get(S):
+                o = t.get(f"{S}.{c}")
+                rows.append((f"{c}: share REJECT", f"{S}.{c}.rate_reject"))
+                if "false_rejection_minus_R0p" in o:
+                    rows.append((f"{c}: FR − FR(R0′)", f"{S}.{c}.false_rejection_minus_R0p"))
+                    vals.append((f"{c}: FR − FR(R0′) CI inside ±0.10", f"{S}.{c}.false_rejection_minus_R0p.ci_inside_equivalence_margin"))
+                if "right_reason_deterministic" in o:
+                    vals += [(f"{c}: REJECTs", f"{S}.{c}.right_reason_deterministic.rejects"),
+                             (f"{c}: deterministic right-reason", f"{S}.{c}.right_reason_deterministic.right_reason"),
+                             (f"{c}: ACCEPTs", f"{S}.{c}.named_accept.accepts"),
+                             (f"{c}: named_accept", f"{S}.{c}.named_accept.named_accept")]
+                if "draw_agreement" in o:
+                    vals.append((f"{c}: draw agreement", f"{S}.{c}.draw_agreement.agree_share"))
+                vals.append((f"{c}: missing", f"{S}.{c}.missing"))
+            t.stats(rows)
+            t.values(vals)
+
+
 def recognise_approve(t: Tables):
     E = "exploratory.recognise_and_approve"
     if "recognise_and_approve" not in t.get("exploratory"):
@@ -663,6 +729,7 @@ def build(v: dict, source_sha256: str) -> str:
     a13(t)
     a14(t)
     a15(t)
+    a16(t)
     exploratory(t)
     figure_data(t)
     d40(t)

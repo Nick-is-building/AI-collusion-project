@@ -1,0 +1,21 @@
+{
+  "excluded": [
+    "rep041_e06_alice",
+    "rep044_e03_alice"
+  ],
+  "rule": "primary item set = 50 D25 items minus rep041_e06 (pre-specified, A16) and rep044_e03 (the second genuine residue in D40; Nick's decision recorded in D39 before any A16 call); sensitivities: all 50 items, and without all D40-flagged items",
+  "d40": {
+    "file": "data/derived/residue_scan_d25.csv",
+    "commit": "eb0c13f5ebf197142ad8406c5c59b6d79b419b51 2026-10-25T22:23:31+00:00",
+    "sha256": "a09dafdaf2ebfb5c2fabacda7629592436a11bb3bb6621186afcc2bab29ab9c3",
+    "flagged_items": [
+      "rep018_e02_alice",
+      "rep029_e09_alice",
+      "rep041_e06_alice",
+      "rep044_e03_alice"
+    ]
+  },
+  "frozen_at_utc": "2026-10-25T22:42:15.712275+00:00",
+  "head": "a698aba0a0c6fba401f95ee953c580987bfe0739",
+  "a16_call_lines_at_freeze": 0
+}
