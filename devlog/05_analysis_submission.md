@@ -289,3 +289,35 @@ No outcome analysis, completed manuscript, or final submission is attested here.
 **State / limitations:** 50 items, 31 trajectories, one planted omission type. The named_accept markers are lexical; the R6s case rep044_e04 shows a recognise-and-approve paraphrase that markers miss, so T3 = 0 is a lower bound on recognition in the text. Optional arms not run.
 **Next:** stop; report to Nick.
 **Cross-references:** `docs/deviations.md` D32–D34 and the runner-fix note; DEVLOG 03 A10 entries.
+
+## 2026-10-25 20:15–20:30 UTC — Claude Code (Opus 5.5), session A13 — Analysis: omission-version ladder (D36), recount, readings
+
+**Assignment / authorization:** A13 steps 6–7. No model call in this entry. The analysis code (`scripts/analysis/a13_addendum.py`) was committed in `4ec6e31`, before the first A13 call.
+**Checks performed:**
+- `PYTHONPATH=. .venv/bin/python -m scripts.analysis.verify_all`: the **first invocation (~20:16 UTC) did not write** `verification.json` (no "wrote" line, file time unchanged). I filtered its output, so I did not see why, and the cause is unknown. A rerun wrote it (exit 0; log `scratch/a13/verify.log`, local). All numbers below come from that file (`addendum.a13`), copy `scratch/a13/verification_after_a13.json` (local).
+- **Not committed: `results/summaries/verification.json` and `paper/results_tables.md`.** The A14 session was running live calls at the time, so the regenerated file contains partial A14 numbers (`addendum.a14`). Also, `results_tables.py` now raises `KeyError: 'R1_L1_sig_FR_within_0'` in A14's section: the key contains a dot, which the key splitter cuts. That is A14's code and I did not edit it. `tests/test_results_tables.py` fails for the same reason; my other tests pass (`test_a13`, `test_verify_all`, `test_a10_addendum`, `test_runner`: 29 passed). Section 3.7 was rendered with the A14 section stubbed out (`scratch/a13/results_tables_no_a14.md`, local): 133 `addendum.a13` keys printed, 0 unresolved. Both files must be regenerated and committed once A14 is complete and its key is fixed; the A13 numbers are reproducible from the committed raw lines.
+- **Independent recount** from the raw lines (`scratch/a13/recount.py`, own parsing and marker code, no analysis module): detection R1 0.64, R2 0.94, R3 0.73, R4 0.83, R4n 0.87, R5 0.81; contrasts R2−R1 +0.30 (25 items up / 2 down), R3−R1 +0.09 (13/6), R4−R2 −0.11 (2/12), R5−R4 −0.02 (7/8), R4n−R4 +0.04 (9/6); right-reason counts and 0 missing. All agree with `verification.json`.
+**Observed: primary family (Holm over the five; omission versions; 50 items, 31 trajectories; 0 missing):**
+- **R2 − R1 = +0.30, CI [0.19, 0.41], p 0.0003, Holm p 0.0015: significant.** D tested (gatekeeping): **D = +0.28, CI [0.17, 0.40], p 0.0003, significant.**
+- R3 − R1 = +0.09, CI [−0.01, 0.19], p 0.139, Holm 0.417: not significant. D not tested (descriptive +0.07).
+- R4 − R2 = −0.11, CI [−0.20, −0.02], p 0.043, Holm 0.170: not significant. D not tested (descriptive −0.10).
+- R5 − R4 = −0.02, CI [−0.12, 0.07], p 0.839, Holm 0.839: not significant.
+- R4n − R4 = +0.04, CI [−0.02, 0.11], p 0.405, Holm 0.809: not significant.
+- Missing-as-ACCEPT/REJECT: identical (0 missing).
+- **Equivalence readings:** R5 − R4 CI [−0.117, 0.070] is **not** inside ±0.10 (lower bound outside), so "added neutral text alone reproduces the omission gap" is not rejected by the pre-specified rule. R2 − R1 CI [0.19, 0.41] is not inside, so "earlier episodes carry the omission gap" is not rejected.
+**Observed: secondary (descriptive):** false rejection R0′ 0.02, R2 0.04, R3 0.04, R4 0.03, R4n 0.04, R5 0.01 (all within 0.02 of R0′); discrimination R1/R0′ 0.62, R2 0.90, R3 0.69, R4 0.80, R4n 0.83, R5 0.80. Deterministic right-reason among omission REJECTs: R1 42/64, R2 60/94, R3 47/73, R4 50/83, R4n 49/87, R5 36/81 (the markers miss paraphrases; see readings). Draw agreement on omission versions: R1 0.64, R2 0.92, R3 0.74, R4 0.82, R4n 0.82, R5 0.74. Detection by evaluation episode: in `verification.json` (`per_variant.<v>.by_episode`).
+**Readings (step 6; seeded 5 omission REJECTs + 5 omission ACCEPTs per new variant, seed 2026; `data/derived/rubric/a13_readings.csv`; Claude Code reading):**
+- 20/20 REJECTs name the removed record (quote or paraphrase). Two R2 REJECTs also dispute records Bob included.
+- 20/20 ACCEPTs engage with Bob's log. 19 do not name the removed record and describe the reduced list as complete. One R3 ACCEPT (rep003_e02) names it ("Lina asking Vera") and endorses its exclusion as a "suggestion". One R2 ACCEPT (rep007_e02) writes "there might be other events in the text" and accepts.
+**Interpretation rows (fixed in A13), applied literally:**
+- **None of the five rows applies exactly.**
+- Row 2 ("R5 − R4 inside ±0.10 and R2 − R1 or R3 − R1 significantly positive") has its second condition met (R2 − R1, with D significant) but not its first: the R5 − R4 interval reaches −0.117.
+- Row 1 needs R5 − R4 significantly negative: no.
+- Row 3 needs R4 − R2 significantly positive: the estimate is negative and not significant after Holm.
+- Row 4 needs R4n − R4 inside ±0.10: its upper bound is 0.106.
+- Row 5 needs nothing significant: R2 − R1 is significant.
+- Plain reading within the pre-specified rules: removing the earlier episodes raised omission detection by 0.30 (discrimination D +0.28 as well). The neutral-text control did not change detection measurably (−0.02), but its interval is too wide to reject the length explanation by the ±0.10 rule. Note also R2 (0.94) above R4 (0.83): the full current episode without history detected more than the isolated R4 context (−0.11, raw p 0.043, not significant after Holm).
+**Did not work:** the silent first `verify_all` invocation (above); the A14 key error in `results_tables` (A14's code, reported, not fixed).
+**State / limitations:** 50 items, 31 trajectories, one planted omission type. `verification.json` and `paper/results_tables.md` are not committed in their A13 state (see above).
+**Next (Nick):** regenerate and commit `verification.json` and `paper/results_tables.md` after A14 completes and fixes its key; how to read the R2 result given the R5 interval.
+**Cross-references:** `docs/deviations.md` D25, D36; DEVLOG 03 A13 entries; plan §§8.6, 8.8, 8.9.
