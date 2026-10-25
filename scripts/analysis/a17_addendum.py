@@ -37,6 +37,9 @@ ROOT = Path(__file__).resolve().parents[2]
 STAGE, CHECK = "a17", "HAIKU"
 CELLS = A16.OM_CELLS + A16.COR_CELLS
 EXPECTED_PRIMARY_EXCLUSIONS = ["rep041_e06_alice", "rep044_e03_alice"]
+# D41 note (A17 rule "stage-1 projection above 12 USD: drop draw 2 of every cell"; projection 15.21 USD): the analysis
+# uses draw 1 only, on every item; the 24 draw-2 calls of stage 1 stay logged and are excluded (uniform design).
+DRAW2_DROPPED = True
 
 
 def comparison(x: pd.DataFrame, other: pd.DataFrame, meta, name: str) -> dict:
@@ -118,6 +121,9 @@ def analyze(main_calls: pd.DataFrame, main_meta: pd.DataFrame) -> dict:
         return {"status": "not run", "label": a17.LABEL}
     from scripts.a17.launch_a17 import p6_check
     x = st[st.check == CHECK]
+    n_draw2_logged = int((x.draw == 2).sum())
+    if DRAW2_DROPPED:
+        x = x[x.draw == 1]
     out = {"label": "ADDENDUM A17 (D41; exploratory cross-family transfer, same design as D39): " + a17.LABEL,
            "exclusions": {"primary_excluded": exc["excluded"], "d40_flagged": exc["d40"]["flagged_items"],
                           "source": "data/derived/a16/primary_exclusions.json (A16's frozen file)"},
@@ -132,7 +138,7 @@ def analyze(main_calls: pd.DataFrame, main_meta: pd.DataFrame) -> dict:
     prim = [i for i in all_items if i not in set(exc["excluded"])]
     out.update(calls=len(x), missing=int(x.y.isna().sum()),
                calls_by_cell={f"{v}|{ver}": int(n) for (v, ver), n in x.groupby(["variant", "version"]).size().items()},
-               a16_finished=f38 is not None,
+               a16_finished=f38 is not None, draw2_dropped=DRAW2_DROPPED, draw2_calls_logged_excluded=n_draw2_logged,
                primary_item_set=block(x, fl, f38, meta, info, prim),
                all_50_sensitivity=block(x, fl, f38, meta, info, all_items),
                without_all_d40_flagged_sensitivity=block(

@@ -563,3 +563,10 @@ D30's timing line says R6x was motivated by "all 24 R6s accepts left the omitted
 - **Contexts above the Haiku window:** none (window 1M; largest context about 143k Flash-Lite tokens; tested with a 2× tokenizer margin); 0 excluded.
 - **Stop rules:** any billing/credit error → STOP (no retry); 429s: upstream backoff, STOP at more than 10 within 5 minutes (A10 guard counter); a response model other than claude-haiku-5-5 → STOP; the runner's response_model rule (`297c244`).
 - **Stages:** P6 (10 R1-om calls on items 4–13 of the order; pass = submit_verdict with thinking in ≥ 9/10), stage 1 (first 3 items, 48 calls, every call read by hand), full run. Stage-1 projection above 12 USD → draw 2 of every cell dropped and recorded here before continuing. Deadline for P6: 04:00 UTC 26 October, else "built, not run".
+
+## D41 note — draw 2 dropped (A17 rule; 25 October 2026, about 23:40 UTC, before the full run)
+
+- **Rule (A17):** "Stage-1 projection above 12 USD: drop draw 2 of every cell and record it in D41."
+- **Projection (observed):** P6 10/10 passed (0.731 USD). Stage 1 (3 items, 48 calls) cost 1.020 USD; the per-call cost model (Claude/Gemini input-token ratio 1.95, 1.27 API requests per call, 1,888 output tokens per call, Haiku tiers) calibrated on stage 1 (factor 0.63) projects **15.21 USD** for all 800 calls, 7.61 USD for draw 1 only. Above 12 USD, so **draw 2 of every cell is dropped**: the full run is the 400 draw-1 calls (`launch_a17 --drop-draw2`).
+- **Consequence for the analysis (implementation, uniform design):** per-item cells are single draws for every item; the 24 draw-2 calls already made in stage 1 stay logged as evidence and are excluded from the analysis (`scripts/analysis/a17_addendum.py`, `DRAW2_DROPPED`). Draw agreement cannot be computed.
+- **Observation from P6 and stage 1 (not a route failure):** in 8/10 P6 and 13/48 stage-1 calls Haiku first called send_message (a communication-phase tool visible in the history, not offered at the verdict); upstream's runtime answered with a PhaseError and Haiku then called submit_verdict. Upstream's own handling; it raises the cost per call.
