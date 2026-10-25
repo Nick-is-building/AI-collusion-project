@@ -713,6 +713,81 @@ def figure_data(t: Tables):
     t.table(["Error", "Variant", "Detection", "95% CI", "False rejection", "95% CI", "Key"], rows)
 
 
+def a17(t: Tables):
+    X = "addendum.a17"
+    t.h(3, "3.11 A17 Claude Haiku 5.5 judging in Gemini 3.1 Flash-Lite's trajectories (cross-family; Gemini thought "
+           "signatures removed) (D41; exploratory)")
+    if "a17" not in t.get("addendum") or t.get(X).get("status") in ("not run", "P6 only"):
+        t.note("Not run." if "a17" not in t.get("addendum") or t.get(X).get("status") == "not run"
+               else "P6 only (see the P6 values in verification.json).")
+        return
+    t.values([("Calls (stage a17, HAIKU)", f"{X}.calls"), ("Missing verdicts", f"{X}.missing"),
+              ("Spend stage a17 (USD)", f"{X}.spend_usd_a17"),
+              ("Served model: only claude-haiku-5-5", f"{X}.evidence.only_expected_model"),
+              ("Call lines with thinking in the response", f"{X}.evidence.calls_with_thinking_in_response"),
+              ("Call lines (incl. P6)", f"{X}.evidence.call_lines"),
+              ("P6 passed", f"{X}.p6.passed"), ("P6 submit_verdict with thinking", f"{X}.p6.submit_verdict_with_thinking"),
+              ("A16 finished (3.8 Flash comparison available)", f"{X}.a16_finished")])
+    for blk, title in (("primary_item_set", "Primary item set (without rep041_e06, rep044_e03)"),
+                       ("all_50_sensitivity", "Sensitivity: all 50 items"),
+                       ("without_all_d40_flagged_sensitivity", "Sensitivity: without all 4 D40-flagged items")):
+        B = f"{X}.{blk}"
+        P = f"{B}.primary"
+        t.h(4, f"{title}: primary family (Holm over G, H, C; omission versions)")
+        rows = []
+        for k in ("G", "H", "C"):
+            r = t.stat_row(f"{k}: {t.get(f'{P}.{k}.contrast')}", f"{P}.{k}")
+            rows.append(r[:4] + [t.num(t.get(f"{P}.{k}.p_holm"), 4), t.num(t.get(f"{P}.{k}.significant")),
+                                 t.num(t.get(f"{P}.{k}.ci_inside_equivalence_margin"))] + r[4:])
+        t.table(["Test", "Estimate", "95% CI", "p", "p (Holm)", "Significant", "CI inside ±0.10", "Items / clusters",
+                 "Key"], rows)
+        t.stats([(f"D for {k} ({'tested' if t.get(f'{P}.D_{k}.tested') else 'not tested, descriptive'})", f"{P}.D_{k}")
+                 for k in ("G", "H", "C")])
+        if blk == "primary_item_set":
+            for sens, lab in (("primary_missing_as_accept", "missing coded ACCEPT"),
+                              ("primary_missing_as_reject", "missing coded REJECT")):
+                t.stats([(f"{k}, {lab}", f"{B}.{sens}.{k}") for k in ("G", "H", "C")])
+            I = f"{B}.interpretation"
+            t.values([(f"Interpretation {k}", f"{I}.rows.{k}") for k in t.get(f"{I}.rows")]
+                     + [("Detection(R1-om), point estimate", f"{I}.detection_R1_om"),
+                        ("FR(R1+CHK) − FR(R0′), point estimate", f"{I}.FR_R1CHK_minus_R0p_point")])
+        for cmpk, other, lab in (("haiku_minus_flash_lite", "flash_lite", "Flash-Lite"),
+                                 ("haiku_minus_flash_38", "flash_38", "3.8 Flash")):
+            V = f"{B}.{cmpk}"
+            if t.get(V).get("status"):
+                t.note(f"{title}: Haiku − {lab}: {t.get(V)['status']}.")
+                continue
+            t.h(4, f"{title}: verifier comparison, Haiku − {lab} (paired by item; descriptive)")
+            rows = []
+            for c in t.get(f"{V}.cells"):
+                rows += [(f"{c}: Haiku", f"{V}.cells.{c}.haiku"), (f"{c}: {lab}", f"{V}.cells.{c}.{other}"),
+                         (f"{c}: difference", f"{V}.cells.{c}.difference")]
+            for k in ("G", "H", "C"):
+                rows += [(f"{k}: Haiku", f"{V}.contrasts.{k}.haiku"), (f"{k}: {lab}", f"{V}.contrasts.{k}.{other}"),
+                         (f"{k}: difference", f"{V}.contrasts.{k}.difference")]
+            t.stats(rows)
+        if blk == "primary_item_set":
+            S = f"{B}.secondary.per_cell"
+            t.h(4, f"{title}: secondary (descriptive)")
+            rows, vals = [], []
+            for c in t.get(S):
+                o = t.get(f"{S}.{c}")
+                if not o.get("calls"):
+                    continue
+                rows.append((f"{c}: share REJECT", f"{S}.{c}.rate_reject"))
+                if "false_rejection_minus_R0p" in o:
+                    rows.append((f"{c}: FR − FR(R0′)", f"{S}.{c}.false_rejection_minus_R0p"))
+                if "right_reason_deterministic" in o:
+                    vals += [(f"{c}: REJECTs", f"{S}.{c}.right_reason_deterministic.rejects"),
+                             (f"{c}: deterministic right-reason", f"{S}.{c}.right_reason_deterministic.right_reason"),
+                             (f"{c}: ACCEPTs", f"{S}.{c}.named_accept.accepts"),
+                             (f"{c}: named_accept", f"{S}.{c}.named_accept.named_accept")]
+                if "draw_agreement" in o:
+                    vals.append((f"{c}: draw agreement", f"{S}.{c}.draw_agreement.agree_share"))
+                vals.append((f"{c}: missing", f"{S}.{c}.missing"))
+            t.stats(rows)
+            t.values(vals)
+
 def build(v: dict, source_sha256: str) -> str:
     t = Tables(v)
     t.lines += ["# Results tables (Study 1 and addenda)", "",
@@ -730,6 +805,7 @@ def build(v: dict, source_sha256: str) -> str:
     a14(t)
     a15(t)
     a16(t)
+    a17(t)
     exploratory(t)
     figure_data(t)
     d40(t)

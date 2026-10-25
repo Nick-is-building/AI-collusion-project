@@ -13,6 +13,7 @@ stages:
   a14: 10.0                 # Nick, A14 (25 Oct 2026): VIG/CHK arms and R6x on the natural errors (D37); raised from 8 by Nick before any A14 call
   a15: 6.0                  # Nick, A15 (25 Oct 2026): history decomposition R3t, R3o (D38)
   a16: 40.0                 # Nick, A16 (25 Oct 2026): Gemini 3.8 Flash on the D25 contexts (D39)
+  a17: 15.0                 # Nick, A17 (25 Oct 2026): Claude Haiku 5.5 on the D25 contexts, Anthropic API only (D41)
 # Sub-caps on groups of checks within a stage (fail closed, same ledger).
 check_groups:
   a02_pilot_checks:          # assignment A02: P1 (incl. 3.7-Flash call), P2, P3, P9; pilot cap stays 10
