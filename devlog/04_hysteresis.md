@@ -309,3 +309,38 @@ Option 1 as asked: remove STOP (its text stays in `scheduler.jsonl` and here); r
 **Evidence committed:** for both groups, `manifest.csv`, `files_sha256.txt`, `calls.csv.gz`, plus per-run `study2_meta.json`. Main group also: `scheduler.jsonl`, `runs.csv`, `stop_watch.json`, `WORKERS`. `main_superseded/README.md`. Full traces stay local (D27).
 **Not looked at:** no outcome yet.
 **Next:** task 4 (preregistered analysis + three D35 sensitivities).
+
+## 2026-10-25 02:35–02:50 UTC — Claude Code (Opus 5.5), session A05b — Task 4: preregistered Study 2 analysis and the three D35 sensitivities
+
+**Assignment / authorization:** A05b task 4, after the run was complete (250/250 arms) and exported (`650cbae`). This is the first time any Study 2 outcome was computed.
+**Commands:**
+- `PYTHONPATH=. .venv/bin/python -m scripts.study2.analyze --runs results/study2/main/runs.csv --out results/summaries/study2_analysis.json --confirm-run-complete` (frozen code, prereg-study2);
+- `PYTHONPATH=. .venv/bin/python -m scripts.study2.analyze_a05b --runs results/study2/main/runs.csv --group-dir results/study2/main --out results/summaries/study2_a05b_sensitivities.json --confirm-run-complete` (D35);
+- both rc 0, log `logs/study2_analyze_a05b.log` (local).
+**Results (observed; from the two JSON files):**
+- Rows: 1,000 verdict rows each for A′, B, C′, PC; 500 for the prefix. Status-line check over all 50 × 5 arms: PASS, 4,500 rows, 0 failures, 0 quoted.
+- **H6 primary (B − C′, strict_full, episodes 6–8, n = 50 pairs, 0 excluded):** B 0.767, C′ 0.687, d = **+0.080** (SD 0.272), t(49) = 2.08, **p = 0.043**, 95% t CI [0.003, 0.157], bootstrap [0.003, 0.153]. The hypothesis was B < C′. The observed difference goes the **opposite** way.
+- **H7 (PC − B, Alice's strict_full, n = 50):** PC 0.820, B 0.853, d = −0.033, t(49) = −0.70, p = 0.49, t CI [−0.130, 0.063], bootstrap [−0.127, 0.060]. Not supported.
+- **Secondary (plan §9.3):**
+  - manipulation check: B 0.767 vs A′ 0.000, d = 0.767, bootstrap [0.723, 0.810] (the opening works);
+  - `strict_full_multipiece` primary: d = +0.067, p = 0.084, bootstrap [−0.007, 0.140];
+  - C′ vs Shi et al. (0.653): C′ 0.687, bootstrap [0.623, 0.747], reference inside;
+  - slopes over episodes 6–10: A′ 0.000, B −0.022 [−0.045, −0.000], C′ −0.036 [−0.062, −0.011], PC (Alice) −0.032 [−0.060, −0.004];
+  - P(accept | peer incorrect): A′ 0.76, B 0.95, C′ 0.92, PC Alice 0.92; discrimination: A′ 0.093, B 0.045, C′ 0.075, PC Alice 0.080, PC Bob (replayed) −0.005;
+  - B vs PC: Alice's verdict the same in 98.8% of 250 episode pairs, rewards the same in only 1.6% (upstream gives scripted Bob reward 0, as preregistered).
+- **D35 sensitivity (1), primary on the 18 sequences not rerun:** B 0.759, C′ 0.731, d = +0.028, t(17) = 0.39, p = 0.70, t CI [−0.123, 0.179], bootstrap [−0.111, 0.167].
+- **D35 sensitivity (2), C′ rerun (32) − original (18), descriptive:** 0.661 vs 0.731, difference −0.070, bootstrap [−0.194, 0.067].
+- **D35 sensitivity (3), B→C′ launch lag (C′ start − B start):** rerun 32: median 635 min (range 623–666, ≈ 10.4–11.1 h); not rerun 18: median 112 min (range 105–283).
+**Correction to D35 (`docs/deviations.md`):** D35 says the 32 rerun C′ arms run "about a day after its B". The measured lag is 10.4–11.1 h (sensitivity 3). D35's text stays; this entry corrects it.
+**Interpretation (inferred, for Nick):**
+- H6 is not supported. The preregistered test is nominally significant in the opposite direction: constrained-then-opened agents transmitted complete logs more often, not less. The effect is fragile:
+  - its intervals reach almost to 0;
+  - the multipiece measure is not significant;
+  - on the 18 pairs without a rerun, the difference is +2.8 pp (p = 0.70);
+  - the rerun C′ arms (run ~10.5 h after their B) are 7 pp lower than the original C′ arms (CI includes 0).
+
+  So part of the +8 pp may come from the D35 time split rather than from the treatment. It cannot be separated with these data.
+- H7 is not supported. Per plan §4, neither "collusive norm" nor "persistence of the practice" can be claimed.
+**Not done:** no paper or figure update (not assigned); no reading of messages or verdict reasonings.
+**State:** the A05b assignment is complete. Stopped, per Nick's instruction.
+**Cross-references:** D35; `PREREGISTRATION_STUDY2.md` §§3–4; plan §§4, 9.2, 9.3, 23.4.
