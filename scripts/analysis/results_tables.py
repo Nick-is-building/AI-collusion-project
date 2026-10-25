@@ -561,6 +561,32 @@ def a14(t: Tables):
     t.table(["Contrast", "Mean d", "95% t CI", "95% bootstrap CI", "p (paired t)", "Seqs / excluded", "Key"], rows)
     t.values([("Statement", f"{E}.statement")])
 
+SENSITIVITY = ROOT / "results" / "summaries" / "sensitivity_residue.json"
+
+
+def d40(t: Tables):
+    """D40 residue sensitivity; numbers from results/summaries/sensitivity_residue.json (key `table[i]`)."""
+    t.h(2, "5. D40 sensitivity: D25 omission analyses without the residue-flagged items (post hoc)")
+    if not SENSITIVITY.exists():
+        t.note("Not run.")
+        return
+    raw = SENSITIVITY.read_bytes()
+    v = json.loads(raw)
+    t.note(f"Source `results/summaries/sensitivity_residue.json` (SHA-256 `{hashlib.sha256(raw).hexdigest()}`); keys "
+           f"refer to that file. Excluded items (residue scan, `data/derived/residue_scan_d25.csv`): "
+           f"{', '.join(v['excluded_items'])}. Same code and methods; significance as each analysis defines it "
+           "(Holm where a family exists; D only under gatekeeping).")
+    rows = []
+    for i, r in enumerate(v["table"]):
+        ci = lambda c: "–" if not c or c[0] is None else f"[{t.num(c[0])}, {t.num(c[1])}]"
+        rows.append([r["test"], t.num(r.get("estimate")), ci(r.get("ci")), t.num(r.get("p_holm") if r.get("p_holm") is not None else r.get("p"), 4),
+                     t.num(r.get("significant")), t.num(r.get("estimate_without")), ci(r.get("ci_without")),
+                     t.num(r.get("p_holm_without") if r.get("p_holm_without") is not None else r.get("p_without"), 4),
+                     t.num(r.get("significant_without")), "CHANGE" if r["significance_changes"] else "",
+                     f"`sensitivity_residue.json:table[{i}]`"])
+    t.table(["Test / row", "Estimate", "95% CI", "p (Holm if any)", "Significant", "Without flagged",
+             "95% CI", "p (Holm if any)", "Significant", "Change", "Key"], rows)
+
 def exploratory(t: Tables):
     E = "exploratory"
     t.h(2, "4. Exploratory (labelled as such)")
@@ -630,6 +656,7 @@ def build(v: dict, source_sha256: str) -> str:
     a15(t)
     exploratory(t)
     figure_data(t)
+    d40(t)
     return "\n".join(t.lines).rstrip() + "\n"
 
 

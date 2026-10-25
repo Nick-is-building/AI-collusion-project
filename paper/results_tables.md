@@ -1336,3 +1336,46 @@ Named = a deterministic marker of the planted error (channel 1, reasoning text),
 | omission | R6s gated | 0.760 | [0.657, 0.855] | 0.040 | [0.000, 0.090] | `figure_data.countermeasure.points[9]` |
 | omission | R6x first | 0.930 | [0.878, 0.972] | 0.030 | [0.000, 0.064] | `figure_data.countermeasure.points[10]` |
 | omission | R6x gated | 0.930 | [0.878, 0.972] | 0.040 | [0.010, 0.080] | `figure_data.countermeasure.points[11]` |
+
+
+## 5. D40 sensitivity: D25 omission analyses without the residue-flagged items (post hoc)
+
+Source `results/summaries/sensitivity_residue.json` (SHA-256 `4acbcdb562aeaa2c7fc231fcb52d5bb87c576383423748bd1841d8b9c6fbf0c3`); keys refer to that file. Excluded items (residue scan, `data/derived/residue_scan_d25.csv`): rep018_e02_alice, rep029_e09_alice, rep041_e06_alice, rep044_e03_alice. Same code and methods; significance as each analysis defines it (Holm where a family exists; D only under gatekeeping).
+
+| Test / row | Estimate | 95% CI | p (Holm if any) | Significant | Without flagged | 95% CI | p (Holm if any) | Significant | Change | Key |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| A06 Delta_om (R4-om - R1-om) | 0.190 | [0.065, 0.302] | 0.0074 | yes | 0.228 | [0.128, 0.329] | 0.0010 | yes |  | `sensitivity_residue.json:table[0]` |
+| A06 D_om | 0.180 | [0.054, 0.295] | 0.0111 | yes | 0.217 | [0.113, 0.322] | 0.0015 | yes |  | `sensitivity_residue.json:table[1]` |
+| A10 T1 | -0.093 | [-0.164, -0.023] | 0.0954 | no | -0.080 | [-0.154, -0.007] | 0.1992 | no |  | `sensitivity_residue.json:table[2]` |
+| A10 T2 | -0.093 | [-0.183, -0.018] | 0.0954 | no | -0.094 | [-0.188, -0.007] | 0.1992 | no |  | `sensitivity_residue.json:table[3]` |
+| A10 T3 | 0.000 | [0.000, 0.000] | 1.0000 | no | 0.000 | [0.000, 0.000] | 1.0000 | no |  | `sensitivity_residue.json:table[4]` |
+| A10 D_T1 | -0.083 | [-0.163, -0.000] | – | not tested | -0.069 | [-0.153, 0.016] | – | not tested |  | `sensitivity_residue.json:table[5]` |
+| A10 D_T2 | -0.083 | [-0.170, -0.013] | – | not tested | -0.083 | [-0.174, -0.004] | – | not tested |  | `sensitivity_residue.json:table[6]` |
+| A13 R2_minus_R1 | 0.300 | [0.191, 0.408] | 0.0015 | yes | 0.326 | [0.222, 0.430] | 0.0005 | yes |  | `sensitivity_residue.json:table[7]` |
+| A13 R3_minus_R1 | 0.090 | [-0.010, 0.194] | 0.4170 | no | 0.076 | [-0.031, 0.182] | 0.6950 | no |  | `sensitivity_residue.json:table[8]` |
+| A13 R4_minus_R2 | -0.110 | [-0.202, -0.020] | 0.1704 | no | -0.098 | [-0.192, -0.010] | 0.3020 | no |  | `sensitivity_residue.json:table[9]` |
+| A13 R5_minus_R4 | -0.020 | [-0.117, 0.070] | 0.8385 | no | -0.054 | [-0.148, 0.034] | 0.7245 | no |  | `sensitivity_residue.json:table[10]` |
+| A13 R4n_minus_R4 | 0.040 | [-0.024, 0.106] | 0.8091 | no | 0.011 | [-0.056, 0.071] | 1.0000 | no |  | `sensitivity_residue.json:table[11]` |
+| A13 D_R2_minus_R1 | 0.280 | [0.167, 0.395] | 0.0003 | yes | 0.304 | [0.189, 0.417] | 0.0001 | yes |  | `sensitivity_residue.json:table[12]` |
+| A13 D_R3_minus_R1 | 0.070 | [-0.026, 0.170] | – | not tested | 0.054 | [-0.044, 0.154] | – | not tested |  | `sensitivity_residue.json:table[13]` |
+| A13 D_R4_minus_R2 | -0.100 | [-0.193, -0.009] | – | not tested | -0.087 | [-0.183, 0.011] | – | not tested |  | `sensitivity_residue.json:table[14]` |
+| A13 D_R5_minus_R4 | 0.000 | [-0.093, 0.083] | – | not tested | -0.033 | [-0.125, 0.052] | – | not tested |  | `sensitivity_residue.json:table[15]` |
+| A13 D_R4n_minus_R4 | 0.030 | [-0.045, 0.104] | – | not tested | 0.000 | [-0.076, 0.071] | – | not tested |  | `sensitivity_residue.json:table[16]` |
+| A14 L1 | 0.300 | [0.216, 0.390] | 0.0002 | yes | 0.315 | [0.233, 0.404] | 0.0002 | yes |  | `sensitivity_residue.json:table[17]` |
+| A14 L2 | 0.280 | [0.189, 0.375] | 0.0002 | yes | 0.304 | [0.213, 0.398] | 0.0002 | yes |  | `sensitivity_residue.json:table[18]` |
+| A14 D_L1 | 0.250 | [0.155, 0.354] | 0.0002 | yes | 0.261 | [0.163, 0.367] | 0.0001 | yes |  | `sensitivity_residue.json:table[19]` |
+| A14 D_L2 | 0.280 | [0.180, 0.380] | 0.0002 | yes | 0.304 | [0.202, 0.405] | 0.0001 | yes |  | `sensitivity_residue.json:table[20]` |
+| A15 H_out | 0.120 | [0.000, 0.250] | 0.1249 | no | 0.163 | [0.033, 0.293] | 0.0434 | yes | CHANGE | `sensitivity_residue.json:table[21]` |
+| A15 H_work | 0.130 | [0.031, 0.237] | 0.0694 | no | 0.152 | [0.043, 0.265] | 0.0434 | yes | CHANGE | `sensitivity_residue.json:table[22]` |
+| A15 D_H_out | 0.130 | [0.010, 0.255] | – | not tested | 0.174 | [0.048, 0.298] | 0.0223 | yes | CHANGE | `sensitivity_residue.json:table[23]` |
+| A15 D_H_work | 0.150 | [0.043, 0.264] | – | not tested | 0.174 | [0.056, 0.294] | 0.0175 | yes | CHANGE | `sensitivity_residue.json:table[24]` |
+| A14 row R1_L1_sig_FR_within_0p05 | yes | – | – | – | no | – | – | – | CHANGE | `sensitivity_residue.json:table[25]` |
+| A14 row R2_L1_sig_FR_rises_more_than_0p05 | no | – | – | – | yes | – | – | – | CHANGE | `sensitivity_residue.json:table[26]` |
+| A14 row R3_L1_null_L2_sig | no | – | – | – | no | – | – | – |  | `sensitivity_residue.json:table[27]` |
+| A14 row R4_both_null | no | – | – | – | no | – | – | – |  | `sensitivity_residue.json:table[28]` |
+| A14 row R5_gap_under_cue_inside_0p10 | yes | – | – | – | yes | – | – | – |  | `sensitivity_residue.json:table[29]` |
+| A14 row R5_otherwise_gap_persists_under_vigilance | no | – | – | – | no | – | – | – |  | `sensitivity_residue.json:table[30]` |
+| A13 equivalence R5_minus_R4 explanation_rejected | no | – | – | – | no | – | – | – |  | `sensitivity_residue.json:table[31]` |
+| A13 equivalence R2_minus_R1 explanation_rejected | no | – | – | – | no | – | – | – |  | `sensitivity_residue.json:table[32]` |
+| A15 H_out ci_inside_equivalence_margin | no | – | – | – | no | – | – | – |  | `sensitivity_residue.json:table[33]` |
+| A15 H_work ci_inside_equivalence_margin | no | – | – | – | no | – | – | – |  | `sensitivity_residue.json:table[34]` |
