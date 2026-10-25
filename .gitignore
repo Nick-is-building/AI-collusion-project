@@ -26,3 +26,7 @@ results/study2/STOP
 results/study2/main/**/llm_usage.jsonl
 results/study2/main/**/bob_cache/
 results/study2/main/**/run.json.gz
+# A05b: superseded main-run C′ attempts (moved, same D27 storage rule)
+results/study2/main_superseded/**/llm_usage.jsonl
+results/study2/main_superseded/**/bob_cache/
+results/study2/main_superseded/**/run.json.gz

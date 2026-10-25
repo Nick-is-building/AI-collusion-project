@@ -45,11 +45,14 @@ def main(argv=None):
     ap.add_argument("--reset-attempts", default="", metavar="REASON",
                     help="log an attempts_reset event (launch counts restart from here), e.g. after a fixed "
                          "launcher bug; the reason is recorded")
+    ap.add_argument("--require-stop-watch", action="store_true",
+                    help="launch nothing while scripts.study2.stop_watch is not alive for this group (A05b)")
     a = ap.parse_args(argv)
     if a.backend == "live" and a.approved_stage != "study2":
         raise SystemExit("live needs --approved-stage study2")
     s = Scheduler(out_root=Path(a.out_root), group=a.group, seqs=parse_seqs(a.seqs), workers=a.workers,
-                  backend=a.backend, approved_stage=a.approved_stage, reserve_slots=a.reserve_slots)
+                  backend=a.backend, approved_stage=a.approved_stage, reserve_slots=a.reserve_slots,
+                  require_stop_watch=a.require_stop_watch)
     if a.reset_attempts:
         s.log(event="attempts_reset", reason=a.reset_attempts)
     if a.plan:

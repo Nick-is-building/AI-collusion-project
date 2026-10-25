@@ -242,6 +242,13 @@ def main(argv=None):
             "status_line": {"first_episode_index": status_line.FIRST_INDEX,
                             "limited": status_line.STATUS_LIMITED, "open": status_line.STATUS_OPEN},
             "throttle_by_episode": throttle_by_ep, "status": "running", "pid": os.getpid()}
+    sw = out_root / a.group / "stop_watch.json"     # A05b: external fail-closed stop rules in effect, if any
+    if sw.exists():
+        from scripts.study2.stop_watch import watcher_alive
+        try:
+            meta["stop_watch"] = {**json.loads(sw.read_text()), "alive_at_launch": watcher_alive(sw)}
+        except ValueError:
+            meta["stop_watch"] = {"unreadable": True}
     if a.arm == "PC":
         meta["pc_message_policy"] = partner_control.MESSAGE_POLICY
         meta["pc_note"] = ("run_config.controlled_bob_verdict is a placeholder; Bob's verdict per episode is "

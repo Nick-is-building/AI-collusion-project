@@ -105,7 +105,8 @@ def scan(group_dir: Path, seq: int, arm: str) -> ArmState:
 class Scheduler:
     def __init__(self, *, out_root: Path, group: str, seqs: list[int], workers: int, backend: str,
                  approved_stage: str | None = None, reserve_slots: int | None = None, log_dir: Path | None = None,
-                 extra_env: dict | None = None, poll_s: float = 5.0, python: str = sys.executable):
+                 extra_env: dict | None = None, poll_s: float = 5.0, python: str = sys.executable,
+                 require_stop_watch: bool = False):
         self.out_root = Path(out_root).resolve()
         self.group = group
         self.group_dir = self.out_root / group
@@ -122,6 +123,9 @@ class Scheduler:
         self.python = python
         self.running: dict[tuple[int, str], subprocess.Popen] = {}
         self.events = self.group_dir / "scheduler.jsonl"
+        # A05b: with require_stop_watch, nothing is launched unless scripts/study2/stop_watch.py is alive
+        # for this group (fail closed: a dead watcher counts as a stop).
+        self.require_stop_watch = require_stop_watch
 
     def log(self, **rec):
         with open(self.events, "a") as fh:
@@ -217,7 +221,18 @@ class Scheduler:
                 continue
         return out
 
+    def stop_watch_missing(self) -> bool:
+        if not self.require_stop_watch:
+            return False
+        from scripts.study2.stop_watch import STATE_FILE, watcher_alive
+        return not watcher_alive(self.group_dir / STATE_FILE)
+
     def stopped(self) -> bool:
+        if self.stop_watch_missing():
+            if not getattr(self, "_logged_watch_missing", False):
+                self.log(event="stop_watch_missing", note="require_stop_watch: no launch while the watcher is not alive")
+                self._logged_watch_missing = True
+            return True
         return (self.out_root / "STOP").exists()
 
     def step(self) -> dict:
@@ -255,7 +270,8 @@ class Scheduler:
                 "stopped": False}
 
     def run(self) -> dict:
-        self.log(event="scheduler_start", seqs=self.seqs, workers=self.workers, backend=self.backend)
+        self.log(event="scheduler_start", seqs=self.seqs, workers=self.workers, backend=self.backend,
+                 require_stop_watch=self.require_stop_watch)
         while True:
             s = self.step()
             if not self.running and not self.orphans() and (s["stopped"] or s["done"] + len(s["failed"]) >= s["total"]

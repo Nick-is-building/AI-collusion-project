@@ -223,3 +223,24 @@ No Study 2 work or result is recorded here. Its inclusion in the plan does not a
 **State / limitations:** `results/study2/main/` is still untracked. The D27 export (`scripts/study2/export.py`) has not been run, since the run is incomplete. The guard does not treat a spend-cap 429 as fail-closed. A possible fix (not made): STOP on "spending cap" in the 429 text.
 **Next (proposal, not authorized):** Nick chooses (a) or (b), checks the AI Studio cap, and decides on fresh vs. resumed C′ for rep014–017 if (a).
 **Cross-references:** plan §§9.1, 9.2, 23.3; `PREREGISTRATION_STUDY2.md` §6; `docs/deviations.md` D20, D23, D27.
+
+## 2026-10-25 00:00–00:30 UTC — Claude Code (Opus 5.5), session A05b — Task 1: D35, superseding move, stop watcher, sensitivities (no API call, no outcome)
+
+**Assignment / authorization:** `assignments/A05b_study2_relaunch.md` (Nick, 25 October 2026, verbatim; commit `32006b0`): option (a), rerun only C′ of rep014–045, fresh. Nick confirms at least 100 USD of AI Studio spend-cap headroom above current spend.
+**Session start:** read CLAUDE.md, DEVLOG_INDEX.md, PROJECT_PLAN.md (complete), this block (complete), PREREGISTRATION_STUDY2.md, docs/deviations.md (D20–D31 and the D17 correction), A05. No process was running. `results/study2/main/` untracked as the diagnosis entry states.
+**Concurrent session:** an A10 session (Study 1 incentive/peer-signal arms, stage `a10`) committed D32–D34 (`8d84bbd`) during this work and holds uncommitted `configs/caps.yaml`, `scripts/a10/`, `src/replay/a10.py`. None is touched or staged here. Hence this decision is **D35**, and the relaunch uses 6 workers (A05b rule while another session runs live calls).
+**Built or changed:**
+- `docs/deviations.md` D35 (decision verbatim, implementation notes).
+- `scripts/study2/supersede.py`: the move (see D35). `scripts/study2/stop_watch.py`: fail-closed watcher (rules in D35). `src/hysteresis/scheduler.py` + `scripts/study2/launch.py`: `--require-stop-watch` (no launch while the watcher is dead; event `stop_watch_missing`). `src/hysteresis/run_arm.py`: records `stop_watch` (rules, pid, state, alive at launch) in `study2_meta.json`.
+- `src/hysteresis/sensitivity_a05b.py`, `scripts/study2/analyze_a05b.py`: the three sensitivities (frozen `analysis.py` unchanged and reused). Same refusal rule as `analyze.py`.
+- `tests/test_study2_a05b.py` (11 tests, synthetic), `scripts/study2/a05b_mock_check.sh` (mock end-to-end check). `.gitignore`: D27 storage rule extended to `main_superseded`.
+**Checks performed:**
+- `pytest tests/test_study2_a05b.py tests/test_study2_build.py tests/test_study2_partner_control.py tests/test_study2_analysis.py`: 61 passed (234 s).
+- `bash scripts/study2/a05b_mock_check.sh` (mock, no API call; output under `scratch/s2a05b/`): mock run of seqs 3–4 with C′ seq 3 killed at episode 2 and resumed; move of C′ seqs 3–4 (3 dirs); watcher started; relaunch with `--reset-attempts --require-stop-watch`, scheduler and new C′ seq 3 child killed again at episode 2, restart. Result: new C′ seq 3 attempt 1 fresh (no resume source), attempt 2 resumed from the new attempt in group `dry` (not from the superseded one), complete 10 episodes; C′ seq 4 fresh, complete; after the reset only the 2 C′ arms were launched (3 launches); every new run records `stop_watch`; watcher ended with the scheduler; no STOP file.
+- Real move: `supersede --group main --to-group main_superseded --seqs 14-45 --arm Cprime --reason "A05b (Nick, 25 Oct 2026): C′ rep014–045 superseded after AI Studio spend-cap 429 failures; rerun fresh (D35)"` at 00:22:37 UTC. 96 run directories (32 arms × 3 attempts, 0 complete) moved; SHA-256 of all 288 files identical before and after (lists in `scratch/a05b_*_sha.txt`, local). C′ directories of rep014–045 now empty. Event `superseded_moved` appended to `results/study2/main/scheduler.jsonl`.
+- `launch --group main --seqs 14-45 --plan`: 32 C′ ready; prefix, A′, B, PC complete for all 32 sequences.
+**Did not work:** none observed.
+**Not looked at:** no outcome; only metadata, journals' error fields, file hashes.
+**State / limitations:** the watcher counts 429s from usage journals (timestamped); the per-run log lines are used only for the "spending cap" text. If the watcher stops the run, the interrupted C′ arms will have partial episodes; resuming them is a decision for Nick (not automated).
+**Next:** commit, push, start the watcher, relaunch (task 2).
+**Cross-references:** D35; `PREREGISTRATION_STUDY2.md` §6; plan §§9.2, 23.3; diagnosis entry above.
