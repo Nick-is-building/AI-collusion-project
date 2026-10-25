@@ -116,6 +116,9 @@ def main(argv=None):
     if (ROOT / "scripts" / "analysis" / "a08_addendum.py").exists():   # A08: D30 R6x and D31 R6 correct versions
         from scripts.analysis import a08_addendum
         res["addendum"]["D30_D31_R6x"] = a08_addendum.analyze(calls, meta)
+    if (ROOT / "scripts" / "analysis" / "a10_addendum.py").exists():   # A10: D32-D34 incentive and peer-signal arms
+        from scripts.analysis import a10_addendum
+        res["addendum"]["a10"] = a10_addendum.analyze(calls, meta)
     from scripts.analysis import figure_data   # A07 task 3: data behind paper/figures (descriptive)
     res["figure_data"] = figure_data.build(calls, meta)
     Path(a.out).write_text(to_json(res))
