@@ -743,3 +743,24 @@ Recorded as the D19 addendum in `docs/deviations.md`.
 **State / limitations:** not yet run live. Full test suite not run (subset above).
 **Next:** commit and push; stage 1 live, hand reading, full run.
 **Cross-references:** `docs/deviations.md` D25, D36; DEVLOG 05 (analysis entry to follow).
+
+## 2026-10-25 19:20–19:56 UTC — Claude Code (Opus 5.5), session A14 — Build: VIG/CHK arms, NAT R6x cells (D37), task 3 run; cap raised to 10 USD
+
+**Assignment / authorization:** `assignments/A14_looking_naturals_evidence.md` (Nick, verbatim; committed `0840ff8` with D37, the caps line and the analysis script, before any A14 call). Stage `a14`. Session start: read CLAUDE.md, DEVLOG_INDEX.md, PROJECT_PLAN.md (complete), DEVLOG 03, 04 and 05 (complete), D24–D36 in `docs/deviations.md`, A13's assignment. The A13 session works live in the same tree: explicit paths only, shared files (`configs/caps.yaml`, `docs/deviations.md`, `verify_all.py`, `results_tables.py`) edited only right before a commit and committed at once (a dirty tracked tree would refuse A13's live launches), `pull --rebase` before every push. `results/study2/` opened only for task 3 (runs.csv and the A′/B/C′/PC run.json files).
+**Built or changed:**
+- `src/replay/a14.py`: `note_block`, `with_note_block` (A10 mechanics: last message must be the verdict prompt), `plain_verdict_fn` / `r6x_verdict_fn` (A10 stop guard around `run_verdict` / unchanged `run_r6x`).
+- `scripts/a14/nat_records.py` → `data/derived/a14/nat_records.csv` + `.sha256` (`6a19bb10…054e`): 26 items (19/3/4 verified), 51 records (44 missing, 7 extra). Every item has exactly one read_source call, so R6x can be built for all 26. 50/51 sentences are verbatim in the transmitted read_source result; 1 flagged and kept: rep010_e08 extra `REC18-cdbdd8` (ID not in the task source; mistyped, as in D24).
+- `scripts/a14/launch_a14.py`: 656 jobs (LOOK 500, NAT 156), one `default_rng(2026)` over all 76 item blocks, then cells; NAT call IDs `a14:NAT:<item>:<cell>:<draw>` via a launcher-side `Job` subclass (runner unchanged); guard dir `logs/a14_guard/<mode>/`.
+- `scripts/analysis/a14_addendum.py` (L1/L2 with Holm, gatekeeping D, secondaries, interpretation rows; NAT test and secondaries; task 3 `--study2`), hooks in `verify_all.py` (`addendum.a14`, `exploratory.a14_study2_evidence`), `results_tables.py` section 3.8 + task 3 table.
+- `scripts/a14/read_cells.py`: hand-reading aid (request checks against the cell definition + reasoning dump of the first 5 complete calls per cell; `--ready`).
+- Tests: `tests/test_a14.py` (14 + 1 skip), `tests/test_a14_addendum.py` (4, synthetic).
+**Decisions:** D37 implementation choices 1–9 in `docs/deviations.md`.
+**Checks performed:**
+- `pytest tests/test_a14.py tests/test_a14_addendum.py`: 18 passed, 1 skipped. They include: for all 50 items, VIG/CHK/R4+VIG with the block removed have the same `messages_sha256` as the logged a06 R1-om / a06-or-main R0′ / a06 R4-om calls; the block appears once and only at the end of the last message; N1f equals the logged main-run N1 hash for all 26 items, and R6x differs only by the prompt sentence and the schema field; 656 jobs, unique IDs, adjacency, seed reconstruction, every cell in the first half of the order.
+- Mock run with 4 workers (`PYTHONPATH=. .venv/bin/python -m scripts.a14.launch_a14 --workers 4`): 656/656 complete, 0 missing (`logs/mock_runs/raw/a14-20261025T1946*`, `…1947*`). `read_cells --mode mock`: 35 calls, 0 request problems. The analysis ran on the mock lines without error (mock outcomes, not results).
+- `--plan`: LOOK 500 calls 6.389 USD, NAT 156 calls 3.680 USD (no cache, R6x doubled) = 10.07 > 8. Projection from logged live costs of the same items/contexts: 6.78 USD. **Asked Nick; he raised the cap to 10 USD** (D37 note, `configs/caps.yaml`), before any A14 call.
+**Task 3 (exploratory, 0 USD, observed):** `PYTHONPATH=. .venv/bin/python -m scripts.analysis.a14_addendum --study2` (80 s; log `logs/a14_study2_evidence.log`, local) → `results/summaries/a14_study2_evidence.json` (committed `0840ff8`). 200 runs, 4,000 verdict rows. Numbers in DEVLOG 05.
+**Did not work:** the first test run of the mock runner slice stopped with `CapExceeded: no cap configured for stage 'a14'` (cap line not yet added); fixed by the caps line. Nothing else observed.
+**State:** built, tested, committed. No live A14 call. A13 full run live (`scripts.a13.launch_ladder`, started ~19:5x UTC); A14 launches only after it has ended.
+**Next:** commit the cap change; one background wait on A13's launcher; then launch A14 live (nohup, `logs/a14.log`, 4 workers).
+**Cross-references:** `docs/deviations.md` D37 and its cap note; DEVLOG 05 A14 entry (task 3); plan §§8.6, 8.8, 23.3.

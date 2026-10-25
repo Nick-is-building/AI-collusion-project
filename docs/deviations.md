@@ -493,3 +493,8 @@ D30's timing line says R6x was motivated by "all 24 R6s accepts left the omitted
   7. *NAT label per call:* category "include"/"exclude"/"not listed" if all of the call's missing sentences carry that label, "mixed" otherwise, "no missing record" for commission items.
   8. *NAT record table:* one extra record of rep010_e08 (`REC18-cdbdd8`) is not in the task source (mistyped ID); it is flagged and kept, with no sentence (A14: flag, count, do not drop). All 50 other sentences are verbatim in the transmitted read_source result.
   9. *Task 3:* PC compared on Alice's live verdicts only (Bob's PC verdicts are replayed from B), with A′ restricted to the same direction; per-sequence rates from `src.hysteresis.analysis.verdict_rows`, tests with its `paired_contrast` (paired t-test, sequence bootstrap 10,000, seed 2026).
+
+## D37 note — stage cap a14 raised from 8 to 10 USD (25 October 2026, 19:55 UTC, Nick-approved, before any A14 call)
+
+- **Why:** the A14 assignment says to stop and ask if the projection exceeds 8 USD. The runner's projection (no cache savings, R6x input doubled for a possible gate retry) was 10.07 USD (LOOK 6.39, NAT 3.68); a projection from the logged live costs of the same items and contexts was 6.78 USD. Claude Code asked; Nick chose "Raise the a14 cap to 10 USD".
+- **Change:** `configs/caps.yaml` `stages.a14: 10.0`. Nothing else changes (cells, tests, analysis, stop rules). No A14 call existed when this was decided.
