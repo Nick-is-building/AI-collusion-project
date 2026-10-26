@@ -788,6 +788,67 @@ def a17(t: Tables):
             t.stats(rows)
             t.values(vals)
 
+
+def a18(t: Tables):
+    X = "addendum.a18"
+    t.h(3, "3.12 A18 positive control for the audit: instructed collusion, AGREE and AGREE+CHK on the D25 contexts "
+           "(D43; post hoc)")
+    if "a18" not in t.get("addendum") or t.get(X).get("status") == "not run":
+        t.note("Not run.")
+        return
+    t.note(t.get(f"{X}.label"))
+    t.values([("Calls (stage a18) / planned", f"{X}.calls_total"), ("Planned", f"{X}.calls_planned"),
+              ("Partial", f"{X}.partial"), ("Spend stage a18 (USD)", f"{X}.spend_usd_a18")])
+    for blk, title in (("primary_48", "Primary item set (48 items, without rep041_e06, rep044_e03)"),
+                       ("all_50", "Sensitivity: all 50 items")):
+        B = f"{X}.{blk}"
+        P = f"{B}.primary"
+        t.values([(f"{title}: calls", f"{B}.calls"), (f"{title}: missing verdicts", f"{B}.missing")])
+        t.h(4, f"{title}: primary family (Holm over P1, P2; omission versions)")
+        rows = []
+        for k in ("P1", "P2"):
+            r = t.stat_row(f"{k}: {t.get(f'{P}.{k}.contrast')}", f"{P}.{k}")
+            rows.append(r[:4] + [t.num(t.get(f"{P}.{k}.p_holm"), 4), t.num(t.get(f"{P}.{k}.significant"))] + r[4:])
+        t.table(["Test", "Estimate", "95% CI", "p", "p (Holm)", "Significant", "Items / clusters", "Key"], rows)
+        for sens, lab in (("primary_missing_as_accept", "missing coded ACCEPT"),
+                          ("primary_missing_as_reject", "missing coded REJECT")):
+            t.stats([(f"{k}, {lab}", f"{B}.{sens}.{k}") for k in ("P1", "P2")])
+        S = f"{B}.secondary"
+        t.h(4, f"{title}: secondary (descriptive)")
+        t.stats([(f"Detection {c}", f"{S}.detection.{c}") for c in t.get(f"{S}.detection")]
+                + [(f"Acceptance of correct versions {c}", f"{S}.acceptance_of_correct.{c}")
+                   for c in t.get(f"{S}.acceptance_of_correct")]
+                + [(f"Discrimination {c} (P(ACCEPT|correct) − P(ACCEPT|om))", f"{S}.discrimination.{c}")
+                   for c in t.get(f"{S}.discrimination")]
+                + [(c, f"{S}.contrasts.{c}") for c in t.get(f"{S}.contrasts")])
+        C = f"{B}.accept_classes"
+        if t.get(C).get("status"):
+            t.note(f"{title}: ACCEPT classes: {t.get(C)['status']}.")
+        else:
+            t.h(4, f"{title}: classes of omission ACCEPTs (single coder; Wilson 95% over calls)")
+            rows = []
+            for c in t.get(C):
+                rows.append([c.replace("|", " "), t.num(t.get(f"{C}.{c}.accepts")), t.num(t.get(f"{C}.{c}.agreement_marker_hits"))]
+                            + [f"{t.get(f'{C}.{c}.{k}.count')} ({t.num(t.get(f'{C}.{c}.{k}.share'), 2)}; "
+                               f"{t.num(t.get(f'{C}.{c}.{k}.wilson_low'), 2)}–{t.num(t.get(f'{C}.{c}.{k}.wilson_high'), 2)})"
+                               for k in ("a", "b", "c", "d", "a_plus_d")] + [f"`{C}.{c}`"])
+            t.table(["Cell", "ACCEPTs", "Agreement-marker hits", "(a)", "(b)", "(c)", "(d)", "(a)+(d)", "Key"], rows)
+        I = f"{B}.interpretation_rows"
+        t.values([(f"{title}: interpretation {k}", f"{I}.{k}") for k in ("row1", "row2", "row3", "row4", "row5")]
+                 + [(f"{title}: row note", f"{I}.note")])
+    D = f"{X}.d42_flash_lite_side_by_side"
+    if t.get(D):
+        t.h(4, "D42 Flash-Lite classes, side by side (primary item set; from results/summaries/d42_accept_classes.json)")
+        rows = []
+        for c in t.get(D):
+            if not c.startswith("Flash-Lite|"):
+                continue
+            rows.append([c.replace("|", " "), t.num(t.get(f"{D}.{c}.accepts"))]
+                        + [f"{t.get(f'{D}.{c}.{k}.count')} ({t.num(t.get(f'{D}.{c}.{k}.share'), 2)})" for k in ("a", "b", "c")]
+                        + [f"`{D}.{c}`"])
+        t.table(["Cell", "ACCEPTs", "(a)", "(b)", "(c)", "Key"], rows)
+
+
 def build(v: dict, source_sha256: str) -> str:
     t = Tables(v)
     t.lines += ["# Results tables (Study 1 and addenda)", "",
@@ -806,6 +867,7 @@ def build(v: dict, source_sha256: str) -> str:
     a15(t)
     a16(t)
     a17(t)
+    a18(t)
     exploratory(t)
     figure_data(t)
     d40(t)
