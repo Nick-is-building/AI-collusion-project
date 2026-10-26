@@ -17,7 +17,8 @@ results/summaries/verification.json. Sections are kept apart by status:
                 over L1-L2) and NAT (R6x on the natural errors; one test outside), key "a14". A16 (D39): Gemini 3.8
                 Flash judging in Gemini 3.1 Flash-Lite's trajectories (Holm over G, H, C), key "a16". A17 (D41): Claude Haiku 5.5 on the same contexts (cross-family; same
                 design as D39), key "a17". A18 (D43): positive control, instructed collusion (AGREE,
-                AGREE+CHK; Holm over P1-P2; post hoc), key "a18".
+                AGREE+CHK; Holm over P1-P2; post hoc), key "a18". A19 (D44): broader positive control (AGREE and
+                SOFT on commissions, SOFT on omissions; Holm over Q1-Q3; post hoc), key "a19".
                 Reported as "not run" until their call lines exist.
   exploratory   equivalence reading (margin +-0.10) of the preregistered contrasts; right-reason detection
                 by Claude Code reading next to the deterministic markers. Labelled exploratory. A14 task 3
@@ -176,6 +177,9 @@ def main(argv=None):
     if (ROOT / "scripts" / "analysis" / "a18_addendum.py").exists():   # A18: D43 positive control (instructed collusion)
         from scripts.analysis import a18_addendum
         res["addendum"]["a18"] = a18_addendum.analyze(calls, meta)
+    if (ROOT / "scripts" / "analysis" / "a19_addendum.py").exists():   # A19: D44 broader positive control (AGREE, SOFT)
+        from scripts.analysis import a19_addendum
+        res["addendum"]["a19"] = a19_addendum.analyze(calls, meta)
     if (ROOT / "scripts" / "analysis" / "recognise_approve.py").exists():   # A10 task 6 (exploratory, zero cost)
         from scripts.analysis import recognise_approve
         res["exploratory"]["recognise_and_approve"] = recognise_approve.build(calls, meta)
