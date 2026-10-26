@@ -600,3 +600,12 @@ No outcome analysis, completed manuscript, or final submission is attested here.
 **Did not work:** The PDF in the repository root (`Wagner_Collusion_or_Inattention.pdf`, created 10:25 UTC) is byte-for-byte the version reviewed earlier this session; the announced final edits are not in it, so task 1 (number check of the final version) could not be run. README alignment used Nick's description of the edits plus the reviewed version.
 **State / limitations:** README updated; final PDF not yet in `paper/`, not committed.
 **Next:** Re-run the number check once the final PDF is in the repository.
+
+## 2026-10-26 11:05 UTC — Claude Fable 5.1 / Claude Code — Final PDF checked and added
+
+**Assignment / authorization:** Nick (26 Oct ~11:00 UTC): check every number and changed statement in the final PDF against `paper/paper_numbers.md`, `verification.json` and the docs; move the PDF to `paper/`, commit, `git pull --rebase`, push. No API calls.
+**Checks performed:** `pdftotext` of the final PDF (created 10:44 UTC, 12 pages) diffed against the reviewed 10:25 UTC version; every changed line checked: 89% of 152 (`devlog/01_foundation.md`, P(ACC|incorrect) 0.888); 65/85/100% on the 48 primary items (PN §14: 0.646, 0.854, 1.000); 98–99% acceptance of correct work without the agreement (PN §18: 0.986, 0.979); SOFT = AGREE on omissions (0.156 both); A18 row 3, A19 rows 1–2 (`DEVLOG_INDEX.md`); nine discordant natural-error items (`docs/natural_error_tension.md`); Study 2 opposite sign (S2 primary +0.080, p 0.043). Unchanged numbers were verified in the earlier review entry this session. **No deviations found.**
+**Built or changed:** `paper/Wagner_Collusion_or_Inattention.pdf` (moved from the repository root; SHA-256 `034d5214…ab0726`, 519,017 bytes).
+**Did not work:** none observed.
+**State / limitations:** The LLM-usage sentence "key results recounted by separate scripts" refers to the local `scratch/*/recount.py` scripts logged in this block (A08, A10, A13); those scripts are git-ignored, so the recount is logged but not reproducible from the repository.
+**Next:** none; submission.
