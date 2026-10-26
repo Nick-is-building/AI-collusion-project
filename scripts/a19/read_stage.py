@@ -18,7 +18,6 @@ from scripts.a19 import launch_a19 as L
 from src.replay import a19
 from src.replay.request import canonical_json
 from src.runner.costs import iter_call_lines
-from src.runner.item_lists import load_bait
 
 ROOT = Path(__file__).resolve().parents[2]
 DIRS = {"live": (ROOT / "results" / "raw", ROOT / "results" / "requests"),
@@ -56,10 +55,8 @@ def check_call(rec: dict, units: dict, qdir: Path, mode: str) -> list[str]:
 
 
 def error_note(u: dict) -> str:
-    if u["kind"] == "COM":
-        b = load_bait(u["item_id"])
-        return f"bait: {b['bait_id']} | {b['bait_sentence']}"
-    return f"removed: {u['o']['removed_id']} | {u['o']['removed_sentence']}"
+    from scripts.analysis.a19_addendum import error_info
+    return ("bait: " if u["kind"] == "COM" else "removed: ") + error_info({"check": u["kind"], "item_id": u["item_id"]})[1]
 
 
 def main(argv=None):
