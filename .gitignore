@@ -30,3 +30,23 @@ results/study2/main/**/run.json.gz
 results/study2/main_superseded/**/llm_usage.jsonl
 results/study2/main_superseded/**/bob_cache/
 results/study2/main_superseded/**/run.json.gz
+
+# editor, OS and tooling leftovers (repo audit, docs/repo_audit.md)
+*.py[cod]
+*.swp
+*.swo
+*~
+*.bak
+*.orig
+*.tmp
+Thumbs.db
+.idea/
+.vscode/
+.ipynb_checkpoints/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.egg-info/
+build/
+dist/
