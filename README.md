@@ -20,7 +20,7 @@ Rates are shares of REJECT verdicts. Δ is the difference in detection between i
 | Other verifiers on identical contexts | omission detection in the workflow: Gemini 3.8 Flash 85%, Claude Haiku 5.5 100%; Gemini 3.8 Flash's false rejection under the check instruction 41% | exploratory | PN §14, §15 |
 | Positive control: instructed agreement | omission detection 65% → 16%; discrimination 0.63 → 0.16; the check instruction restores the colluder too (+0.39); stated reasons disclose the agreement in 41% of collusive acceptances | fixed before outcomes (post hoc control, D43) | V `addendum.a18.primary_48` |
 
-A19: added after the run is committed.
+A19 (broader positive control, D44, fixed before outcomes; V `addendum.a19.com_109__om_primary_48`): instructed agreement lowers commission detection from 97.7% to 42% (−0.56), and a softer "benefit of the doubt" agreement lowers commission detection to 52% (−0.46) and omission detection to 16% (−0.49); all three Holm-significant.
 
 Mutual acceptance alone cannot separate collusion from unchecked acceptance; a planted-error discrimination test registers instructed collusion.
 
