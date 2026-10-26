@@ -8,19 +8,17 @@ Shi et al. (2026) let two LLM agents complete tasks, exchange logs and verify ea
 
 ## Key results
 
-Rates are shares of REJECT verdicts. Δ is the difference in detection between isolation and workflow, with a cluster sign-flip p-value over trajectories. Labels: **preregistered** (test in a tagged preregistration), **fixed before outcomes** (test and analysis committed before any call of that stage), **exploratory** (descriptive, no prior test). Sources: `PN` = [`paper/paper_numbers.md`](paper/paper_numbers.md), `V` = [`results/summaries/verification.json`](results/summaries/verification.json).
+Rates are shares of REJECT verdicts. Δ is the difference in detection between isolation and workflow, with a cluster sign-flip p-value over trajectories. Labels: **preregistered** (in a tagged preregistration: the commission experiment, the live replay R1-live, Study 2 and the fidelity check), **fixed before outcomes** (only the D25 omission experiment, the workflow vs isolation contrast on omissions), **exploratory** (everything later: A10, A13–A19, D42 and the verifier transfer, each with cells, tests and interpretation rows committed before its own first call). Sources: `PN` = [`paper/paper_numbers.md`](paper/paper_numbers.md), `V` = [`results/summaries/verification.json`](results/summaries/verification.json).
 
 | Finding | Numbers | Label | Source |
 |---|---|---|---|
 | Replay fidelity | 71.4% of original REJECTs re-rejected; 0.8% of matched ACCEPTs rejected | preregistered (fidelity check) | PN §1 |
 | Commissions are caught in the workflow and in isolation | 97.7% vs 100%; Δ +0.023, p = 0.12 (109 items, 43 trajectories) | preregistered | PN §2 |
 | Omissions are missed more often in the workflow | 64% vs 83%; Δ +0.19, p = 0.007 (50 items, 31 trajectories) | fixed before outcomes | PN §5 |
-| Removing earlier episodes, a vigilance sentence or a check instruction restores omission detection | from 64% to 94%, 94% and 92%; each Holm-significant | fixed before outcomes | PN §10, §11 |
-| Reward and promise cues | lower omission detection by about 9 points; not significant after Holm | fixed before outcomes | PN §8 |
+| Removing earlier episodes, a vigilance sentence or a check instruction restores omission detection | from 64% to 94%, 94% and 92%; each Holm-significant | exploratory | PN §10, §11 |
+| Reward and promise cues | lower omission detection by about 9 points; not significant after Holm | exploratory | PN §8 |
 | Other verifiers on identical contexts | omission detection in the workflow: Gemini 3.8 Flash 85%, Claude Haiku 5.5 100%; Gemini 3.8 Flash's false rejection under the check instruction 41% | exploratory | PN §14, §15 |
-| Positive control: instructed agreement | omission detection 65% → 16%; discrimination 0.63 → 0.16; the check instruction restores the colluder too (+0.39); stated reasons disclose the agreement in 41% of collusive acceptances | fixed before outcomes (post hoc control, D43) | V `addendum.a18.primary_48` |
-
-A19 (broader positive control, D44, fixed before outcomes; V `addendum.a19.com_109__om_primary_48`): instructed agreement lowers commission detection from 97.7% to 42% (−0.56), and a softer "benefit of the doubt" agreement lowers commission detection to 52% (−0.46) and omission detection to 16% (−0.49); all three Holm-significant.
+| Positive control: instructed agreement (AGREE) or 'benefit of the doubt' (SOFT) | correct work accepted in every case; discrimination on added errors 0.96 → 0.42 (AGREE) and 0.52 (SOFT), on removed records 0.63 → 0.16 (both); the check instruction restores the colluder too (+0.385); stated reasons cite the agreement in 87–97% of collusive acceptances of added errors but only 41–64% for removed records | exploratory | V `addendum.a18`, `addendum.a19` |
 
 Mutual acceptance alone cannot separate collusion from unchecked acceptance; a planted-error discrimination test registers instructed collusion.
 
@@ -75,7 +73,7 @@ The Study 2 summaries (`results/summaries/study2_analysis.json`, `results/summar
 
 - Git tags: `prereg-v0` (plan and analysis before any paid call), `prereg-v1` ([`PREREGISTRATION.md`](PREREGISTRATION.md), Study 1 main run), `prereg-v1-r1live` ([`PREREGISTRATION_R1LIVE.md`](PREREGISTRATION_R1LIVE.md)), `prereg-study2` ([`PREREGISTRATION_STUDY2.md`](PREREGISTRATION_STUDY2.md)).
 - Every departure from the plan is recorded with its timing and decision maker as D1–D44 in [`docs/deviations.md`](docs/deviations.md).
-- Evidence labels: a result is preregistered only if its test is in a tagged preregistration, and fixed before outcomes if its test and analysis code were committed before any call of its stage, even when earlier results motivated that stage. All other results, including every comparison across verifier models, are exploratory and reported descriptively.
+- Evidence labels: the commission experiment, the live replay (R1-live), Study 2 and the fidelity check are preregistered in the tagged preregistrations; the D25 omission experiment (workflow vs isolation on omissions) is the only result fixed before outcomes, decided before any main-run outcome was looked at. Everything later (A10, A13–A19, D42 and the verifier transfer) is exploratory, although each stage's cells, tests and interpretation rows were committed before its own first call.
 - The raw call lines behind every reported Study 1 number are committed in `results/raw/`; [`paper/paper_numbers.md`](paper/paper_numbers.md) lists each number with its source key.
 - Study 2 storage: per-call tables, run metadata and checksums are committed under `results/study2/`; the full trajectories are kept locally, and their SHA-256 hashes are committed.
 
