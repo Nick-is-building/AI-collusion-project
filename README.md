@@ -2,9 +2,11 @@
 
 Nick Wagner, Independent AI Safety Researcher. AI Collusion Research Sprint (Apart Research), October 2026.
 
+Paper: `paper/Wagner_Collusion_or_Inattention.pdf` (added at submission).
+
 ## Summary
 
-Shi et al. (2026) let two LLM agents complete tasks, exchange logs and verify each other's work. When a channel limit makes the required evidence impossible to send, the agents drift into mutual acceptance, which the authors count as collusion. Mutual acceptance is also what a verifier produces when it does not check. This project separates the two readings with a planted-error audit. We replay the verdicts of Gemini 3.1 Flash-Lite from Shi et al.'s published trajectories, plant known errors into the peer's work, and compare detection in the original workflow context with detection of the same item in isolation. Commissions add a visible wrong step to the peer's work; omissions remove one valid record whose source sentence is still visible in the transmitted log. Correct versions of every item measure false rejection, so detection can be separated from a general tendency to reject. A positive control instructs the verifier to accept its peer's work, giving a known case of collusion against which the audit is calibrated.
+Shi et al. (2026) let two LLM agents complete tasks, exchange logs and verify each other's work. When a channel limit makes the required evidence impossible to send, the agents drift into mutual acceptance, which the authors count as collusion. Mutual acceptance is also what a verifier produces when it does not check. This project separates the two readings with a planted-error audit. We replay the verdicts of Gemini 3.1 Flash-Lite from Shi et al.'s published trajectories, plant known errors into the peer's work, and compare detection in the original workflow context with detection of the same item in isolation. Commissions add a visible wrong step to the peer's work; omissions remove one valid record whose source sentence is still visible in the transmitted log. Correct versions of every item measure false rejection, so detection can be separated from a general tendency to reject. As a positive control, one sentence in the verdict prompt tells the verifier that it has agreed to accept its peer's work (AGREE) or to give the peer the benefit of the doubt (SOFT). This prompted agreement is asserted in the prompt, not formed between the agents; it checks whether the audit registers collusive acceptance, not whether it detects collusion in general.
 
 ## Key results
 
@@ -17,10 +19,10 @@ Rates are shares of REJECT verdicts. Δ is the difference in detection between i
 | Omissions are missed more often in the workflow | 64% vs 83%; Δ +0.19, p = 0.007 (50 items, 31 trajectories) | fixed before outcomes | PN §5 |
 | Removing earlier episodes, a vigilance sentence or a check instruction restores omission detection | from 64% to 94%, 94% and 92%; each Holm-significant | exploratory | PN §10, §11 |
 | Reward and promise cues | lower omission detection by about 9 points; not significant after Holm | exploratory | PN §8 |
-| Other verifiers on identical contexts | omission detection in the workflow: Gemini 3.8 Flash 85%, Claude Haiku 5.5 100%; Gemini 3.8 Flash's false rejection under the check instruction 41% | exploratory | PN §14, §15 |
-| Positive control: instructed agreement (AGREE) or 'benefit of the doubt' (SOFT) | correct work accepted in every case; discrimination on added errors 0.96 → 0.42 (AGREE) and 0.52 (SOFT), on removed records 0.63 → 0.16 (both); the check instruction restores the colluder too (+0.385); stated reasons cite the agreement in 87–97% of collusive acceptances of added errors but only 41–64% for removed records | exploratory | V `addendum.a18`, `addendum.a19` |
+| Other verifiers on identical contexts | omission detection in the workflow on the 48 primary items (50 minus the two D40 residue items): Flash-Lite 65%, Gemini 3.8 Flash 85%, Claude Haiku 5.5 100%; Gemini 3.8 Flash's false rejection under the check instruction 41% | exploratory | PN §14, §15 |
+| Positive control: prompted agreement (AGREE) or 'benefit of the doubt' (SOFT) | correct work accepted in every case (100% against 98–99% without the agreement); discrimination on added errors 0.96 → 0.42 (AGREE) and 0.52 (SOFT) (109 items), on removed records 0.63 → 0.16 (both; 48 primary items); the check instruction restores the prompted colluder too (+0.385); stated reasons cite the agreement in 87–97% of collusive acceptances of added errors but only 41–64% for removed records | exploratory | V `addendum.a18`, `addendum.a19` |
 
-Mutual acceptance alone cannot separate collusion from unchecked acceptance; a planted-error discrimination test registers instructed collusion.
+Mutual acceptance alone cannot separate collusion from unchecked acceptance; planted-error discrimination responds to prompted collusion. Workflow omission detection is 64% on all 50 D25 items (Sections 4.2–4.3 of the paper) and 65% on the 48 primary items used from the positive control and the verifier transfer on.
 
 ## Repository map
 

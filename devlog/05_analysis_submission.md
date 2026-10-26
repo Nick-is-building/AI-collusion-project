@@ -591,3 +591,12 @@ No outcome analysis, completed manuscript, or final submission is attested here.
 **State / limitations:** numbers only; no interpretation added.
 **Next:** none proposed.
 **Cross-references:** A18 and A19 analysis entries above; Paper numbers entry (2026-10-26).
+
+## 2026-10-26 10:55 UTC — Claude Fable 5.1 / Claude Code — README aligned with the final paper wording
+
+**Assignment / authorization:** Nick (pasted message, 26 Oct ~10:45 UTC): check the final PDF against `paper_numbers.md`/`verification.json`/docs, align `README.md` with it, add the paper path, commit with explicit paths, `git pull --rebase`, push. No API calls.
+**Built or changed:** `README.md`: positive control described as a prompted (asserted) agreement instead of "instructs"/"known case of collusion"/"instructed collusion"; verifier-transfer row states the 48-item primary set and Flash-Lite 65%; positive-control row gives item sets (109 / 48) and "100% against 98–99%"; closing sentence explains 64% (50 items) vs 65% (48 items); line "Paper: paper/Wagner_Collusion_or_Inattention.pdf (added at submission)" added under the author line.
+**Checks performed:** Numbers taken from `paper/paper_numbers.md` §14, §17, §18 (R1/om 0.646 on 48 items; a13 R1 0.640 on 50; acceptance of correct 0.986/0.979 vs 1.000). `grep -i "instructed|known colluder"` on README: no hits.
+**Did not work:** The PDF in the repository root (`Wagner_Collusion_or_Inattention.pdf`, created 10:25 UTC) is byte-for-byte the version reviewed earlier this session; the announced final edits are not in it, so task 1 (number check of the final version) could not be run. README alignment used Nick's description of the edits plus the reviewed version.
+**State / limitations:** README updated; final PDF not yet in `paper/`, not committed.
+**Next:** Re-run the number check once the final PDF is in the repository.
