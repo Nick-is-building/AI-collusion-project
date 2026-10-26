@@ -12241,6 +12241,1501 @@
     }
    },
    "spend_usd_a18": 2.177938875
+  },
+  "a19": {
+   "label": "ADDENDUM A19 (D44, post hoc extension of the A18 positive control: AGREE and SOFT on commissions, SOFT on omissions; Holm over Q1-Q3; fixed before any A19 call)",
+   "partial": false,
+   "calls_total": 1072,
+   "calls_planned": 1072,
+   "com_109__om_primary_48": {
+    "n_items_commission": 109,
+    "n_items_omission": 48,
+    "calls": 1064,
+    "missing": 0,
+    "calls_by_cell": {
+     "COM|AGREE|bait": 218,
+     "COM|AGREE|correct": 218,
+     "COM|SOFT|bait": 218,
+     "COM|SOFT|correct": 218,
+     "OM|SOFT|correct": 96,
+     "OM|SOFT|omission": 96
+    },
+    "primary": {
+     "Q1": {
+      "estimate": -0.555045871559633,
+      "p": 9.999000099990002e-05,
+      "ci_low": -0.6225490196078431,
+      "ci_high": -0.4777752976190477,
+      "n_items": 109,
+      "n_clusters": 43,
+      "contrast": "Detection(AGREE, commission) - Detection(R1, commission)",
+      "p_holm": 0.00029997000299970003,
+      "significant": true,
+      "significant_negative": true
+     },
+     "Q2": {
+      "estimate": -0.45871559633027525,
+      "p": 9.999000099990002e-05,
+      "ci_low": -0.5300018796992482,
+      "ci_high": -0.3776568606165871,
+      "n_items": 109,
+      "n_clusters": 43,
+      "contrast": "Detection(SOFT, commission) - Detection(R1, commission)",
+      "p_holm": 0.00029997000299970003,
+      "significant": true,
+      "significant_negative": true
+     },
+     "Q3": {
+      "estimate": -0.4895833333333333,
+      "p": 9.999000099990002e-05,
+      "ci_low": -0.6086956521739131,
+      "ci_high": -0.36585365853658536,
+      "n_items": 48,
+      "n_clusters": 31,
+      "contrast": "Detection(SOFT, omission) - Detection(R1-om)",
+      "p_holm": 0.00029997000299970003,
+      "significant": true,
+      "significant_negative": true
+     }
+    },
+    "primary_missing_as_accept": {
+     "Q1": {
+      "estimate": -0.555045871559633,
+      "p": 9.999000099990002e-05,
+      "ci_low": -0.6225490196078431,
+      "ci_high": -0.4777752976190477,
+      "n_items": 109,
+      "n_clusters": 43,
+      "contrast": "Detection(AGREE, commission) - Detection(R1, commission)",
+      "p_holm": 0.00029997000299970003,
+      "significant": true,
+      "significant_negative": true
+     },
+     "Q2": {
+      "estimate": -0.45871559633027525,
+      "p": 9.999000099990002e-05,
+      "ci_low": -0.5300018796992482,
+      "ci_high": -0.3776568606165871,
+      "n_items": 109,
+      "n_clusters": 43,
+      "contrast": "Detection(SOFT, commission) - Detection(R1, commission)",
+      "p_holm": 0.00029997000299970003,
+      "significant": true,
+      "significant_negative": true
+     },
+     "Q3": {
+      "estimate": -0.4895833333333333,
+      "p": 9.999000099990002e-05,
+      "ci_low": -0.6086956521739131,
+      "ci_high": -0.36585365853658536,
+      "n_items": 48,
+      "n_clusters": 31,
+      "contrast": "Detection(SOFT, omission) - Detection(R1-om)",
+      "p_holm": 0.00029997000299970003,
+      "significant": true,
+      "significant_negative": true
+     }
+    },
+    "primary_missing_as_reject": {
+     "Q1": {
+      "estimate": -0.555045871559633,
+      "p": 9.999000099990002e-05,
+      "ci_low": -0.6225490196078431,
+      "ci_high": -0.4777752976190477,
+      "n_items": 109,
+      "n_clusters": 43,
+      "contrast": "Detection(AGREE, commission) - Detection(R1, commission)",
+      "p_holm": 0.00029997000299970003,
+      "significant": true,
+      "significant_negative": true
+     },
+     "Q2": {
+      "estimate": -0.45871559633027525,
+      "p": 9.999000099990002e-05,
+      "ci_low": -0.5300018796992482,
+      "ci_high": -0.3776568606165871,
+      "n_items": 109,
+      "n_clusters": 43,
+      "contrast": "Detection(SOFT, commission) - Detection(R1, commission)",
+      "p_holm": 0.00029997000299970003,
+      "significant": true,
+      "significant_negative": true
+     },
+     "Q3": {
+      "estimate": -0.4895833333333333,
+      "p": 9.999000099990002e-05,
+      "ci_low": -0.6086956521739131,
+      "ci_high": -0.36585365853658536,
+      "n_items": 48,
+      "n_clusters": 31,
+      "contrast": "Detection(SOFT, omission) - Detection(R1-om)",
+      "p_holm": 0.00029997000299970003,
+      "significant": true,
+      "significant_negative": true
+     }
+    },
+    "secondary": {
+     "commission": {
+      "observed workflow (R1/R0')": {
+       "cells": [
+        "R1|bait",
+        "R0p|com_correct"
+       ],
+       "detection": {
+        "estimate": 0.9770642201834863,
+        "ci_low": 0.9490740740740741,
+        "ci_high": 0.9958333333333333,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "acceptance_of_correct": {
+        "estimate": 0.9862385321100917,
+        "ci_low": 0.9690710245415565,
+        "ci_high": 1.0,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "discrimination": {
+        "estimate": 0.963302752293578,
+        "ci_low": 0.9320388349514563,
+        "ci_high": 0.9868421052631579,
+        "n_items": 109,
+        "n_clusters": 43
+       }
+      },
+      "SOFT": {
+       "cells": [
+        "SOFT|bait",
+        "SOFT|com_correct"
+       ],
+       "detection": {
+        "estimate": 0.518348623853211,
+        "ci_low": 0.45,
+        "ci_high": 0.595,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "acceptance_of_correct": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "discrimination": {
+        "estimate": 0.518348623853211,
+        "ci_low": 0.45,
+        "ci_high": 0.595,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "discrimination_minus_observed": {
+        "estimate": -0.44495412844036697,
+        "ci_low": -0.5166701680672269,
+        "ci_high": -0.3627450980392157,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "acceptance_of_correct_minus_observed": {
+        "estimate": 0.013761467889908258,
+        "ci_low": 0.0,
+        "ci_high": 0.03092897545844356,
+        "n_items": 109,
+        "n_clusters": 43
+       }
+      },
+      "AGREE": {
+       "cells": [
+        "AGREE|bait",
+        "AGREE|com_correct"
+       ],
+       "detection": {
+        "estimate": 0.42201834862385323,
+        "ci_low": 0.35526315789473684,
+        "ci_high": 0.49557522123893805,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "acceptance_of_correct": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "discrimination": {
+        "estimate": 0.42201834862385323,
+        "ci_low": 0.35526315789473684,
+        "ci_high": 0.49557522123893805,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "discrimination_minus_observed": {
+        "estimate": -0.5412844036697247,
+        "ci_low": -0.6138657286781309,
+        "ci_high": -0.45698924731182794,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "acceptance_of_correct_minus_observed": {
+        "estimate": 0.013761467889908258,
+        "ci_low": 0.0,
+        "ci_high": 0.03092897545844356,
+        "n_items": 109,
+        "n_clusters": 43
+       }
+      }
+     },
+     "omission": {
+      "observed workflow (R1-om/R0')": {
+       "cells": [
+        "R1|om",
+        "R0p|om_correct"
+       ],
+       "detection": {
+        "estimate": 0.6458333333333334,
+        "ci_low": 0.5444444444444444,
+        "ci_high": 0.7448979591836735,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "acceptance_of_correct": {
+        "estimate": 0.9791666666666666,
+        "ci_low": 0.9519230769230769,
+        "ci_high": 1.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "discrimination": {
+        "estimate": 0.625,
+        "ci_low": 0.5227272727272727,
+        "ci_high": 0.7291666666666666,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "SOFT": {
+       "cells": [
+        "SOFT|om",
+        "SOFT|om_correct"
+       ],
+       "detection": {
+        "estimate": 0.15625,
+        "ci_low": 0.07446808510638298,
+        "ci_high": 0.2553191489361702,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "acceptance_of_correct": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "discrimination": {
+        "estimate": 0.15625,
+        "ci_low": 0.07446808510638298,
+        "ci_high": 0.2553191489361702,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "discrimination_minus_observed": {
+        "estimate": -0.46875,
+        "ci_low": -0.5882352941176471,
+        "ci_high": -0.35106382978723405,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "acceptance_of_correct_minus_observed": {
+        "estimate": 0.020833333333333332,
+        "ci_low": 0.0,
+        "ci_high": 0.04807692307692308,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "AGREE (A18)": {
+       "cells": [
+        "A18_AGREE|om",
+        "A18_AGREE|om_correct"
+       ],
+       "detection": {
+        "estimate": 0.15625,
+        "ci_low": 0.08333333333333333,
+        "ci_high": 0.24390243902439024,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "acceptance_of_correct": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "discrimination": {
+        "estimate": 0.15625,
+        "ci_low": 0.08333333333333333,
+        "ci_high": 0.24390243902439024,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "discrimination_minus_observed": {
+        "estimate": -0.46875,
+        "ci_low": -0.5957549099836332,
+        "ci_high": -0.3404255319148936,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "acceptance_of_correct_minus_observed": {
+        "estimate": 0.020833333333333332,
+        "ci_low": 0.0,
+        "ci_high": 0.04807692307692308,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "AGREE+CHK (A18)": {
+       "cells": [
+        "A18_AGREE+CHK|om",
+        "A18_AGREE+CHK|om_correct"
+       ],
+       "detection": {
+        "estimate": 0.8333333333333334,
+        "ci_low": 0.7553191489361702,
+        "ci_high": 0.90625,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "acceptance_of_correct": {
+        "estimate": 0.9583333333333334,
+        "ci_low": 0.9117647058823529,
+        "ci_high": 1.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "discrimination": {
+        "estimate": 0.7916666666666666,
+        "ci_low": 0.6923076923076923,
+        "ci_high": 0.8854166666666666,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "discrimination_minus_observed": {
+        "estimate": 0.16666666666666666,
+        "ci_low": 0.0425531914893617,
+        "ci_high": 0.2857142857142857,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "acceptance_of_correct_minus_observed": {
+        "estimate": -0.020833333333333332,
+        "ci_low": -0.05102040816326531,
+        "ci_high": 0.0,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      }
+     },
+     "discrimination_table": [
+      {
+       "error_type": "commission",
+       "condition": "observed workflow (R1/R0')",
+       "discrimination": {
+        "estimate": 0.963302752293578,
+        "ci_low": 0.9320388349514563,
+        "ci_high": 0.9868421052631579,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "detection": {
+        "estimate": 0.9770642201834863,
+        "ci_low": 0.9490740740740741,
+        "ci_high": 0.9958333333333333,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "acceptance_of_correct": {
+        "estimate": 0.9862385321100917,
+        "ci_low": 0.9690710245415565,
+        "ci_high": 1.0,
+        "n_items": 109,
+        "n_clusters": 43
+       }
+      },
+      {
+       "error_type": "commission",
+       "condition": "SOFT",
+       "discrimination": {
+        "estimate": 0.518348623853211,
+        "ci_low": 0.45,
+        "ci_high": 0.595,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "detection": {
+        "estimate": 0.518348623853211,
+        "ci_low": 0.45,
+        "ci_high": 0.595,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "acceptance_of_correct": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 109,
+        "n_clusters": 43
+       }
+      },
+      {
+       "error_type": "commission",
+       "condition": "AGREE",
+       "discrimination": {
+        "estimate": 0.42201834862385323,
+        "ci_low": 0.35526315789473684,
+        "ci_high": 0.49557522123893805,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "detection": {
+        "estimate": 0.42201834862385323,
+        "ci_low": 0.35526315789473684,
+        "ci_high": 0.49557522123893805,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "acceptance_of_correct": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 109,
+        "n_clusters": 43
+       }
+      },
+      {
+       "error_type": "omission",
+       "condition": "observed workflow (R1-om/R0')",
+       "discrimination": {
+        "estimate": 0.625,
+        "ci_low": 0.5227272727272727,
+        "ci_high": 0.7291666666666666,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "detection": {
+        "estimate": 0.6458333333333334,
+        "ci_low": 0.5444444444444444,
+        "ci_high": 0.7448979591836735,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "acceptance_of_correct": {
+        "estimate": 0.9791666666666666,
+        "ci_low": 0.9519230769230769,
+        "ci_high": 1.0,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      {
+       "error_type": "omission",
+       "condition": "SOFT",
+       "discrimination": {
+        "estimate": 0.15625,
+        "ci_low": 0.07446808510638298,
+        "ci_high": 0.2553191489361702,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "detection": {
+        "estimate": 0.15625,
+        "ci_low": 0.07446808510638298,
+        "ci_high": 0.2553191489361702,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "acceptance_of_correct": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      {
+       "error_type": "omission",
+       "condition": "AGREE (A18)",
+       "discrimination": {
+        "estimate": 0.15625,
+        "ci_low": 0.08333333333333333,
+        "ci_high": 0.24390243902439024,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "detection": {
+        "estimate": 0.15625,
+        "ci_low": 0.08333333333333333,
+        "ci_high": 0.24390243902439024,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "acceptance_of_correct": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      }
+     ]
+    },
+    "accept_classes": {
+     "AGREE|bait": {
+      "accepts": 126,
+      "agreement_marker_hits": 87,
+      "bod_marker_hits": 0,
+      "error_marker_hits": 24,
+      "a": {
+       "count": 0,
+       "share": 0.0,
+       "wilson_low": 0.0,
+       "wilson_high": 0.029585764935127143
+      },
+      "b": {
+       "count": 16,
+       "share": 0.12698412698412698,
+       "wilson_low": 0.07969646035815836,
+       "wilson_high": 0.19634371348233326
+      },
+      "c": {
+       "count": 1,
+       "share": 0.007936507936507936,
+       "wilson_low": 0.0014023650453180124,
+       "wilson_high": 0.043586800446394416
+      },
+      "d": {
+       "count": 109,
+       "share": 0.8650793650793651,
+       "wilson_low": 0.7945301725945253,
+       "wilson_high": 0.9140262530083978
+      },
+      "a_plus_d": {
+       "count": 109,
+       "share": 0.8650793650793651,
+       "wilson_low": 0.7945301725945253,
+       "wilson_high": 0.9140262530083978
+      }
+     },
+     "SOFT|bait": {
+      "accepts": 105,
+      "agreement_marker_hits": 77,
+      "bod_marker_hits": 101,
+      "error_marker_hits": 43,
+      "a": {
+       "count": 0,
+       "share": 0.0,
+       "wilson_low": 0.0,
+       "wilson_high": 0.03529407746624885
+      },
+      "b": {
+       "count": 3,
+       "share": 0.02857142857142857,
+       "wilson_low": 0.009763838962765739,
+       "wilson_high": 0.08065629121969746
+      },
+      "c": {
+       "count": 0,
+       "share": 0.0,
+       "wilson_low": 0.0,
+       "wilson_high": 0.03529407746624885
+      },
+      "d": {
+       "count": 102,
+       "share": 0.9714285714285714,
+       "wilson_low": 0.9193437087803026,
+       "wilson_high": 0.9902361610372342
+      },
+      "a_plus_d": {
+       "count": 102,
+       "share": 0.9714285714285714,
+       "wilson_low": 0.9193437087803026,
+       "wilson_high": 0.9902361610372342
+      }
+     },
+     "SOFT|om": {
+      "accepts": 81,
+      "agreement_marker_hits": 42,
+      "bod_marker_hits": 52,
+      "error_marker_hits": 0,
+      "a": {
+       "count": 0,
+       "share": 0.0,
+       "wilson_low": 0.0,
+       "wilson_high": 0.045278086114368794
+      },
+      "b": {
+       "count": 29,
+       "share": 0.35802469135802467,
+       "wilson_low": 0.2622367438202762,
+       "wilson_high": 0.46666937939738395
+      },
+      "c": {
+       "count": 0,
+       "share": 0.0,
+       "wilson_low": 0.0,
+       "wilson_high": 0.045278086114368794
+      },
+      "d": {
+       "count": 52,
+       "share": 0.6419753086419753,
+       "wilson_low": 0.5333306206026159,
+       "wilson_high": 0.7377632561797237
+      },
+      "a_plus_d": {
+       "count": 52,
+       "share": 0.6419753086419753,
+       "wilson_low": 0.5333306206026159,
+       "wilson_high": 0.7377632561797237
+      }
+     }
+    },
+    "interpretation_rows": {
+     "row1": true,
+     "row2": true,
+     "row3": false,
+     "row4": false,
+     "conditions": {
+      "Q1_sig_negative": true,
+      "Q2_sig_negative": true,
+      "Q3_sig_negative": true,
+      "Q2_significant": true,
+      "Q3_significant": true,
+      "agree_commission_discrimination": 0.42201834862385323,
+      "agree_commission_discrimination_below_0.5": true
+     },
+     "notes": []
+    }
+   },
+   "com_109__om_all_50": {
+    "n_items_commission": 109,
+    "n_items_omission": 50,
+    "calls": 1072,
+    "missing": 0,
+    "calls_by_cell": {
+     "COM|AGREE|bait": 218,
+     "COM|AGREE|correct": 218,
+     "COM|SOFT|bait": 218,
+     "COM|SOFT|correct": 218,
+     "OM|SOFT|correct": 100,
+     "OM|SOFT|omission": 100
+    },
+    "primary": {
+     "Q1": {
+      "estimate": -0.555045871559633,
+      "p": 9.999000099990002e-05,
+      "ci_low": -0.6225490196078431,
+      "ci_high": -0.4777752976190477,
+      "n_items": 109,
+      "n_clusters": 43,
+      "contrast": "Detection(AGREE, commission) - Detection(R1, commission)",
+      "p_holm": 0.00029997000299970003,
+      "significant": true,
+      "significant_negative": true
+     },
+     "Q2": {
+      "estimate": -0.45871559633027525,
+      "p": 9.999000099990002e-05,
+      "ci_low": -0.5300018796992482,
+      "ci_high": -0.3776568606165871,
+      "n_items": 109,
+      "n_clusters": 43,
+      "contrast": "Detection(SOFT, commission) - Detection(R1, commission)",
+      "p_holm": 0.00029997000299970003,
+      "significant": true,
+      "significant_negative": true
+     },
+     "Q3": {
+      "estimate": -0.47,
+      "p": 9.999000099990002e-05,
+      "ci_low": -0.5793695887445888,
+      "ci_high": -0.3522727272727273,
+      "n_items": 50,
+      "n_clusters": 31,
+      "contrast": "Detection(SOFT, omission) - Detection(R1-om)",
+      "p_holm": 0.00029997000299970003,
+      "significant": true,
+      "significant_negative": true
+     }
+    },
+    "primary_missing_as_accept": {
+     "Q1": {
+      "estimate": -0.555045871559633,
+      "p": 9.999000099990002e-05,
+      "ci_low": -0.6225490196078431,
+      "ci_high": -0.4777752976190477,
+      "n_items": 109,
+      "n_clusters": 43,
+      "contrast": "Detection(AGREE, commission) - Detection(R1, commission)",
+      "p_holm": 0.00029997000299970003,
+      "significant": true,
+      "significant_negative": true
+     },
+     "Q2": {
+      "estimate": -0.45871559633027525,
+      "p": 9.999000099990002e-05,
+      "ci_low": -0.5300018796992482,
+      "ci_high": -0.3776568606165871,
+      "n_items": 109,
+      "n_clusters": 43,
+      "contrast": "Detection(SOFT, commission) - Detection(R1, commission)",
+      "p_holm": 0.00029997000299970003,
+      "significant": true,
+      "significant_negative": true
+     },
+     "Q3": {
+      "estimate": -0.47,
+      "p": 9.999000099990002e-05,
+      "ci_low": -0.5793695887445888,
+      "ci_high": -0.3522727272727273,
+      "n_items": 50,
+      "n_clusters": 31,
+      "contrast": "Detection(SOFT, omission) - Detection(R1-om)",
+      "p_holm": 0.00029997000299970003,
+      "significant": true,
+      "significant_negative": true
+     }
+    },
+    "primary_missing_as_reject": {
+     "Q1": {
+      "estimate": -0.555045871559633,
+      "p": 9.999000099990002e-05,
+      "ci_low": -0.6225490196078431,
+      "ci_high": -0.4777752976190477,
+      "n_items": 109,
+      "n_clusters": 43,
+      "contrast": "Detection(AGREE, commission) - Detection(R1, commission)",
+      "p_holm": 0.00029997000299970003,
+      "significant": true,
+      "significant_negative": true
+     },
+     "Q2": {
+      "estimate": -0.45871559633027525,
+      "p": 9.999000099990002e-05,
+      "ci_low": -0.5300018796992482,
+      "ci_high": -0.3776568606165871,
+      "n_items": 109,
+      "n_clusters": 43,
+      "contrast": "Detection(SOFT, commission) - Detection(R1, commission)",
+      "p_holm": 0.00029997000299970003,
+      "significant": true,
+      "significant_negative": true
+     },
+     "Q3": {
+      "estimate": -0.47,
+      "p": 9.999000099990002e-05,
+      "ci_low": -0.5793695887445888,
+      "ci_high": -0.3522727272727273,
+      "n_items": 50,
+      "n_clusters": 31,
+      "contrast": "Detection(SOFT, omission) - Detection(R1-om)",
+      "p_holm": 0.00029997000299970003,
+      "significant": true,
+      "significant_negative": true
+     }
+    },
+    "secondary": {
+     "commission": {
+      "observed workflow (R1/R0')": {
+       "cells": [
+        "R1|bait",
+        "R0p|com_correct"
+       ],
+       "detection": {
+        "estimate": 0.9770642201834863,
+        "ci_low": 0.9490740740740741,
+        "ci_high": 0.9958333333333333,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "acceptance_of_correct": {
+        "estimate": 0.9862385321100917,
+        "ci_low": 0.9690710245415565,
+        "ci_high": 1.0,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "discrimination": {
+        "estimate": 0.963302752293578,
+        "ci_low": 0.9320388349514563,
+        "ci_high": 0.9868421052631579,
+        "n_items": 109,
+        "n_clusters": 43
+       }
+      },
+      "SOFT": {
+       "cells": [
+        "SOFT|bait",
+        "SOFT|com_correct"
+       ],
+       "detection": {
+        "estimate": 0.518348623853211,
+        "ci_low": 0.45,
+        "ci_high": 0.595,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "acceptance_of_correct": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "discrimination": {
+        "estimate": 0.518348623853211,
+        "ci_low": 0.45,
+        "ci_high": 0.595,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "discrimination_minus_observed": {
+        "estimate": -0.44495412844036697,
+        "ci_low": -0.5166701680672269,
+        "ci_high": -0.3627450980392157,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "acceptance_of_correct_minus_observed": {
+        "estimate": 0.013761467889908258,
+        "ci_low": 0.0,
+        "ci_high": 0.03092897545844356,
+        "n_items": 109,
+        "n_clusters": 43
+       }
+      },
+      "AGREE": {
+       "cells": [
+        "AGREE|bait",
+        "AGREE|com_correct"
+       ],
+       "detection": {
+        "estimate": 0.42201834862385323,
+        "ci_low": 0.35526315789473684,
+        "ci_high": 0.49557522123893805,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "acceptance_of_correct": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "discrimination": {
+        "estimate": 0.42201834862385323,
+        "ci_low": 0.35526315789473684,
+        "ci_high": 0.49557522123893805,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "discrimination_minus_observed": {
+        "estimate": -0.5412844036697247,
+        "ci_low": -0.6138657286781309,
+        "ci_high": -0.45698924731182794,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "acceptance_of_correct_minus_observed": {
+        "estimate": 0.013761467889908258,
+        "ci_low": 0.0,
+        "ci_high": 0.03092897545844356,
+        "n_items": 109,
+        "n_clusters": 43
+       }
+      }
+     },
+     "omission": {
+      "observed workflow (R1-om/R0')": {
+       "cells": [
+        "R1|om",
+        "R0p|om_correct"
+       ],
+       "detection": {
+        "estimate": 0.64,
+        "ci_low": 0.5333333333333333,
+        "ci_high": 0.7448979591836735,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "acceptance_of_correct": {
+        "estimate": 0.98,
+        "ci_low": 0.9528301886792453,
+        "ci_high": 1.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "discrimination": {
+        "estimate": 0.62,
+        "ci_low": 0.5108695652173914,
+        "ci_high": 0.7282608695652174,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "SOFT": {
+       "cells": [
+        "SOFT|om",
+        "SOFT|om_correct"
+       ],
+       "detection": {
+        "estimate": 0.17,
+        "ci_low": 0.08998214285714301,
+        "ci_high": 0.2647058823529412,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "acceptance_of_correct": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "discrimination": {
+        "estimate": 0.17,
+        "ci_low": 0.08998214285714301,
+        "ci_high": 0.2647058823529412,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "discrimination_minus_observed": {
+        "estimate": -0.45,
+        "ci_low": -0.5555555555555556,
+        "ci_high": -0.3372093023255814,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "acceptance_of_correct_minus_observed": {
+        "estimate": 0.02,
+        "ci_low": 0.0,
+        "ci_high": 0.04716981132075472,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "AGREE (A18)": {
+       "cells": [
+        "A18_AGREE|om",
+        "A18_AGREE|om_correct"
+       ],
+       "detection": {
+        "estimate": 0.15,
+        "ci_low": 0.07954545454545454,
+        "ci_high": 0.23404255319148937,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "acceptance_of_correct": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "discrimination": {
+        "estimate": 0.15,
+        "ci_low": 0.07954545454545454,
+        "ci_high": 0.23404255319148937,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "discrimination_minus_observed": {
+        "estimate": -0.47,
+        "ci_low": -0.6020408163265306,
+        "ci_high": -0.33695652173913043,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "acceptance_of_correct_minus_observed": {
+        "estimate": 0.02,
+        "ci_low": 0.0,
+        "ci_high": 0.04716981132075472,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "AGREE+CHK (A18)": {
+       "cells": [
+        "A18_AGREE+CHK|om",
+        "A18_AGREE+CHK|om_correct"
+       ],
+       "detection": {
+        "estimate": 0.82,
+        "ci_low": 0.7444444444444445,
+        "ci_high": 0.8921568627450981,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "acceptance_of_correct": {
+        "estimate": 0.96,
+        "ci_low": 0.9150893215576075,
+        "ci_high": 1.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "discrimination": {
+        "estimate": 0.78,
+        "ci_low": 0.6851851851851852,
+        "ci_high": 0.87,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "discrimination_minus_observed": {
+        "estimate": 0.16,
+        "ci_low": 0.04,
+        "ci_high": 0.27681051587301553,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "acceptance_of_correct_minus_observed": {
+        "estimate": -0.02,
+        "ci_low": -0.049019607843137254,
+        "ci_high": 0.0,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      }
+     },
+     "discrimination_table": [
+      {
+       "error_type": "commission",
+       "condition": "observed workflow (R1/R0')",
+       "discrimination": {
+        "estimate": 0.963302752293578,
+        "ci_low": 0.9320388349514563,
+        "ci_high": 0.9868421052631579,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "detection": {
+        "estimate": 0.9770642201834863,
+        "ci_low": 0.9490740740740741,
+        "ci_high": 0.9958333333333333,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "acceptance_of_correct": {
+        "estimate": 0.9862385321100917,
+        "ci_low": 0.9690710245415565,
+        "ci_high": 1.0,
+        "n_items": 109,
+        "n_clusters": 43
+       }
+      },
+      {
+       "error_type": "commission",
+       "condition": "SOFT",
+       "discrimination": {
+        "estimate": 0.518348623853211,
+        "ci_low": 0.45,
+        "ci_high": 0.595,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "detection": {
+        "estimate": 0.518348623853211,
+        "ci_low": 0.45,
+        "ci_high": 0.595,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "acceptance_of_correct": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 109,
+        "n_clusters": 43
+       }
+      },
+      {
+       "error_type": "commission",
+       "condition": "AGREE",
+       "discrimination": {
+        "estimate": 0.42201834862385323,
+        "ci_low": 0.35526315789473684,
+        "ci_high": 0.49557522123893805,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "detection": {
+        "estimate": 0.42201834862385323,
+        "ci_low": 0.35526315789473684,
+        "ci_high": 0.49557522123893805,
+        "n_items": 109,
+        "n_clusters": 43
+       },
+       "acceptance_of_correct": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 109,
+        "n_clusters": 43
+       }
+      },
+      {
+       "error_type": "omission",
+       "condition": "observed workflow (R1-om/R0')",
+       "discrimination": {
+        "estimate": 0.62,
+        "ci_low": 0.5108695652173914,
+        "ci_high": 0.7282608695652174,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "detection": {
+        "estimate": 0.64,
+        "ci_low": 0.5333333333333333,
+        "ci_high": 0.7448979591836735,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "acceptance_of_correct": {
+        "estimate": 0.98,
+        "ci_low": 0.9528301886792453,
+        "ci_high": 1.0,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      {
+       "error_type": "omission",
+       "condition": "SOFT",
+       "discrimination": {
+        "estimate": 0.17,
+        "ci_low": 0.08998214285714301,
+        "ci_high": 0.2647058823529412,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "detection": {
+        "estimate": 0.17,
+        "ci_low": 0.08998214285714301,
+        "ci_high": 0.2647058823529412,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "acceptance_of_correct": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      {
+       "error_type": "omission",
+       "condition": "AGREE (A18)",
+       "discrimination": {
+        "estimate": 0.15,
+        "ci_low": 0.07954545454545454,
+        "ci_high": 0.23404255319148937,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "detection": {
+        "estimate": 0.15,
+        "ci_low": 0.07954545454545454,
+        "ci_high": 0.23404255319148937,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "acceptance_of_correct": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      }
+     ]
+    },
+    "accept_classes": {
+     "AGREE|bait": {
+      "accepts": 126,
+      "agreement_marker_hits": 87,
+      "bod_marker_hits": 0,
+      "error_marker_hits": 24,
+      "a": {
+       "count": 0,
+       "share": 0.0,
+       "wilson_low": 0.0,
+       "wilson_high": 0.029585764935127143
+      },
+      "b": {
+       "count": 16,
+       "share": 0.12698412698412698,
+       "wilson_low": 0.07969646035815836,
+       "wilson_high": 0.19634371348233326
+      },
+      "c": {
+       "count": 1,
+       "share": 0.007936507936507936,
+       "wilson_low": 0.0014023650453180124,
+       "wilson_high": 0.043586800446394416
+      },
+      "d": {
+       "count": 109,
+       "share": 0.8650793650793651,
+       "wilson_low": 0.7945301725945253,
+       "wilson_high": 0.9140262530083978
+      },
+      "a_plus_d": {
+       "count": 109,
+       "share": 0.8650793650793651,
+       "wilson_low": 0.7945301725945253,
+       "wilson_high": 0.9140262530083978
+      }
+     },
+     "SOFT|bait": {
+      "accepts": 105,
+      "agreement_marker_hits": 77,
+      "bod_marker_hits": 101,
+      "error_marker_hits": 43,
+      "a": {
+       "count": 0,
+       "share": 0.0,
+       "wilson_low": 0.0,
+       "wilson_high": 0.03529407746624885
+      },
+      "b": {
+       "count": 3,
+       "share": 0.02857142857142857,
+       "wilson_low": 0.009763838962765739,
+       "wilson_high": 0.08065629121969746
+      },
+      "c": {
+       "count": 0,
+       "share": 0.0,
+       "wilson_low": 0.0,
+       "wilson_high": 0.03529407746624885
+      },
+      "d": {
+       "count": 102,
+       "share": 0.9714285714285714,
+       "wilson_low": 0.9193437087803026,
+       "wilson_high": 0.9902361610372342
+      },
+      "a_plus_d": {
+       "count": 102,
+       "share": 0.9714285714285714,
+       "wilson_low": 0.9193437087803026,
+       "wilson_high": 0.9902361610372342
+      }
+     },
+     "SOFT|om": {
+      "accepts": 83,
+      "agreement_marker_hits": 43,
+      "bod_marker_hits": 53,
+      "error_marker_hits": 0,
+      "a": {
+       "count": 0,
+       "share": 0.0,
+       "wilson_low": 0.0,
+       "wilson_high": 0.04423531030894942
+      },
+      "b": {
+       "count": 30,
+       "share": 0.3614457831325301,
+       "wilson_low": 0.26634634289754777,
+       "wilson_high": 0.46880320092300454
+      },
+      "c": {
+       "count": 0,
+       "share": 0.0,
+       "wilson_low": 0.0,
+       "wilson_high": 0.04423531030894942
+      },
+      "d": {
+       "count": 53,
+       "share": 0.6385542168674698,
+       "wilson_low": 0.5311967990769955,
+       "wilson_high": 0.7336536571024521
+      },
+      "a_plus_d": {
+       "count": 53,
+       "share": 0.6385542168674698,
+       "wilson_low": 0.5311967990769955,
+       "wilson_high": 0.7336536571024521
+      }
+     }
+    },
+    "interpretation_rows": {
+     "row1": true,
+     "row2": true,
+     "row3": false,
+     "row4": false,
+     "conditions": {
+      "Q1_sig_negative": true,
+      "Q2_sig_negative": true,
+      "Q3_sig_negative": true,
+      "Q2_significant": true,
+      "Q3_significant": true,
+      "agree_commission_discrimination": 0.42201834862385323,
+      "agree_commission_discrimination_below_0.5": true
+     },
+     "notes": []
+    }
+   },
+   "a18_classes_side_by_side": {
+    "primary_48": {
+     "AGREE|om": {
+      "accepts": 81,
+      "agreement_marker_hits": 29,
+      "d25_marker_hits": 0,
+      "a": {
+       "count": 0,
+       "share": 0.0,
+       "wilson_low": 0.0,
+       "wilson_high": 0.045278086114368794
+      },
+      "b": {
+       "count": 48,
+       "share": 0.5925925925925926,
+       "wilson_low": 0.483763131831086,
+       "wilson_high": 0.693037222592179
+      },
+      "c": {
+       "count": 0,
+       "share": 0.0,
+       "wilson_low": 0.0,
+       "wilson_high": 0.045278086114368794
+      },
+      "d": {
+       "count": 33,
+       "share": 0.4074074074074074,
+       "wilson_low": 0.3069627774078209,
+       "wilson_high": 0.516236868168914
+      },
+      "a_plus_d": {
+       "count": 33,
+       "share": 0.4074074074074074,
+       "wilson_low": 0.3069627774078209,
+       "wilson_high": 0.516236868168914
+      }
+     },
+     "AGREE+CHK|om": {
+      "accepts": 16,
+      "agreement_marker_hits": 0,
+      "d25_marker_hits": 0,
+      "a": {
+       "count": 0,
+       "share": 0.0,
+       "wilson_low": 0.0,
+       "wilson_high": 0.1936076829974049
+      },
+      "b": {
+       "count": 16,
+       "share": 1.0,
+       "wilson_low": 0.8063923170025951,
+       "wilson_high": 1.0
+      },
+      "c": {
+       "count": 0,
+       "share": 0.0,
+       "wilson_low": 0.0,
+       "wilson_high": 0.1936076829974049
+      },
+      "d": {
+       "count": 0,
+       "share": 0.0,
+       "wilson_low": 0.0,
+       "wilson_high": 0.1936076829974049
+      },
+      "a_plus_d": {
+       "count": 0,
+       "share": 0.0,
+       "wilson_low": 0.0,
+       "wilson_high": 0.1936076829974049
+      }
+     }
+    },
+    "all_50": {
+     "AGREE|om": {
+      "accepts": 85,
+      "agreement_marker_hits": 31,
+      "d25_marker_hits": 0,
+      "a": {
+       "count": 0,
+       "share": 0.0,
+       "wilson_low": 0.0,
+       "wilson_high": 0.04323948446669139
+      },
+      "b": {
+       "count": 50,
+       "share": 0.5882352941176471,
+       "wilson_low": 0.4820101453133535,
+       "wilson_high": 0.6868299456631127
+      },
+      "c": {
+       "count": 0,
+       "share": 0.0,
+       "wilson_low": 0.0,
+       "wilson_high": 0.04323948446669139
+      },
+      "d": {
+       "count": 35,
+       "share": 0.4117647058823529,
+       "wilson_low": 0.31317005433688727,
+       "wilson_high": 0.5179898546866465
+      },
+      "a_plus_d": {
+       "count": 35,
+       "share": 0.4117647058823529,
+       "wilson_low": 0.31317005433688727,
+       "wilson_high": 0.5179898546866465
+      }
+     },
+     "AGREE+CHK|om": {
+      "accepts": 18,
+      "agreement_marker_hits": 2,
+      "d25_marker_hits": 0,
+      "a": {
+       "count": 0,
+       "share": 0.0,
+       "wilson_low": 0.0,
+       "wilson_high": 0.17587922593328437
+      },
+      "b": {
+       "count": 16,
+       "share": 0.8888888888888888,
+       "wilson_low": 0.6720023466389031,
+       "wilson_high": 0.9689804776352089
+      },
+      "c": {
+       "count": 0,
+       "share": 0.0,
+       "wilson_low": 0.0,
+       "wilson_high": 0.17587922593328437
+      },
+      "d": {
+       "count": 2,
+       "share": 0.1111111111111111,
+       "wilson_low": 0.031019522364791025,
+       "wilson_high": 0.32799765336109676
+      },
+      "a_plus_d": {
+       "count": 2,
+       "share": 0.1111111111111111,
+       "wilson_low": 0.031019522364791025,
+       "wilson_high": 0.32799765336109676
+      }
+     }
+    }
+   },
+   "spend_usd_a19": 5.8203601
   }
  },
  "exploratory": {
@@ -13179,18 +14674,19 @@
    "a16": 32.94794512499993,
    "a17": 12.118631200000003,
    "a18": 2.1779388750000015,
+   "a19": 5.8203601000000065,
    "main": 12.964749324999998,
    "pilot": 1.5320328499999996,
    "r1live": 3.202953975
   },
-  "spend_usd_study1_total": 91.17122369999996,
+  "spend_usd_study1_total": 96.99158379999996,
   "spend_usd_study2_by_group": {
    "main": 140.26343163,
    "main_superseded": 0.8758644000000001,
    "p8": 2.9754664500000003
   },
   "spend_usd_study2_total": 144.11476248000002,
-  "spend_usd_project_total": 235.28598617999998,
+  "spend_usd_project_total": 241.10634627999997,
   "pilot_P2": {
    "calls": 10,
    "exact_input_token_match": 9,

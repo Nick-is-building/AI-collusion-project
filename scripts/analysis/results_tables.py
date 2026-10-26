@@ -849,6 +849,62 @@ def a18(t: Tables):
         t.table(["Cell", "ACCEPTs", "(a)", "(b)", "(c)", "Key"], rows)
 
 
+def a19(t: Tables):
+    X = "addendum.a19"
+    t.h(3, "3.13 A19 broader positive control: AGREE and SOFT on commissions, SOFT on omissions (D44; post hoc)")
+    if "a19" not in t.get("addendum") or t.get(X).get("status") == "not run":
+        t.note("Not run.")
+        return
+    t.note(t.get(f"{X}.label"))
+    t.values([("Calls (stage a19)", f"{X}.calls_total"), ("Planned", f"{X}.calls_planned"),
+              ("Partial", f"{X}.partial"), ("Spend stage a19 (USD)", f"{X}.spend_usd_a19")])
+    for blk, title in (("com_109__om_primary_48", "Commissions 109 items; omissions primary set (48 items)"),
+                       ("com_109__om_all_50", "Sensitivity: commissions 109 items; omissions all 50 items")):
+        B = f"{X}.{blk}"
+        P = f"{B}.primary"
+        t.values([(f"{title}: calls", f"{B}.calls"), (f"{title}: missing verdicts", f"{B}.missing")])
+        t.h(4, f"{title}: primary family (Holm over Q1, Q2, Q3)")
+        rows = []
+        for k in ("Q1", "Q2", "Q3"):
+            r = t.stat_row(f"{k}: {t.get(f'{P}.{k}.contrast')}", f"{P}.{k}")
+            rows.append(r[:4] + [t.num(t.get(f"{P}.{k}.p_holm"), 4), t.num(t.get(f"{P}.{k}.significant"))] + r[4:])
+        t.table(["Test", "Estimate", "95% CI", "p", "p (Holm)", "Significant", "Items / clusters", "Key"], rows)
+        for sens, lab in (("primary_missing_as_accept", "missing coded ACCEPT"),
+                          ("primary_missing_as_reject", "missing coded REJECT")):
+            t.stats([(f"{k}, {lab}", f"{B}.{sens}.{k}") for k in ("Q1", "Q2", "Q3")])
+        S = f"{B}.secondary"
+        t.h(4, f"{title}: discrimination by error type and condition (descriptive)")
+        rows = []
+        for etype in ("commission", "omission"):
+            for c in t.get(f"{S}.{etype}"):
+                for q, lab in (("detection", "detection"), ("acceptance_of_correct", "acceptance of correct"),
+                               ("discrimination", "discrimination (P(ACCEPT|correct) − P(ACCEPT|error))"),
+                               ("discrimination_minus_observed", "discrimination − observed"),
+                               ("acceptance_of_correct_minus_observed", "acceptance of correct − observed")):
+                    if q in t.get(f"{S}.{etype}.{c}"):
+                        rows.append((f"{etype}, {c}: {lab}", f"{S}.{etype}.{c}.{q}"))
+        t.stats(rows)
+        C = f"{B}.accept_classes"
+        if t.get(C).get("status"):
+            t.note(f"{title}: ACCEPT classes: {t.get(C)['status']}.")
+        else:
+            t.h(4, f"{title}: classes of ACCEPTs on error versions (single coder; Wilson 95% over calls)")
+            rows = []
+            for c in t.get(C):
+                rows.append([c.replace("|", " "), t.num(t.get(f"{C}.{c}.accepts")),
+                             t.num(t.get(f"{C}.{c}.agreement_marker_hits")), t.num(t.get(f"{C}.{c}.bod_marker_hits")),
+                             t.num(t.get(f"{C}.{c}.error_marker_hits"))]
+                            + [f"{t.get(f'{C}.{c}.{k}.count')} ({t.num(t.get(f'{C}.{c}.{k}.share'), 2)}; "
+                               f"{t.num(t.get(f'{C}.{c}.{k}.wilson_low'), 2)}–{t.num(t.get(f'{C}.{c}.{k}.wilson_high'), 2)})"
+                               for k in ("a", "b", "c", "d", "a_plus_d")] + [f"`{C}.{c}`"])
+            t.table(["Cell", "ACCEPTs", "Agreement-marker hits", "Benefit-of-doubt hits", "Error-marker hits",
+                     "(a)", "(b)", "(c)", "(d)", "(a)+(d)", "Key"], rows)
+        I = f"{B}.interpretation_rows"
+        t.values([(f"{title}: interpretation {k}", f"{I}.{k}") for k in ("row1", "row2", "row3", "row4")]
+                 + ([(f"{title}: row 3 error types", f"{I}.row3_error_types")] if t.get(I).get("row3") else [])
+                 + [(f"{title}: row notes", f"{I}.notes")])
+
+
 def build(v: dict, source_sha256: str) -> str:
     t = Tables(v)
     t.lines += ["# Results tables (Study 1 and addenda)", "",
@@ -868,6 +924,7 @@ def build(v: dict, source_sha256: str) -> str:
     a16(t)
     a17(t)
     a18(t)
+    a19(t)
     exploratory(t)
     figure_data(t)
     d40(t)
