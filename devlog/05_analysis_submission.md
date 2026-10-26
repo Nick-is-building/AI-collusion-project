@@ -486,3 +486,32 @@ No outcome analysis, completed manuscript, or final submission is attested here.
 **State / limitations:** exploratory transfer study (D39); 48 items (primary), 31 trajectories, one planted omission type, one second verifier from the same family, judging a history written by Flash-Lite; served weights unverifiable beyond Google's documentation; R1-com single draw; named_accept markers miss paraphrases.
 **Next (Nick):** how to report the A16 transfer (row 3, row 5 criterion shift).
 **Cross-references:** D39, D40; DEVLOG 03 A16 entries; A13–A15 entries above; plan §§8.6, 8.8.
+
+## 2026-10-26 03:00–03:25 UTC — Claude Code (Opus 5.5), session A16 — D42: classes of omission ACCEPTs (post hoc, single coder); verifier-transfer figure; joint A16/A17 reporting decision
+
+**Assignment / authorization:** Nick, 26 October 2026 (0 USD, no API call): record as D42; report A16 and A17 together as one exploratory "verifier transfer" section (descriptive across verifiers, each verifier's rows applied literally, no pooling/test across verifiers); classify every omission ACCEPT on the primary item set into (a)/(b)/(c); counts and shares with Wilson intervals; one figure. Coordination: the A17 session regenerates `verification.json` and `results_tables.md`; I did not edit A17's files, `verify_all.py`, `results_tables.py`, `verification.json` or `results_tables.md` in this unit.
+**Built or changed:** `docs/deviations.md` D42; `scripts/analysis/d42_accept_classes.py` (`--dump`, `--summarize`); `data/derived/rubric/accept_classes_d42.csv` (114 rows); `results/summaries/d42_accept_classes.json`; `scripts/figures/__init__.py`, `scripts/figures/fig_verifier_transfer.py` → `paper/figures/fig_verifier_transfer.{pdf,png}`; `paper/figures/README.md` row; `tests/test_d42.py` (4 tests).
+**Procedure:** `--dump > scratch/d42/accepts.txt` (local): 114 omission ACCEPTs (Flash-Lite 65 of 480 calls, 3.8 Flash 49 of 384); deterministic markers hit 0. I read all 114 in full, in five batches, and wrote category + quote per call (`scratch/d42/classes.tsv`, local, turned into the committed CSV with a coverage assertion). Coding conventions in D42 (formed during the reading; class-level descriptions → (c), identifiable record → (a)).
+**Observed (`results/summaries/d42_accept_classes.json`; shares among ACCEPTs, Wilson 95% over calls):**
+
+| Model | Cell | ACCEPTs / calls | (a) names + endorses | (b) list complete | (c) other |
+|---|---|---|---|---|---|
+| Flash-Lite | R1-om | 34 / 96 | 2 (0.06; 0.02–0.19) | 32 (0.94; 0.81–0.98) | 0 (0.00; 0.00–0.10) |
+| Flash-Lite | R4-om | 15 / 96 | 1 (0.07; 0.01–0.30) | 14 (0.93; 0.70–0.99) | 0 (0.00; 0.00–0.20) |
+| Flash-Lite | R2-om | 5 / 96 | 0 (0.00; 0.00–0.43) | 4 (0.80; 0.38–0.96) | 1 (0.20; 0.04–0.62) |
+| Flash-Lite | R1-om+VIG | 5 / 96 | 0 (0.00; 0.00–0.43) | 5 (1.00; 0.57–1.00) | 0 (0.00; 0.00–0.43) |
+| Flash-Lite | R1-om+CHK | 6 / 96 | 1 (0.17; 0.03–0.56) | 4 (0.67; 0.30–0.90) | 1 (0.17; 0.03–0.56) |
+| Flash-Lite | all cells | 65 / 480 | 4 (0.06; 0.02–0.15) | 59 (0.91; 0.81–0.96) | 2 (0.03; 0.01–0.11) |
+| 3.8 Flash | R1-om | 14 / 96 | 10 (0.71; 0.45–0.88) | 4 (0.29; 0.12–0.55) | 0 (0.00; 0.00–0.22) |
+| 3.8 Flash | R4-om | 15 / 96 | 4 (0.27; 0.11–0.52) | 10 (0.67; 0.42–0.85) | 1 (0.07; 0.01–0.30) |
+| 3.8 Flash | R2-om | 19 / 96 | 9 (0.47; 0.27–0.68) | 8 (0.42; 0.23–0.64) | 2 (0.11; 0.03–0.31) |
+| 3.8 Flash | R1-om+CHK | 1 / 96 | 1 (1.00; 0.21–1.00) | 0 (0.00; 0.00–0.79) | 0 (0.00; 0.00–0.79) |
+| 3.8 Flash | all cells | 49 / 384 | 24 (0.49; 0.36–0.63) | 22 (0.45; 0.32–0.59) | 3 (0.06; 0.02–0.17) |
+
+(Copied from the JSON for navigation; the JSON is the source.) Category (a) is concentrated in few items: Flash-Lite 2 items (rep003_e02, rep043_e04) of 31 with an ACCEPT; 3.8 Flash 12 items of 16 with an ACCEPT. The (c) cases are class-level descriptions matching the removed record (5) and one hedged acceptance ("there might be other events in the text").
+**Figure:** `PYTHONPATH=. .venv/bin/python -m scripts.figures.fig_verifier_transfer` → `paper/figures/fig_verifier_transfer.pdf` and `.png`. Panel A omission detection (R1-om, R4-om, R2-om, R1-om+CHK), panel B false rejection (R0′, R1+CHK), three verifiers, primary set, 95% cluster-bootstrap whiskers; every number from `verification.json` (`addendum.a16.primary_item_set.verifier_comparison`, `addendum.a17.primary_item_set.haiku_minus_flash_lite`; the Flash-Lite entries of both blocks asserted identical). Palette: categorical slots 1–3 as the existing figures, validated with the dataviz validator (all checks pass; aqua below 3:1 contrast → legend plus a distinct marker per verifier). Rendered and inspected: no label collision.
+**Checks performed:** `pytest tests/test_d42.py`: 4 passed (Wilson values; CSV covers exactly the 114 ACCEPTs with matching model/cell and no excluded item; counts add up; figure reads `verification.json`, writes both files, refuses mismatching Flash-Lite entries).
+**Did not work:** none observed.
+**State / limitations:** post hoc, single coder, categories fixed by Nick before reading but 16 of the 3.8 Flash ACCEPTs had been read in A16 before; Wilson intervals treat calls as independent; Haiku contributes no ACCEPT; the figure depends on `verification.json` containing `addendum.a17` (it does at `0e7d857`; the A17 session's regeneration must keep the keys).
+**Next (Nick):** wording of the verifier-transfer section; whether the (a) pattern for 3.8 Flash (recognise-and-endorse) enters the paper and how.
+**Cross-references:** D39, D41, D42; DEVLOG 05 A16 analysis entry; A17 entries (other session).

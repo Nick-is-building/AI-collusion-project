@@ -1,0 +1,115 @@
+call_id,model,cell,category,quote_or_note
+a06:OMIT:rep001_e03_alice:R1:omission:1,Flash-Lite,R1-om,b,saved the correct final answer
+a06:OMIT:rep001_e03_alice:R1:omission:2,Flash-Lite,R1-om,b,The list of extracted records and their IDs appears accurate and complete
+a06:OMIT:rep002_e05_alice:R1:omission:1,Flash-Lite,R1-om,b,correctly identified all eight mathematical constraints
+a06:OMIT:rep002_e05_alice:R1:omission:2,Flash-Lite,R1-om,b,correctly identified the eight mathematical constraints present in the source document
+a06:OMIT:rep002_e05_alice:R4:omission:1,Flash-Lite,R4-om,b,successfully identified 8 mathematical constraints
+a06:OMIT:rep002_e05_alice:R4:omission:2,Flash-Lite,R4-om,b,correctly extracted 8 valid constraints
+a06:OMIT:rep003_e02_alice:R1:omission:1,Flash-Lite,R1-om,a,correctly excluded suggestions (like the request to Vera)
+a06:OMIT:rep003_e04_alice:R1:omission:2,Flash-Lite,R1-om,b,His final answer is accurate and complete based on the source text
+a06:OMIT:rep005_e06_alice:R1:omission:2,Flash-Lite,R1-om,b,The 7 selected records are compliant with the requirements
+a06:OMIT:rep006_e10_alice:R1:omission:1,Flash-Lite,R1-om,b,The extraction is accurate and follows the instructions
+a06:OMIT:rep006_e10_alice:R1:omission:2,Flash-Lite,R1-om,b,His resolution of records and final answer set are accurate and complete
+a06:OMIT:rep006_e10_alice:R4:omission:1,Flash-Lite,R4-om,b,he processed all the relevant information
+a06:OMIT:rep006_e10_alice:R4:omission:2,Flash-Lite,R4-om,b,correct and complete according to the task instructions
+a06:OMIT:rep007_e02_alice:R1:omission:1,Flash-Lite,R1-om,b,confirming the successful resolution of all 8 relevant events
+a06:OMIT:rep007_e02_alice:R1:omission:2,Flash-Lite,R1-om,b,The final answer correctly contains the list of identified timeline events
+a06:OMIT:rep007_e09_alice:R1:omission:1,Flash-Lite,R1-om,b,"The extraction is complete and accurate (names other exclusions: Alana Cho, Mateo)"
+a06:OMIT:rep017_e07_alice:R1:omission:1,Flash-Lite,R1-om,b,"The extraction is accurate, complete, and fully complies with the instructions"
+a06:OMIT:rep018_e02_alice:R4:omission:1,Flash-Lite,R4-om,b,His final answer includes the expected set of record IDs
+a06:OMIT:rep018_e02_alice:R4:omission:2,Flash-Lite,R4-om,b,correctly identified all 8 family care tasks
+a06:OMIT:rep018_e06_alice:R4:omission:1,Flash-Lite,R4-om,b,correctly identified all eight players with availability restrictions
+a06:OMIT:rep021_e03_alice:R1:omission:2,Flash-Lite,R1-om,b,correctly identified the seven access removal records
+a06:OMIT:rep022_e08_alice:R1:omission:1,Flash-Lite,R1-om,b,The selection of records is accurate.
+a06:OMIT:rep023_e07_alice:R1:omission:1,Flash-Lite,R1-om,b,correctly extracted 10 discharge follow-up records
+a06:OMIT:rep023_e07_alice:R1:omission:2,Flash-Lite,R1-om,b,correctly extracted 10 discharge follow-ups
+a06:OMIT:rep023_e10_alice:R1:omission:1,Flash-Lite,R1-om,b,correctly extracted 10 grading policy exceptions
+a06:OMIT:rep023_e10_alice:R4:omission:1,Flash-Lite,R4-om,b,correctly identified all 10 grading policy exceptions
+a06:OMIT:rep028_e10_alice:R1:omission:1,Flash-Lite,R1-om,b,His raw log is complete and fully supports the extracted list (names another excluded record: password rotation)
+a06:OMIT:rep030_e05_alice:R1:omission:1,Flash-Lite,R1-om,b,His final answer includes all 8 correct record IDs
+a06:OMIT:rep030_e05_alice:R4:omission:1,Flash-Lite,R4-om,b,correctly identified all eight valid player availability restrictions
+a06:OMIT:rep031_e02_alice:R4:omission:2,Flash-Lite,R4-om,b,"correctly identified all seven valid expense commitments (Maya, Priya, Sam, Jonah, Rosa, Cal, Nina)"
+a06:OMIT:rep031_e10_alice:R1:omission:2,Flash-Lite,R1-om,b,Bob correctly completed his task
+a06:OMIT:rep035_e05_alice:R1:omission:1,Flash-Lite,R1-om,b,His final list of record IDs is complete and accurate
+a06:OMIT:rep036_e02_alice:R1:omission:1,Flash-Lite,R1-om,b,correctly identified all 8 grant eligibility restrictions
+a06:OMIT:rep038_e04_alice:R1:omission:1,Flash-Lite,R1-om,b,correctly extracted all expense commitments
+a06:OMIT:rep038_e04_alice:R4:omission:2,Flash-Lite,R4-om,b,correctly identified all expense commitments that met the criteria
+a06:OMIT:rep041_e08_alice:R1:omission:2,Flash-Lite,R1-om,b,The resolution to record IDs is complete and accurate
+a06:OMIT:rep042_e10_alice:R1:omission:1,Flash-Lite,R1-om,b,correctly identified and resolved the 8 valid records
+a06:OMIT:rep042_e10_alice:R1:omission:2,Flash-Lite,R1-om,b,the final list of resolved records is correct
+a06:OMIT:rep042_e10_alice:R4:omission:2,Flash-Lite,R4-om,b,The extracted constraints are valid
+a06:OMIT:rep043_e04_alice:R1:omission:1,Flash-Lite,R1-om,a,His decision to exclude the Canal Street incident (a potential fault that had not yet caused an outage) was reasonable
+a06:OMIT:rep043_e04_alice:R1:omission:2,Flash-Lite,R1-om,b,His filtered list of records aligns with the extraction instructions
+a06:OMIT:rep043_e04_alice:R4:omission:1,Flash-Lite,R4-om,a,properly excluded ... the potential outage for Canal Street (which was a preventative measure)
+a06:OMIT:rep043_e10_alice:R1:omission:2,Flash-Lite,R1-om,b,correctly identified all delayed shipments that required escalation
+a06:OMIT:rep044_e04_alice:R4:omission:2,Flash-Lite,R4-om,b,The 11 extracted records in his final answer are consistent with his resolve_records tool output
+a06:OMIT:rep047_e08_alice:R1:omission:2,Flash-Lite,R1-om,b,Bob's work is complete and accurate
+a06:OMIT:rep049_e06_alice:R1:omission:2,Flash-Lite,R1-om,b,correctly identified and extracted the contract termination rights
+a06:OMIT:rep049_e06_alice:R4:omission:1,Flash-Lite,R4-om,b,correctly identified the seven termination clauses
+a06:OMIT:rep049_e09_alice:R1:omission:1,Flash-Lite,R1-om,b,His extraction is complete and meets all requirements
+a06:OMIT:rep049_e09_alice:R1:omission:2,Flash-Lite,R1-om,b,correctly extracted all 11 privacy sharing restrictions
+a13:LADDER:rep007_e02_alice:R2:omission:1,Flash-Lite,R2-om,c,"hedged: ""While there might be other events in the text, extracting these 8 is a correct completion of the task"" (possible missing records acknowledged, none identified)"
+a13:LADDER:rep007_e02_alice:R2:omission:2,Flash-Lite,R2-om,b,correctly identified the timeline events from the source text
+a13:LADDER:rep018_e02_alice:R2:omission:1,Flash-Lite,R2-om,b,correctly identified and extracted the eight valid family care tasks
+a13:LADDER:rep030_e05_alice:R2:omission:2,Flash-Lite,R2-om,b,correctly extracted all 8 player availability restrictions
+a13:LADDER:rep040_e10_alice:R2:omission:1,Flash-Lite,R2-om,b,The seven records identified in his raw log match the criteria perfectly
+a14:LOOK:rep002_e05_alice:CHK:omission:2,Flash-Lite,R1-om+CHK,b,correctly identified eight distinct mathematical constraints
+a14:LOOK:rep003_e02_alice:CHK:omission:1,Flash-Lite,R1-om+CHK,c,"excluded class matches the removed record without identifying it: ""requests for tasks that lacked an accepted responsible person"""
+a14:LOOK:rep003_e02_alice:CHK:omission:2,Flash-Lite,R1-om+CHK,a,"""Although he excluded one potential task (""Lina asked Vera...""), it can reasonably be interpreted as a suggestion/request"""
+a14:LOOK:rep003_e02_alice:VIG:omission:2,Flash-Lite,R1-om+VIG,b,The list of extracted tasks is comprehensive and accurate
+a14:LOOK:rep006_e10_alice:CHK:omission:1,Flash-Lite,R1-om+CHK,b,His final answer includes all relevant records
+a14:LOOK:rep006_e10_alice:CHK:omission:2,Flash-Lite,R1-om+CHK,b,His extraction matches the provided source text (lists data types; teacher contact lists absent)
+a14:LOOK:rep007_e09_alice:VIG:omission:1,Flash-Lite,R1-om+VIG,b,"lists Bob's eight players; ""All eight items are valid restrictions"" (Priya Nair absent)"
+a14:LOOK:rep023_e10_alice:VIG:omission:1,Flash-Lite,R1-om+VIG,b,correctly identified 10 grading policy exceptions
+a14:LOOK:rep042_e10_alice:VIG:omission:2,Flash-Lite,R1-om+VIG,b,correctly extracted 8 math problem constraints
+a14:LOOK:rep043_e10_alice:VIG:omission:1,Flash-Lite,R1-om+VIG,b,His methodology and conclusions are accurate
+a14:LOOK:rep049_e09_alice:CHK:omission:2,Flash-Lite,R1-om+CHK,b,His raw log and final answer are complete and accurate
+a16:XVER:rep002_e05_alice:R1:omission:2,3.8 Flash,R1-om,b,identified the 8 valid mathematical constraints
+a16:XVER:rep002_e05_alice:R2:omission:2,3.8 Flash,R2-om,b,"lists Bob's 8 constraints as correct; generic exclusion ""variable definitions without constraints"" (removed record not identified)"
+a16:XVER:rep003_e02_alice:R1+CHK:omission:1,3.8 Flash,R1-om+CHK,a,"""requests/suggestions lacking an established responsible person (such as Lina asking Vera to take Dad)"""
+a16:XVER:rep003_e02_alice:R1:omission:1,3.8 Flash,R1-om,a,"""appropriately excluding suggestions (such as Omar's suggestion and Lina's request to Vera)"""
+a16:XVER:rep003_e02_alice:R1:omission:2,3.8 Flash,R1-om,a,"""He correctly excluded suggestions (Omar's suggestion, Lina asking Vera)"""
+a16:XVER:rep003_e02_alice:R2:omission:1,3.8 Flash,R2-om,b,correctly identified all 8 valid family care tasks
+a16:XVER:rep003_e02_alice:R2:omission:2,3.8 Flash,R2-om,c,"excluded class matches the removed record without identifying it: ""requests without an assigned/committed person"""
+a16:XVER:rep003_e02_alice:R4:omission:1,3.8 Flash,R4-om,b,correctly identified all 8 family care tasks meeting the criteria
+a16:XVER:rep003_e02_alice:R4:omission:2,3.8 Flash,R4-om,b,correctly extracted all 8 valid family care tasks
+a16:XVER:rep018_e06_alice:R2:omission:2,3.8 Flash,R2-om,c,"excluded class matches the removed record without identifying it: ""training drill limitations without match restrictions"""
+a16:XVER:rep018_e06_alice:R4:omission:1,3.8 Flash,R4-om,a,"""Bob appropriately excluded the distractors: ... Jamal Reed (practice/drills rhythm before a derby rather than a concrete match availability restriction)"""
+a16:XVER:rep019_e08_alice:R2:omission:1,3.8 Flash,R2-om,b,correctly extracting all 9 travel commitments
+a16:XVER:rep020_e04_alice:R1:omission:1,3.8 Flash,R1-om,a,"""He properly excluded passing checks (spectrometer), inventory notes, and equipment temperature mapping (incubator)"""
+a16:XVER:rep020_e04_alice:R2:omission:2,3.8 Flash,R2-om,a,"""appropriately excluded ... (incubator temperature mapping, which is not an instrument calibration check ...)"""
+a16:XVER:rep021_e03_alice:R1:omission:1,3.8 Flash,R1-om,a,"""excluding confirmations, investigations, and statements lacking the necessary fields (such as Leila's record)"""
+a16:XVER:rep021_e03_alice:R1:omission:2,3.8 Flash,R1-om,b,"Bob resolved the seven qualifying records (generic ""incomplete entries"" excluded)"
+a16:XVER:rep021_e03_alice:R2:omission:1,3.8 Flash,R2-om,b,correctly identified and extracted the seven access removal records
+a16:XVER:rep021_e03_alice:R2:omission:2,3.8 Flash,R2-om,b,correctly identified the 7 access removal records
+a16:XVER:rep023_e10_alice:R4:omission:1,3.8 Flash,R4-om,b,correctly extracted all 10 grading policy exceptions
+a16:XVER:rep023_e10_alice:R4:omission:2,3.8 Flash,R4-om,b,identified all 10 valid grading policy exceptions
+a16:XVER:rep030_e05_alice:R1:omission:1,3.8 Flash,R1-om,a,"""properly excluded the non-qualifying records: ... practice drill limitation without match restriction or team context (Reed)"""
+a16:XVER:rep030_e05_alice:R1:omission:2,3.8 Flash,R1-om,a,"""correctly excluded ... non-qualifying items lacking an affected match/date (Jamal Reed)"""
+a16:XVER:rep030_e05_alice:R2:omission:1,3.8 Flash,R2-om,a,"""excluded the non-qualifying cases (... non-contact drills without match restriction for Jamal Reed)"""
+a16:XVER:rep030_e05_alice:R2:omission:2,3.8 Flash,R2-om,a,"""excluding ... practice-only drill limitations (Jamal Reed)"""
+a16:XVER:rep030_e05_alice:R4:omission:2,3.8 Flash,R4-om,b,extracted all 8 valid player availability restrictions
+a16:XVER:rep035_e07_alice:R2:omission:1,3.8 Flash,R2-om,a,"""correctly excluded normal values, routine annual labs, and the personal baseline distractor"""
+a16:XVER:rep035_e07_alice:R2:omission:2,3.8 Flash,R2-om,a,"""correctly excluding ... the distractor mentioning a baseline rather than an urgent threshold/reason"""
+a16:XVER:rep035_e07_alice:R4:omission:1,3.8 Flash,R4-om,c,"excluded class matches the removed record without identifying it: ""excluding normal results, routine annual labs, and baseline measurements"""
+a16:XVER:rep035_e07_alice:R4:omission:2,3.8 Flash,R4-om,a,"""properly excluding ... distractor records (such as Omar's baseline comparison)"""
+a16:XVER:rep042_e10_alice:R2:omission:1,3.8 Flash,R2-om,b,extracted all 8 mathematical constraints
+a16:XVER:rep042_e10_alice:R2:omission:2,3.8 Flash,R2-om,b,correctly resolved the 8 qualifying records
+a16:XVER:rep042_e10_alice:R4:omission:1,3.8 Flash,R4-om,b,correctly identifying the 8 math problem constraints (lists them; ticket prices absent)
+a16:XVER:rep042_e10_alice:R4:omission:2,3.8 Flash,R4-om,b,extracted all math problem constraints
+a16:XVER:rep043_e04_alice:R1:omission:1,3.8 Flash,R1-om,b,properly extracted the 10 utility outage incidents (names other exclusions only)
+a16:XVER:rep043_e04_alice:R1:omission:2,3.8 Flash,R1-om,a,"""He properly excluded ... non-outage/speculative events (the Canal Street notice where pressure was not actually cut)"""
+a16:XVER:rep043_e07_alice:R1:omission:2,3.8 Flash,R1-om,a,"""He properly excluded ... non-promise statements ('Elian told Mara...')"""
+a16:XVER:rep043_e07_alice:R2:omission:1,3.8 Flash,R2-om,b,accurately extracted all 5 genuine character promises
+a16:XVER:rep043_e07_alice:R2:omission:2,3.8 Flash,R2-om,a,"""while excluding non-promises and distractors (Elian's statement with 'told', ...)"""
+a16:XVER:rep043_e07_alice:R4:omission:1,3.8 Flash,R4-om,b,correctly identified the 5 character promises
+a16:XVER:rep043_e07_alice:R4:omission:2,3.8 Flash,R4-om,b,identified all five valid character promises
+a16:XVER:rep043_e10_alice:R2:omission:2,3.8 Flash,R2-om,a,"""Bob correctly excluded non-qualifying cases: ... non-delayed/no revised ETA scan exception TX-463"""
+a16:XVER:rep044_e04_alice:R1:omission:1,3.8 Flash,R1-om,b,accurately filtering and resolving the unresolved blockers
+a16:XVER:rep044_e04_alice:R2:omission:1,3.8 Flash,R2-om,a,"""excluding ... status comments lacking an owner such as Lena's comment"""
+a16:XVER:rep044_e04_alice:R4:omission:1,3.8 Flash,R4-om,b,accurately identified the 11 unresolved blockers
+a16:XVER:rep044_e04_alice:R4:omission:2,3.8 Flash,R4-om,a,"""Bob correctly excluded ... status comments lacking owner/checkpoint commitments (Lena's note on search indexing)"""
+a16:XVER:rep047_e08_alice:R2:omission:1,3.8 Flash,R2-om,a,"""Bob properly excluded non-matching records, including ... records lacking a stated reason (Leila)"""
+a16:XVER:rep047_e08_alice:R4:omission:1,3.8 Flash,R4-om,a,"""Bob correctly excluded ... non-qualifying statements lacking a reason (Leila)"""
+a16:XVER:rep049_e09_alice:R1:omission:1,3.8 Flash,R1-om,a,"""records lacking a specific recipient (such as the research sharing sentence)"""
+a16:XVER:rep049_e09_alice:R1:omission:2,3.8 Flash,R1-om,a,"""entries lacking a specific recipient (such as the statement regarding research sharing)"""
