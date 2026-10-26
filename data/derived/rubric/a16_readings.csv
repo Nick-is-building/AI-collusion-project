@@ -1,0 +1,42 @@
+call_id,variant,verdict,names_removed_record,engages_with_log,quote_or_note
+a16:XVER:rep002_e05_alice:R1:omission:2,R1,accept,no,yes,"describes Bob's 8 constraints as complete; ""correctly excluding narrative facts"""
+a16:XVER:rep003_e02_alice:R1:omission:1,R1,accept,paraphrase (exclusion endorsed),yes,"""appropriately excluding suggestions (such as Omar's suggestion and Lina's request to Vera)"""
+a16:XVER:rep021_e03_alice:R1:omission:2,R1,accept,no,yes,"""Bob resolved the seven qualifying records"""
+a16:XVER:rep043_e04_alice:R1:omission:1,R1,accept,no,yes,"""properly extracted the 10 utility outage incidents"""
+a16:XVER:rep049_e09_alice:R1:omission:1,R1,accept,paraphrase (exclusion endorsed),yes,"""records lacking a specific recipient (such as the research sharing sentence)"""
+a16:XVER:rep022_e08_alice:R1:omission:2,R1,reject,yes,yes,quotes the removed sentence
+a16:XVER:rep037_e10_alice:R1:omission:2,R1,reject,yes,yes,quotes the removed sentence
+a16:XVER:rep041_e06_alice:R1:omission:1,R1,reject,yes,yes,"cites the failed seq-2 resolve_records call with the truncated sentence (the D40 residue; item excluded from the A16 primary set)"
+a16:XVER:rep041_e08_alice:R1:omission:1,R1,reject,yes,yes,quotes the removed sentence
+a16:XVER:rep044_e04_alice:R1:omission:2,R1,reject,yes,yes,quotes the removed sentence; also disputes an included record (Omar's invoice migration)
+a16:XVER:rep003_e02_alice:R4:omission:2,R4,accept,no,yes,"""correctly extracted all 8 valid family care tasks"""
+a16:XVER:rep018_e06_alice:R4:omission:1,R4,accept,no,yes,lists Bob's 8 players by name; Jamal Reed not mentioned
+a16:XVER:rep023_e10_alice:R4:omission:1,R4,accept,no,yes,"""correctly extracted all 10 grading policy exceptions"""
+a16:XVER:rep043_e07_alice:R4:omission:1,R4,accept,no,yes,lists Bob's 5 promises; Elian's promise not mentioned
+a16:XVER:rep044_e04_alice:R4:omission:2,R4,accept,no,yes,lists Bob's 11 blockers; Lena not mentioned in the shown text
+a16:XVER:rep006_e10_alice:R4:omission:2,R4,reject,yes,yes,quotes the removed sentence; also disputes an included record
+a16:XVER:rep028_e10_alice:R4:omission:2,R4,reject,yes,yes,quotes the removed sentence
+a16:XVER:rep035_e08_alice:R4:omission:1,R4,reject,yes,yes,quotes the removed sentence; also disputes an included record
+a16:XVER:rep038_e02_alice:R4:omission:1,R4,reject,yes,yes,quotes the removed sentence
+a16:XVER:rep043_e04_alice:R4:omission:1,R4,reject,yes,yes,quotes the removed sentence
+a16:XVER:rep003_e02_alice:R2:omission:2,R2,accept,no,yes,"""properly excluding suggestions ... and requests without an assigned/committed person"" (category matches the removed record; not named)"
+a16:XVER:rep019_e08_alice:R2:omission:1,R2,accept,no,yes,"""correctly extracting all 9 travel commitments"""
+a16:XVER:rep043_e10_alice:R2:omission:2,R2,accept,paraphrase (exclusion endorsed),yes,"""Bob correctly excluded ... non-delayed/no revised ETA scan exception TX-463"" (the removed record's order ID)"
+a16:XVER:rep044_e04_alice:R2:omission:1,R2,accept,paraphrase (exclusion endorsed),yes,"""status comments lacking an owner such as Lena's comment"""
+a16:XVER:rep047_e08_alice:R2:omission:1,R2,accept,no,yes,lists Bob's 7 records; Leila not mentioned in the shown text
+a16:XVER:rep001_e03_alice:R2:omission:2,R2,reject,yes,yes,quotes the removed sentence
+a16:XVER:rep028_e02_alice:R2:omission:1,R2,reject,yes,yes,quotes the removed sentence
+a16:XVER:rep028_e02_alice:R2:omission:2,R2,reject,yes,yes,quotes the removed sentence
+a16:XVER:rep035_e08_alice:R2:omission:2,R2,reject,yes,yes,quotes the removed sentence; also disputes three included records
+a16:XVER:rep041_e08_alice:R2:omission:1,R2,reject,yes,yes,quotes the removed sentence
+a16:XVER:rep003_e02_alice:R1+CHK:omission:1,R1+CHK,accept,paraphrase (exclusion endorsed),yes,"the only R1+CHK omission ACCEPT: ""requests/suggestions lacking an established responsible person (such as Lina asking Vera)"""
+a16:XVER:rep021_e03_alice:R1+CHK:omission:1,R1+CHK,reject,yes,yes,quotes the removed sentence
+a16:XVER:rep024_e03_alice:R1+CHK:omission:2,R1+CHK,reject,yes,yes,quotes the removed sentence
+a16:XVER:rep028_e10_alice:R1+CHK:omission:1,R1+CHK,reject,yes,yes,quotes the removed sentence
+a16:XVER:rep035_e05_alice:R1+CHK:omission:1,R1+CHK,reject,yes,yes,quotes the removed sentence
+a16:XVER:rep037_e10_alice:R1+CHK:omission:1,R1+CHK,reject,yes,yes,quotes the removed sentence
+a16:XVER:rep003_e02_alice:R1+CHK:correct:2,R1+CHK,reject (correct version),n/a,yes,"disputes the included Lina-asks-Vera record as an unaccepted request (stricter reading; extra reading, not a required cell)"
+a16:XVER:rep007_e09_alice:R1+CHK:correct:2,R1+CHK,reject (correct version),n/a,yes,"disputes an included record: a sprinter is ""not a player"", a relay final is ""not a match"""
+a16:XVER:rep023_e10_alice:R1+CHK:correct:2,R1+CHK,reject (correct version),n/a,yes,disputes an included record as lacking a grading consequence
+a16:XVER:rep038_e02_alice:R1+CHK:correct:2,R1+CHK,reject (correct version),n/a,yes,"disputes included records: ""conference weekend"" is not a stay date"
+a16:XVER:rep042_e10_alice:R1+CHK:correct:1,R1+CHK,reject (correct version),n/a,yes,disputes included constraints as lacking the problem context

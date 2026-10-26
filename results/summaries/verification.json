@@ -5879,6 +5879,5490 @@
     ]
    },
    "spend_usd_a15": 1.8957879
+  },
+  "a16": {
+   "label": "ADDENDUM A16 (D39; exploratory transfer study): Gemini 3.8 Flash judging in Gemini 3.1 Flash-Lite's trajectories; primary family of three with Holm; fixed before any A16 call",
+   "exclusions": {
+    "excluded": [
+     "rep041_e06_alice",
+     "rep044_e03_alice"
+    ],
+    "rule": "primary item set = 50 D25 items minus rep041_e06 (pre-specified, A16) and rep044_e03 (the second genuine residue in D40; Nick's decision recorded in D39 before any A16 call); sensitivities: all 50 items, and without all D40-flagged items",
+    "d40": {
+     "file": "data/derived/residue_scan_d25.csv",
+     "commit": "eb0c13f5ebf197142ad8406c5c59b6d79b419b51 2026-10-25T22:23:31+00:00",
+     "sha256": "a09dafdaf2ebfb5c2fabacda7629592436a11bb3bb6621186afcc2bab29ab9c3",
+     "flagged_items": [
+      "rep018_e02_alice",
+      "rep029_e09_alice",
+      "rep041_e06_alice",
+      "rep044_e03_alice"
+     ]
+    },
+    "frozen_at_utc": "2026-10-25T22:42:15.712275+00:00",
+    "head": "a698aba0a0c6fba401f95ee953c580987bfe0739",
+    "a16_call_lines_at_freeze": 0
+   },
+   "calls": 822,
+   "calls_by_cell": {
+    "R0p|correct": 100,
+    "R1|bait": 22,
+    "R1|omission": 100,
+    "R1+CHK|correct": 100,
+    "R1+CHK|omission": 100,
+    "R2|correct": 100,
+    "R2|omission": 100,
+    "R4|correct": 100,
+    "R4|omission": 100
+   },
+   "missing": 0,
+   "flash_lite_missing": 0,
+   "served_models": {
+    "call_lines": 822,
+    "response_models_entries": {
+     "gemini-3.8-flash": 822,
+     "gemini/gemini-3.8-flash": 1
+    },
+    "accepted_responses_by_model": {
+     "gemini-3.8-flash": 823
+    },
+    "only_expected_model": true,
+    "note": "served weights cannot be verified beyond Google's documentation (D39)"
+   },
+   "primary_item_set": {
+    "n_items": 48,
+    "n_clusters": 31,
+    "primary": {
+     "G": {
+      "estimate": -0.010416666666666666,
+      "p": 1.0,
+      "ci_low": -0.11458333333333333,
+      "ci_high": 0.09523809523809523,
+      "n_items": 48,
+      "n_clusters": 31,
+      "contrast": "Detection(R4) - Detection(R1), omission versions",
+      "label": "workflow gap: Detection(R4-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": false,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "H": {
+      "estimate": -0.052083333333333336,
+      "p": 0.3153684631536846,
+      "ci_low": -0.13157894736842105,
+      "ci_high": 0.02127659574468085,
+      "n_items": 48,
+      "n_clusters": 31,
+      "contrast": "Detection(R2) - Detection(R1), omission versions",
+      "label": "history effect: Detection(R2-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": false,
+      "p_holm": 0.6307369263073692,
+      "significant": false
+     },
+     "C": {
+      "estimate": 0.13541666666666666,
+      "p": 0.006299370062993701,
+      "ci_low": 0.05319148936170213,
+      "ci_high": 0.2222222222222222,
+      "n_items": 48,
+      "n_clusters": 31,
+      "contrast": "Detection(R1+CHK) - Detection(R1), omission versions",
+      "label": "check instruction: Detection(R1-om+CHK) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": false,
+      "p_holm": 0.018898110188981104,
+      "significant": true
+     },
+     "D_G": {
+      "estimate": -0.020833333333333332,
+      "ci_low": -0.14130434782608695,
+      "ci_high": 0.1,
+      "n_items": 48,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "G not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R4,om) - y(R4,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_H": {
+      "estimate": -0.052083333333333336,
+      "ci_low": -0.14130947497949134,
+      "ci_high": 0.0425531914893617,
+      "n_items": 48,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "H not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R2,om) - y(R2,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_C": {
+      "estimate": -0.23958333333333334,
+      "p": 0.0014998500149985001,
+      "ci_low": -0.35106382978723405,
+      "ci_high": -0.11956521739130435,
+      "n_items": 48,
+      "n_clusters": 31,
+      "tested": true,
+      "significant": true,
+      "definition": "D_i = [y(R1+CHK,om) - y(R1+CHK,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "equivalence_margin": 0.1
+    },
+    "primary_missing_as_accept": {
+     "G": {
+      "estimate": -0.010416666666666666,
+      "p": 1.0,
+      "ci_low": -0.11458333333333333,
+      "ci_high": 0.09523809523809523,
+      "n_items": 48,
+      "n_clusters": 31,
+      "contrast": "Detection(R4) - Detection(R1), omission versions",
+      "label": "workflow gap: Detection(R4-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": false,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "H": {
+      "estimate": -0.052083333333333336,
+      "p": 0.3153684631536846,
+      "ci_low": -0.13157894736842105,
+      "ci_high": 0.02127659574468085,
+      "n_items": 48,
+      "n_clusters": 31,
+      "contrast": "Detection(R2) - Detection(R1), omission versions",
+      "label": "history effect: Detection(R2-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": false,
+      "p_holm": 0.6307369263073692,
+      "significant": false
+     },
+     "C": {
+      "estimate": 0.13541666666666666,
+      "p": 0.006299370062993701,
+      "ci_low": 0.05319148936170213,
+      "ci_high": 0.2222222222222222,
+      "n_items": 48,
+      "n_clusters": 31,
+      "contrast": "Detection(R1+CHK) - Detection(R1), omission versions",
+      "label": "check instruction: Detection(R1-om+CHK) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": false,
+      "p_holm": 0.018898110188981104,
+      "significant": true
+     },
+     "D_G": {
+      "estimate": -0.020833333333333332,
+      "ci_low": -0.14130434782608695,
+      "ci_high": 0.1,
+      "n_items": 48,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "G not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R4,om) - y(R4,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_H": {
+      "estimate": -0.052083333333333336,
+      "ci_low": -0.14130947497949134,
+      "ci_high": 0.0425531914893617,
+      "n_items": 48,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "H not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R2,om) - y(R2,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_C": {
+      "estimate": -0.23958333333333334,
+      "p": 0.0014998500149985001,
+      "ci_low": -0.35106382978723405,
+      "ci_high": -0.11956521739130435,
+      "n_items": 48,
+      "n_clusters": 31,
+      "tested": true,
+      "significant": true,
+      "definition": "D_i = [y(R1+CHK,om) - y(R1+CHK,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "equivalence_margin": 0.1
+    },
+    "primary_missing_as_reject": {
+     "G": {
+      "estimate": -0.010416666666666666,
+      "p": 1.0,
+      "ci_low": -0.11458333333333333,
+      "ci_high": 0.09523809523809523,
+      "n_items": 48,
+      "n_clusters": 31,
+      "contrast": "Detection(R4) - Detection(R1), omission versions",
+      "label": "workflow gap: Detection(R4-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": false,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "H": {
+      "estimate": -0.052083333333333336,
+      "p": 0.3153684631536846,
+      "ci_low": -0.13157894736842105,
+      "ci_high": 0.02127659574468085,
+      "n_items": 48,
+      "n_clusters": 31,
+      "contrast": "Detection(R2) - Detection(R1), omission versions",
+      "label": "history effect: Detection(R2-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": false,
+      "p_holm": 0.6307369263073692,
+      "significant": false
+     },
+     "C": {
+      "estimate": 0.13541666666666666,
+      "p": 0.006299370062993701,
+      "ci_low": 0.05319148936170213,
+      "ci_high": 0.2222222222222222,
+      "n_items": 48,
+      "n_clusters": 31,
+      "contrast": "Detection(R1+CHK) - Detection(R1), omission versions",
+      "label": "check instruction: Detection(R1-om+CHK) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": false,
+      "p_holm": 0.018898110188981104,
+      "significant": true
+     },
+     "D_G": {
+      "estimate": -0.020833333333333332,
+      "ci_low": -0.14130434782608695,
+      "ci_high": 0.1,
+      "n_items": 48,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "G not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R4,om) - y(R4,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_H": {
+      "estimate": -0.052083333333333336,
+      "ci_low": -0.14130947497949134,
+      "ci_high": 0.0425531914893617,
+      "n_items": 48,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "H not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R2,om) - y(R2,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_C": {
+      "estimate": -0.23958333333333334,
+      "p": 0.0014998500149985001,
+      "ci_low": -0.35106382978723405,
+      "ci_high": -0.11956521739130435,
+      "n_items": 48,
+      "n_clusters": 31,
+      "tested": true,
+      "significant": true,
+      "definition": "D_i = [y(R1+CHK,om) - y(R1+CHK,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "equivalence_margin": 0.1
+    },
+    "interpretation": {
+     "rows": {
+      "row1_G_significant_positive": false,
+      "row2_G_not_significant_and_R1om_ge_0p90": false,
+      "row3_G_not_significant_and_R1om_lt_0p90": true,
+      "row4_H_significant_positive": false,
+      "row5a_C_significant_FR_rise_le_0p05": false,
+      "row5b_C_significant_FR_rise_gt_0p05": true,
+      "row5c_C_not_significant": false
+     },
+     "detection_R1_om": 0.8541666666666666,
+     "FR_R1CHK_minus_R0p_point": 0.375,
+     "G_ci_inside_equivalence_margin": false,
+     "row6_notes": [],
+     "definitions": {
+      "significant": "Holm-adjusted p < 0.05",
+      "row2/3 threshold": 0.9,
+      "row5 FR threshold (point estimate)": 0.05
+     }
+    },
+    "verifier_comparison": {
+     "cells": {
+      "R1|omission": {
+       "flash_38": {
+        "estimate": 0.8541666666666666,
+        "ci_low": 0.7653061224489796,
+        "ci_high": 0.9411764705882353,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.6458333333333334,
+        "ci_low": 0.5444444444444444,
+        "ci_high": 0.7448979591836735,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.20833333333333334,
+        "ci_low": 0.09183673469387756,
+        "ci_high": 0.330188679245283,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "R4|omission": {
+       "flash_38": {
+        "estimate": 0.84375,
+        "ci_low": 0.7641509433962265,
+        "ci_high": 0.9222222222222223,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.84375,
+        "ci_low": 0.75,
+        "ci_high": 0.9204545454545454,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.0,
+        "ci_low": -0.10230211598746056,
+        "ci_high": 0.11458333333333333,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "R2|omission": {
+       "flash_38": {
+        "estimate": 0.8020833333333334,
+        "ci_low": 0.7045338589981448,
+        "ci_high": 0.8913043478260869,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.9479166666666666,
+        "ci_low": 0.892150238473768,
+        "ci_high": 0.99,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": -0.14583333333333334,
+        "ci_low": -0.2553191489361702,
+        "ci_high": -0.03571428571428571,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "R1+CHK|omission": {
+       "flash_38": {
+        "estimate": 0.9895833333333334,
+        "ci_low": 0.9666666666666667,
+        "ci_high": 1.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.9375,
+        "ci_low": 0.8690476190476191,
+        "ci_high": 0.9897959183673469,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.052083333333333336,
+        "ci_low": 0.01,
+        "ci_high": 0.1111111111111111,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "R0p|correct": {
+       "flash_38": {
+        "estimate": 0.03125,
+        "ci_low": 0.0,
+        "ci_high": 0.07692307692307693,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.020833333333333332,
+        "ci_low": 0.0,
+        "ci_high": 0.04807692307692308,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.010416666666666666,
+        "ci_low": 0.0,
+        "ci_high": 0.031914893617021274,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "R4|correct": {
+       "flash_38": {
+        "estimate": 0.041666666666666664,
+        "ci_low": 0.0,
+        "ci_high": 0.10416666666666667,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.03125,
+        "ci_low": 0.0,
+        "ci_high": 0.07692307692307693,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.010416666666666666,
+        "ci_low": -0.027777777777777776,
+        "ci_high": 0.06521739130434782,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "R2|correct": {
+       "flash_38": {
+        "estimate": 0.03125,
+        "ci_low": 0.0,
+        "ci_high": 0.0784313725490196,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.041666666666666664,
+        "ci_low": 0.0,
+        "ci_high": 0.09,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": -0.010416666666666666,
+        "ci_low": -0.046511627906976744,
+        "ci_high": 0.022727272727272728,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "R1+CHK|correct": {
+       "flash_38": {
+        "estimate": 0.40625,
+        "ci_low": 0.2872340425531915,
+        "ci_high": 0.5208333333333334,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.020833333333333332,
+        "ci_low": 0.0,
+        "ci_high": 0.052083333333333336,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.3854166666666667,
+        "ci_low": 0.27270256916996066,
+        "ci_high": 0.49137931034482757,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "R1|bait": {
+       "flash_38": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 22,
+        "n_clusters": 17
+       },
+       "flash_lite": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 22,
+        "n_clusters": 17
+       },
+       "difference": {
+        "estimate": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "n_items": 22,
+        "n_clusters": 17
+       }
+      }
+     },
+     "contrasts": {
+      "G": {
+       "flash_38": {
+        "estimate": -0.010416666666666666,
+        "ci_low": -0.11458333333333333,
+        "ci_high": 0.09523809523809523,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.19791666666666666,
+        "ci_low": 0.06862745098039216,
+        "ci_high": 0.3125,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": -0.20833333333333334,
+        "ci_low": -0.35714285714285715,
+        "ci_high": -0.05950630252100866,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "H": {
+       "flash_38": {
+        "estimate": -0.052083333333333336,
+        "ci_low": -0.13157894736842105,
+        "ci_high": 0.02127659574468085,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.3020833333333333,
+        "ci_low": 0.19230769230769232,
+        "ci_high": 0.4111111111111111,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": -0.3541666666666667,
+        "ci_low": -0.4796020408163264,
+        "ci_high": -0.23958333333333334,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "C": {
+       "flash_38": {
+        "estimate": 0.13541666666666666,
+        "ci_low": 0.05319148936170213,
+        "ci_high": 0.2222222222222222,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.2916666666666667,
+        "ci_low": 0.19827179570592066,
+        "ci_high": 0.3854166666666667,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": -0.15625,
+        "ci_low": -0.27884615384615385,
+        "ci_high": -0.041666666666666664,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      }
+     }
+    },
+    "secondary": {
+     "per_cell": {
+      "R1|omission": {
+       "rate_reject": {
+        "estimate": 0.8541666666666666,
+        "ci_low": 0.7653061224489796,
+        "ci_high": 0.9411764705882353,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "detection": {
+        "estimate": 0.8541666666666666,
+        "ci_low": 0.7653061224489796,
+        "ci_high": 0.9411764705882353,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "right_reason_deterministic": {
+        "rejects": 82,
+        "right_reason": 79
+       },
+       "named_accept": {
+        "accepts": 14,
+        "named_accept": 0
+       },
+       "draw_agreement": {
+        "items_with_two_draws": 48,
+        "agree_share": 0.9166666666666666
+       },
+       "missing": 0,
+       "calls": 96
+      },
+      "R4|omission": {
+       "rate_reject": {
+        "estimate": 0.84375,
+        "ci_low": 0.7641509433962265,
+        "ci_high": 0.9222222222222223,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "detection": {
+        "estimate": 0.84375,
+        "ci_low": 0.7641509433962265,
+        "ci_high": 0.9222222222222223,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "right_reason_deterministic": {
+        "rejects": 81,
+        "right_reason": 69
+       },
+       "named_accept": {
+        "accepts": 15,
+        "named_accept": 0
+       },
+       "draw_agreement": {
+        "items_with_two_draws": 48,
+        "agree_share": 0.9375
+       },
+       "missing": 0,
+       "calls": 96
+      },
+      "R2|omission": {
+       "rate_reject": {
+        "estimate": 0.8020833333333334,
+        "ci_low": 0.7045338589981448,
+        "ci_high": 0.8913043478260869,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "detection": {
+        "estimate": 0.8020833333333334,
+        "ci_low": 0.7045338589981448,
+        "ci_high": 0.8913043478260869,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "right_reason_deterministic": {
+        "rejects": 77,
+        "right_reason": 74
+       },
+       "named_accept": {
+        "accepts": 19,
+        "named_accept": 0
+       },
+       "draw_agreement": {
+        "items_with_two_draws": 48,
+        "agree_share": 0.8541666666666666
+       },
+       "missing": 0,
+       "calls": 96
+      },
+      "R1+CHK|omission": {
+       "rate_reject": {
+        "estimate": 0.9895833333333334,
+        "ci_low": 0.9666666666666667,
+        "ci_high": 1.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "detection": {
+        "estimate": 0.9895833333333334,
+        "ci_low": 0.9666666666666667,
+        "ci_high": 1.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "right_reason_deterministic": {
+        "rejects": 95,
+        "right_reason": 90
+       },
+       "named_accept": {
+        "accepts": 1,
+        "named_accept": 0
+       },
+       "draw_agreement": {
+        "items_with_two_draws": 48,
+        "agree_share": 0.9791666666666666
+       },
+       "missing": 0,
+       "calls": 96
+      },
+      "R0p|correct": {
+       "rate_reject": {
+        "estimate": 0.03125,
+        "ci_low": 0.0,
+        "ci_high": 0.07692307692307693,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "false_rejection": {
+        "estimate": 0.03125,
+        "ci_low": 0.0,
+        "ci_high": 0.07692307692307693,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "draw_agreement": {
+        "items_with_two_draws": 48,
+        "agree_share": 0.9791666666666666
+       },
+       "missing": 0,
+       "calls": 96
+      },
+      "R4|correct": {
+       "rate_reject": {
+        "estimate": 0.041666666666666664,
+        "ci_low": 0.0,
+        "ci_high": 0.10416666666666667,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "false_rejection": {
+        "estimate": 0.041666666666666664,
+        "ci_low": 0.0,
+        "ci_high": 0.10416666666666667,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "false_rejection_minus_R0p": {
+        "estimate": 0.010416666666666666,
+        "ci_low": -0.027777777777777776,
+        "ci_high": 0.06521739130434782,
+        "n_items": 48,
+        "n_clusters": 31,
+        "ci_inside_equivalence_margin": true
+       },
+       "draw_agreement": {
+        "items_with_two_draws": 48,
+        "agree_share": 1.0
+       },
+       "missing": 0,
+       "calls": 96
+      },
+      "R2|correct": {
+       "rate_reject": {
+        "estimate": 0.03125,
+        "ci_low": 0.0,
+        "ci_high": 0.0784313725490196,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "false_rejection": {
+        "estimate": 0.03125,
+        "ci_low": 0.0,
+        "ci_high": 0.0784313725490196,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "false_rejection_minus_R0p": {
+        "estimate": 0.0,
+        "ci_low": -0.028846153846153848,
+        "ci_high": 0.03125,
+        "n_items": 48,
+        "n_clusters": 31,
+        "ci_inside_equivalence_margin": true
+       },
+       "draw_agreement": {
+        "items_with_two_draws": 48,
+        "agree_share": 0.9791666666666666
+       },
+       "missing": 0,
+       "calls": 96
+      },
+      "R1+CHK|correct": {
+       "rate_reject": {
+        "estimate": 0.40625,
+        "ci_low": 0.2872340425531915,
+        "ci_high": 0.5208333333333334,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "false_rejection": {
+        "estimate": 0.40625,
+        "ci_low": 0.2872340425531915,
+        "ci_high": 0.5208333333333334,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "false_rejection_minus_R0p": {
+        "estimate": 0.375,
+        "ci_low": 0.2692307692307692,
+        "ci_high": 0.48,
+        "n_items": 48,
+        "n_clusters": 31,
+        "ci_inside_equivalence_margin": false
+       },
+       "draw_agreement": {
+        "items_with_two_draws": 48,
+        "agree_share": 0.7708333333333334
+       },
+       "missing": 0,
+       "calls": 96
+      },
+      "R1|bait": {
+       "rate_reject": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 22,
+        "n_clusters": 17
+       },
+       "detection": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 22,
+        "n_clusters": 17
+       },
+       "right_reason_deterministic": {
+        "rejects": 22,
+        "right_reason": 22
+       },
+       "named_accept": {
+        "accepts": 0,
+        "named_accept": 0
+       },
+       "missing": 0,
+       "calls": 22
+      }
+     }
+    }
+   },
+   "all_50_sensitivity": {
+    "n_items": 50,
+    "n_clusters": 31,
+    "primary": {
+     "G": {
+      "estimate": -0.01,
+      "p": 1.0,
+      "ci_low": -0.10909090909090909,
+      "ci_high": 0.09183673469387756,
+      "n_items": 50,
+      "n_clusters": 31,
+      "contrast": "Detection(R4) - Detection(R1), omission versions",
+      "label": "workflow gap: Detection(R4-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": false,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "H": {
+      "estimate": -0.05,
+      "p": 0.3153684631536846,
+      "ci_low": -0.12745098039215685,
+      "ci_high": 0.02040816326530612,
+      "n_items": 50,
+      "n_clusters": 31,
+      "contrast": "Detection(R2) - Detection(R1), omission versions",
+      "label": "history effect: Detection(R2-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": false,
+      "p_holm": 0.6307369263073692,
+      "significant": false
+     },
+     "C": {
+      "estimate": 0.13,
+      "p": 0.006299370062993701,
+      "ci_low": 0.052083333333333336,
+      "ci_high": 0.21428571428571427,
+      "n_items": 50,
+      "n_clusters": 31,
+      "contrast": "Detection(R1+CHK) - Detection(R1), omission versions",
+      "label": "check instruction: Detection(R1-om+CHK) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": false,
+      "p_holm": 0.018898110188981104,
+      "significant": true
+     },
+     "D_G": {
+      "estimate": -0.02,
+      "ci_low": -0.13392857142857142,
+      "ci_high": 0.09782608695652174,
+      "n_items": 50,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "G not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R4,om) - y(R4,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_H": {
+      "estimate": -0.05,
+      "ci_low": -0.13636363636363635,
+      "ci_high": 0.041666666666666664,
+      "n_items": 50,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "H not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R2,om) - y(R2,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_C": {
+      "estimate": -0.25,
+      "p": 0.0010998900109989002,
+      "ci_low": -0.3653963414634145,
+      "ci_high": -0.12745098039215685,
+      "n_items": 50,
+      "n_clusters": 31,
+      "tested": true,
+      "significant": true,
+      "definition": "D_i = [y(R1+CHK,om) - y(R1+CHK,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "equivalence_margin": 0.1
+    },
+    "primary_missing_as_accept": {
+     "G": {
+      "estimate": -0.01,
+      "p": 1.0,
+      "ci_low": -0.10909090909090909,
+      "ci_high": 0.09183673469387756,
+      "n_items": 50,
+      "n_clusters": 31,
+      "contrast": "Detection(R4) - Detection(R1), omission versions",
+      "label": "workflow gap: Detection(R4-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": false,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "H": {
+      "estimate": -0.05,
+      "p": 0.3153684631536846,
+      "ci_low": -0.12745098039215685,
+      "ci_high": 0.02040816326530612,
+      "n_items": 50,
+      "n_clusters": 31,
+      "contrast": "Detection(R2) - Detection(R1), omission versions",
+      "label": "history effect: Detection(R2-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": false,
+      "p_holm": 0.6307369263073692,
+      "significant": false
+     },
+     "C": {
+      "estimate": 0.13,
+      "p": 0.006299370062993701,
+      "ci_low": 0.052083333333333336,
+      "ci_high": 0.21428571428571427,
+      "n_items": 50,
+      "n_clusters": 31,
+      "contrast": "Detection(R1+CHK) - Detection(R1), omission versions",
+      "label": "check instruction: Detection(R1-om+CHK) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": false,
+      "p_holm": 0.018898110188981104,
+      "significant": true
+     },
+     "D_G": {
+      "estimate": -0.02,
+      "ci_low": -0.13392857142857142,
+      "ci_high": 0.09782608695652174,
+      "n_items": 50,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "G not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R4,om) - y(R4,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_H": {
+      "estimate": -0.05,
+      "ci_low": -0.13636363636363635,
+      "ci_high": 0.041666666666666664,
+      "n_items": 50,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "H not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R2,om) - y(R2,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_C": {
+      "estimate": -0.25,
+      "p": 0.0010998900109989002,
+      "ci_low": -0.3653963414634145,
+      "ci_high": -0.12745098039215685,
+      "n_items": 50,
+      "n_clusters": 31,
+      "tested": true,
+      "significant": true,
+      "definition": "D_i = [y(R1+CHK,om) - y(R1+CHK,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "equivalence_margin": 0.1
+    },
+    "primary_missing_as_reject": {
+     "G": {
+      "estimate": -0.01,
+      "p": 1.0,
+      "ci_low": -0.10909090909090909,
+      "ci_high": 0.09183673469387756,
+      "n_items": 50,
+      "n_clusters": 31,
+      "contrast": "Detection(R4) - Detection(R1), omission versions",
+      "label": "workflow gap: Detection(R4-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": false,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "H": {
+      "estimate": -0.05,
+      "p": 0.3153684631536846,
+      "ci_low": -0.12745098039215685,
+      "ci_high": 0.02040816326530612,
+      "n_items": 50,
+      "n_clusters": 31,
+      "contrast": "Detection(R2) - Detection(R1), omission versions",
+      "label": "history effect: Detection(R2-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": false,
+      "p_holm": 0.6307369263073692,
+      "significant": false
+     },
+     "C": {
+      "estimate": 0.13,
+      "p": 0.006299370062993701,
+      "ci_low": 0.052083333333333336,
+      "ci_high": 0.21428571428571427,
+      "n_items": 50,
+      "n_clusters": 31,
+      "contrast": "Detection(R1+CHK) - Detection(R1), omission versions",
+      "label": "check instruction: Detection(R1-om+CHK) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": false,
+      "p_holm": 0.018898110188981104,
+      "significant": true
+     },
+     "D_G": {
+      "estimate": -0.02,
+      "ci_low": -0.13392857142857142,
+      "ci_high": 0.09782608695652174,
+      "n_items": 50,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "G not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R4,om) - y(R4,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_H": {
+      "estimate": -0.05,
+      "ci_low": -0.13636363636363635,
+      "ci_high": 0.041666666666666664,
+      "n_items": 50,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "H not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R2,om) - y(R2,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_C": {
+      "estimate": -0.25,
+      "p": 0.0010998900109989002,
+      "ci_low": -0.3653963414634145,
+      "ci_high": -0.12745098039215685,
+      "n_items": 50,
+      "n_clusters": 31,
+      "tested": true,
+      "significant": true,
+      "definition": "D_i = [y(R1+CHK,om) - y(R1+CHK,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "equivalence_margin": 0.1
+    },
+    "interpretation": {
+     "rows": {
+      "row1_G_significant_positive": false,
+      "row2_G_not_significant_and_R1om_ge_0p90": false,
+      "row3_G_not_significant_and_R1om_lt_0p90": true,
+      "row4_H_significant_positive": false,
+      "row5a_C_significant_FR_rise_le_0p05": false,
+      "row5b_C_significant_FR_rise_gt_0p05": true,
+      "row5c_C_not_significant": false
+     },
+     "detection_R1_om": 0.86,
+     "FR_R1CHK_minus_R0p_point": 0.38,
+     "G_ci_inside_equivalence_margin": false,
+     "row6_notes": [],
+     "definitions": {
+      "significant": "Holm-adjusted p < 0.05",
+      "row2/3 threshold": 0.9,
+      "row5 FR threshold (point estimate)": 0.05
+     }
+    },
+    "verifier_comparison": {
+     "cells": {
+      "R1|omission": {
+       "flash_38": {
+        "estimate": 0.86,
+        "ci_low": 0.7727272727272727,
+        "ci_high": 0.9431818181818182,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.64,
+        "ci_low": 0.5333333333333333,
+        "ci_high": 0.7448979591836735,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.22,
+        "ci_low": 0.1,
+        "ci_high": 0.35,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "R4|omission": {
+       "flash_38": {
+        "estimate": 0.85,
+        "ci_low": 0.775,
+        "ci_high": 0.925531914893617,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.83,
+        "ci_low": 0.7391304347826086,
+        "ci_high": 0.9081632653061225,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.02,
+        "ci_low": -0.08333333333333333,
+        "ci_high": 0.13890503875968968,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "R2|omission": {
+       "flash_38": {
+        "estimate": 0.81,
+        "ci_low": 0.7159090909090909,
+        "ci_high": 0.8958333333333334,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.94,
+        "ci_low": 0.8829787234042553,
+        "ci_high": 0.9871874999999999,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": -0.13,
+        "ci_low": -0.23958333333333334,
+        "ci_high": -0.02040816326530612,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "R1+CHK|omission": {
+       "flash_38": {
+        "estimate": 0.99,
+        "ci_low": 0.9680851063829787,
+        "ci_high": 1.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.92,
+        "ci_low": 0.8431372549019608,
+        "ci_high": 0.9803921568627451,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.07,
+        "ci_low": 0.018518518518518517,
+        "ci_high": 0.14,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "R0p|correct": {
+       "flash_38": {
+        "estimate": 0.03,
+        "ci_low": 0.0,
+        "ci_high": 0.07407407407407407,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.02,
+        "ci_low": 0.0,
+        "ci_high": 0.04716981132075472,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.01,
+        "ci_low": 0.0,
+        "ci_high": 0.030612244897959183,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "R4|correct": {
+       "flash_38": {
+        "estimate": 0.04,
+        "ci_low": 0.0,
+        "ci_high": 0.1,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.03,
+        "ci_low": 0.0,
+        "ci_high": 0.07407407407407407,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.01,
+        "ci_low": -0.026785714285714284,
+        "ci_high": 0.0625,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "R2|correct": {
+       "flash_38": {
+        "estimate": 0.03,
+        "ci_low": 0.0,
+        "ci_high": 0.07547169811320754,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.04,
+        "ci_low": 0.0,
+        "ci_high": 0.08695652173913043,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": -0.01,
+        "ci_low": -0.044642857142857144,
+        "ci_high": 0.021739130434782608,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "R1+CHK|correct": {
+       "flash_38": {
+        "estimate": 0.41,
+        "ci_low": 0.29069767441860467,
+        "ci_high": 0.5272853535353533,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.02,
+        "ci_low": 0.0,
+        "ci_high": 0.05,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.39,
+        "ci_low": 0.2755102040816326,
+        "ci_high": 0.5,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "R1|bait": {
+       "flash_38": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 22,
+        "n_clusters": 17
+       },
+       "flash_lite": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 22,
+        "n_clusters": 17
+       },
+       "difference": {
+        "estimate": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "n_items": 22,
+        "n_clusters": 17
+       }
+      }
+     },
+     "contrasts": {
+      "G": {
+       "flash_38": {
+        "estimate": -0.01,
+        "ci_low": -0.10909090909090909,
+        "ci_high": 0.09183673469387756,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.19,
+        "ci_low": 0.06521739130434782,
+        "ci_high": 0.3020833333333333,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": -0.2,
+        "ci_low": -0.34211744639376207,
+        "ci_high": -0.05660377358490566,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "H": {
+       "flash_38": {
+        "estimate": -0.05,
+        "ci_low": -0.12745098039215685,
+        "ci_high": 0.02040816326530612,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.3,
+        "ci_low": 0.19148936170212766,
+        "ci_high": 0.40816326530612246,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": -0.35,
+        "ci_low": -0.4782608695652174,
+        "ci_high": -0.23529411764705882,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "C": {
+       "flash_38": {
+        "estimate": 0.13,
+        "ci_low": 0.052083333333333336,
+        "ci_high": 0.21428571428571427,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.28,
+        "ci_low": 0.18888888888888888,
+        "ci_high": 0.375,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": -0.15,
+        "ci_low": -0.2692307692307692,
+        "ci_high": -0.04,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      }
+     }
+    },
+    "secondary": {
+     "per_cell": {
+      "R1|omission": {
+       "rate_reject": {
+        "estimate": 0.86,
+        "ci_low": 0.7727272727272727,
+        "ci_high": 0.9431818181818182,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "detection": {
+        "estimate": 0.86,
+        "ci_low": 0.7727272727272727,
+        "ci_high": 0.9431818181818182,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "right_reason_deterministic": {
+        "rejects": 86,
+        "right_reason": 83
+       },
+       "named_accept": {
+        "accepts": 14,
+        "named_accept": 0
+       },
+       "draw_agreement": {
+        "items_with_two_draws": 50,
+        "agree_share": 0.92
+       },
+       "missing": 0,
+       "calls": 100
+      },
+      "R4|omission": {
+       "rate_reject": {
+        "estimate": 0.85,
+        "ci_low": 0.775,
+        "ci_high": 0.925531914893617,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "detection": {
+        "estimate": 0.85,
+        "ci_low": 0.775,
+        "ci_high": 0.925531914893617,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "right_reason_deterministic": {
+        "rejects": 85,
+        "right_reason": 72
+       },
+       "named_accept": {
+        "accepts": 15,
+        "named_accept": 0
+       },
+       "draw_agreement": {
+        "items_with_two_draws": 50,
+        "agree_share": 0.94
+       },
+       "missing": 0,
+       "calls": 100
+      },
+      "R2|omission": {
+       "rate_reject": {
+        "estimate": 0.81,
+        "ci_low": 0.7159090909090909,
+        "ci_high": 0.8958333333333334,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "detection": {
+        "estimate": 0.81,
+        "ci_low": 0.7159090909090909,
+        "ci_high": 0.8958333333333334,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "right_reason_deterministic": {
+        "rejects": 81,
+        "right_reason": 78
+       },
+       "named_accept": {
+        "accepts": 19,
+        "named_accept": 0
+       },
+       "draw_agreement": {
+        "items_with_two_draws": 50,
+        "agree_share": 0.86
+       },
+       "missing": 0,
+       "calls": 100
+      },
+      "R1+CHK|omission": {
+       "rate_reject": {
+        "estimate": 0.99,
+        "ci_low": 0.9680851063829787,
+        "ci_high": 1.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "detection": {
+        "estimate": 0.99,
+        "ci_low": 0.9680851063829787,
+        "ci_high": 1.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "right_reason_deterministic": {
+        "rejects": 99,
+        "right_reason": 94
+       },
+       "named_accept": {
+        "accepts": 1,
+        "named_accept": 0
+       },
+       "draw_agreement": {
+        "items_with_two_draws": 50,
+        "agree_share": 0.98
+       },
+       "missing": 0,
+       "calls": 100
+      },
+      "R0p|correct": {
+       "rate_reject": {
+        "estimate": 0.03,
+        "ci_low": 0.0,
+        "ci_high": 0.07407407407407407,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "false_rejection": {
+        "estimate": 0.03,
+        "ci_low": 0.0,
+        "ci_high": 0.07407407407407407,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "draw_agreement": {
+        "items_with_two_draws": 50,
+        "agree_share": 0.98
+       },
+       "missing": 0,
+       "calls": 100
+      },
+      "R4|correct": {
+       "rate_reject": {
+        "estimate": 0.04,
+        "ci_low": 0.0,
+        "ci_high": 0.1,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "false_rejection": {
+        "estimate": 0.04,
+        "ci_low": 0.0,
+        "ci_high": 0.1,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "false_rejection_minus_R0p": {
+        "estimate": 0.01,
+        "ci_low": -0.026785714285714284,
+        "ci_high": 0.0625,
+        "n_items": 50,
+        "n_clusters": 31,
+        "ci_inside_equivalence_margin": true
+       },
+       "draw_agreement": {
+        "items_with_two_draws": 50,
+        "agree_share": 1.0
+       },
+       "missing": 0,
+       "calls": 100
+      },
+      "R2|correct": {
+       "rate_reject": {
+        "estimate": 0.03,
+        "ci_low": 0.0,
+        "ci_high": 0.07547169811320754,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "false_rejection": {
+        "estimate": 0.03,
+        "ci_low": 0.0,
+        "ci_high": 0.07547169811320754,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "false_rejection_minus_R0p": {
+        "estimate": 0.0,
+        "ci_low": -0.027777777777777776,
+        "ci_high": 0.03,
+        "n_items": 50,
+        "n_clusters": 31,
+        "ci_inside_equivalence_margin": true
+       },
+       "draw_agreement": {
+        "items_with_two_draws": 50,
+        "agree_share": 0.98
+       },
+       "missing": 0,
+       "calls": 100
+      },
+      "R1+CHK|correct": {
+       "rate_reject": {
+        "estimate": 0.41,
+        "ci_low": 0.29069767441860467,
+        "ci_high": 0.5272853535353533,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "false_rejection": {
+        "estimate": 0.41,
+        "ci_low": 0.29069767441860467,
+        "ci_high": 0.5272853535353533,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "false_rejection_minus_R0p": {
+        "estimate": 0.38,
+        "ci_low": 0.2744922969187677,
+        "ci_high": 0.4897959183673469,
+        "n_items": 50,
+        "n_clusters": 31,
+        "ci_inside_equivalence_margin": false
+       },
+       "draw_agreement": {
+        "items_with_two_draws": 50,
+        "agree_share": 0.78
+       },
+       "missing": 0,
+       "calls": 100
+      },
+      "R1|bait": {
+       "rate_reject": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 22,
+        "n_clusters": 17
+       },
+       "detection": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 22,
+        "n_clusters": 17
+       },
+       "right_reason_deterministic": {
+        "rejects": 22,
+        "right_reason": 22
+       },
+       "named_accept": {
+        "accepts": 0,
+        "named_accept": 0
+       },
+       "missing": 0,
+       "calls": 22
+      }
+     }
+    }
+   },
+   "without_all_d40_flagged_sensitivity": {
+    "n_items": 46,
+    "n_clusters": 30,
+    "primary": {
+     "G": {
+      "estimate": -0.010869565217391304,
+      "p": 1.0,
+      "ci_low": -0.125,
+      "ci_high": 0.10204081632653061,
+      "n_items": 46,
+      "n_clusters": 30,
+      "contrast": "Detection(R4) - Detection(R1), omission versions",
+      "label": "workflow gap: Detection(R4-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": false,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "H": {
+      "estimate": -0.05434782608695652,
+      "p": 0.3073692630736926,
+      "ci_low": -0.13829787234042554,
+      "ci_high": 0.021739130434782608,
+      "n_items": 46,
+      "n_clusters": 30,
+      "contrast": "Detection(R2) - Detection(R1), omission versions",
+      "label": "history effect: Detection(R2-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": false,
+      "p_holm": 0.6147385261473852,
+      "significant": false
+     },
+     "C": {
+      "estimate": 0.14130434782608695,
+      "p": 0.007999200079992,
+      "ci_low": 0.056818181818181816,
+      "ci_high": 0.23076923076923078,
+      "n_items": 46,
+      "n_clusters": 30,
+      "contrast": "Detection(R1+CHK) - Detection(R1), omission versions",
+      "label": "check instruction: Detection(R1-om+CHK) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": false,
+      "p_holm": 0.023997600239976002,
+      "significant": true
+     },
+     "D_G": {
+      "estimate": -0.021739130434782608,
+      "ci_low": -0.1511627906976744,
+      "ci_high": 0.1111111111111111,
+      "n_items": 46,
+      "n_clusters": 30,
+      "tested": false,
+      "note": "G not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R4,om) - y(R4,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_H": {
+      "estimate": -0.05434782608695652,
+      "ci_low": -0.14893617021276595,
+      "ci_high": 0.044444444444444446,
+      "n_items": 46,
+      "n_clusters": 30,
+      "tested": false,
+      "note": "H not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R2,om) - y(R2,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_C": {
+      "estimate": -0.22826086956521738,
+      "p": 0.0016998300169983002,
+      "ci_low": -0.3409090909090909,
+      "ci_high": -0.10714285714285714,
+      "n_items": 46,
+      "n_clusters": 30,
+      "tested": true,
+      "significant": true,
+      "definition": "D_i = [y(R1+CHK,om) - y(R1+CHK,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "equivalence_margin": 0.1
+    },
+    "primary_missing_as_accept": {
+     "G": {
+      "estimate": -0.010869565217391304,
+      "p": 1.0,
+      "ci_low": -0.125,
+      "ci_high": 0.10204081632653061,
+      "n_items": 46,
+      "n_clusters": 30,
+      "contrast": "Detection(R4) - Detection(R1), omission versions",
+      "label": "workflow gap: Detection(R4-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": false,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "H": {
+      "estimate": -0.05434782608695652,
+      "p": 0.3073692630736926,
+      "ci_low": -0.13829787234042554,
+      "ci_high": 0.021739130434782608,
+      "n_items": 46,
+      "n_clusters": 30,
+      "contrast": "Detection(R2) - Detection(R1), omission versions",
+      "label": "history effect: Detection(R2-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": false,
+      "p_holm": 0.6147385261473852,
+      "significant": false
+     },
+     "C": {
+      "estimate": 0.14130434782608695,
+      "p": 0.007999200079992,
+      "ci_low": 0.056818181818181816,
+      "ci_high": 0.23076923076923078,
+      "n_items": 46,
+      "n_clusters": 30,
+      "contrast": "Detection(R1+CHK) - Detection(R1), omission versions",
+      "label": "check instruction: Detection(R1-om+CHK) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": false,
+      "p_holm": 0.023997600239976002,
+      "significant": true
+     },
+     "D_G": {
+      "estimate": -0.021739130434782608,
+      "ci_low": -0.1511627906976744,
+      "ci_high": 0.1111111111111111,
+      "n_items": 46,
+      "n_clusters": 30,
+      "tested": false,
+      "note": "G not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R4,om) - y(R4,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_H": {
+      "estimate": -0.05434782608695652,
+      "ci_low": -0.14893617021276595,
+      "ci_high": 0.044444444444444446,
+      "n_items": 46,
+      "n_clusters": 30,
+      "tested": false,
+      "note": "H not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R2,om) - y(R2,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_C": {
+      "estimate": -0.22826086956521738,
+      "p": 0.0016998300169983002,
+      "ci_low": -0.3409090909090909,
+      "ci_high": -0.10714285714285714,
+      "n_items": 46,
+      "n_clusters": 30,
+      "tested": true,
+      "significant": true,
+      "definition": "D_i = [y(R1+CHK,om) - y(R1+CHK,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "equivalence_margin": 0.1
+    },
+    "primary_missing_as_reject": {
+     "G": {
+      "estimate": -0.010869565217391304,
+      "p": 1.0,
+      "ci_low": -0.125,
+      "ci_high": 0.10204081632653061,
+      "n_items": 46,
+      "n_clusters": 30,
+      "contrast": "Detection(R4) - Detection(R1), omission versions",
+      "label": "workflow gap: Detection(R4-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": false,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "H": {
+      "estimate": -0.05434782608695652,
+      "p": 0.3073692630736926,
+      "ci_low": -0.13829787234042554,
+      "ci_high": 0.021739130434782608,
+      "n_items": 46,
+      "n_clusters": 30,
+      "contrast": "Detection(R2) - Detection(R1), omission versions",
+      "label": "history effect: Detection(R2-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": false,
+      "p_holm": 0.6147385261473852,
+      "significant": false
+     },
+     "C": {
+      "estimate": 0.14130434782608695,
+      "p": 0.007999200079992,
+      "ci_low": 0.056818181818181816,
+      "ci_high": 0.23076923076923078,
+      "n_items": 46,
+      "n_clusters": 30,
+      "contrast": "Detection(R1+CHK) - Detection(R1), omission versions",
+      "label": "check instruction: Detection(R1-om+CHK) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": false,
+      "p_holm": 0.023997600239976002,
+      "significant": true
+     },
+     "D_G": {
+      "estimate": -0.021739130434782608,
+      "ci_low": -0.1511627906976744,
+      "ci_high": 0.1111111111111111,
+      "n_items": 46,
+      "n_clusters": 30,
+      "tested": false,
+      "note": "G not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R4,om) - y(R4,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_H": {
+      "estimate": -0.05434782608695652,
+      "ci_low": -0.14893617021276595,
+      "ci_high": 0.044444444444444446,
+      "n_items": 46,
+      "n_clusters": 30,
+      "tested": false,
+      "note": "H not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R2,om) - y(R2,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_C": {
+      "estimate": -0.22826086956521738,
+      "p": 0.0016998300169983002,
+      "ci_low": -0.3409090909090909,
+      "ci_high": -0.10714285714285714,
+      "n_items": 46,
+      "n_clusters": 30,
+      "tested": true,
+      "significant": true,
+      "definition": "D_i = [y(R1+CHK,om) - y(R1+CHK,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "equivalence_margin": 0.1
+    },
+    "interpretation": {
+     "rows": {
+      "row1_G_significant_positive": false,
+      "row2_G_not_significant_and_R1om_ge_0p90": false,
+      "row3_G_not_significant_and_R1om_lt_0p90": true,
+      "row4_H_significant_positive": false,
+      "row5a_C_significant_FR_rise_le_0p05": false,
+      "row5b_C_significant_FR_rise_gt_0p05": true,
+      "row5c_C_not_significant": false
+     },
+     "detection_R1_om": 0.8478260869565217,
+     "FR_R1CHK_minus_R0p_point": 0.3695652173913043,
+     "G_ci_inside_equivalence_margin": false,
+     "row6_notes": [],
+     "definitions": {
+      "significant": "Holm-adjusted p < 0.05",
+      "row2/3 threshold": 0.9,
+      "row5 FR threshold (point estimate)": 0.05
+     }
+    },
+    "verifier_comparison": {
+     "cells": {
+      "R1|omission": {
+       "flash_38": {
+        "estimate": 0.8478260869565217,
+        "ci_low": 0.7549019607843137,
+        "ci_high": 0.9375,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_lite": {
+        "estimate": 0.6304347826086957,
+        "ci_low": 0.5293976244343893,
+        "ci_high": 0.7317073170731707,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": 0.21739130434782608,
+        "ci_low": 0.0975609756097561,
+        "ci_high": 0.34523809523809523,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      },
+      "R4|omission": {
+       "flash_38": {
+        "estimate": 0.8369565217391305,
+        "ci_low": 0.7549019607843137,
+        "ci_high": 0.9204545454545454,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_lite": {
+        "estimate": 0.8586956521739131,
+        "ci_low": 0.7804878048780488,
+        "ci_high": 0.9239130434782609,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": -0.021739130434782608,
+        "ci_low": -0.11956521739130435,
+        "ci_high": 0.08888888888888889,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      },
+      "R2|omission": {
+       "flash_38": {
+        "estimate": 0.7934782608695652,
+        "ci_low": 0.6904761904761905,
+        "ci_high": 0.8863636363636364,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_lite": {
+        "estimate": 0.9565217391304348,
+        "ci_low": 0.8979591836734694,
+        "ci_high": 1.0,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": -0.16304347826086957,
+        "ci_low": -0.2765957446808511,
+        "ci_high": -0.05102040816326531,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      },
+      "R1+CHK|omission": {
+       "flash_38": {
+        "estimate": 0.9891304347826086,
+        "ci_low": 0.9651162790697675,
+        "ci_high": 1.0,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_lite": {
+        "estimate": 0.9347826086956522,
+        "ci_low": 0.8636363636363636,
+        "ci_high": 0.9893617021276596,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": 0.05434782608695652,
+        "ci_low": 0.010416666666666666,
+        "ci_high": 0.11702127659574468,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      },
+      "R0p|correct": {
+       "flash_38": {
+        "estimate": 0.03260869565217391,
+        "ci_low": 0.0,
+        "ci_high": 0.07896232057416246,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_lite": {
+        "estimate": 0.021739130434782608,
+        "ci_low": 0.0,
+        "ci_high": 0.05,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": 0.010869565217391304,
+        "ci_low": 0.0,
+        "ci_high": 0.03333333333333333,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      },
+      "R4|correct": {
+       "flash_38": {
+        "estimate": 0.043478260869565216,
+        "ci_low": 0.0,
+        "ci_high": 0.10869565217391304,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_lite": {
+        "estimate": 0.03260869565217391,
+        "ci_low": 0.0,
+        "ci_high": 0.07896232057416246,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": 0.010869565217391304,
+        "ci_low": -0.029411764705882353,
+        "ci_high": 0.06945251937984484,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      },
+      "R2|correct": {
+       "flash_38": {
+        "estimate": 0.03260869565217391,
+        "ci_low": 0.0,
+        "ci_high": 0.08139534883720931,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_lite": {
+        "estimate": 0.043478260869565216,
+        "ci_low": 0.0,
+        "ci_high": 0.09375,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": -0.010869565217391304,
+        "ci_low": -0.04878048780487805,
+        "ci_high": 0.023809523809523808,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      },
+      "R1+CHK|correct": {
+       "flash_38": {
+        "estimate": 0.40217391304347827,
+        "ci_low": 0.27906976744186046,
+        "ci_high": 0.5208333333333334,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_lite": {
+        "estimate": 0.021739130434782608,
+        "ci_low": 0.0,
+        "ci_high": 0.05434782608695652,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": 0.3804347826086957,
+        "ci_low": 0.2625,
+        "ci_high": 0.49019607843137253,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      },
+      "R1|bait": {
+       "flash_38": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 22,
+        "n_clusters": 17
+       },
+       "flash_lite": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 22,
+        "n_clusters": 17
+       },
+       "difference": {
+        "estimate": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "n_items": 22,
+        "n_clusters": 17
+       }
+      }
+     },
+     "contrasts": {
+      "G": {
+       "flash_38": {
+        "estimate": -0.010869565217391304,
+        "ci_low": -0.125,
+        "ci_high": 0.10204081632653061,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_lite": {
+        "estimate": 0.22826086956521738,
+        "ci_low": 0.12765435961618693,
+        "ci_high": 0.3292752217294899,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": -0.2391304347826087,
+        "ci_low": -0.38636363636363635,
+        "ci_high": -0.09803921568627451,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      },
+      "H": {
+       "flash_38": {
+        "estimate": -0.05434782608695652,
+        "ci_low": -0.13829787234042554,
+        "ci_high": 0.021739130434782608,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_lite": {
+        "estimate": 0.32608695652173914,
+        "ci_low": 0.22219551282051306,
+        "ci_high": 0.43023255813953487,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": -0.3804347826086957,
+        "ci_low": -0.5116279069767442,
+        "ci_high": -0.26136363636363635,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      },
+      "C": {
+       "flash_38": {
+        "estimate": 0.14130434782608695,
+        "ci_low": 0.056818181818181816,
+        "ci_high": 0.23076923076923078,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_lite": {
+        "estimate": 0.30434782608695654,
+        "ci_low": 0.2127659574468085,
+        "ci_high": 0.3979591836734694,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": -0.16304347826086957,
+        "ci_low": -0.29069767441860467,
+        "ci_high": -0.0425531914893617,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      }
+     }
+    },
+    "secondary": {
+     "per_cell": {
+      "R1|omission": {
+       "rate_reject": {
+        "estimate": 0.8478260869565217,
+        "ci_low": 0.7549019607843137,
+        "ci_high": 0.9375,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "detection": {
+        "estimate": 0.8478260869565217,
+        "ci_low": 0.7549019607843137,
+        "ci_high": 0.9375,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "right_reason_deterministic": {
+        "rejects": 78,
+        "right_reason": 75
+       },
+       "named_accept": {
+        "accepts": 14,
+        "named_accept": 0
+       },
+       "draw_agreement": {
+        "items_with_two_draws": 46,
+        "agree_share": 0.9130434782608695
+       },
+       "missing": 0,
+       "calls": 92
+      },
+      "R4|omission": {
+       "rate_reject": {
+        "estimate": 0.8369565217391305,
+        "ci_low": 0.7549019607843137,
+        "ci_high": 0.9204545454545454,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "detection": {
+        "estimate": 0.8369565217391305,
+        "ci_low": 0.7549019607843137,
+        "ci_high": 0.9204545454545454,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "right_reason_deterministic": {
+        "rejects": 77,
+        "right_reason": 66
+       },
+       "named_accept": {
+        "accepts": 15,
+        "named_accept": 0
+       },
+       "draw_agreement": {
+        "items_with_two_draws": 46,
+        "agree_share": 0.9347826086956522
+       },
+       "missing": 0,
+       "calls": 92
+      },
+      "R2|omission": {
+       "rate_reject": {
+        "estimate": 0.7934782608695652,
+        "ci_low": 0.6904761904761905,
+        "ci_high": 0.8863636363636364,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "detection": {
+        "estimate": 0.7934782608695652,
+        "ci_low": 0.6904761904761905,
+        "ci_high": 0.8863636363636364,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "right_reason_deterministic": {
+        "rejects": 73,
+        "right_reason": 70
+       },
+       "named_accept": {
+        "accepts": 19,
+        "named_accept": 0
+       },
+       "draw_agreement": {
+        "items_with_two_draws": 46,
+        "agree_share": 0.8478260869565217
+       },
+       "missing": 0,
+       "calls": 92
+      },
+      "R1+CHK|omission": {
+       "rate_reject": {
+        "estimate": 0.9891304347826086,
+        "ci_low": 0.9651162790697675,
+        "ci_high": 1.0,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "detection": {
+        "estimate": 0.9891304347826086,
+        "ci_low": 0.9651162790697675,
+        "ci_high": 1.0,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "right_reason_deterministic": {
+        "rejects": 91,
+        "right_reason": 86
+       },
+       "named_accept": {
+        "accepts": 1,
+        "named_accept": 0
+       },
+       "draw_agreement": {
+        "items_with_two_draws": 46,
+        "agree_share": 0.9782608695652174
+       },
+       "missing": 0,
+       "calls": 92
+      },
+      "R0p|correct": {
+       "rate_reject": {
+        "estimate": 0.03260869565217391,
+        "ci_low": 0.0,
+        "ci_high": 0.07896232057416246,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "false_rejection": {
+        "estimate": 0.03260869565217391,
+        "ci_low": 0.0,
+        "ci_high": 0.07896232057416246,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "draw_agreement": {
+        "items_with_two_draws": 46,
+        "agree_share": 0.9782608695652174
+       },
+       "missing": 0,
+       "calls": 92
+      },
+      "R4|correct": {
+       "rate_reject": {
+        "estimate": 0.043478260869565216,
+        "ci_low": 0.0,
+        "ci_high": 0.10869565217391304,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "false_rejection": {
+        "estimate": 0.043478260869565216,
+        "ci_low": 0.0,
+        "ci_high": 0.10869565217391304,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "false_rejection_minus_R0p": {
+        "estimate": 0.010869565217391304,
+        "ci_low": -0.029411764705882353,
+        "ci_high": 0.06945251937984484,
+        "n_items": 46,
+        "n_clusters": 30,
+        "ci_inside_equivalence_margin": true
+       },
+       "draw_agreement": {
+        "items_with_two_draws": 46,
+        "agree_share": 1.0
+       },
+       "missing": 0,
+       "calls": 92
+      },
+      "R2|correct": {
+       "rate_reject": {
+        "estimate": 0.03260869565217391,
+        "ci_low": 0.0,
+        "ci_high": 0.08139534883720931,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "false_rejection": {
+        "estimate": 0.03260869565217391,
+        "ci_low": 0.0,
+        "ci_high": 0.08139534883720931,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "false_rejection_minus_R0p": {
+        "estimate": 0.0,
+        "ci_low": -0.030612244897959183,
+        "ci_high": 0.031914893617021274,
+        "n_items": 46,
+        "n_clusters": 30,
+        "ci_inside_equivalence_margin": true
+       },
+       "draw_agreement": {
+        "items_with_two_draws": 46,
+        "agree_share": 0.9782608695652174
+       },
+       "missing": 0,
+       "calls": 92
+      },
+      "R1+CHK|correct": {
+       "rate_reject": {
+        "estimate": 0.40217391304347827,
+        "ci_low": 0.27906976744186046,
+        "ci_high": 0.5208333333333334,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "false_rejection": {
+        "estimate": 0.40217391304347827,
+        "ci_low": 0.27906976744186046,
+        "ci_high": 0.5208333333333334,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "false_rejection_minus_R0p": {
+        "estimate": 0.3695652173913043,
+        "ci_low": 0.2608695652173913,
+        "ci_high": 0.4782608695652174,
+        "n_items": 46,
+        "n_clusters": 30,
+        "ci_inside_equivalence_margin": false
+       },
+       "draw_agreement": {
+        "items_with_two_draws": 46,
+        "agree_share": 0.7608695652173914
+       },
+       "missing": 0,
+       "calls": 92
+      },
+      "R1|bait": {
+       "rate_reject": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 22,
+        "n_clusters": 17
+       },
+       "detection": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 22,
+        "n_clusters": 17
+       },
+       "right_reason_deterministic": {
+        "rejects": 22,
+        "right_reason": 22
+       },
+       "named_accept": {
+        "accepts": 0,
+        "named_accept": 0
+       },
+       "missing": 0,
+       "calls": 22
+      }
+     }
+    }
+   },
+   "spend_usd_a16": 32.947945125
+  },
+  "a17": {
+   "label": "ADDENDUM A17 (D41; exploratory cross-family transfer, same design as D39): Claude Haiku 5.5 judging in Gemini 3.1 Flash-Lite's trajectories (cross-family; Gemini thought signatures removed)",
+   "exclusions": {
+    "primary_excluded": [
+     "rep041_e06_alice",
+     "rep044_e03_alice"
+    ],
+    "d40_flagged": [
+     "rep018_e02_alice",
+     "rep029_e09_alice",
+     "rep041_e06_alice",
+     "rep044_e03_alice"
+    ],
+    "source": "data/derived/a16/primary_exclusions.json (A16's frozen file)"
+   },
+   "p6": {
+    "calls": 10,
+    "submit_verdict": 10,
+    "submit_verdict_with_thinking": 10,
+    "passed": true,
+    "per_call": [
+     {
+      "call_id": "a17:P6:rep047_e08_alice:R1:omission:1",
+      "submit_verdict": true,
+      "thinking": true,
+      "verdict": "reject"
+     },
+     {
+      "call_id": "a17:P6:rep007_e02_alice:R1:omission:1",
+      "submit_verdict": true,
+      "thinking": true,
+      "verdict": "reject"
+     },
+     {
+      "call_id": "a17:P6:rep041_e08_alice:R1:omission:1",
+      "submit_verdict": true,
+      "thinking": true,
+      "verdict": "reject"
+     },
+     {
+      "call_id": "a17:P6:rep003_e04_alice:R1:omission:1",
+      "submit_verdict": true,
+      "thinking": true,
+      "verdict": "reject"
+     },
+     {
+      "call_id": "a17:P6:rep018_e06_alice:R1:omission:1",
+      "submit_verdict": true,
+      "thinking": true,
+      "verdict": "reject"
+     },
+     {
+      "call_id": "a17:P6:rep009_e08_alice:R1:omission:1",
+      "submit_verdict": true,
+      "thinking": true,
+      "verdict": "reject"
+     },
+     {
+      "call_id": "a17:P6:rep023_e04_alice:R1:omission:1",
+      "submit_verdict": true,
+      "thinking": true,
+      "verdict": "reject"
+     },
+     {
+      "call_id": "a17:P6:rep013_e02_alice:R1:omission:1",
+      "submit_verdict": true,
+      "thinking": true,
+      "verdict": "reject"
+     },
+     {
+      "call_id": "a17:P6:rep040_e10_alice:R1:omission:1",
+      "submit_verdict": true,
+      "thinking": true,
+      "verdict": "reject"
+     },
+     {
+      "call_id": "a17:P6:rep006_e10_alice:R1:omission:1",
+      "submit_verdict": true,
+      "thinking": true,
+      "verdict": "reject"
+     }
+    ]
+   },
+   "evidence": {
+    "call_lines": 434,
+    "response_models_entries": {
+     "claude-haiku-5-5": 434
+    },
+    "accepted_responses_by_model": {
+     "claude-haiku-5-5": 574
+    },
+    "only_expected_model": true,
+    "calls_with_thinking_in_response": 434,
+    "accepted_responses": 574,
+    "median_billable_output_tokens": 1457.0,
+    "median_reasoning_tokens_logged": 0.0
+   },
+   "calls": 400,
+   "missing": 0,
+   "calls_by_cell": {
+    "R0p|correct": 50,
+    "R1|omission": 50,
+    "R1+CHK|correct": 50,
+    "R1+CHK|omission": 50,
+    "R2|correct": 50,
+    "R2|omission": 50,
+    "R4|correct": 50,
+    "R4|omission": 50
+   },
+   "a16_finished": true,
+   "draw2_dropped": true,
+   "draw2_calls_logged_excluded": 24,
+   "primary_item_set": {
+    "n_items": 48,
+    "n_clusters": 31,
+    "primary": {
+     "G": {
+      "estimate": 0.0,
+      "p": 1.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "n_items": 48,
+      "n_clusters": 31,
+      "contrast": "Detection(R4) - Detection(R1), omission versions",
+      "label": "workflow gap: Detection(R4-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": true,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "H": {
+      "estimate": 0.0,
+      "p": 1.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "n_items": 48,
+      "n_clusters": 31,
+      "contrast": "Detection(R2) - Detection(R1), omission versions",
+      "label": "history effect: Detection(R2-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": true,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "C": {
+      "estimate": 0.0,
+      "p": 1.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "n_items": 48,
+      "n_clusters": 31,
+      "contrast": "Detection(R1+CHK) - Detection(R1), omission versions",
+      "label": "check instruction: Detection(R1-om+CHK) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": true,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "D_G": {
+      "estimate": 0.0,
+      "ci_low": -0.061224489795918366,
+      "ci_high": 0.061224489795918366,
+      "n_items": 48,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "G not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R4,om) - y(R4,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_H": {
+      "estimate": 0.0,
+      "ci_low": -0.0851063829787234,
+      "ci_high": 0.08163265306122448,
+      "n_items": 48,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "H not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R2,om) - y(R2,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_C": {
+      "estimate": 0.0,
+      "ci_low": -0.0851063829787234,
+      "ci_high": 0.08163265306122448,
+      "n_items": 48,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "C not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R1+CHK,om) - y(R1+CHK,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "equivalence_margin": 0.1
+    },
+    "primary_missing_as_accept": {
+     "G": {
+      "estimate": 0.0,
+      "p": 1.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "n_items": 48,
+      "n_clusters": 31,
+      "contrast": "Detection(R4) - Detection(R1), omission versions",
+      "label": "workflow gap: Detection(R4-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": true,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "H": {
+      "estimate": 0.0,
+      "p": 1.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "n_items": 48,
+      "n_clusters": 31,
+      "contrast": "Detection(R2) - Detection(R1), omission versions",
+      "label": "history effect: Detection(R2-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": true,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "C": {
+      "estimate": 0.0,
+      "p": 1.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "n_items": 48,
+      "n_clusters": 31,
+      "contrast": "Detection(R1+CHK) - Detection(R1), omission versions",
+      "label": "check instruction: Detection(R1-om+CHK) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": true,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "D_G": {
+      "estimate": 0.0,
+      "ci_low": -0.061224489795918366,
+      "ci_high": 0.061224489795918366,
+      "n_items": 48,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "G not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R4,om) - y(R4,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_H": {
+      "estimate": 0.0,
+      "ci_low": -0.0851063829787234,
+      "ci_high": 0.08163265306122448,
+      "n_items": 48,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "H not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R2,om) - y(R2,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_C": {
+      "estimate": 0.0,
+      "ci_low": -0.0851063829787234,
+      "ci_high": 0.08163265306122448,
+      "n_items": 48,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "C not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R1+CHK,om) - y(R1+CHK,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "equivalence_margin": 0.1
+    },
+    "primary_missing_as_reject": {
+     "G": {
+      "estimate": 0.0,
+      "p": 1.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "n_items": 48,
+      "n_clusters": 31,
+      "contrast": "Detection(R4) - Detection(R1), omission versions",
+      "label": "workflow gap: Detection(R4-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": true,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "H": {
+      "estimate": 0.0,
+      "p": 1.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "n_items": 48,
+      "n_clusters": 31,
+      "contrast": "Detection(R2) - Detection(R1), omission versions",
+      "label": "history effect: Detection(R2-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": true,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "C": {
+      "estimate": 0.0,
+      "p": 1.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "n_items": 48,
+      "n_clusters": 31,
+      "contrast": "Detection(R1+CHK) - Detection(R1), omission versions",
+      "label": "check instruction: Detection(R1-om+CHK) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": true,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "D_G": {
+      "estimate": 0.0,
+      "ci_low": -0.061224489795918366,
+      "ci_high": 0.061224489795918366,
+      "n_items": 48,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "G not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R4,om) - y(R4,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_H": {
+      "estimate": 0.0,
+      "ci_low": -0.0851063829787234,
+      "ci_high": 0.08163265306122448,
+      "n_items": 48,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "H not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R2,om) - y(R2,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_C": {
+      "estimate": 0.0,
+      "ci_low": -0.0851063829787234,
+      "ci_high": 0.08163265306122448,
+      "n_items": 48,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "C not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R1+CHK,om) - y(R1+CHK,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "equivalence_margin": 0.1
+    },
+    "interpretation": {
+     "rows": {
+      "row1_G_significant_positive": false,
+      "row2_G_not_significant_and_R1om_ge_0p90": true,
+      "row3_G_not_significant_and_R1om_lt_0p90": false,
+      "row4_H_significant_positive": false,
+      "row5a_C_significant_FR_rise_le_0p05": false,
+      "row5b_C_significant_FR_rise_gt_0p05": false,
+      "row5c_C_not_significant": true
+     },
+     "detection_R1_om": 1.0,
+     "FR_R1CHK_minus_R0p_point": 0.0,
+     "G_ci_inside_equivalence_margin": true,
+     "row6_notes": [],
+     "definitions": {
+      "significant": "Holm-adjusted p < 0.05",
+      "row2/3 threshold": 0.9,
+      "row5 FR threshold (point estimate)": 0.05
+     }
+    },
+    "haiku_minus_flash_lite": {
+     "cells": {
+      "R1|omission": {
+       "haiku": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.6458333333333334,
+        "ci_low": 0.5444444444444444,
+        "ci_high": 0.7448979591836735,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.3541666666666667,
+        "ci_low": 0.25510204081632654,
+        "ci_high": 0.45555555555555555,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "R4|omission": {
+       "haiku": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.84375,
+        "ci_low": 0.75,
+        "ci_high": 0.9204545454545454,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.15625,
+        "ci_low": 0.07954545454545454,
+        "ci_high": 0.25,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "R2|omission": {
+       "haiku": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.9479166666666666,
+        "ci_low": 0.892150238473768,
+        "ci_high": 0.99,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.052083333333333336,
+        "ci_low": 0.01,
+        "ci_high": 0.10784976152623202,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "R1+CHK|omission": {
+       "haiku": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.9375,
+        "ci_low": 0.8690476190476191,
+        "ci_high": 0.9897959183673469,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.0625,
+        "ci_low": 0.01020408163265306,
+        "ci_high": 0.13095238095238096,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "R0p|correct": {
+       "haiku": {
+        "estimate": 0.041666666666666664,
+        "ci_low": 0.0,
+        "ci_high": 0.1,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.020833333333333332,
+        "ci_low": 0.0,
+        "ci_high": 0.04807692307692308,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.020833333333333332,
+        "ci_low": -0.021739130434782608,
+        "ci_high": 0.07446808510638298,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "R4|correct": {
+       "haiku": {
+        "estimate": 0.041666666666666664,
+        "ci_low": 0.0,
+        "ci_high": 0.10204081632653061,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.03125,
+        "ci_low": 0.0,
+        "ci_high": 0.07692307692307693,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.010416666666666666,
+        "ci_low": -0.02830188679245283,
+        "ci_high": 0.06382978723404255,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "R2|correct": {
+       "haiku": {
+        "estimate": 0.041666666666666664,
+        "ci_low": 0.0,
+        "ci_high": 0.10204081632653061,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.041666666666666664,
+        "ci_low": 0.0,
+        "ci_high": 0.09,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.0,
+        "ci_low": -0.05319148936170213,
+        "ci_high": 0.045454545454545456,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "R1+CHK|correct": {
+       "haiku": {
+        "estimate": 0.041666666666666664,
+        "ci_low": 0.0,
+        "ci_high": 0.10204081632653061,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.020833333333333332,
+        "ci_low": 0.0,
+        "ci_high": 0.052083333333333336,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.020833333333333332,
+        "ci_low": -0.021739130434782608,
+        "ci_high": 0.07317073170731707,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      }
+     },
+     "contrasts": {
+      "G": {
+       "haiku": {
+        "estimate": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.19791666666666666,
+        "ci_low": 0.06862745098039216,
+        "ci_high": 0.3125,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": -0.19791666666666666,
+        "ci_low": -0.3125,
+        "ci_high": -0.06862745098039216,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "H": {
+       "haiku": {
+        "estimate": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.3020833333333333,
+        "ci_low": 0.19230769230769232,
+        "ci_high": 0.4111111111111111,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": -0.3020833333333333,
+        "ci_low": -0.4111111111111111,
+        "ci_high": -0.19230769230769232,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "C": {
+       "haiku": {
+        "estimate": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.2916666666666667,
+        "ci_low": 0.19827179570592066,
+        "ci_high": 0.3854166666666667,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": -0.2916666666666667,
+        "ci_low": -0.3854166666666667,
+        "ci_high": -0.19827179570592068,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      }
+     }
+    },
+    "haiku_minus_flash_38": {
+     "cells": {
+      "R1|omission": {
+       "haiku": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_38": {
+        "estimate": 0.8541666666666666,
+        "ci_low": 0.7653061224489796,
+        "ci_high": 0.9411764705882353,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.14583333333333334,
+        "ci_low": 0.058823529411764705,
+        "ci_high": 0.23469387755102042,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "R4|omission": {
+       "haiku": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_38": {
+        "estimate": 0.84375,
+        "ci_low": 0.7641509433962265,
+        "ci_high": 0.9222222222222223,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.15625,
+        "ci_low": 0.07777777777777778,
+        "ci_high": 0.2358490566037736,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "R2|omission": {
+       "haiku": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_38": {
+        "estimate": 0.8020833333333334,
+        "ci_low": 0.7045338589981448,
+        "ci_high": 0.8913043478260869,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.19791666666666666,
+        "ci_low": 0.10869565217391304,
+        "ci_high": 0.29546614100185514,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "R1+CHK|omission": {
+       "haiku": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_38": {
+        "estimate": 0.9895833333333334,
+        "ci_low": 0.9666666666666667,
+        "ci_high": 1.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.010416666666666666,
+        "ci_low": 0.0,
+        "ci_high": 0.03333333333333333,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "R0p|correct": {
+       "haiku": {
+        "estimate": 0.041666666666666664,
+        "ci_low": 0.0,
+        "ci_high": 0.1,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_38": {
+        "estimate": 0.03125,
+        "ci_low": 0.0,
+        "ci_high": 0.07692307692307693,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.010416666666666666,
+        "ci_low": -0.02830188679245283,
+        "ci_high": 0.06382978723404255,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "R4|correct": {
+       "haiku": {
+        "estimate": 0.041666666666666664,
+        "ci_low": 0.0,
+        "ci_high": 0.10204081632653061,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_38": {
+        "estimate": 0.041666666666666664,
+        "ci_low": 0.0,
+        "ci_high": 0.10416666666666667,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.0,
+        "ci_low": -0.06382978723404255,
+        "ci_high": 0.06,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "R2|correct": {
+       "haiku": {
+        "estimate": 0.041666666666666664,
+        "ci_low": 0.0,
+        "ci_high": 0.10204081632653061,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_38": {
+        "estimate": 0.03125,
+        "ci_low": 0.0,
+        "ci_high": 0.0784313725490196,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.010416666666666666,
+        "ci_low": -0.060008620689655096,
+        "ci_high": 0.0875,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "R1+CHK|correct": {
+       "haiku": {
+        "estimate": 0.041666666666666664,
+        "ci_low": 0.0,
+        "ci_high": 0.10204081632653061,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_38": {
+        "estimate": 0.40625,
+        "ci_low": 0.2872340425531915,
+        "ci_high": 0.5208333333333334,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": -0.3645833333333333,
+        "ci_low": -0.46808510638297873,
+        "ci_high": -0.2604166666666667,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      }
+     },
+     "contrasts": {
+      "G": {
+       "haiku": {
+        "estimate": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_38": {
+        "estimate": -0.010416666666666666,
+        "ci_low": -0.11458333333333333,
+        "ci_high": 0.09523809523809523,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.010416666666666666,
+        "ci_low": -0.09523809523809523,
+        "ci_high": 0.11458333333333333,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "H": {
+       "haiku": {
+        "estimate": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_38": {
+        "estimate": -0.052083333333333336,
+        "ci_low": -0.13157894736842105,
+        "ci_high": 0.02127659574468085,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.052083333333333336,
+        "ci_low": -0.02127659574468085,
+        "ci_high": 0.13157894736842105,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      },
+      "C": {
+       "haiku": {
+        "estimate": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "flash_38": {
+        "estimate": 0.13541666666666666,
+        "ci_low": 0.05319148936170213,
+        "ci_high": 0.2222222222222222,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": -0.13541666666666666,
+        "ci_low": -0.2222222222222222,
+        "ci_high": -0.05319148936170213,
+        "n_items": 48,
+        "n_clusters": 31
+       }
+      }
+     }
+    },
+    "secondary": {
+     "per_cell": {
+      "R1|omission": {
+       "rate_reject": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "detection": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "right_reason_deterministic": {
+        "rejects": 48,
+        "right_reason": 28
+       },
+       "named_accept": {
+        "accepts": 0,
+        "named_accept": 0
+       },
+       "missing": 0,
+       "calls": 48
+      },
+      "R4|omission": {
+       "rate_reject": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "detection": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "right_reason_deterministic": {
+        "rejects": 48,
+        "right_reason": 19
+       },
+       "named_accept": {
+        "accepts": 0,
+        "named_accept": 0
+       },
+       "missing": 0,
+       "calls": 48
+      },
+      "R2|omission": {
+       "rate_reject": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "detection": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "right_reason_deterministic": {
+        "rejects": 48,
+        "right_reason": 25
+       },
+       "named_accept": {
+        "accepts": 0,
+        "named_accept": 0
+       },
+       "missing": 0,
+       "calls": 48
+      },
+      "R1+CHK|omission": {
+       "rate_reject": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "detection": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "right_reason_deterministic": {
+        "rejects": 48,
+        "right_reason": 26
+       },
+       "named_accept": {
+        "accepts": 0,
+        "named_accept": 0
+       },
+       "missing": 0,
+       "calls": 48
+      },
+      "R0p|correct": {
+       "rate_reject": {
+        "estimate": 0.041666666666666664,
+        "ci_low": 0.0,
+        "ci_high": 0.1,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "false_rejection": {
+        "estimate": 0.041666666666666664,
+        "ci_low": 0.0,
+        "ci_high": 0.1,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "missing": 0,
+       "calls": 48
+      },
+      "R4|correct": {
+       "rate_reject": {
+        "estimate": 0.041666666666666664,
+        "ci_low": 0.0,
+        "ci_high": 0.10204081632653061,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "false_rejection": {
+        "estimate": 0.041666666666666664,
+        "ci_low": 0.0,
+        "ci_high": 0.10204081632653061,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "false_rejection_minus_R0p": {
+        "estimate": 0.0,
+        "ci_low": -0.061224489795918366,
+        "ci_high": 0.061224489795918366,
+        "n_items": 48,
+        "n_clusters": 31,
+        "ci_inside_equivalence_margin": true
+       },
+       "missing": 0,
+       "calls": 48
+      },
+      "R2|correct": {
+       "rate_reject": {
+        "estimate": 0.041666666666666664,
+        "ci_low": 0.0,
+        "ci_high": 0.10204081632653061,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "false_rejection": {
+        "estimate": 0.041666666666666664,
+        "ci_low": 0.0,
+        "ci_high": 0.10204081632653061,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "false_rejection_minus_R0p": {
+        "estimate": 0.0,
+        "ci_low": -0.08163265306122448,
+        "ci_high": 0.0851063829787234,
+        "n_items": 48,
+        "n_clusters": 31,
+        "ci_inside_equivalence_margin": true
+       },
+       "missing": 0,
+       "calls": 48
+      },
+      "R1+CHK|correct": {
+       "rate_reject": {
+        "estimate": 0.041666666666666664,
+        "ci_low": 0.0,
+        "ci_high": 0.10204081632653061,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "false_rejection": {
+        "estimate": 0.041666666666666664,
+        "ci_low": 0.0,
+        "ci_high": 0.10204081632653061,
+        "n_items": 48,
+        "n_clusters": 31
+       },
+       "false_rejection_minus_R0p": {
+        "estimate": 0.0,
+        "ci_low": -0.08163265306122448,
+        "ci_high": 0.0851063829787234,
+        "n_items": 48,
+        "n_clusters": 31,
+        "ci_inside_equivalence_margin": true
+       },
+       "missing": 0,
+       "calls": 48
+      },
+      "R1|bait": {
+       "rate_reject": {
+        "estimate": null,
+        "ci_low": null,
+        "ci_high": null,
+        "n_items": 0
+       },
+       "detection": {
+        "estimate": null,
+        "ci_low": null,
+        "ci_high": null,
+        "n_items": 0
+       },
+       "right_reason_deterministic": {
+        "rejects": 0,
+        "right_reason": 0
+       },
+       "named_accept": {
+        "accepts": 0,
+        "named_accept": 0
+       },
+       "missing": 0,
+       "calls": 0
+      }
+     }
+    }
+   },
+   "all_50_sensitivity": {
+    "n_items": 50,
+    "n_clusters": 31,
+    "primary": {
+     "G": {
+      "estimate": 0.0,
+      "p": 1.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "n_items": 50,
+      "n_clusters": 31,
+      "contrast": "Detection(R4) - Detection(R1), omission versions",
+      "label": "workflow gap: Detection(R4-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": true,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "H": {
+      "estimate": -0.02,
+      "p": 1.0,
+      "ci_low": -0.06521739130434782,
+      "ci_high": 0.0,
+      "n_items": 50,
+      "n_clusters": 31,
+      "contrast": "Detection(R2) - Detection(R1), omission versions",
+      "label": "history effect: Detection(R2-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": true,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "C": {
+      "estimate": 0.0,
+      "p": 1.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "n_items": 50,
+      "n_clusters": 31,
+      "contrast": "Detection(R1+CHK) - Detection(R1), omission versions",
+      "label": "check instruction: Detection(R1-om+CHK) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": true,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "D_G": {
+      "estimate": 0.0,
+      "ci_low": -0.058823529411764705,
+      "ci_high": 0.06,
+      "n_items": 50,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "G not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R4,om) - y(R4,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_H": {
+      "estimate": -0.02,
+      "ci_low": -0.10869565217391304,
+      "ci_high": 0.06382978723404255,
+      "n_items": 50,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "H not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R2,om) - y(R2,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_C": {
+      "estimate": 0.0,
+      "ci_low": -0.08163265306122448,
+      "ci_high": 0.0784313725490196,
+      "n_items": 50,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "C not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R1+CHK,om) - y(R1+CHK,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "equivalence_margin": 0.1
+    },
+    "primary_missing_as_accept": {
+     "G": {
+      "estimate": 0.0,
+      "p": 1.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "n_items": 50,
+      "n_clusters": 31,
+      "contrast": "Detection(R4) - Detection(R1), omission versions",
+      "label": "workflow gap: Detection(R4-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": true,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "H": {
+      "estimate": -0.02,
+      "p": 1.0,
+      "ci_low": -0.06521739130434782,
+      "ci_high": 0.0,
+      "n_items": 50,
+      "n_clusters": 31,
+      "contrast": "Detection(R2) - Detection(R1), omission versions",
+      "label": "history effect: Detection(R2-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": true,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "C": {
+      "estimate": 0.0,
+      "p": 1.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "n_items": 50,
+      "n_clusters": 31,
+      "contrast": "Detection(R1+CHK) - Detection(R1), omission versions",
+      "label": "check instruction: Detection(R1-om+CHK) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": true,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "D_G": {
+      "estimate": 0.0,
+      "ci_low": -0.058823529411764705,
+      "ci_high": 0.06,
+      "n_items": 50,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "G not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R4,om) - y(R4,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_H": {
+      "estimate": -0.02,
+      "ci_low": -0.10869565217391304,
+      "ci_high": 0.06382978723404255,
+      "n_items": 50,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "H not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R2,om) - y(R2,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_C": {
+      "estimate": 0.0,
+      "ci_low": -0.08163265306122448,
+      "ci_high": 0.0784313725490196,
+      "n_items": 50,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "C not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R1+CHK,om) - y(R1+CHK,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "equivalence_margin": 0.1
+    },
+    "primary_missing_as_reject": {
+     "G": {
+      "estimate": 0.0,
+      "p": 1.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "n_items": 50,
+      "n_clusters": 31,
+      "contrast": "Detection(R4) - Detection(R1), omission versions",
+      "label": "workflow gap: Detection(R4-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": true,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "H": {
+      "estimate": -0.02,
+      "p": 1.0,
+      "ci_low": -0.06521739130434782,
+      "ci_high": 0.0,
+      "n_items": 50,
+      "n_clusters": 31,
+      "contrast": "Detection(R2) - Detection(R1), omission versions",
+      "label": "history effect: Detection(R2-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": true,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "C": {
+      "estimate": 0.0,
+      "p": 1.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "n_items": 50,
+      "n_clusters": 31,
+      "contrast": "Detection(R1+CHK) - Detection(R1), omission versions",
+      "label": "check instruction: Detection(R1-om+CHK) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": true,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "D_G": {
+      "estimate": 0.0,
+      "ci_low": -0.058823529411764705,
+      "ci_high": 0.06,
+      "n_items": 50,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "G not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R4,om) - y(R4,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_H": {
+      "estimate": -0.02,
+      "ci_low": -0.10869565217391304,
+      "ci_high": 0.06382978723404255,
+      "n_items": 50,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "H not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R2,om) - y(R2,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_C": {
+      "estimate": 0.0,
+      "ci_low": -0.08163265306122448,
+      "ci_high": 0.0784313725490196,
+      "n_items": 50,
+      "n_clusters": 31,
+      "tested": false,
+      "note": "C not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R1+CHK,om) - y(R1+CHK,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "equivalence_margin": 0.1
+    },
+    "interpretation": {
+     "rows": {
+      "row1_G_significant_positive": false,
+      "row2_G_not_significant_and_R1om_ge_0p90": true,
+      "row3_G_not_significant_and_R1om_lt_0p90": false,
+      "row4_H_significant_positive": false,
+      "row5a_C_significant_FR_rise_le_0p05": false,
+      "row5b_C_significant_FR_rise_gt_0p05": false,
+      "row5c_C_not_significant": true
+     },
+     "detection_R1_om": 1.0,
+     "FR_R1CHK_minus_R0p_point": 0.0,
+     "G_ci_inside_equivalence_margin": true,
+     "row6_notes": [],
+     "definitions": {
+      "significant": "Holm-adjusted p < 0.05",
+      "row2/3 threshold": 0.9,
+      "row5 FR threshold (point estimate)": 0.05
+     }
+    },
+    "haiku_minus_flash_lite": {
+     "cells": {
+      "R1|omission": {
+       "haiku": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.64,
+        "ci_low": 0.5333333333333333,
+        "ci_high": 0.7448979591836735,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.36,
+        "ci_low": 0.25510204081632654,
+        "ci_high": 0.4666666666666667,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "R4|omission": {
+       "haiku": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.83,
+        "ci_low": 0.7391304347826086,
+        "ci_high": 0.9081632653061225,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.17,
+        "ci_low": 0.09183673469387756,
+        "ci_high": 0.2608695652173913,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "R2|omission": {
+       "haiku": {
+        "estimate": 0.98,
+        "ci_low": 0.9347826086956522,
+        "ci_high": 1.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.94,
+        "ci_low": 0.8829787234042553,
+        "ci_high": 0.9871874999999999,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.04,
+        "ci_low": -0.01,
+        "ci_high": 0.09782608695652174,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "R1+CHK|omission": {
+       "haiku": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.92,
+        "ci_low": 0.8431372549019608,
+        "ci_high": 0.9803921568627451,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.08,
+        "ci_low": 0.0196078431372549,
+        "ci_high": 0.1568627450980392,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "R0p|correct": {
+       "haiku": {
+        "estimate": 0.04,
+        "ci_low": 0.0,
+        "ci_high": 0.09803921568627451,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.02,
+        "ci_low": 0.0,
+        "ci_high": 0.04716981132075472,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.02,
+        "ci_low": -0.020833333333333332,
+        "ci_high": 0.07272727272727272,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "R4|correct": {
+       "haiku": {
+        "estimate": 0.04,
+        "ci_low": 0.0,
+        "ci_high": 0.09803921568627451,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.03,
+        "ci_low": 0.0,
+        "ci_high": 0.07407407407407407,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.01,
+        "ci_low": -0.02727272727272727,
+        "ci_high": 0.0625,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "R2|correct": {
+       "haiku": {
+        "estimate": 0.04,
+        "ci_low": 0.0,
+        "ci_high": 0.1,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.04,
+        "ci_low": 0.0,
+        "ci_high": 0.08695652173913043,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.0,
+        "ci_low": -0.05102040816326531,
+        "ci_high": 0.043478260869565216,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "R1+CHK|correct": {
+       "haiku": {
+        "estimate": 0.04,
+        "ci_low": 0.0,
+        "ci_high": 0.1,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.02,
+        "ci_low": 0.0,
+        "ci_high": 0.05,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.02,
+        "ci_low": -0.020833333333333332,
+        "ci_high": 0.07142857142857142,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      }
+     },
+     "contrasts": {
+      "G": {
+       "haiku": {
+        "estimate": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.19,
+        "ci_low": 0.06521739130434782,
+        "ci_high": 0.3020833333333333,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": -0.19,
+        "ci_low": -0.3020833333333333,
+        "ci_high": -0.06521739130434782,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "H": {
+       "haiku": {
+        "estimate": -0.02,
+        "ci_low": -0.06521739130434782,
+        "ci_high": 0.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.3,
+        "ci_low": 0.19148936170212766,
+        "ci_high": 0.40816326530612246,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": -0.32,
+        "ci_low": -0.4423076923076923,
+        "ci_high": -0.20175438596491227,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "C": {
+       "haiku": {
+        "estimate": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_lite": {
+        "estimate": 0.28,
+        "ci_low": 0.18888888888888888,
+        "ci_high": 0.375,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": -0.28,
+        "ci_low": -0.375,
+        "ci_high": -0.18888888888888888,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      }
+     }
+    },
+    "haiku_minus_flash_38": {
+     "cells": {
+      "R1|omission": {
+       "haiku": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_38": {
+        "estimate": 0.86,
+        "ci_low": 0.7727272727272727,
+        "ci_high": 0.9431818181818182,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.14,
+        "ci_low": 0.056818181818181816,
+        "ci_high": 0.22727272727272727,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "R4|omission": {
+       "haiku": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_38": {
+        "estimate": 0.85,
+        "ci_low": 0.775,
+        "ci_high": 0.925531914893617,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.15,
+        "ci_low": 0.07446808510638298,
+        "ci_high": 0.225,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "R2|omission": {
+       "haiku": {
+        "estimate": 0.98,
+        "ci_low": 0.9347826086956522,
+        "ci_high": 1.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_38": {
+        "estimate": 0.81,
+        "ci_low": 0.7159090909090909,
+        "ci_high": 0.8958333333333334,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.17,
+        "ci_low": 0.06479018912529572,
+        "ci_high": 0.27450980392156865,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "R1+CHK|omission": {
+       "haiku": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_38": {
+        "estimate": 0.99,
+        "ci_low": 0.9680851063829787,
+        "ci_high": 1.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.01,
+        "ci_low": 0.0,
+        "ci_high": 0.031914893617021274,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "R0p|correct": {
+       "haiku": {
+        "estimate": 0.04,
+        "ci_low": 0.0,
+        "ci_high": 0.09803921568627451,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_38": {
+        "estimate": 0.03,
+        "ci_low": 0.0,
+        "ci_high": 0.07407407407407407,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.01,
+        "ci_low": -0.02727272727272727,
+        "ci_high": 0.061224489795918366,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "R4|correct": {
+       "haiku": {
+        "estimate": 0.04,
+        "ci_low": 0.0,
+        "ci_high": 0.09803921568627451,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_38": {
+        "estimate": 0.04,
+        "ci_low": 0.0,
+        "ci_high": 0.1,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.0,
+        "ci_low": -0.061224489795918366,
+        "ci_high": 0.057692307692307696,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "R2|correct": {
+       "haiku": {
+        "estimate": 0.04,
+        "ci_low": 0.0,
+        "ci_high": 0.1,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_38": {
+        "estimate": 0.03,
+        "ci_low": 0.0,
+        "ci_high": 0.07547169811320754,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.01,
+        "ci_low": -0.05813953488372093,
+        "ci_high": 0.08490566037735849,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "R1+CHK|correct": {
+       "haiku": {
+        "estimate": 0.04,
+        "ci_low": 0.0,
+        "ci_high": 0.1,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_38": {
+        "estimate": 0.41,
+        "ci_low": 0.29069767441860467,
+        "ci_high": 0.5272853535353533,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": -0.37,
+        "ci_low": -0.47368421052631576,
+        "ci_high": -0.26136363636363635,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      }
+     },
+     "contrasts": {
+      "G": {
+       "haiku": {
+        "estimate": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_38": {
+        "estimate": -0.01,
+        "ci_low": -0.10909090909090909,
+        "ci_high": 0.09183673469387756,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.01,
+        "ci_low": -0.09183673469387756,
+        "ci_high": 0.10909090909090909,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "H": {
+       "haiku": {
+        "estimate": -0.02,
+        "ci_low": -0.06521739130434782,
+        "ci_high": 0.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_38": {
+        "estimate": -0.05,
+        "ci_low": -0.12745098039215685,
+        "ci_high": 0.02040816326530612,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": 0.03,
+        "ci_low": -0.052083333333333336,
+        "ci_high": 0.11538461538461539,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      },
+      "C": {
+       "haiku": {
+        "estimate": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "flash_38": {
+        "estimate": 0.13,
+        "ci_low": 0.052083333333333336,
+        "ci_high": 0.21428571428571427,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "difference": {
+        "estimate": -0.13,
+        "ci_low": -0.21428571428571427,
+        "ci_high": -0.052083333333333336,
+        "n_items": 50,
+        "n_clusters": 31
+       }
+      }
+     }
+    },
+    "secondary": {
+     "per_cell": {
+      "R1|omission": {
+       "rate_reject": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "detection": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "right_reason_deterministic": {
+        "rejects": 50,
+        "right_reason": 29
+       },
+       "named_accept": {
+        "accepts": 0,
+        "named_accept": 0
+       },
+       "missing": 0,
+       "calls": 50
+      },
+      "R4|omission": {
+       "rate_reject": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "detection": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "right_reason_deterministic": {
+        "rejects": 50,
+        "right_reason": 20
+       },
+       "named_accept": {
+        "accepts": 0,
+        "named_accept": 0
+       },
+       "missing": 0,
+       "calls": 50
+      },
+      "R2|omission": {
+       "rate_reject": {
+        "estimate": 0.98,
+        "ci_low": 0.9347826086956522,
+        "ci_high": 1.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "detection": {
+        "estimate": 0.98,
+        "ci_low": 0.9347826086956522,
+        "ci_high": 1.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "right_reason_deterministic": {
+        "rejects": 49,
+        "right_reason": 26
+       },
+       "named_accept": {
+        "accepts": 1,
+        "named_accept": 0
+       },
+       "missing": 0,
+       "calls": 50
+      },
+      "R1+CHK|omission": {
+       "rate_reject": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "detection": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "right_reason_deterministic": {
+        "rejects": 50,
+        "right_reason": 27
+       },
+       "named_accept": {
+        "accepts": 0,
+        "named_accept": 0
+       },
+       "missing": 0,
+       "calls": 50
+      },
+      "R0p|correct": {
+       "rate_reject": {
+        "estimate": 0.04,
+        "ci_low": 0.0,
+        "ci_high": 0.09803921568627451,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "false_rejection": {
+        "estimate": 0.04,
+        "ci_low": 0.0,
+        "ci_high": 0.09803921568627451,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "missing": 0,
+       "calls": 50
+      },
+      "R4|correct": {
+       "rate_reject": {
+        "estimate": 0.04,
+        "ci_low": 0.0,
+        "ci_high": 0.09803921568627451,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "false_rejection": {
+        "estimate": 0.04,
+        "ci_low": 0.0,
+        "ci_high": 0.09803921568627451,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "false_rejection_minus_R0p": {
+        "estimate": 0.0,
+        "ci_low": -0.06,
+        "ci_high": 0.058823529411764705,
+        "n_items": 50,
+        "n_clusters": 31,
+        "ci_inside_equivalence_margin": true
+       },
+       "missing": 0,
+       "calls": 50
+      },
+      "R2|correct": {
+       "rate_reject": {
+        "estimate": 0.04,
+        "ci_low": 0.0,
+        "ci_high": 0.1,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "false_rejection": {
+        "estimate": 0.04,
+        "ci_low": 0.0,
+        "ci_high": 0.1,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "false_rejection_minus_R0p": {
+        "estimate": 0.0,
+        "ci_low": -0.0784313725490196,
+        "ci_high": 0.08163265306122448,
+        "n_items": 50,
+        "n_clusters": 31,
+        "ci_inside_equivalence_margin": true
+       },
+       "missing": 0,
+       "calls": 50
+      },
+      "R1+CHK|correct": {
+       "rate_reject": {
+        "estimate": 0.04,
+        "ci_low": 0.0,
+        "ci_high": 0.1,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "false_rejection": {
+        "estimate": 0.04,
+        "ci_low": 0.0,
+        "ci_high": 0.1,
+        "n_items": 50,
+        "n_clusters": 31
+       },
+       "false_rejection_minus_R0p": {
+        "estimate": 0.0,
+        "ci_low": -0.0784313725490196,
+        "ci_high": 0.08163265306122448,
+        "n_items": 50,
+        "n_clusters": 31,
+        "ci_inside_equivalence_margin": true
+       },
+       "missing": 0,
+       "calls": 50
+      },
+      "R1|bait": {
+       "rate_reject": {
+        "estimate": null,
+        "ci_low": null,
+        "ci_high": null,
+        "n_items": 0
+       },
+       "detection": {
+        "estimate": null,
+        "ci_low": null,
+        "ci_high": null,
+        "n_items": 0
+       },
+       "right_reason_deterministic": {
+        "rejects": 0,
+        "right_reason": 0
+       },
+       "named_accept": {
+        "accepts": 0,
+        "named_accept": 0
+       },
+       "missing": 0,
+       "calls": 0
+      }
+     }
+    }
+   },
+   "without_all_d40_flagged_sensitivity": {
+    "n_items": 46,
+    "n_clusters": 30,
+    "primary": {
+     "G": {
+      "estimate": 0.0,
+      "p": 1.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "n_items": 46,
+      "n_clusters": 30,
+      "contrast": "Detection(R4) - Detection(R1), omission versions",
+      "label": "workflow gap: Detection(R4-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": true,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "H": {
+      "estimate": 0.0,
+      "p": 1.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "n_items": 46,
+      "n_clusters": 30,
+      "contrast": "Detection(R2) - Detection(R1), omission versions",
+      "label": "history effect: Detection(R2-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": true,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "C": {
+      "estimate": 0.0,
+      "p": 1.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "n_items": 46,
+      "n_clusters": 30,
+      "contrast": "Detection(R1+CHK) - Detection(R1), omission versions",
+      "label": "check instruction: Detection(R1-om+CHK) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": true,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "D_G": {
+      "estimate": 0.0,
+      "ci_low": -0.06382978723404255,
+      "ci_high": 0.0625,
+      "n_items": 46,
+      "n_clusters": 30,
+      "tested": false,
+      "note": "G not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R4,om) - y(R4,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_H": {
+      "estimate": 0.0,
+      "ci_low": -0.08695652173913043,
+      "ci_high": 0.0851063829787234,
+      "n_items": 46,
+      "n_clusters": 30,
+      "tested": false,
+      "note": "H not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R2,om) - y(R2,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_C": {
+      "estimate": 0.0,
+      "ci_low": -0.08695652173913043,
+      "ci_high": 0.0851063829787234,
+      "n_items": 46,
+      "n_clusters": 30,
+      "tested": false,
+      "note": "C not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R1+CHK,om) - y(R1+CHK,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "equivalence_margin": 0.1
+    },
+    "primary_missing_as_accept": {
+     "G": {
+      "estimate": 0.0,
+      "p": 1.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "n_items": 46,
+      "n_clusters": 30,
+      "contrast": "Detection(R4) - Detection(R1), omission versions",
+      "label": "workflow gap: Detection(R4-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": true,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "H": {
+      "estimate": 0.0,
+      "p": 1.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "n_items": 46,
+      "n_clusters": 30,
+      "contrast": "Detection(R2) - Detection(R1), omission versions",
+      "label": "history effect: Detection(R2-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": true,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "C": {
+      "estimate": 0.0,
+      "p": 1.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "n_items": 46,
+      "n_clusters": 30,
+      "contrast": "Detection(R1+CHK) - Detection(R1), omission versions",
+      "label": "check instruction: Detection(R1-om+CHK) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": true,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "D_G": {
+      "estimate": 0.0,
+      "ci_low": -0.06382978723404255,
+      "ci_high": 0.0625,
+      "n_items": 46,
+      "n_clusters": 30,
+      "tested": false,
+      "note": "G not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R4,om) - y(R4,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_H": {
+      "estimate": 0.0,
+      "ci_low": -0.08695652173913043,
+      "ci_high": 0.0851063829787234,
+      "n_items": 46,
+      "n_clusters": 30,
+      "tested": false,
+      "note": "H not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R2,om) - y(R2,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_C": {
+      "estimate": 0.0,
+      "ci_low": -0.08695652173913043,
+      "ci_high": 0.0851063829787234,
+      "n_items": 46,
+      "n_clusters": 30,
+      "tested": false,
+      "note": "C not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R1+CHK,om) - y(R1+CHK,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "equivalence_margin": 0.1
+    },
+    "primary_missing_as_reject": {
+     "G": {
+      "estimate": 0.0,
+      "p": 1.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "n_items": 46,
+      "n_clusters": 30,
+      "contrast": "Detection(R4) - Detection(R1), omission versions",
+      "label": "workflow gap: Detection(R4-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": true,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "H": {
+      "estimate": 0.0,
+      "p": 1.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "n_items": 46,
+      "n_clusters": 30,
+      "contrast": "Detection(R2) - Detection(R1), omission versions",
+      "label": "history effect: Detection(R2-om) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": true,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "C": {
+      "estimate": 0.0,
+      "p": 1.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "n_items": 46,
+      "n_clusters": 30,
+      "contrast": "Detection(R1+CHK) - Detection(R1), omission versions",
+      "label": "check instruction: Detection(R1-om+CHK) - Detection(R1-om)",
+      "ci_inside_equivalence_margin": true,
+      "p_holm": 1.0,
+      "significant": false
+     },
+     "D_G": {
+      "estimate": 0.0,
+      "ci_low": -0.06382978723404255,
+      "ci_high": 0.0625,
+      "n_items": 46,
+      "n_clusters": 30,
+      "tested": false,
+      "note": "G not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R4,om) - y(R4,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_H": {
+      "estimate": 0.0,
+      "ci_low": -0.08695652173913043,
+      "ci_high": 0.0851063829787234,
+      "n_items": 46,
+      "n_clusters": 30,
+      "tested": false,
+      "note": "H not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R2,om) - y(R2,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "D_C": {
+      "estimate": 0.0,
+      "ci_low": -0.08695652173913043,
+      "ci_high": 0.0851063829787234,
+      "n_items": 46,
+      "n_clusters": 30,
+      "tested": false,
+      "note": "C not significant: D not tested (gatekeeping, plan 8.6)",
+      "definition": "D_i = [y(R1+CHK,om) - y(R1+CHK,correct)] - [y(R1,om) - y(R0',correct)]"
+     },
+     "equivalence_margin": 0.1
+    },
+    "interpretation": {
+     "rows": {
+      "row1_G_significant_positive": false,
+      "row2_G_not_significant_and_R1om_ge_0p90": true,
+      "row3_G_not_significant_and_R1om_lt_0p90": false,
+      "row4_H_significant_positive": false,
+      "row5a_C_significant_FR_rise_le_0p05": false,
+      "row5b_C_significant_FR_rise_gt_0p05": false,
+      "row5c_C_not_significant": true
+     },
+     "detection_R1_om": 1.0,
+     "FR_R1CHK_minus_R0p_point": 0.0,
+     "G_ci_inside_equivalence_margin": true,
+     "row6_notes": [],
+     "definitions": {
+      "significant": "Holm-adjusted p < 0.05",
+      "row2/3 threshold": 0.9,
+      "row5 FR threshold (point estimate)": 0.05
+     }
+    },
+    "haiku_minus_flash_lite": {
+     "cells": {
+      "R1|omission": {
+       "haiku": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_lite": {
+        "estimate": 0.6304347826086957,
+        "ci_low": 0.5293976244343893,
+        "ci_high": 0.7317073170731707,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": 0.3695652173913043,
+        "ci_low": 0.2682926829268293,
+        "ci_high": 0.47060237556561063,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      },
+      "R4|omission": {
+       "haiku": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_lite": {
+        "estimate": 0.8586956521739131,
+        "ci_low": 0.7804878048780488,
+        "ci_high": 0.9239130434782609,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": 0.14130434782608695,
+        "ci_low": 0.07608695652173914,
+        "ci_high": 0.21951219512195122,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      },
+      "R2|omission": {
+       "haiku": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_lite": {
+        "estimate": 0.9565217391304348,
+        "ci_low": 0.8979591836734694,
+        "ci_high": 1.0,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": 0.043478260869565216,
+        "ci_low": 0.0,
+        "ci_high": 0.10204081632653061,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      },
+      "R1+CHK|omission": {
+       "haiku": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_lite": {
+        "estimate": 0.9347826086956522,
+        "ci_low": 0.8636363636363636,
+        "ci_high": 0.9893617021276596,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": 0.06521739130434782,
+        "ci_low": 0.010638297872340425,
+        "ci_high": 0.13636363636363635,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      },
+      "R0p|correct": {
+       "haiku": {
+        "estimate": 0.043478260869565216,
+        "ci_low": 0.0,
+        "ci_high": 0.10416666666666667,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_lite": {
+        "estimate": 0.021739130434782608,
+        "ci_low": 0.0,
+        "ci_high": 0.05,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": 0.021739130434782608,
+        "ci_low": -0.022222222222222223,
+        "ci_high": 0.0784313725490196,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      },
+      "R4|correct": {
+       "haiku": {
+        "estimate": 0.043478260869565216,
+        "ci_low": 0.0,
+        "ci_high": 0.10416666666666667,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_lite": {
+        "estimate": 0.03260869565217391,
+        "ci_low": 0.0,
+        "ci_high": 0.07896232057416246,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": 0.010869565217391304,
+        "ci_low": -0.03,
+        "ci_high": 0.06605345911949663,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      },
+      "R2|correct": {
+       "haiku": {
+        "estimate": 0.043478260869565216,
+        "ci_low": 0.0,
+        "ci_high": 0.10638297872340426,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_lite": {
+        "estimate": 0.043478260869565216,
+        "ci_low": 0.0,
+        "ci_high": 0.09375,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": 0.0,
+        "ci_low": -0.05555555555555555,
+        "ci_high": 0.046511627906976744,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      },
+      "R1+CHK|correct": {
+       "haiku": {
+        "estimate": 0.043478260869565216,
+        "ci_low": 0.0,
+        "ci_high": 0.10638297872340426,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_lite": {
+        "estimate": 0.021739130434782608,
+        "ci_low": 0.0,
+        "ci_high": 0.05434782608695652,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": 0.021739130434782608,
+        "ci_low": -0.022234848484848375,
+        "ci_high": 0.07692307692307693,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      }
+     },
+     "contrasts": {
+      "G": {
+       "haiku": {
+        "estimate": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_lite": {
+        "estimate": 0.22826086956521738,
+        "ci_low": 0.12765435961618693,
+        "ci_high": 0.3292752217294899,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": -0.22826086956521738,
+        "ci_low": -0.32927522172949,
+        "ci_high": -0.12765435961618696,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      },
+      "H": {
+       "haiku": {
+        "estimate": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_lite": {
+        "estimate": 0.32608695652173914,
+        "ci_low": 0.22219551282051306,
+        "ci_high": 0.43023255813953487,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": -0.32608695652173914,
+        "ci_low": -0.43023255813953487,
+        "ci_high": -0.2221955128205132,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      },
+      "C": {
+       "haiku": {
+        "estimate": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_lite": {
+        "estimate": 0.30434782608695654,
+        "ci_low": 0.2127659574468085,
+        "ci_high": 0.3979591836734694,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": -0.30434782608695654,
+        "ci_low": -0.3979591836734694,
+        "ci_high": -0.2127659574468085,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      }
+     }
+    },
+    "haiku_minus_flash_38": {
+     "cells": {
+      "R1|omission": {
+       "haiku": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_38": {
+        "estimate": 0.8478260869565217,
+        "ci_low": 0.7549019607843137,
+        "ci_high": 0.9375,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": 0.15217391304347827,
+        "ci_low": 0.0625,
+        "ci_high": 0.24509803921568626,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      },
+      "R4|omission": {
+       "haiku": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_38": {
+        "estimate": 0.8369565217391305,
+        "ci_low": 0.7549019607843137,
+        "ci_high": 0.9204545454545454,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": 0.16304347826086957,
+        "ci_low": 0.07954545454545454,
+        "ci_high": 0.24509803921568626,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      },
+      "R2|omission": {
+       "haiku": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_38": {
+        "estimate": 0.7934782608695652,
+        "ci_low": 0.6904761904761905,
+        "ci_high": 0.8863636363636364,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": 0.20652173913043478,
+        "ci_low": 0.11363636363636363,
+        "ci_high": 0.30952380952380953,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      },
+      "R1+CHK|omission": {
+       "haiku": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_38": {
+        "estimate": 0.9891304347826086,
+        "ci_low": 0.9651162790697675,
+        "ci_high": 1.0,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": 0.010869565217391304,
+        "ci_low": 0.0,
+        "ci_high": 0.03488372093023256,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      },
+      "R0p|correct": {
+       "haiku": {
+        "estimate": 0.043478260869565216,
+        "ci_low": 0.0,
+        "ci_high": 0.10416666666666667,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_38": {
+        "estimate": 0.03260869565217391,
+        "ci_low": 0.0,
+        "ci_high": 0.07896232057416246,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": 0.010869565217391304,
+        "ci_low": -0.03,
+        "ci_high": 0.06666666666666667,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      },
+      "R4|correct": {
+       "haiku": {
+        "estimate": 0.043478260869565216,
+        "ci_low": 0.0,
+        "ci_high": 0.10416666666666667,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_38": {
+        "estimate": 0.043478260869565216,
+        "ci_low": 0.0,
+        "ci_high": 0.10869565217391304,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": 0.0,
+        "ci_low": -0.06521739130434782,
+        "ci_high": 0.0625,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      },
+      "R2|correct": {
+       "haiku": {
+        "estimate": 0.043478260869565216,
+        "ci_low": 0.0,
+        "ci_high": 0.10638297872340426,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_38": {
+        "estimate": 0.03260869565217391,
+        "ci_low": 0.0,
+        "ci_high": 0.08139534883720931,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": 0.010869565217391304,
+        "ci_low": -0.0625,
+        "ci_high": 0.09,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      },
+      "R1+CHK|correct": {
+       "haiku": {
+        "estimate": 0.043478260869565216,
+        "ci_low": 0.0,
+        "ci_high": 0.10638297872340426,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_38": {
+        "estimate": 0.40217391304347827,
+        "ci_low": 0.27906976744186046,
+        "ci_high": 0.5208333333333334,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": -0.358695652173913,
+        "ci_low": -0.4643013784461152,
+        "ci_high": -0.25,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      }
+     },
+     "contrasts": {
+      "G": {
+       "haiku": {
+        "estimate": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_38": {
+        "estimate": -0.010869565217391304,
+        "ci_low": -0.125,
+        "ci_high": 0.10204081632653061,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": 0.010869565217391304,
+        "ci_low": -0.10204081632653061,
+        "ci_high": 0.125,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      },
+      "H": {
+       "haiku": {
+        "estimate": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_38": {
+        "estimate": -0.05434782608695652,
+        "ci_low": -0.13829787234042554,
+        "ci_high": 0.021739130434782608,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": 0.05434782608695652,
+        "ci_low": -0.021739130434782608,
+        "ci_high": 0.13829787234042554,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      },
+      "C": {
+       "haiku": {
+        "estimate": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "flash_38": {
+        "estimate": 0.14130434782608695,
+        "ci_low": 0.056818181818181816,
+        "ci_high": 0.23076923076923078,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "difference": {
+        "estimate": -0.14130434782608695,
+        "ci_low": -0.23076923076923078,
+        "ci_high": -0.056818181818181816,
+        "n_items": 46,
+        "n_clusters": 30
+       }
+      }
+     }
+    },
+    "secondary": {
+     "per_cell": {
+      "R1|omission": {
+       "rate_reject": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "detection": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "right_reason_deterministic": {
+        "rejects": 46,
+        "right_reason": 28
+       },
+       "named_accept": {
+        "accepts": 0,
+        "named_accept": 0
+       },
+       "missing": 0,
+       "calls": 46
+      },
+      "R4|omission": {
+       "rate_reject": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "detection": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "right_reason_deterministic": {
+        "rejects": 46,
+        "right_reason": 18
+       },
+       "named_accept": {
+        "accepts": 0,
+        "named_accept": 0
+       },
+       "missing": 0,
+       "calls": 46
+      },
+      "R2|omission": {
+       "rate_reject": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "detection": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "right_reason_deterministic": {
+        "rejects": 46,
+        "right_reason": 23
+       },
+       "named_accept": {
+        "accepts": 0,
+        "named_accept": 0
+       },
+       "missing": 0,
+       "calls": 46
+      },
+      "R1+CHK|omission": {
+       "rate_reject": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "detection": {
+        "estimate": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "right_reason_deterministic": {
+        "rejects": 46,
+        "right_reason": 25
+       },
+       "named_accept": {
+        "accepts": 0,
+        "named_accept": 0
+       },
+       "missing": 0,
+       "calls": 46
+      },
+      "R0p|correct": {
+       "rate_reject": {
+        "estimate": 0.043478260869565216,
+        "ci_low": 0.0,
+        "ci_high": 0.10416666666666667,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "false_rejection": {
+        "estimate": 0.043478260869565216,
+        "ci_low": 0.0,
+        "ci_high": 0.10416666666666667,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "missing": 0,
+       "calls": 46
+      },
+      "R4|correct": {
+       "rate_reject": {
+        "estimate": 0.043478260869565216,
+        "ci_low": 0.0,
+        "ci_high": 0.10416666666666667,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "false_rejection": {
+        "estimate": 0.043478260869565216,
+        "ci_low": 0.0,
+        "ci_high": 0.10416666666666667,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "false_rejection_minus_R0p": {
+        "estimate": 0.0,
+        "ci_low": -0.0625,
+        "ci_high": 0.06382978723404255,
+        "n_items": 46,
+        "n_clusters": 30,
+        "ci_inside_equivalence_margin": true
+       },
+       "missing": 0,
+       "calls": 46
+      },
+      "R2|correct": {
+       "rate_reject": {
+        "estimate": 0.043478260869565216,
+        "ci_low": 0.0,
+        "ci_high": 0.10638297872340426,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "false_rejection": {
+        "estimate": 0.043478260869565216,
+        "ci_low": 0.0,
+        "ci_high": 0.10638297872340426,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "false_rejection_minus_R0p": {
+        "estimate": 0.0,
+        "ci_low": -0.0851063829787234,
+        "ci_high": 0.08695652173913043,
+        "n_items": 46,
+        "n_clusters": 30,
+        "ci_inside_equivalence_margin": true
+       },
+       "missing": 0,
+       "calls": 46
+      },
+      "R1+CHK|correct": {
+       "rate_reject": {
+        "estimate": 0.043478260869565216,
+        "ci_low": 0.0,
+        "ci_high": 0.10638297872340426,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "false_rejection": {
+        "estimate": 0.043478260869565216,
+        "ci_low": 0.0,
+        "ci_high": 0.10638297872340426,
+        "n_items": 46,
+        "n_clusters": 30
+       },
+       "false_rejection_minus_R0p": {
+        "estimate": 0.0,
+        "ci_low": -0.0851063829787234,
+        "ci_high": 0.08695652173913043,
+        "n_items": 46,
+        "n_clusters": 30,
+        "ci_inside_equivalence_margin": true
+       },
+       "missing": 0,
+       "calls": 46
+      },
+      "R1|bait": {
+       "rate_reject": {
+        "estimate": null,
+        "ci_low": null,
+        "ci_high": null,
+        "n_items": 0
+       },
+       "detection": {
+        "estimate": null,
+        "ci_low": null,
+        "ci_high": null,
+        "n_items": 0
+       },
+       "right_reason_deterministic": {
+        "rejects": 0,
+        "right_reason": 0
+       },
+       "named_accept": {
+        "accepts": 0,
+        "named_accept": 0
+       },
+       "missing": 0,
+       "calls": 0
+      }
+     }
+    }
+   },
+   "spend_usd_a17": 12.1186312
   }
  },
  "exploratory": {
