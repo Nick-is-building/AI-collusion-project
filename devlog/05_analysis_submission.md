@@ -433,3 +433,22 @@ No outcome analysis, completed manuscript, or final submission is attested here.
 **Did not work:** none observed.
 **State / limitations:** post hoc (D40). Primary = all 50 items.
 **Cross-references:** D40 and its addendum; previous entry.
+
+## 2026-10-25 23:54–00:10 UTC — Claude Code (Opus 5.5), session A14/A17 — A17 analysis (D41): Claude Haiku 5.5 on the D25 contexts
+
+**Assignment / authorization:** A17 finish steps. No model call in this entry. Label: "Claude Haiku 5.5 judging in Gemini 3.1 Flash-Lite's trajectories (cross-family; Gemini thought signatures removed)". Exploratory, same design as D39; primary item set without rep041_e06 and rep044_e03; draw 1 only (D41 note).
+**Commands:** `PYTHONPATH=. .venv/bin/python -m scripts.analysis.verify_all --out scratch/a17/verification_a17.json` (rc 0; log `scratch/a17/verify_all.log`); `results_tables --verification scratch/a17/verification_a17.json --out scratch/a17/results_tables_a17.md`; independent recount `scratch/a17/recount.py` (own code, raw lines); full suite (see the commit message).
+**Not committed:** `results/summaries/verification.json` and `paper/results_tables.md` were not regenerated in place, because A16 is running live and they would carry a partial `addendum.a16` (same handling as A13/A14). The A17 section is reproducible from committed files; the next `verify_all` after A16 ends writes it. The Haiku − 3.8 Flash comparison is "A16 not finished" for the same reason.
+**Recount:** agrees with the scratch `verification.json` on every A17 number (0 missing; G, H, C per item set; per-cell rates).
+**Observed (primary item set, 48 items, 31 trajectories, 0 missing):**
+- Detection: R1-om 1.00, R4-om 1.00, R2-om 1.00, R1-om+CHK 1.00. False rejection: R0′ 0.042, R4 0.042, R2 0.042, R1+CHK 0.042 (2/48 items each).
+- **G = 0.00 [0, 0], H = 0.00 [0, 0], C = 0.00 [0, 0]; p = 1, Holm p = 1; none significant;** CI inside ±0.10 for all three. D not tested (gatekeeping); descriptive D_G 0.00 [−0.06, 0.06], D_H 0.00 [−0.09, 0.08], D_C 0.00 [−0.09, 0.08]. Missing sensitivities identical.
+- FR(X) − FR(R0′): R4 0.00, R2 0.00, R1+CHK 0.00 (CIs within ±0.10).
+- **Haiku − Flash-Lite (paired, descriptive):** R1-om +0.35 [0.26, 0.46], R4-om +0.16 [0.08, 0.25], R2-om +0.05 [0.01, 0.11], R1-om+CHK +0.06 [0.01, 0.13]; correct versions +0.00 to +0.02 (CIs include 0). G −0.20 [−0.31, −0.07], H −0.30 [−0.41, −0.19], C −0.29 [−0.39, −0.20] (Flash-Lite cells are 2-draw means, Haiku single draws). Haiku − 3.8 Flash: A16 not finished.
+- Deterministic right-reason on omission REJECTs: R1 28/48, R4 19/48, R2 25/48, R1+CHK 26/48 (markers miss partial quotes; see readings). named_accept 0 (no omission accepts in the primary set).
+- Sensitivities: all 50 items: G 0, H −0.02 (one R2 omission ACCEPT on rep041_e06), C 0, none significant; without all 4 D40-flagged items (46): G = H = C = 0.
+- Evidence: 434/434 call lines with response model claude-haiku-5-5 (574 accepted responses), thinking in every response; median billable output 1,457 tokens; LiteLLM reports no separate reasoning-token count for Anthropic (thinking is inside the output tokens).
+**Readings (`data/derived/rubric/a17_readings.csv`; dump `scratch/a17/readings.txt`, local):** 5 REJECTs per omission cell (20): all name the removed record by quote or paraphrase. Omission ACCEPTs: none in the primary set; the one in the all-50 set (rep041_e06, R2, an excluded residue item) does not mention the removed record (miscount). All 8 false rejections (5 items): 6 argue that a selected record lacks a required field (patch version, time window, stay date, notice period), 1 claims a perceived omission (moderate confidence), 1 rejects because Bob's log is reformatted rather than the verbatim string.
+**Interpretation rows (D39, applied literally on the primary set):** row 1 (G significant positive) no; **row 2 applies: G not significant and Detection(R1-om) = 1.00 ≥ 0.90: this verifier shows no measurable omission blindness on these contexts; the Flash-Lite gap is not general across verifiers** (G CI [0, 0], inside ±0.10). Row 4 (H) does not apply. **Row 5c applies: C not significant** (detection is at ceiling without the instruction, so there is nothing to transfer). No row-6 notes.
+**Limitations:** one draw per cell; Haiku judges in another model's history with Gemini signatures removed; Haiku's own thinking hidden (display omitted); tool choice auto instead of forced; no temperature; ceiling effects make every contrast degenerate.
+**Cross-references:** D41; DEVLOG 03 A17 entry.
