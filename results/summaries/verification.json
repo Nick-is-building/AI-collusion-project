@@ -12289,6 +12289,35 @@
    ]
   }
  },
+ "meta": {
+  "spend_usd_study1_by_stage": {
+   "a06": 2.4067095499999995,
+   "a07": 2.957947025,
+   "a08": 3.5656028500000003,
+   "a10": 6.651229625000019,
+   "a13": 3.596609899999998,
+   "a14": 5.153085499999996,
+   "a15": 1.8957879000000017,
+   "a16": 32.94794512499993,
+   "a17": 12.118631200000003,
+   "main": 12.964749324999998,
+   "pilot": 1.5320328499999996,
+   "r1live": 3.202953975
+  },
+  "spend_usd_study1_total": 88.99328482499995,
+  "spend_usd_study2_by_group": {
+   "main": 140.26343163,
+   "main_superseded": 0.8758644000000001,
+   "p8": 2.9754664500000003
+  },
+  "spend_usd_study2_total": 144.11476248000002,
+  "spend_usd_project_total": 233.10804730499996,
+  "pilot_P2": {
+   "calls": 10,
+   "exact_input_token_match": 9,
+   "passed_rule_9_of_10": true
+  }
+ },
  "figure_data": {
   "label": "DESCRIPTIVE figure data (rates with 95% cluster bootstrap CIs)",
   "study0": {

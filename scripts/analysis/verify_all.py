@@ -101,6 +101,34 @@ def equivalence_reading(conf: dict) -> dict:
 
 # ---------------------------------------------------------------- main
 
+def meta_section() -> dict:
+    """Operational numbers for the paper (no outcome): spend by stage and the pilot P2 request-identity check.
+    Study 1 stages: all live call lines in results/raw (src.runner.costs.Ledger, our price table). Study 2: the
+    committed per-call exports (results/study2/{main,main_superseded}/calls.csv.gz, column cost_usd from our price
+    table, scripts/study2/export.py) and the committed P8 usage journals (src.hysteresis.guard.JournalLedger).
+    P2 (plan 10; fidelity level 1): R0 on 10 hold-out items, API-reported input_tokens of the accepted response equal
+    to the original verdict call's logged input_tokens (scripts.pilot.p2_r0_identity's rule)."""
+    from src.hysteresis.guard import JournalLedger
+    from src.runner.costs import Ledger
+    from src.runner.estimates import r0_tokens
+    led = Ledger(ROOT / "results" / "raw", "live")
+    s1 = {k: float(v) for k, v in sorted(led.by_stage.items()) if k != "study2"}
+    s2 = {g: float(pd.read_csv(ROOT / "results" / "study2" / g / "calls.csv.gz").cost_usd.fillna(0).sum())
+          for g in ("main", "main_superseded")}
+    s2["p8"] = float(JournalLedger(ROOT / "results" / "study2" / "p8").refresh().total)
+    ref = r0_tokens()
+    p2 = [r for r in iter_call_lines(ROOT / "results" / "raw") if r.get("stage") == "pilot" and r.get("check") == "P2"
+          and r.get("mode") == "live"]
+    match = 0
+    for c in p2:
+        acc = [u for u in c.get("usage") or [] if u.get("response_status") == "accepted"]
+        match += bool(acc) and acc[0].get("input_tokens") == ref.get(c["item_id"])
+    return {"spend_usd_study1_by_stage": s1, "spend_usd_study1_total": sum(s1.values()),
+            "spend_usd_study2_by_group": s2, "spend_usd_study2_total": sum(s2.values()),
+            "spend_usd_project_total": sum(s1.values()) + sum(s2.values()),
+            "pilot_P2": {"calls": len(p2), "exact_input_token_match": int(match),
+                         "passed_rule_9_of_10": len(p2) >= 10 and match >= 9}}
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default=str(SUMMARIES / "verification.json"))
@@ -147,6 +175,7 @@ def main(argv=None):
     if (ROOT / "scripts" / "analysis" / "recognise_approve.py").exists():   # A10 task 6 (exploratory, zero cost)
         from scripts.analysis import recognise_approve
         res["exploratory"]["recognise_and_approve"] = recognise_approve.build(calls, meta)
+    res["meta"] = meta_section()   # spend by stage and the P2 identity check (paper numbers; 0 USD)
     from scripts.analysis import figure_data   # A07 task 3: data behind paper/figures (descriptive)
     res["figure_data"] = figure_data.build(calls, meta)
     Path(a.out).write_text(to_json(res))
