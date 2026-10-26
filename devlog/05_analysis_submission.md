@@ -581,3 +581,13 @@ No outcome analysis, completed manuscript, or final submission is attested here.
 **State / limitations:** post hoc positive control; one model; the agreement is instructed in the final verdict prompt; classification single coder with conventions formed during reading; Wilson intervals treat calls as independent. The 22 items in both lists have SOFT correct-version calls in both units (identical contexts; analysed per unit).
 **Next (Nick):** whether and how A19 enters the paper; whether paper_numbers should get A18/A19 sections.
 **Cross-references:** D44; DEVLOG 03 A19 entry; A18 analysis entry (2026-10-26 07:47 UTC); D42 entry.
+
+## 2026-10-26 09:39 UTC — Claude Code (Opus 5.5), session A19 — paper_numbers: A18 and A19 sections
+
+**Assignment / authorization:** Nick, in session A19 after the A19 report: "add A18 and A19 sections to paper_numbers.md". 0 USD, no model call.
+**Built or changed:** `scripts/analysis/paper_numbers.py`: new section 17 (A18, D43): stage counts and spend; everything under `addendum.a18.primary_48`; all-50 sensitivity: primary, secondary, ACCEPT classes, interpretation rows. New section 18 (A19, D44): stage counts and spend; everything under `addendum.a19.com_109__om_primary_48` except `secondary.discrimination_table` (it repeats `secondary.<error type>.<condition>`, and its elements have no unique identifying field); all-50 sensitivity: primary, omission secondaries, SOFT|om classes, interpretation rows. The spend section moves from 17 to 19. Item-set labels `A19_PRIM`, `A19_ALL`. `paper/paper_numbers.md` regenerated: 2,297 rows (was 1,938); the diff outside the two new sections is only the spend heading's number.
+**Checks performed:** `PYTHONPATH=. .venv/bin/python -m scripts.analysis.paper_numbers` (rc 0; every pattern matched a key, so the rename guard passed); `pytest tests/test_paper_numbers.py`: 1 passed. Spot check against `verification.json` and the A18/A19 DEVLOG entries: A18 P1 −0.490 (Holm p 0.0002), A19 Q1 −0.555 (Holm p 0.0003), row flags (A18 row1 no, A19 row1 yes). In paths, keys with "|" are printed with "/" (the script's existing behaviour, keeps the markdown tables intact).
+**Did not work:** none observed.
+**State / limitations:** numbers only; no interpretation added.
+**Next:** none proposed.
+**Cross-references:** A18 and A19 analysis entries above; Paper numbers entry (2026-10-26).

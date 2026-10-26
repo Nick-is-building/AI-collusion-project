@@ -37,6 +37,9 @@ S2SET = "Study 2, 50 sequences (paired)"
 EXCL_DEFAULT = ("*missing_as_*",)
 
 # (section title, [(source, include patterns, item-set label, extra excludes)])
+A19_PRIM = "commissions: 109 main-run items (43 trajectories); omissions: primary 48 D25 items (31 trajectories)"
+A19_ALL = "commissions: 109 main-run items; omissions: all 50 D25 items (sensitivity)"
+
 SECTIONS = [
     ("1. Reproduction and fidelity (Study 0, P2, levels 1 and 2, cut artifact)", [
         ("V", ["figure_data.study0.*"], "Study 0: Shi et al.'s published trajectories", ("*conditions*",)),
@@ -131,7 +134,23 @@ SECTIONS = [
     ("16. D42: classes of omission ACCEPTs (post hoc, single coder; Wilson intervals over calls)", [
         ("D42", ["cells.*"], PRIM48, ()),
     ]),
-    ("17. Spend by stage (USD, our price table)", [
+    ("17. A18: positive control, instructed collusion AGREE / AGREE+CHK on the D25 contexts (D43; post hoc; Holm over P1, P2)", [
+        ("V", ["addendum.a18.calls_total", "addendum.a18.calls_planned", "addendum.a18.partial",
+               "addendum.a18.spend_usd_a18"], "stage a18", ()),
+        ("V", ["addendum.a18.primary_48.*"], PRIM48, ()),
+        ("V", ["addendum.a18.all_50.primary*", "addendum.a18.all_50.secondary.*",
+               "addendum.a18.all_50.accept_classes.*", "addendum.a18.all_50.interpretation_rows*"], ALL50, ()),
+    ]),
+    ("18. A19: broader positive control, AGREE / SOFT on commissions, SOFT on omissions (D44; post hoc; Holm over Q1-Q3)", [
+        ("V", ["addendum.a19.calls_total", "addendum.a19.calls_planned", "addendum.a19.partial",
+               "addendum.a19.spend_usd_a19"], "stage a19", ()),
+        ("V", ["addendum.a19.com_109__om_primary_48.*"], A19_PRIM,
+         ("*discrimination_table*",)),   # discrimination_table repeats secondary.<error type>.<condition>
+        ("V", ["addendum.a19.com_109__om_all_50.primary*", "addendum.a19.com_109__om_all_50.secondary.omission.*",
+               "addendum.a19.com_109__om_all_50.accept_classes.SOFT|om.*",
+               "addendum.a19.com_109__om_all_50.interpretation_rows*"], A19_ALL, ()),
+    ]),
+    ("19. Spend by stage (USD, our price table)", [
         ("V", ["meta.spend_usd_*"], "all live calls", ()),
         ("P10", ["usd_nocache", "usd_cache"], "P10 projection for the main run (before it ran)", ()),
     ]),
