@@ -106,7 +106,7 @@ def test_raw_anthropic_body_on_all_contexts(monkeypatch):
     """LiteLLM's Anthropic transformation (offline): system field, every text unchanged and in order, parameters."""
     from litellm.types.utils import CallTypes
     from litellm.utils import return_raw_request
-    monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-ant-dummy-offline-test")
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "dummy-offline-test-key")
     for o in OM:
         for v, ver in CELLS:
             fl = _upstream_request(build_messages(o, v, ver))

@@ -524,3 +524,13 @@ No outcome analysis, completed manuscript, or final submission is attested here.
 **Did not work:** none observed.
 **State:** A17 complete; outputs committed (A16's `0e7d857` carries the regenerated files; this entry records the check).
 **Cross-references:** D39, D41; DEVLOG 05 A17 entry and A16's entries.
+
+## 2026-10-26 ~03:45 UTC — Claude Code (Opus 5.5), session A14/A17 — Repository made public (Nick's explicit authorization); pre-publication checks
+
+**Assignment / authorization:** Nick, 26 October 2026 (in the session): "Nick authorizes changing the visibility of Nick-is-building/AI-collusion-project from private to public. This is the one visibility change CLAUDE.md reserves for him." Checks first; stop and report if anything is found; no history rewrite.
+**Checks performed (findings only; no secret printed):**
+- `git log --all -- .env` and `-- blind_check/key.local.json`: 0 commits each (101 commits in the full history). Both are in `.gitignore`. `.env.example` (1 commit) has only empty values (GEMINI_API_KEY, ANTHROPIC_API_KEY).
+- Secret patterns over every diff of the full history (`git log --all -P -G`) and over all tracked and untracked-not-ignored files: AIza…{35}, sk-ant-…, gh[pousr]_…, AKIA…, xox…, private-key headers, `Bearer <token>`, api_key assignments with a value. Two hits, both false positives, compared by hash with the two project keys (neither equal): (1) `AIza` + 35 characters inside a long base64 run (a Gemini thought signature in a logged response) in `results/raw/a15-20261025T205548Z-007374.jsonl` (raw evidence, not edited); (2) the literal test dummy `sk-ant-dummy-offline-test` in `tests/test_a17.py`. Reported to Nick, who chose "rename the test dummy first": the dummy is now `dummy-offline-test-key` (test `test_raw_anthropic_body_on_all_contexts` rerun: passed); the old string remains in the history of `3cc070d` (no history rewrite).
+- Long base64 (≥ 60 characters) in config/log/text files: only SHA-256 checksum lists (`blind_check/key_sha256.txt`, `data/checksums.txt`, `prior_work/1_reanalyse/pruefsummen_reanalyse.txt`, `results/study2/*/files_sha256.txt`, `results/study2/p8/run_json_sha256.txt`).
+- No tracked file and no blob in the history over 50 MB (largest tracked 21.97 MB, `results/raw/a16-…-2f21f9.jsonl`); `results/requests/` and `logs/` have 0 tracked files.
+**Change:** pending work committed and pushed, then `gh repo edit Nick-is-building/AI-collusion-project --visibility public` (gh 2.45.0; no confirmation flag in this version). Verification in the next lines of this entry's commit/report (`gh repo view --json visibility`).
